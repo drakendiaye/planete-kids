@@ -1,5 +1,6 @@
 Bienvenue à tous les membres du projet.
 
+
 Voici les adresses utiles :
 
 Google Code : http://code.google.com/p/planete-kids
@@ -9,3 +10,18 @@ Google Groups : http://groups.google.fr/group/planete-kids
 Group email : planete-kids@googlegroups.com
 
 Google Agenda : http://www.google.com/calendar
+
+
+Tuto SVN :
+
+Metter l'adresse du serveur SVN dans votre client subversion favori.
+Login : Votre adresse email complète si votre compte google n'utilise pas une adresse GMail, votre adresse sans le @gmail.com sinon.
+Password : A récupérer à l'adresse suivante : http://code.google.com/hosting/settings
+
+
+Règles de bonne conduite :
+
+Commenter votre code.
+Commenter tous vos commits sur le SVN.
+Consulter le calendrier et votre boite mail régulièrement.
+Mettre à jour le calendrier quand vous avez effectué une tâche qui vous était attribuée.
