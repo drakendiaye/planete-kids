@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project name="planete-kids" default="install" basedir=".">
+
+  <!-- Import common rules -->
+  <import file="easybeans-common.xml" />
+
+  <!-- Below are the properties used by common script -->
+  <!-- Name of the generated ejb-jar -->
+  <property name="ejb.name" value="planete-kids" />
+
+  <!-- Pattern for EJB -->
+  <patternset id="ejb.patternset">
+    <include name="ecom/beans/*.class" />
+  </patternset>
+
+ <!-- Following line added by F. Boyer -->
+ <!-- Define a servlet client -->
+  <property name="servlet.client" value="true" />
+
+
+  <!-- Pattern for Client -->
+  <patternset id="client.patternset">
+    <include name="ecom/client/*.class" />
+    <include name="ecom/beans/*Remote.class" />
+    <include name="ecom/shell/*.class" />
+    <include name="shell/*.class" />
+  </patternset>
+
+  <!-- Main class of the client -->
+  <property name="customer.class" value="ecom.client.ExternCustomer" />
+  <property name="admin.class" value="ecom.client.ExternAdmin" />
+  <property name="initdatabase.class" value="ecom.client.InitDataBase" />
+
+
+
+<!-- Pattern for servlet -->
+  <patternset id="servlet.patternset">
+    <include name="ecom/servlets/*.class" />
+    <include name="ecom/beans/*Local.class" />
+  </patternset>
+
+</project>
+
