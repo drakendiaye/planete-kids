@@ -26,4 +26,6 @@ Commenter tous vos commits sur le SVN.
 Consulter le calendrier et votre boite mail régulièrement.
 Mettre à jour le calendrier quand vous avez effectué une tâche qui vous était attribuée.
 
-Nous travaillons actuellement sur la version 0.2
+Ceci est la version v0.1 :
+  - Premiere version opérationnelle
+  - Déploiement des beans et servlets ecom
