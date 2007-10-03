@@ -29,9 +29,9 @@
 
  
 
-  <property name="classes.dir" value="../../classes" />
-  <property name="rar.classes.dir" value="../../classes.rar" />
-  <property name="dist.dir" value="../../output" />
+  <property name="classes.dir" value="classes" />
+  <property name="rar.classes.dir" value="classes.rar" />
+  <property name="dist.dir" value="output" />
   <property name="dist.ejbjars.dir" value="${dist.dir}/ejbjars" />
   <property name="dist.clients.dir" value="${dist.dir}/clients" />
   <property name="lib.dir" value="${jonas.root}/lib" />
