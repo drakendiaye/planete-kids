@@ -32,7 +32,7 @@
 
   <!-- Below are the properties used by common script -->
   <!-- Name of the generated ejb-jar -->
-  <property name="ejb.name" value="ecom" />
+  <property name="ejb.name" value="planete-kids" />
 
   <!-- Pattern for EJB -->
   <patternset id="ejb.patternset">
