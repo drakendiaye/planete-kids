@@ -1,0 +1,88 @@
+
+.title {
+	background-color: #cc99ff;
+	border-color: black;
+	border-style: solid;
+	border-width: medium;
+	font-size: 1.5em;
+	margin-right: 10%;
+	padding: .5%;
+	text-align: left;
+}
+
+/* For Menu Bar */
+.menubar {
+	border-color: black;
+	border-width: medium;
+	font-family: verdana, helvetica, arial, sans-serif;
+	font-size: 0.9em;
+	font-weight : bold;
+	margin-left: 10%;
+	margin-right: 10%;
+	text-align: center;
+}
+
+.menubar A {
+	background-color: #9999ff;
+	color: black;
+	text-decoration: none;
+}
+
+.menubar A:hover {
+	background-color: #cc99cc;
+	color: #cc0000;
+	text-decoration: none;
+}
+
+/* For Menu Bar */
+
+body { 
+	background-color: #ccccff;
+	color : black;
+	font-family: verdana, helvetica, arial, sans-serif;
+}
+
+body.admin { 
+	background-color: #ffffff;
+	color : black;
+	font-family: verdana, helvetica, arial, sans-serif;
+}
+
+h1, h2, h3  {
+	font-family: verdana, helvetica, arial, sans-serif
+}
+
+h1 {
+	background-color: #9999ff;
+	font-size : 175%;
+	text-align : center;
+	border-color: black;
+	border-style: solid;
+	border-width: medium;	
+	padding: .5%;
+}
+
+h2 {
+	font-size : 150%;
+	border-bottom : solid; 
+	border-bottom-width : 1;
+}
+
+h3 {
+	font-size : 125%;
+}
+
+strong {
+	font-weight : bold;
+}
+
+td {
+	border-bottom : solid; 
+	border-bottom-width : 1;
+}
+
+hr {
+	size : 1;
+	width : 100%;
+}
+

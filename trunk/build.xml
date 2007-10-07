@@ -25,7 +25,7 @@
  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
  -->
 
-<project name="Ecom" default="install" basedir=".">
+<project name="planete-kids" default="install" basedir=".">
 
   <!-- Call all dirs -->
   <target name="install" description="">
@@ -37,12 +37,6 @@
   <target name="clean" description="">
     <ant antfile="ecom/build.xml"
          target="clean"
-         inheritall="false" />
-  </target>
-
-  <target name="run.initdatabase" description="">
-    <ant antfile="ecom/build.xml"
-         target="run.initdatabase"
          inheritall="false" />
   </target>
 
