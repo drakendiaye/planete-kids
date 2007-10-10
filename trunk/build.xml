@@ -1,43 +1,118 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!--
- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
- - EasyBeans
- - Copyright (C) 2006 Bull S.A.S.
- - Contact: easybeans@objectweb.org
- -
- - This library is free software; you can redistribute it and/or
- - modify it under the terms of the GNU Lesser General Public
- - License as published by the Free Software Foundation; either
- - version 2.1 of the License, or any later version.
- -
- - This library is distributed in the hope that it will be useful,
- - but WITHOUT ANY WARRANTY; without even the implied warranty of
- - MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
- - Lesser General Public License for more details.
- -
- - You should have received a copy of the GNU Lesser General Public
- - License along with this library; if not, write to the Free Software
- - Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307
- - USA
- -
- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
- - $Id: build.xml 9 2006-06-19 18:53:32Z boyerf $
- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
- -->
-
 <project name="planete-kids" default="install" basedir=".">
 
-  <!-- Call all dirs -->
-  <target name="install" description="">
-    <ant antfile="ecom/build.xml"
-         target="install"
-         inheritall="false" />
+  <property environment="myenv" />
+  <property name="jonas.root" value="${myenv.JONAS_ROOT}" />
+
+  <property name="javac.debug" value="on" />
+  <property name="javac.optimize" value="off" />
+  <property name="javac.deprecation" value="off" />
+  <property name="javac.verbose" value="off" />
+  <property name="javac.compiler" value="modern" />
+  <property name="javac.nowarn" value="off" />
+
+  <property file="build.properties" />
+  <property name="ejb.name" value="planete-kids" />
+  <property name="src.dir" value="src" />
+  <property name="resources.dir" value="www" />
+  <property name="classes.dir" value="classes" />
+  <property name="rar.classes.dir" value="classes.rar" />
+  <property name="dist.dir" value="output" />
+  <property name="dist.ejbjars.dir" value="${dist.dir}/ejbjars" />
+  <property name="dist.clients.dir" value="${dist.dir}/clients" />
+  <property name="lib.dir" value="${jonas.root}/lib" />
+  <property name="dest.ejbjars.dir" value="${jonas.root}/deploy" />
+  <property name="dest.webapps.dir" value="${jonas.root}/webapps" />
+
+  <property name="war.defined" value="true" />
+  <property name="persistence.defined" value="true" />
+
+  <!-- Pattern for EJB -->
+  <patternset id="ejb.patternset">
+    <include name="beans/entity/*.class" />
+    <include name="beans/stateful/*.class" />
+  </patternset>
+
+<!-- Pattern for servlet -->
+  <patternset id="servlet.patternset">
+    <include name="servlets/*.class" />
+    <include name="beans/stateful/*Local.class" />
+  </patternset>
+
+  <target name="init">
+    <!-- directories building -->
+    <mkdir dir="${classes.dir}" />
+    <mkdir dir="${rar.classes.dir}" />
+    <mkdir dir="${dist.dir}" />
+    <mkdir dir="${dist.clients.dir}" />
+    <mkdir dir="${dist.ejbjars.dir}" />
+
+    <!-- Unpack the rar file from JONAS_ROOT/rars or JONAS_ROOT/rars/autoload -->
+    <unjar dest="${rar.classes.dir}">
+      <fileset dir="${jonas.root}/rars">
+        <include name="ow_easybeans_for_jonas.rar" />
+        <include name="autoload/ow_easybeans_for_jonas.rar" />
+      </fileset>
+    </unjar>
+
+    <!-- The classpath to be used to compile examples -->
+    <path id="base.classpath">
+      <pathelement location="${classes.dir}" />
+      <fileset dir="${rar.classes.dir}">
+        <include name="**/*.jar" />
+      </fileset>
+      <fileset dir="${lib.dir}">
+        <include name="**/*.jar" />
+      </fileset>
+    </path>
   </target>
 
-  <target name="clean" description="">
-    <ant antfile="ecom/build.xml"
-         target="clean"
-         inheritall="false" />
+  <target name="clean">
+    <!-- directories removal -->
+    <delete dir="${classes.dir}" />
+    <delete dir="${rar.classes.dir}" />
+    <delete dir="${dist.dir}" />
   </target>
 
+  <target name="compile" depends="init">
+    <javac srcdir="${src.dir}"
+           destdir="${classes.dir}"
+           debug="${javac.debug}"
+           deprecation="${javac.deprecation}"
+           optimize="${javac.optimize}"
+           verbose="${javac.verbose}"
+           compiler="${javac.compiler}"
+           nowarn="${javac.nowarn}">
+      <classpath refid="base.classpath" />
+    </javac>
+  </target>
+
+  <target name="install.persistence" if="persistence.defined">
+    <mkdir dir="${dest.ejbjars.dir}/${ejb.name}.jar/META-INF/" />
+    <copy todir="${dest.ejbjars.dir}/${ejb.name}.jar/META-INF">
+      <fileset dir="${resources.dir}">
+        <include name="persistence.xml" />
+      </fileset>
+    </copy>
+  </target>
+
+  <target name="install.war" if="war.defined">
+    <war warfile="${dest.webapps.dir}/${ejb.name}.war" webxml="${resources.dir}/web.xml">
+       <webinf dir="${resources.dir}" includes="jonas-web.xml, web-jetty.xml" />
+       <zipfileset dir="${resources.dir}" prefix="" />
+       <classes dir="${classes.dir}">
+         <include name="**/**/**/*.class" />
+       </classes>
+   </war>
+  </target>
+  <target name="install" depends="compile, install.persistence, install.war">
+    <copy todir="${dest.ejbjars.dir}/${ejb.name}.jar">
+      <fileset dir="${classes.dir}">
+        <patternset refid="ejb.patternset" />
+      </fileset>
+    </copy>
+  </target>
 </project>
+
+
+
