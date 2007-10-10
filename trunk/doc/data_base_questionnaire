@@ -1,0 +1,137 @@
+-- phpMyAdmin SQL Dump
+-- version 2.9.1.1-Debian-2ubuntu1
+-- http://www.phpmyadmin.net
+-- 
+-- Serveur: localhost
+-- Généré le : Mercredi 03 Octobre 2007 à 16:43
+-- Version du serveur: 5.0.38
+-- Version de PHP: 5.2.1
+-- 
+-- Base de données: `planetekids`
+-- 
+
+-- --------------------------------------------------------
+
+-- 
+-- Structure de la table `answer`
+-- 
+
+CREATE TABLE `answer` (
+  `questionnaire_id` int(11) NOT NULL,
+  `question_id` int(11) NOT NULL,
+  `answer_id` int(11) NOT NULL,
+  `answer_text` varchar(100) NOT NULL,
+  `answer_comment` tinyint(1) NOT NULL,
+  PRIMARY KEY  (`questionnaire_id`,`question_id`,`answer_id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+-- 
+-- Contenu de la table `answer`
+-- 
+
+INSERT INTO `answer` (`questionnaire_id`, `question_id`, `answer_id`, `answer_text`, `answer_comment`) VALUES 
+(0, 0, 0, 'enfant(s)', 0),
+(0, 1, 0, 'Connexion modem 56k', 0),
+(0, 1, 1, 'Connexion ADSL', 0),
+(0, 1, 2, 'Connexion par cable', 0),
+(0, 1, 3, 'Autres, présisez :', 1),
+(0, 2, 0, 'Internet Explorer', 0),
+(0, 2, 1, 'Mozilla Firefox', 0),
+(0, 2, 2, 'Opéra', 0),
+(0, 2, 3, 'Safari', 0),
+(0, 2, 4, 'Autres, précisez :', 1),
+(0, 3, 0, '(a)', 0),
+(0, 3, 1, '(b)', 0),
+(0, 3, 2, '(c)', 0),
+(0, 4, 0, 'L''attractivité des prix', 0),
+(0, 4, 1, 'Diversité des produits proposés', 0),
+(0, 4, 2, 'La qualité du site (esthétisme, facilité d''utilisation, ...)', 0),
+(0, 4, 3, 'Les services proposés (garanties, remboursement, livraison)', 0),
+(0, 5, 0, 'Produits culturel (CD, DVD, spectacles, livres, ...)', 0),
+(0, 5, 1, 'Informatique (logiciel, matériel, jeux vidéos)', 0),
+(0, 5, 2, 'TV, Hi-Fi, vidéo, téléphonie', 0),
+(0, 5, 3, 'Textile, habillement, mode', 0),
+(0, 5, 4, 'Alimentation', 0),
+(0, 5, 5, 'Tourisme', 0),
+(0, 5, 6, 'Fleur', 0),
+(0, 6, 0, 'Oui', 0),
+(0, 6, 1, 'Non', 0),
+(0, 7, 0, 'Une fois par an', 0),
+(0, 7, 1, 'Deux à trois fois par an', 0),
+(0, 7, 2, 'Quatre fois par an et plus, précisez :', 1),
+(0, 8, 0, 'Vous', 0),
+(0, 8, 1, 'Vos enfants', 0),
+(0, 8, 2, 'Autres, précisez :', 1),
+(0, 9, 0, 'Euros par an et par enfants', 0);
+
+-- --------------------------------------------------------
+
+-- 
+-- Structure de la table `question`
+-- 
+
+CREATE TABLE `question` (
+  `questionnaire_id` int(11) NOT NULL,
+  `question_id` int(11) NOT NULL,
+  `question_text` varchar(100) NOT NULL,
+  `question_type` enum('SINGLE_CHOICE','MULTI_CHOICE','SORT','VALUE') NOT NULL,
+  PRIMARY KEY  (`questionnaire_id`,`question_id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+-- 
+-- Contenu de la table `question`
+-- 
+
+INSERT INTO `question` (`questionnaire_id`, `question_id`, `question_text`, `question_type`) VALUES 
+(0, 0, 'Combien d''enfants de moins de 17 ans vivent dans votre foyer?', 'VALUE'),
+(0, 1, 'Quel type de connexion internet utilisez-vous?', 'SINGLE_CHOICE'),
+(0, 2, 'Quel navigateur internet utilisez-vous le plus?', 'SINGLE_CHOICE'),
+(0, 3, 'Écrivez trois mot-clés que vous utiliseriez pour rechercher des vètements pour votre enfant sur inte', 'VALUE'),
+(0, 4, 'D''une manière générale, lorsque vous achetez sur internet, vous êtes sensible à ...', 'SORT'),
+(0, 5, 'Dans lesquelles des catégories suivantes avez-vous acheté un produit ou un service en ligne au cours', 'MULTI_CHOICE'),
+(0, 6, 'Seriez-vous intéressés par l''achat de vêtements en ligne pour vos enfants?', 'SINGLE_CHOICE'),
+(0, 7, 'A quelle fréquence achetez-vous des vètements pour vos enfants?', 'SINGLE_CHOICE'),
+(0, 8, 'Qui choisit les vètements à acheter?', 'SINGLE_CHOICE'),
+(0, 9, 'Quel budget allouez-vous pour l''achat de vètements pour vos enfants', 'VALUE');
+
+-- --------------------------------------------------------
+
+-- 
+-- Structure de la table `questionnaire`
+-- 
+
+CREATE TABLE `questionnaire` (
+  `questionnaire_id` int(11) NOT NULL,
+  `questionnaire_title` varchar(100) NOT NULL,
+  `questionnaire_desc` varchar(500) NOT NULL,
+  PRIMARY KEY  (`questionnaire_id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+-- 
+-- Contenu de la table `questionnaire`
+-- 
+
+INSERT INTO `questionnaire` (`questionnaire_id`, `questionnaire_title`, `questionnaire_desc`) VALUES 
+(0, 'Planete-kids ouvre sont site en janvier', 'Aidez-nous à concevoir un site à votre image.');
+
+-- --------------------------------------------------------
+
+-- 
+-- Structure de la table `result`
+-- 
+
+CREATE TABLE `result` (
+  `questionnaire_id` int(11) NOT NULL,
+  `question_id` int(11) NOT NULL,
+  `answer_id` int(11) NOT NULL,
+  `result_id` int(11) NOT NULL,
+  `result_value` varchar(100) NOT NULL,
+  `result_comment` varchar(100) default NULL,
+  PRIMARY KEY  (`questionnaire_id`,`question_id`,`answer_id`,`result_id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+-- 
+-- Contenu de la table `result`
+-- 
+
+
