@@ -5,7 +5,7 @@
 * may 2006
 */
 
-package beans.stateful;
+package planetekids.beans.stateful;
 
 import javax.ejb.Remote;
 import javax.ejb.SessionSynchronization;

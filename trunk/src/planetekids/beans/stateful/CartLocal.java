@@ -5,7 +5,7 @@
 * @author Fabienne Boyer - Didier Donsez - may 2006
 */
 
-package beans.stateful;
+package planetekids.beans.stateful;
 
 public interface CartLocal {
 

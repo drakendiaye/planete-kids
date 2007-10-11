@@ -1,4 +1,4 @@
-package beans.entity;
+package planetekids.beans.entity;
 
 import java.io.Serializable;
 import java.util.ArrayList;

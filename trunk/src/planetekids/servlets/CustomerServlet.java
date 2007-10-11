@@ -4,9 +4,9 @@
  * @author    Fabienne Boyer - Didier Donsez - may 2006
  */
 
-package servlets;
+package planetekids.servlets;
 
-import beans.stateful.CustomerRemote;
+import planetekids.beans.stateful.CustomerRemote;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.naming.Context;

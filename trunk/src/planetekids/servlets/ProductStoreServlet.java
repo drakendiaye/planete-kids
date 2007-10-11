@@ -4,7 +4,7 @@
  * @author    Fabienne Boyer - Didier Donsez - may 2006
  */
 
-package servlets;
+package planetekids.servlets;
 
 import java.io.IOException;
 import java.io.PrintWriter;

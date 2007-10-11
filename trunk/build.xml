@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project name="planete-kids" default="install" basedir=".">
+<project name="planete-kids" default="install.ear" basedir=".">
 
   <property environment="myenv" />
   <property name="jonas.root" value="${myenv.JONAS_ROOT}" />
@@ -14,67 +14,40 @@
   <property file="build.properties" />
   <property name="ejb.name" value="planete-kids" />
   <property name="src.dir" value="src" />
-  <property name="resources.dir" value="www" />
-  <property name="classes.dir" value="classes" />
-  <property name="rar.classes.dir" value="classes.rar" />
-  <property name="dist.dir" value="output" />
-  <property name="dist.ejbjars.dir" value="${dist.dir}/ejbjars" />
-  <property name="dist.clients.dir" value="${dist.dir}/clients" />
+  <property name="www.dir" value="www" />
+  <property name="build.dir" value="build" />
+  <property name="classes.dir" value="${build.dir}/classes" />
+  <property name="dist.dir" value="dist" />
+  <property name="dist.ear.dir" value="${dist.dir}/ear" />
+  <property name="dist.jar.dir" value="${dist.dir}/jar" />
+  <property name="dist.war.dir" value="${dist.dir}/war" />
   <property name="lib.dir" value="${jonas.root}/lib" />
-  <property name="dest.ejbjars.dir" value="${jonas.root}/deploy" />
-  <property name="dest.webapps.dir" value="${jonas.root}/webapps" />
-
-  <property name="war.defined" value="true" />
-  <property name="persistence.defined" value="true" />
-
-  <!-- Pattern for EJB -->
-  <patternset id="ejb.patternset">
-    <include name="beans/entity/*.class" />
-    <include name="beans/stateful/*.class" />
-  </patternset>
-
-<!-- Pattern for servlet -->
-  <patternset id="servlet.patternset">
-    <include name="servlets/*.class" />
-    <include name="beans/stateful/*Local.class" />
-  </patternset>
+  <property name="dest.ear.dir" value="${jonas.root}/apps" />
+  <property name="dest.jar.dir" value="${jonas.root}/deploy" />
+  <property name="dest.war.dir" value="${jonas.root}/webapps" />
+  
+  <path id="base.classpath">
+    <pathelement location="${classes.dir}" />
+    <fileset dir="${lib.dir}">
+      <include name="**/*.jar" />
+    </fileset>
+  </path>
 
   <target name="init">
-    <!-- directories building -->
+    <mkdir dir="${build.dir}" />
     <mkdir dir="${classes.dir}" />
-    <mkdir dir="${rar.classes.dir}" />
     <mkdir dir="${dist.dir}" />
-    <mkdir dir="${dist.clients.dir}" />
-    <mkdir dir="${dist.ejbjars.dir}" />
-
-    <!-- Unpack the rar file from JONAS_ROOT/rars or JONAS_ROOT/rars/autoload -->
-    <unjar dest="${rar.classes.dir}">
-      <fileset dir="${jonas.root}/rars">
-        <include name="ow_easybeans_for_jonas.rar" />
-        <include name="autoload/ow_easybeans_for_jonas.rar" />
-      </fileset>
-    </unjar>
-
-    <!-- The classpath to be used to compile examples -->
-    <path id="base.classpath">
-      <pathelement location="${classes.dir}" />
-      <fileset dir="${rar.classes.dir}">
-        <include name="**/*.jar" />
-      </fileset>
-      <fileset dir="${lib.dir}">
-        <include name="**/*.jar" />
-      </fileset>
-    </path>
+    <mkdir dir="${dist.ear.dir}" />
+    <mkdir dir="${dist.jar.dir}" />
+    <mkdir dir="${dist.war.dir}" />
   </target>
 
   <target name="clean">
-    <!-- directories removal -->
-    <delete dir="${classes.dir}" />
-    <delete dir="${rar.classes.dir}" />
+    <delete dir="${build.dir}" />
     <delete dir="${dist.dir}" />
   </target>
 
-  <target name="compile" depends="init">
+  <target name="build.classes" depends="init">
     <javac srcdir="${src.dir}"
            destdir="${classes.dir}"
            debug="${javac.debug}"
@@ -87,32 +60,36 @@
     </javac>
   </target>
 
-  <target name="install.persistence" if="persistence.defined">
-    <mkdir dir="${dest.ejbjars.dir}/${ejb.name}.jar/META-INF/" />
-    <copy todir="${dest.ejbjars.dir}/${ejb.name}.jar/META-INF">
-      <fileset dir="${resources.dir}">
-        <include name="persistence.xml" />
-      </fileset>
-    </copy>
+  <target name="build.war" depends="build.classes">
+    <war warfile="${dist.war.dir}/${ejb.name}.war" webxml="web.xml">
+       <zipfileset dir="${www.dir}" />
+       <classes dir="${classes.dir}" includes="**/*.class" />
+    </war>
   </target>
 
-  <target name="install.war" if="war.defined">
-    <war warfile="${dest.webapps.dir}/${ejb.name}.war" webxml="${resources.dir}/web.xml">
-       <webinf dir="${resources.dir}" includes="jonas-web.xml, web-jetty.xml" />
-       <zipfileset dir="${resources.dir}" prefix="" />
-       <classes dir="${classes.dir}">
-         <include name="**/**/**/*.class" />
-       </classes>
-   </war>
-  </target>
-  <target name="install" depends="compile, install.persistence, install.war">
-    <copy todir="${dest.ejbjars.dir}/${ejb.name}.jar">
-      <fileset dir="${classes.dir}">
-        <patternset refid="ejb.patternset" />
-      </fileset>
-    </copy>
+  <target name="build.jar" depends="build.classes">
+    <jar jarfile="${dist.jar.dir}/${ejb.name}.jar">
+      <metainf dir="." includes="persistence.xml"/>
+      <fileset dir="${classes.dir}" includes="planetekids/beans/*/*.class" />
+    </jar>
+  </target>
+  
+  <target name="build.ear" depends="build.jar, build.war">
+    <ear earfile="${dist.ear.dir}/${ejb.name}.ear" appxml="app.xml">
+      <fileset dir="${dist.jar.dir}" includes="${ejb.name}.jar/**"/>
+      <fileset dir="${dist.war.dir}" includes="${ejb.name}.war"/>
+    </ear>
+  </target>
+  
+  <target name="install.war" depends="build.war">
+    <copy file="${dist.war.dir}/${ejb.name}.war" todir="${dest.war.dir}"/>
+  </target>
+  
+  <target name="install.jar" depends="build.jar">
+    <copy file="${dist.jar.dir}/${ejb.name}.jar" todir="${dest.jar.dir}"/>
+  </target>
+  
+  <target name="install.ear" depends="build.ear">
+    <copy file="${dist.ear.dir}/${ejb.name}.ear" todir="${dest.ear.dir}"/>
   </target>
 </project>
-
-
-

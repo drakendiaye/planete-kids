@@ -5,11 +5,11 @@
 * may 2006
 */
 
-package beans.stateful;
+package planetekids.beans.stateful;
 
-import beans.entity.AnswerBean;
-import beans.entity.QuestionBean;
-import beans.entity.QuestionnaireBean;
+import planetekids.beans.entity.AnswerBean;
+import planetekids.beans.entity.QuestionBean;
+import planetekids.beans.entity.QuestionnaireBean;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;

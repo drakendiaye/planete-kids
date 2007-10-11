@@ -4,9 +4,10 @@
  * @author    Fabienne Boyer - Didier Donsez - may 2006
  */
 
-package servlets;
+package planetekids.servlets;
 
-import beans.stateful.CustomerRemote;
+import planetekids.beans.stateful.CustomerBean;
+import planetekids.beans.stateful.CustomerRemote;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.naming.Context;
@@ -53,7 +54,7 @@ public class QuestionnaireServlet extends HttpServlet {
         
         try {
             Context initialContext = new InitialContext();
-            CustomerRemote customer = (CustomerRemote)initialContext.lookup("beans.stateful.CustomerBean" + "_" + CustomerRemote.class.getName() + "@Remote");
+            CustomerRemote customer = (CustomerRemote)initialContext.lookup(CustomerBean.class.getName() + "_" + CustomerRemote.class.getName() + "@Remote");
             customer.init();
             out.println("<p>Successful</p>");
         } catch (NamingException ex) {

@@ -5,7 +5,7 @@
 * may 2006
 */
 
-package beans.entity;
+package planetekids.beans.entity;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
