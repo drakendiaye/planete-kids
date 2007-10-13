@@ -1,95 +1,78 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project name="planete-kids" default="install.ear" basedir=".">
+<project name="planete-kids" default="build" basedir=".">
+    <property environment="myenv" />
+    <property name="jonas.root" value="${myenv.JONAS_ROOT}" />
+    
+    <target name="build">
+        <mkdir dir="build" />
+        
+        <javac srcdir="src" destdir="build" debug="on" deprecation="off" optimize="off" verbose="off" compiler="modern" nowarn="off">
+            <classpath>
+                <fileset dir="lib" includes="**/*.jar" />
+            </classpath>
+        </javac>
+        
+        <jar jarfile="build/planete-kids.jar">
+            <metainf dir="conf" includes="persistence.xml"/>
+            <zipfileset dir="build" includes="planetekids/beans/**/*.class" />
+        </jar>
+        
+        <jar jarfile="build/admin-client.jar">
+            <manifest>
+                <attribute name="Main-Class" value="planetekids.clients.AdminClient" />
+            </manifest>
+            <fileset dir="build" includes="planetekids/clients/AdminClient.class" />
+            <fileset dir="build" includes="planetekids/beans/**/*.class" />
+        </jar>
 
-  <property environment="myenv" />
-  <property name="jonas.root" value="${myenv.JONAS_ROOT}" />
+        <jar jarfile="build/customer-client.jar">
+            <manifest>
+                <attribute name="Main-Class" value="planetekids.clients.CustomerClient" />
+            </manifest>
+            <fileset dir="build" includes="planetekids/clients/CustomerClient.class" />
+            <fileset dir="build" includes="planetekids/beans/**/*.class" />
+        </jar>
 
-  <property name="javac.debug" value="on" />
-  <property name="javac.optimize" value="off" />
-  <property name="javac.deprecation" value="off" />
-  <property name="javac.verbose" value="off" />
-  <property name="javac.compiler" value="modern" />
-  <property name="javac.nowarn" value="off" />
+        <jar jarfile="build/init-data-client.jar">
+            <manifest>
+                <attribute name="Main-Class" value="planetekids.clients.InitDataBaseClient" />
+            </manifest>
+            <fileset dir="build" includes="planetekids/clients/InitDataBaseClient.class" />
+            <fileset dir="build" includes="planetekids/beans/**/*.class" />
+        </jar>
+        
+        <war warfile="build/planete-kids.war" webxml="conf/web.xml">
+           <zipfileset dir="web" includes="**"/>
+           <classes dir="conf" includes="struts.xml" />
+           <classes dir="build" includes="planetekids/beans/**/*.class" />
+           <classes dir="build" includes="planetekids/actions/**/*.class" />
+           <classes dir="build" includes="planetekids/servlets/**/*.class" />
+        </war>
+        
+        <ear earfile="build/planete-kids.ear" appxml="conf/application.xml">
+            <indexjars location="mysql-connector-java.jar" />
+            <zipfileset dir="build" includes="planete-kids.jar" />
+            <zipfileset dir="build" includes="planete-kids.war" />
+            <zipfileset dir="build" includes="admin-client.jar" />
+            <zipfileset dir="build" includes="customer-client.jar" />
+            <zipfileset dir="build" includes="init-data-client.jar" />
+            <zipfileset prefix="lib" dir="lib/struts2" includes="**/*.jar" />
+        </ear>
+    </target>
 
-  <property file="build.properties" />
-  <property name="ejb.name" value="planete-kids" />
-  <property name="src.dir" value="src" />
-  <property name="www.dir" value="www" />
-  <property name="build.dir" value="build" />
-  <property name="classes.dir" value="${build.dir}/classes" />
-  <property name="dist.dir" value="dist" />
-  <property name="dist.ear.dir" value="${dist.dir}/ear" />
-  <property name="dist.jar.dir" value="${dist.dir}/jar" />
-  <property name="dist.war.dir" value="${dist.dir}/war" />
-  <property name="lib.dir" value="${jonas.root}/lib" />
-  <property name="dest.ear.dir" value="${jonas.root}/apps" />
-  <property name="dest.jar.dir" value="${jonas.root}/deploy" />
-  <property name="dest.war.dir" value="${jonas.root}/webapps" />
-  
-  <path id="base.classpath">
-    <pathelement location="${classes.dir}" />
-    <fileset dir="${lib.dir}">
-      <include name="**/*.jar" />
-    </fileset>
-  </path>
-
-  <target name="init">
-    <mkdir dir="${build.dir}" />
-    <mkdir dir="${classes.dir}" />
-    <mkdir dir="${dist.dir}" />
-    <mkdir dir="${dist.ear.dir}" />
-    <mkdir dir="${dist.jar.dir}" />
-    <mkdir dir="${dist.war.dir}" />
-  </target>
-
-  <target name="clean">
-    <delete dir="${build.dir}" />
-    <delete dir="${dist.dir}" />
-  </target>
-
-  <target name="build.classes" depends="init">
-    <javac srcdir="${src.dir}"
-           destdir="${classes.dir}"
-           debug="${javac.debug}"
-           deprecation="${javac.deprecation}"
-           optimize="${javac.optimize}"
-           verbose="${javac.verbose}"
-           compiler="${javac.compiler}"
-           nowarn="${javac.nowarn}">
-      <classpath refid="base.classpath" />
-    </javac>
-  </target>
-
-  <target name="build.war" depends="build.classes">
-    <war warfile="${dist.war.dir}/${ejb.name}.war" webxml="web.xml">
-       <zipfileset dir="${www.dir}" />
-       <classes dir="${classes.dir}" includes="**/*.class" />
-    </war>
-  </target>
-
-  <target name="build.jar" depends="build.classes">
-    <jar jarfile="${dist.jar.dir}/${ejb.name}.jar">
-      <metainf dir="." includes="persistence.xml"/>
-      <fileset dir="${classes.dir}" includes="planetekids/beans/*/*.class" />
-    </jar>
-  </target>
-  
-  <target name="build.ear" depends="build.jar, build.war">
-    <ear earfile="${dist.ear.dir}/${ejb.name}.ear" appxml="app.xml">
-      <fileset dir="${dist.jar.dir}" includes="${ejb.name}.jar/**"/>
-      <fileset dir="${dist.war.dir}" includes="${ejb.name}.war"/>
-    </ear>
-  </target>
-  
-  <target name="install.war" depends="build.war">
-    <copy file="${dist.war.dir}/${ejb.name}.war" todir="${dest.war.dir}"/>
-  </target>
-  
-  <target name="install.jar" depends="build.jar">
-    <copy file="${dist.jar.dir}/${ejb.name}.jar" todir="${dest.jar.dir}"/>
-  </target>
-  
-  <target name="install.ear" depends="build.ear">
-    <copy file="${dist.ear.dir}/${ejb.name}.ear" todir="${dest.ear.dir}"/>
-  </target>
+    <target name="clean">
+        <delete dir="build" />
+    </target>
+    
+    <target name="deploy" depends="build">
+        <copy todir="${jonas.root}/deploy">
+            <fileset dir="build" includes="planete-kids.ear" />
+        </copy>
+    </target>
+    
+    <target name="undeploy">
+        <delete>
+            <fileset dir="${jonas.root}/deploy" includes="planete-kids.ear" />
+        </delete>
+    </target>
 </project>
