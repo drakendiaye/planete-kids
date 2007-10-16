@@ -1,7 +1,7 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
 <%@ taglib prefix="s" uri="/struts-tags" %>
 
-<h2><s:text name="content"/></h2>
+<h2><s:text name="questionnaire"/></h2>
 
 <s:if test="questionnaires.size > 0">
     <ul>
