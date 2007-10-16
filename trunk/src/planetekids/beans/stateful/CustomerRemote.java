@@ -14,5 +14,7 @@ import planetekids.beans.entity.QuestionnaireBean;
 @Remote
 public interface CustomerRemote {
   public void init();
+  public String getCurrent_action();
+  public void setCurrent_action(String current_action);
   public List<QuestionnaireBean> getQuestionnaires();
 }

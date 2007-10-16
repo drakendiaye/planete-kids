@@ -28,6 +28,8 @@ public class CustomerBean implements CustomerRemote{
     @PersistenceContext
     private EntityManager entityManager;
     
+    private String current_action;
+    
     public void init() {
         QuestionnaireBean questionnaire = new QuestionnaireBean("Planete-Kids ouvre bientôt ses porte sur le web!!!", "Aidez-nous à créer un site à votre image");
         
@@ -39,6 +41,14 @@ public class CustomerBean implements CustomerRemote{
         
         entityManager.persist(questionnaire);
         entityManager.joinTransaction();
+    }
+    
+    public String getCurrent_action() {
+        return current_action;
+    }
+
+    public void setCurrent_action(String current_action) {
+        this.current_action = current_action;
     }
     
     public List<QuestionnaireBean> getQuestionnaires() {
