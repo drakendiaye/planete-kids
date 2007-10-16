@@ -2,5 +2,7 @@
 <%@ taglib prefix="s" uri="/struts-tags" %>
 
 <h2><s:text name="generalmenu"/></h2>
-<s:a theme="ajax" notifyTopics="/contentrefresh"><s:text name="welcome"/></s:a>
-<s:a theme="ajax" notifyTopics="/contentrefresh"><s:text name="questionnaire"/></s:a>
+<s:url id="url" action="welcome"/>
+<s:a theme="ajax" href="%{url}" targets="content"><s:text name="welcome"/></s:a>
+<s:url id="url" action="questionnaire"/>
+<s:a theme="ajax" href="%{url}" targets="content"><s:text name="questionnaire"/></s:a>
