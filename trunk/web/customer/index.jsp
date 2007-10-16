@@ -4,6 +4,7 @@
 <html>
     <head>
         <title>Planete-kids</title>
+        <s:head theme="ajax" debug="true"/>
         <link href="<s:url value='style.css'/>" rel="stylesheet" type="text/css"/>
     </head>
     <body>
