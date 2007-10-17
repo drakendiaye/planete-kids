@@ -1,10 +1,11 @@
 package planetekids.beans.entity;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -19,8 +20,8 @@ public class QuestionnaireBean implements Serializable {
     @GeneratedValue(strategy=GenerationType.AUTO)
     private int id;
     
-    @OneToMany(mappedBy="questionnaire", cascade=CascadeType.ALL)
-    private List<QuestionBean> questions = new ArrayList<QuestionBean>();
+    @OneToMany(mappedBy="questionnaire", fetch = FetchType.EAGER, cascade=CascadeType.ALL)
+    private Set<QuestionBean> questions = new HashSet<QuestionBean>();
     
     private String title;
     private String description;
@@ -41,11 +42,11 @@ public class QuestionnaireBean implements Serializable {
         this.id = id;
     }
 
-    public List<QuestionBean> getQuestions() {
+    public Set<QuestionBean> getQuestions() {
         return questions;
     }
 
-    public void setQuestions(List<QuestionBean> questions) {
+    public void setQuestions(Set<QuestionBean> questions) {
         this.questions = questions;
     }
 

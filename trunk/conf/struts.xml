@@ -8,6 +8,9 @@
         <action name="welcome" class="planetekids.actions.customer.WelcomeAction" >
             <result>welcome.jsp</result>
         </action>
+        <action name="questionnaires" class="planetekids.actions.customer.QuestionnaireAction" >
+            <result>questionnaires.jsp</result>
+        </action>
         <action name="questionnaire" class="planetekids.actions.customer.QuestionnaireAction" >
             <result>questionnaire.jsp</result>
         </action>

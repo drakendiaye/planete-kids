@@ -15,7 +15,7 @@ public class ResultBean implements Serializable {
     @GeneratedValue(strategy=GenerationType.AUTO)
     private int id;
     
-    @ManyToOne(cascade=CascadeType.ALL, optional=false)
+    @ManyToOne(optional=false)
     private AnswerBean answer;
     
     private String test;

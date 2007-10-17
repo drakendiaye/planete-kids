@@ -7,20 +7,18 @@
 
 package planetekids.beans.stateful;
 
+import java.util.List;
 import planetekids.beans.entity.AnswerBean;
 import planetekids.beans.entity.QuestionBean;
 import planetekids.beans.entity.QuestionnaireBean;
-import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 import javax.ejb.PostActivate;
 import javax.ejb.PrePassivate;
 import javax.ejb.Remove;
-import javax.ejb.SessionSynchronization;
 import javax.ejb.Stateful;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.persistence.Query;
 
 @Stateful
 public class CustomerBean implements CustomerRemote{
@@ -52,8 +50,11 @@ public class CustomerBean implements CustomerRemote{
     }
     
     public List<QuestionnaireBean> getQuestionnaires() {
-        Query query = entityManager.createNamedQuery("getQuestionnaires");
-        return query.getResultList();
+        return entityManager.createNamedQuery("getQuestionnaires").getResultList();
+    }
+    
+    public QuestionnaireBean getQuestionnaire(int questionnaire_id) {
+         return entityManager.find(QuestionnaireBean.class, questionnaire_id);
     }
     
     @PostConstruct

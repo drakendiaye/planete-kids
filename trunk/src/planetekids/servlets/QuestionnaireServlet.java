@@ -55,7 +55,8 @@ public class QuestionnaireServlet extends HttpServlet {
         try {
             Context initialContext = new InitialContext();
             CustomerRemote customer = (CustomerRemote)initialContext.lookup(CustomerBean.class.getName() + "_" + CustomerRemote.class.getName() + "@Remote");
-            customer.init();
+            /*customer.init();*/
+            out.println(customer.getQuestionnaire(1).getQuestions().get(1).getText());
             out.println("<p>Successful</p>");
         } catch (NamingException ex) {
             ex.printStackTrace(out);

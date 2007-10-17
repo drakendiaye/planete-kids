@@ -34,8 +34,8 @@
                         </div>
                         <br style="clear:both;" />
                     </div>
-                    <s:url id="contenturl" action="questionnaire" />
-                    <s:div id="content" theme="ajax" href="%{contenturl}" loadingText="%{getText('loading')}" listenTopics="/contentrefresh" />
+                    <s:url id="url" action="%{getCurrent_action()}" />
+                    <s:div id="content" theme="ajax" href="%{url}" loadingText="%{getText('loading')}" listenTopics="/contentrefresh" />
                 </div>
                 <div id="rightmenu">
                     <div id="cart">

@@ -1,14 +1,14 @@
 package planetekids.beans.entity;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
@@ -21,11 +21,12 @@ public class QuestionBean implements Serializable {
     @GeneratedValue(strategy=GenerationType.AUTO)
     private int id;
     
-    @ManyToOne(cascade=CascadeType.ALL, optional=false)
+    @ManyToOne(optional=false)
+    //@JoinColumn(name = "questionnaire_id")
     private QuestionnaireBean questionnaire;
     
-    @OneToMany(mappedBy="question", cascade=CascadeType.ALL)
-    private List<AnswerBean> answers = new ArrayList<AnswerBean>();
+    @OneToMany(mappedBy="question", fetch = FetchType.EAGER, cascade=CascadeType.ALL)
+    private Set<AnswerBean> answers = new HashSet<AnswerBean>();
     
     private String text;
     private Pattern pattern;
@@ -55,11 +56,11 @@ public class QuestionBean implements Serializable {
         this.questionnaire = questionnaire;
     }
 
-    public List<AnswerBean> getAnswers() {
+    public Set<AnswerBean> getAnswers() {
         return answers;
     }
 
-    public void setAnswers(List<AnswerBean> answers) {
+    public void setAnswers(Set<AnswerBean> answers) {
         this.answers = answers;
     }
 
