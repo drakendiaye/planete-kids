@@ -11,6 +11,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 
 @Entity
 public class QuestionBean implements Serializable {
@@ -27,6 +28,9 @@ public class QuestionBean implements Serializable {
     
     @OneToMany(mappedBy="question", fetch = FetchType.EAGER, cascade=CascadeType.ALL)
     private Set<AnswerBean> answers = new HashSet<AnswerBean>();
+    
+    @OneToOne
+    private MultiLangStringBean multiLangString;
     
     private String text;
     private Pattern pattern;
@@ -78,6 +82,14 @@ public class QuestionBean implements Serializable {
 
     public void setPattern(Pattern pattern) {
         this.pattern = pattern;
+    }
+
+    public MultiLangStringBean getMultiLangString() {
+	return multiLangString;
+    }
+
+    public void setMultiLangString(MultiLangStringBean multiLangString) {
+	this.multiLangString = multiLangString;
     }
     
 }
