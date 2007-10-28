@@ -1,0 +1,230 @@
+body {
+}
+
+h1 {
+  margin :0px;
+  font-size :42pt;
+  text-align :center;
+}
+
+h2 {
+  margin :0px;
+  font-size :14pt;
+  background-color :#ff0000;
+}
+
+h3 {
+  margin :0px;
+  font-size :12pt;
+}
+
+a {
+  border :0px;
+  margin :0px;
+  padding :0px;
+  font-size :12pt;
+  color :#ffffff;
+}
+
+a:hover {
+  cursor :pointer;
+  color :#000000;
+}
+
+div {
+  border :0px;
+  margin :0px;
+  padding :0px;
+}
+
+img {
+  border :0px;
+  margin :0px;
+  padding :0px;
+}
+
+#container {
+  width :950px;
+  height :570px;
+  margin-top :20px;
+  margin-left :auto;
+  margin-right :auto;
+  overflow :hidden;
+}
+
+#page {
+  width :950px;
+  height :470px;
+  overflow :hidden;
+}
+
+#pagecenter {
+  width :650px;
+  height :470px;
+  overflow :hidden;
+  float :left;
+}
+
+
+#leftmenu {
+  width :150px;
+  height :470px;
+  overflow :hidden;
+  float :left;
+}
+
+#rightmenu {
+  width :150px;
+  height :470px;
+  overflow :hidden;
+  float :left;
+}
+
+#topmenu {
+  width :650px;
+  height :20px;
+  overflow :hidden;
+  margin :1px;
+  background-color :#0000ff;
+}
+
+#previous {
+  width :20px;
+  height :20px;
+  float : left;
+}
+
+#next {
+  width :20px;
+  height :20px;
+  float : left;
+}
+
+#refresh {
+  width :20px;
+  height :20px;
+  float : left;
+}
+
+#frflag {
+  width :32px;
+  height :20px;
+  float : left;
+}
+
+#enflag {
+  width :32px;
+  height :20px;
+  float : left;
+}
+
+#location {
+  width :526px;
+  height :20px;
+  float : left;
+  font-size :8px;
+  vertical-align :middle;
+}
+
+#header {
+  width :950px;
+  height :70px;
+  margin :1px;
+  background-color :#ff0000;
+}
+
+#footer {
+  width :950px;
+  height :30px;
+  margin :1px;
+  background-color :#ff0000;
+}
+
+#generalmenu {
+  width :150px;
+  height :235px;
+  overflow :hidden;
+  margin :1px;
+  background-color :#0000ff;
+}
+
+#contextualmenu {
+  width :150px;
+  height :235px;
+  overflow :hidden;
+  margin :1px;
+  background-color :#0000ff;
+}
+
+#catalogue {
+  width :150px;
+  height :235px;
+  overflow :hidden;
+  margin :1px;
+  background-color :#0000ff;
+}
+
+#cart {
+  width :150px;
+  height :235px;
+  overflow :hidden;
+  margin :1px;
+  background-color :#0000ff;
+}
+
+#content {
+  width :650px;
+  height :448px;
+  overflow :auto;
+  margin :1px;
+  background-color :#ffffff;
+}
+
+div.welcome {
+  width :610px;
+  margin-top :20px;
+  margin-left :auto;
+  margin-right :auto;
+  color :#000000;
+  background-color :#0000ff;
+}
+
+div.questionnaire {
+  width :610px;
+  margin-top :20px;
+  margin-left :auto;
+  margin-right :auto;
+  color :#000000;
+  background-color :#0000ff;
+}
+
+div.questionnaire h3 {
+  background-color :#ff0000;
+}
+
+a.questionnaire div {
+  width :610px;
+  margin-top :20px;
+  margin-left :auto;
+  margin-right :auto;
+  color :#ffffff;
+  background-color :#0000ff;
+}
+
+a.questionnaire h3 {
+  color :#000000;
+  background-color :#ff0000;
+}
+
+a.questionnaire:hover div {
+  color :#000000;
+}
+
+div.question {
+  width :570px;
+  margin-top :20px;
+  margin-left :auto;
+  margin-right :auto;
+  color :#000000;
+  background-color :#0000ff;
+}
