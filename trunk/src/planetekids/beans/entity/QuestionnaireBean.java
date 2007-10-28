@@ -11,6 +11,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 
 @Entity
 @NamedQuery(name = "getQuestionnaires", query = "select o FROM QuestionnaireBean o")
@@ -20,16 +21,19 @@ public class QuestionnaireBean implements Serializable {
     @GeneratedValue(strategy=GenerationType.AUTO)
     private int id;
     
-    @OneToMany(mappedBy="questionnaire", fetch = FetchType.EAGER, cascade=CascadeType.ALL)
+    @OneToMany(mappedBy="questionnaire", fetch=FetchType.EAGER, cascade=CascadeType.ALL)
     private Set<QuestionBean> questions = new HashSet<QuestionBean>();
     
-    private String title;
-    private String description;
+    @OneToOne(fetch=FetchType.EAGER, cascade=CascadeType.ALL, optional=false)
+    private LocaleBean title;
+    
+    @OneToOne(fetch=FetchType.EAGER, cascade=CascadeType.ALL, optional=false)
+    private LocaleBean description;
   
     public QuestionnaireBean() {
     }
     
-    public QuestionnaireBean(String title, String description) {
+    public QuestionnaireBean(LocaleBean title, LocaleBean description) {
         setTitle(title);
         setDescription(description);
     }
@@ -49,20 +53,30 @@ public class QuestionnaireBean implements Serializable {
     public void setQuestions(Set<QuestionBean> questions) {
         this.questions = questions;
     }
+    
+    public String getTitle(String locale) {
+        if(locale.compareTo("fr") == 0) return(title.getFr());
+        else return(title.getEn());
+    }
 
-    public String getTitle() {
+    public LocaleBean getTitle() {
         return title;
     }
 
-    public void setTitle(String title) {
+    public void setTitle(LocaleBean title) {
         this.title = title;
     }
+    
+    public String getDescription(String locale) {
+        if(locale.compareTo("fr") == 0) return(description.getFr());
+        else return(description.getEn());
+    }
 
-    public String getDescription() {
+    public LocaleBean getDescription() {
         return description;
     }
 
-    public void setDescription(String description) {
+    public void setDescription(LocaleBean description) {
         this.description = description;
     }
 

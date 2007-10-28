@@ -6,18 +6,17 @@
 
 package planetekids.servlets;
 
-import planetekids.beans.stateful.CustomerBean;
-import planetekids.beans.stateful.CustomerRemote;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.naming.Context;
 import javax.naming.InitialContext;
+import javax.naming.NamingException;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.naming.NamingException;
-import javax.transaction.UserTransaction;
+import planetekids.beans.stateful.CustomerBean;
+import planetekids.beans.stateful.CustomerRemote;
 
 public class QuestionnaireServlet extends HttpServlet {
 
@@ -50,7 +49,7 @@ public class QuestionnaireServlet extends HttpServlet {
         out.println("</head>");
         out.println("<body style=\"background : white; color : black;\">");
 
-        out.println("<h1>Trying to create an Questionnaire</h1>");
+        out.println("<h1>Not yet implemented</h1>");
         
         try {
             Context initialContext = new InitialContext();

@@ -18,8 +18,6 @@ public class ResultBean implements Serializable {
     @ManyToOne(optional=false)
     private AnswerBean answer;
     
-    private String test;
-    
     public ResultBean() {
     }
 
@@ -37,14 +35,6 @@ public class ResultBean implements Serializable {
 
     public void setAnswer(AnswerBean answer) {
         this.answer = answer;
-    }
-
-    public String getValue() {
-        return test;
-    }
-
-    public void setValue(String value) {
-        this.test = value;
     }
     
 }

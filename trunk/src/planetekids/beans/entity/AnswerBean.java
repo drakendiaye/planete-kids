@@ -2,7 +2,6 @@ package planetekids.beans.entity;
 
 import java.io.Serializable;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -12,6 +11,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 
 @Entity
 public class AnswerBean implements Serializable {
@@ -26,13 +26,15 @@ public class AnswerBean implements Serializable {
     @OneToMany(mappedBy="answer", fetch = FetchType.EAGER, cascade=CascadeType.ALL)
     private Set<ResultBean> results = new HashSet<ResultBean>();
     
-    private String text;
+    @OneToOne(fetch=FetchType.EAGER, cascade=CascadeType.ALL, optional=false)
+    private LocaleBean text;
+    
     private Boolean commentable;
     
     public AnswerBean() {
     }
     
-    public AnswerBean(QuestionBean question, String text, Boolean commentable) {
+    public AnswerBean(QuestionBean question, LocaleBean text, Boolean commentable) {
         setQuestion(question);
         setText(text);
         setCommentable(commentable);
@@ -54,11 +56,16 @@ public class AnswerBean implements Serializable {
         this.question = question;
     }
     
-    public String getText() {
+    public String getText(String locale) {
+        if(locale.compareTo("fr") == 0) return(text.getFr());
+        else return(text.getEn());
+    }
+    
+    public LocaleBean getText() {
         return text;
     }
     
-    public void setText(String text) {
+    public void setText(LocaleBean text) {
         this.text = text;
     }
     

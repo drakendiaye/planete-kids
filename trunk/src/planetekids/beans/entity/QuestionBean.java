@@ -23,22 +23,27 @@ public class QuestionBean implements Serializable {
     private int id;
     
     @ManyToOne(optional=false)
-    //@JoinColumn(name = "questionnaire_id")
     private QuestionnaireBean questionnaire;
     
     @OneToMany(mappedBy="question", fetch = FetchType.EAGER, cascade=CascadeType.ALL)
     private Set<AnswerBean> answers = new HashSet<AnswerBean>();
     
+<<<<<<< .mine
+    @OneToOne(fetch=FetchType.EAGER, cascade=CascadeType.ALL, optional=false)
+    private LocaleBean text;
+    
+=======
     @OneToOne
     private MultiLangStringBean multiLangString;
     
     private String text;
+>>>>>>> .r60
     private Pattern pattern;
     
     public QuestionBean() {
     }
     
-    public QuestionBean(QuestionnaireBean questionnaire, String text, Pattern pattern) {
+    public QuestionBean(QuestionnaireBean questionnaire, LocaleBean text, Pattern pattern) {
         setQuestionnaire(questionnaire);
         setText(text);
         setPattern(pattern);
@@ -67,12 +72,17 @@ public class QuestionBean implements Serializable {
     public void setAnswers(Set<AnswerBean> answers) {
         this.answers = answers;
     }
+    
+    public String getText(String locale) {
+        if(locale.compareTo("fr") == 0) return(text.getFr());
+        else return(text.getEn());
+    }
 
-    public String getText() {
+    public LocaleBean getText() {
         return text;
     }
 
-    public void setText(String text) {
+    public void setText(LocaleBean text) {
         this.text = text;
     }
 
