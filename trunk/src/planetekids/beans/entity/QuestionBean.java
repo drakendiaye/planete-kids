@@ -28,16 +28,9 @@ public class QuestionBean implements Serializable {
     @OneToMany(mappedBy="question", fetch = FetchType.EAGER, cascade=CascadeType.ALL)
     private Set<AnswerBean> answers = new HashSet<AnswerBean>();
     
-<<<<<<< .mine
     @OneToOne(fetch=FetchType.EAGER, cascade=CascadeType.ALL, optional=false)
     private LocaleBean text;
     
-=======
-    @OneToOne
-    private MultiLangStringBean multiLangString;
-    
-    private String text;
->>>>>>> .r60
     private Pattern pattern;
     
     public QuestionBean() {
@@ -92,14 +85,6 @@ public class QuestionBean implements Serializable {
 
     public void setPattern(Pattern pattern) {
         this.pattern = pattern;
-    }
-
-    public MultiLangStringBean getMultiLangString() {
-	return multiLangString;
-    }
-
-    public void setMultiLangString(MultiLangStringBean multiLangString) {
-	this.multiLangString = multiLangString;
     }
     
 }
