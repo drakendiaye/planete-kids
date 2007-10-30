@@ -22,6 +22,7 @@ public class IndexAction extends ActionSupport implements SessionAware {
         return (CustomerRemote)session.get("customer");
     }
     
+    @Override
     public String execute() throws Exception {
         try {
             if(getCustomer() == null) session.put("customer", new InitialContext().lookup(CustomerBean.class.getName() + "_" + CustomerRemote.class.getName() + "@Remote"));
