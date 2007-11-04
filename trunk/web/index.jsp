@@ -6,7 +6,7 @@
         <title>Planete-kids</title>
         <s:head theme="ajax" debug="true" />
         <link href="<s:url value='/style.css'/>" rel="stylesheet" type="text/css"/>
-        <script language="javascript">
+        <script type="text/javascript" >
             var locale_current;
             var content_default = new Array();
             var content_current = new Array();
@@ -18,12 +18,24 @@
                 this.url = url;
                 this.target = target;
             }
-
+            
+            
+            function navExecJS(data) {
+                var reg = new RegExp("<script.*/script>", "gi");
+                var scripts = data.replace(reg,"coucou");
+                alert(scripts);
+                //eval();
+            }
+            
             function navExec(target, url) {
                 dojo.io.bind({
                     url:        url,
                     load:       function(type, data, event) {
                                     dojo.byId(target).innerHTML = data;
+                                    var scripts = dojo.byId(target).getElementsByTagName("script");
+                                    for each (script in scripts) {
+                                        window.eval(script.text);
+                                    }
                                 },
                     error:      function(type, errorObject) {
                                     dojo.byId(target).innerHTML = "Error...";

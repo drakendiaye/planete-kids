@@ -1,8 +1,8 @@
 package planetekids.beans.entity;
 
 import java.io.Serializable;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.SortedSet;
+import java.util.TreeSet;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -12,6 +12,8 @@ import javax.persistence.Id;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import org.hibernate.annotations.Sort;
+import org.hibernate.annotations.SortType;
 
 @Entity
 @NamedQuery(name = "getQuestionnaires", query = "select o FROM QuestionnaireBean o")
@@ -22,7 +24,8 @@ public class QuestionnaireBean implements Serializable {
     private int id;
     
     @OneToMany(mappedBy="questionnaire", fetch=FetchType.EAGER, cascade=CascadeType.ALL)
-    private Set<QuestionBean> questions = new HashSet<QuestionBean>();
+    @Sort(type=SortType.NATURAL)
+    private SortedSet<QuestionBean> questions = new TreeSet<QuestionBean>();
     
     @OneToOne(fetch=FetchType.EAGER, cascade=CascadeType.ALL, optional=false)
     private LocaleBean title;
@@ -46,11 +49,11 @@ public class QuestionnaireBean implements Serializable {
         this.id = id;
     }
 
-    public Set<QuestionBean> getQuestions() {
+    public SortedSet<QuestionBean> getQuestions() {
         return questions;
     }
 
-    public void setQuestions(Set<QuestionBean> questions) {
+    public void setQuestions(SortedSet<QuestionBean> questions) {
         this.questions = questions;
     }
     

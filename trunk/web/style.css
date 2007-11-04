@@ -228,3 +228,11 @@ div.question {
   color :#000000;
   background-color :#0000ff;
 }
+
+div.answer {
+  width :550px;
+  margin-left :auto;
+  margin-right :auto;
+  color :#000000;
+  background-color :#0000ff;
+}

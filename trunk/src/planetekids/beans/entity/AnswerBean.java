@@ -14,7 +14,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
 @Entity
-public class AnswerBean implements Serializable {
+public class AnswerBean implements Serializable, Comparable<AnswerBean> {
     
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
@@ -31,16 +31,19 @@ public class AnswerBean implements Serializable {
     
     private Boolean commentable;
     
+    private int number;
+    
     public AnswerBean() {
     }
     
-    public AnswerBean(QuestionBean question, LocaleBean text, Boolean commentable) {
+    public AnswerBean(QuestionBean question, LocaleBean text, Boolean commentable, int order) {
         setQuestion(question);
         setText(text);
         setCommentable(commentable);
+        setNumber(order);
     }
     
-    public int GetId() {
+    public int getId() {
         return id;
     }
     
@@ -83,6 +86,20 @@ public class AnswerBean implements Serializable {
     
     public void setResults(Set<ResultBean> results) {
         this.results = results;
+    }
+
+    public int getNumber() {
+        return number;
+    }
+
+    public void setNumber(int order) {
+        this.number = order;
+    }
+    
+    public int compareTo(AnswerBean o) {
+        if(this.getNumber() < o.getNumber()) return(-1);
+        if(this.getNumber() > o.getNumber()) return(1);
+        return(0);
     }
     
 }

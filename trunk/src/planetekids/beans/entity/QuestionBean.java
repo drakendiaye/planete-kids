@@ -1,8 +1,8 @@
 package planetekids.beans.entity;
 
 import java.io.Serializable;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.SortedSet;
+import java.util.TreeSet;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -12,9 +12,11 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import org.hibernate.annotations.Sort;
+import org.hibernate.annotations.SortType;
 
 @Entity
-public class QuestionBean implements Serializable {
+public class QuestionBean implements Serializable, Comparable<QuestionBean> {
     
     public enum Pattern {SINGLE_CHOICE, MULTI_CHOICE, SORT, VALUE};
     
@@ -26,20 +28,24 @@ public class QuestionBean implements Serializable {
     private QuestionnaireBean questionnaire;
     
     @OneToMany(mappedBy="question", fetch = FetchType.EAGER, cascade=CascadeType.ALL)
-    private Set<AnswerBean> answers = new HashSet<AnswerBean>();
+    @Sort(type=SortType.NATURAL)
+    private SortedSet<AnswerBean> answers = new TreeSet<AnswerBean>();
     
     @OneToOne(fetch=FetchType.EAGER, cascade=CascadeType.ALL, optional=false)
     private LocaleBean text;
     
     private Pattern pattern;
     
+    private int number;
+    
     public QuestionBean() {
     }
     
-    public QuestionBean(QuestionnaireBean questionnaire, LocaleBean text, Pattern pattern) {
+    public QuestionBean(QuestionnaireBean questionnaire, LocaleBean text, Pattern pattern,int order) {
         setQuestionnaire(questionnaire);
         setText(text);
         setPattern(pattern);
+        setNumber(order);
     }
 
     public int getId() {
@@ -58,11 +64,11 @@ public class QuestionBean implements Serializable {
         this.questionnaire = questionnaire;
     }
 
-    public Set<AnswerBean> getAnswers() {
+    public SortedSet<AnswerBean> getAnswers() {
         return answers;
     }
 
-    public void setAnswers(Set<AnswerBean> answers) {
+    public void setAnswers(SortedSet<AnswerBean> answers) {
         this.answers = answers;
     }
     
@@ -85,6 +91,20 @@ public class QuestionBean implements Serializable {
 
     public void setPattern(Pattern pattern) {
         this.pattern = pattern;
+    }
+    
+    public int getNumber() {
+        return number;
+    }
+
+    public void setNumber(int order) {
+        this.number = order;
+    }
+
+    public int compareTo(QuestionBean o) {
+        if(this.getNumber() < o.getNumber()) return(-1);
+        if(this.getNumber() > o.getNumber()) return(1);
+        return(0);
     }
     
 }
