@@ -1,16 +1,17 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
 <%@ taglib prefix="s" uri="/struts-tags" %>
 
-<s:div cssClass="questionnaire">
-    <h3><s:property value="getQuestionnaire().getTitle(getLocale())" /></h3>
+<h2><s:text name="questionnaire"/></h2>
+<s:div cssClass="main">
+    <h4><s:property value="getQuestionnaire().getTitle(getLocale())" /></h4>
     <p><s:property value="getQuestionnaire().getDescription(getLocale())" /></p>
     
     <s:if test="getQuestionnaire().getQuestions().size() > 0">
-        <form id="questionnaire" method="post" action="<s:url namespace="/questionnaire" action="questionnaire_submit" includeParams="none"/>">
+        <form id="questionnaire_form" method="post">
             <s:iterator value="getQuestionnaire().getQuestions()">
                 <s:div cssClass="question">
                     <s:property value="getText(getLocale())" />
-                    <s:div cssClass="answer">
+                    <s:div>
                         <s:if test="getPattern().toString() == 'SINGLE_CHOICE'">
                             <s:if test="getAnswers().size() > 0">
                                 <script type="text/javascript">
@@ -22,15 +23,20 @@
                                         dojo.byId(id).value = "true";
                                         dojo.byId(id+"_img").src = "images/radio_selected.png";
                                     }
+                                    
+                                    if(<s:iterator value="getAnswers()"> dojo.byId("answer_<s:property value="getId()"/>").value == "false" && </s:iterator>true)
+                                        radioClick_<s:property value="getId()"/>("answer_<s:property value="getAnswers().first().getId()"/>");
                                 </script>
-                            </s:if>
-                            <s:if test="getAnswers().size() > 0">
                                 <s:iterator id="answer" value="getAnswers()">
-                                    <input id="answer_<s:property value="getId()"/>" name="answer_<s:property value="getId()"/>" type="hidden" value="false"/>
+                                    <s:hidden id="answer_%{getId()}" name="answer_%{getId()}" value="false"/>
                                     <img id="answer_<s:property value="getId()"/>_img" src="images/radio_deselected.png" width="20px" onclick="radioClick_<s:property value="getQuestion().getId()"/>('answer_<s:property value="getId()"/>')"/>
                                     <s:property value="%{getText(getLocale())}"/>
                                     <s:if test="getCommentable()">
-                                        <s:textfield name="answer_%{getId()}_comment" />
+                                        <script type="text/javascript">
+                                            dojo.byId('answer_<s:property value="getId()"/>_comment_field').value = dojo.byId('answer_<s:property value="getId()"/>_comment').value;
+                                        </script>
+                                        <s:hidden id="answer_%{getId()}_comment" name="answer_%{getId()}_comment"/>
+                                        <s:textfield id="answer_%{getId()}_comment_field" onchange="dojo.byId('answer_%{getId()}_comment').value = this.value"/>
                                     </s:if>
                                     <br/>
                                 </s:iterator>
@@ -55,21 +61,67 @@
                                     <img id="answer_<s:property value="getId()"/>_img" src="images/check_deselected.png" width="20px" onclick="checkClick_<s:property value="getId()"/>()"/>
                                     <s:property value="%{getText(getLocale())}"/>
                                     <s:if test="getCommentable()">
-                                        <s:textfield name="answer_%{getId()}_comment" />
+                                        <script type="text/javascript">
+                                            dojo.byId('answer_<s:property value="getId()"/>_comment_field').value = dojo.byId('answer_<s:property value="getId()"/>_comment').value;
+                                        </script>
+                                        <s:hidden id="answer_%{getId()}_comment" name="answer_%{getId()}_comment"/>
+                                        <s:textfield id="answer_%{getId()}_comment_field" onchange="dojo.byId('answer_%{getId()}_comment').value = this.value"/>
                                     </s:if>
                                     <br/>
                                 </s:iterator>
                             </s:if>
                         </s:elseif>
                         <s:elseif test="getPattern().toString() == 'SORT'">
+                            <!--<s:if test="getAnswers().size() > 0">
+                                <script type="text/javascript">
+                                    function sortUpClick_<s:property value="getId()"/>(id) {
+                                        var temp = dojo.byId(id).value
+                                        <s:iterator value="getAnswers()">
+                                            dojo.byId("answer_<s:property value="getId()"/>").value = "false";
+                                            dojo.byId("answer_<s:property value="getId()"/>_img").src = "images/radio_deselected.png";
+                                        </s:iterator>
+                                        dojo.byId(id).value = "true";
+                                        dojo.byId(id+"_img").src = "images/radio_selected.png";
+                                    }
+                                    function sortDownClick_<s:property value="getId()"/>(id) {
+                                        <s:iterator value="getAnswers()">
+                                            dojo.byId("answer_<s:property value="getId()"/>").value = "false";
+                                            dojo.byId("answer_<s:property value="getId()"/>_img").src = "images/radio_deselected.png";
+                                        </s:iterator>
+                                        dojo.byId(id).value = "true";
+                                        dojo.byId(id+"_img").src = "images/radio_selected.png";
+                                    }
+                                </script>
+                                <s:iterator id="answer" value="getAnswers()">
+                                    <s:hidden id="answer_%{getId()}" name="answer_%{getId()}" value="false"/>
+                                    <img id="answer_<s:property value="getId()"/>_img" src="images/radio_deselected.png" width="20px" onclick="radioClick_<s:property value="getQuestion().getId()"/>('answer_<s:property value="getId()"/>')"/>
+                                    <s:property value="%{getText(getLocale())}"/>
+                                    <s:if test="getCommentable()">
+                                        <script type="text/javascript">
+                                            dojo.byId('answer_<s:property value="getId()"/>_comment_field').value = dojo.byId('answer_<s:property value="getId()"/>_comment').value;
+                                        </script>
+                                        <s:hidden id="answer_%{getId()}_comment" name="answer_%{getId()}_comment"/>
+                                        <s:textfield id="answer_%{getId()}_comment_field" onchange="dojo.byId('answer_%{getId()}_comment').value = this.value"/>
+                                    </s:if>
+                                    <br/>
+                                </s:iterator>
+                            </s:if>-->
                         </s:elseif>
                         <s:elseif test="getPattern().toString() == 'VALUE'">
                             <s:if test="getAnswers().size() > 0">
                                 <s:iterator value="getAnswers()">
-                                    <input id="answer_<s:property value="getId()"/>_value" name="answer_<s:property value="getId()"/>_value" type="text"/>
+                                    <script type="text/javascript">
+                                        dojo.byId('answer_<s:property value="getId()"/>_field').value = dojo.byId('answer_<s:property value="getId()"/>').value;
+                                    </script>
+                                    <s:hidden id="answer_%{getId()}" name="answer_%{getId()}"/>
+                                    <s:textfield id="answer_%{getId()}_field" onchange="dojo.byId('answer_%{getId()}').value = this.value"/>
                                     <s:property value="%{getText(getLocale())}" />
                                     <s:if test="getCommentable()">
-                                        <input id="answer_<s:property value="getId()"/>_comment" name="answer_<s:property value="getId()"/>_comment" type="text"/>
+                                        <script type="text/javascript">
+                                            dojo.byId('answer_<s:property value="getId()"/>_comment_field').value = dojo.byId('answer_<s:property value="getId()"/>_comment').value;
+                                        </script>
+                                        <s:hidden id="answer_%{getId()}_comment" name="answer_%{getId()}_comment"/>
+                                        <s:textfield id="answer_%{getId()}_comment_field" onchange="dojo.byId('answer_%{getId()}_comment').value = this.value"/>
                                     </s:if>
                                     <br/>
                                 </s:iterator>

@@ -2,45 +2,62 @@ body {
 }
 
 h1 {
-  margin :0px;
-  font-size :42pt;
-  text-align :center;
+    margin :0px;
+    padding :0px;
+    border :0px;
+    margin-top :20px;
+    text-align :center;
+    background-color : #0000ff;
 }
 
 h2 {
-  margin :0px;
-  font-size :14pt;
-  background-color :#ff0000;
+    margin :0px;
+    padding :0px;
+    border :0px;
+    background-color : #2222ff;
 }
 
 h3 {
-  margin :0px;
-  font-size :12pt;
+    margin :0px;
+    padding :0px;
+    border :0px;
+    background-color : #4444ff;
 }
 
-a {
-  border :0px;
-  margin :0px;
-  padding :0px;
-  font-size :12pt;
-  color :#ffffff;
+h4 {
+    margin :0px;
+    padding :0px;
+    border :0px;
+    background-color : #6666ff;
 }
 
-a:hover {
-  cursor :pointer;
-  color :#000000;
+p {
+    margin :0px;
+    padding :0px;
+    border :0px;
+    background-color : #8888ff;
 }
 
 div {
   border :0px;
   margin :0px;
   padding :0px;
+  background-color : #aaaaff
 }
 
 img {
   border :0px;
   margin :0px;
   padding :0px;
+}
+
+a {
+    color :#ffffff;
+}
+
+a:hover {
+    cursor :pointer;
+    color :#ff0000;
 }
 
 #container {
@@ -84,19 +101,19 @@ img {
   width :650px;
   height :20px;
   overflow :hidden;
-  margin :1px;
-  background-color :#0000ff;
 }
 
 #previous {
   width :20px;
   height :20px;
+  overflow :hidden;
   float : left;
 }
 
 #next {
   width :20px;
   height :20px;
+  overflow :hidden;
   float : left;
 }
 
@@ -109,130 +126,75 @@ img {
 #frflag {
   width :32px;
   height :20px;
+  overflow :hidden;
   float : left;
 }
 
 #enflag {
   width :32px;
   height :20px;
+  overflow :hidden;
   float : left;
 }
 
 #location {
   width :526px;
   height :20px;
+  overflow :hidden;
   float : left;
-  font-size :8px;
-  vertical-align :middle;
 }
 
 #header {
   width :950px;
   height :70px;
-  margin :1px;
-  background-color :#ff0000;
+  overflow :hidden;
 }
 
 #footer {
   width :950px;
   height :30px;
-  margin :1px;
-  background-color :#ff0000;
+  overflow :hidden;
 }
 
 #generalmenu {
-  width :150px;
-  height :235px;
+  width :140px;
+  height :225px;
   overflow :hidden;
-  margin :1px;
-  background-color :#0000ff;
+  padding :5px;
 }
 
 #contextualmenu {
-  width :150px;
-  height :235px;
+  width :140px;
+  height :225px;
   overflow :hidden;
-  margin :1px;
-  background-color :#0000ff;
+  padding :5px;
 }
 
 #catalogue {
-  width :150px;
-  height :235px;
+  width :140px;
+  height :225px;
   overflow :hidden;
-  margin :1px;
-  background-color :#0000ff;
+  padding :5px;
 }
 
 #cart {
-  width :150px;
-  height :235px;
+  width :140px;
+  height :225px;
   overflow :hidden;
-  margin :1px;
-  background-color :#0000ff;
+  padding :5px;
 }
 
 #content {
-  width :650px;
-  height :448px;
+  width :640px;
+  height :440px;
   overflow :auto;
-  margin :1px;
-  background-color :#ffffff;
+  padding :5px;
 }
 
-div.welcome {
-  width :610px;
-  margin-top :20px;
-  margin-left :auto;
-  margin-right :auto;
-  color :#000000;
-  background-color :#0000ff;
-}
-
-div.questionnaire {
-  width :610px;
-  margin-top :20px;
-  margin-left :auto;
-  margin-right :auto;
-  color :#000000;
-  background-color :#0000ff;
-}
-
-div.questionnaire h3 {
-  background-color :#ff0000;
-}
-
-a.questionnaire div {
-  width :610px;
-  margin-top :20px;
-  margin-left :auto;
-  margin-right :auto;
-  color :#ffffff;
-  background-color :#0000ff;
-}
-
-a.questionnaire h3 {
-  color :#000000;
-  background-color :#ff0000;
-}
-
-a.questionnaire:hover div {
-  color :#000000;
+div.main {
+  padding :5px
 }
 
 div.question {
-  width :570px;
-  margin-top :20px;
-  margin-left :auto;
-  margin-right :auto;
-  color :#000000;
-  background-color :#0000ff;
-}
-
-div.answer {
-  width :550px;
-  margin-left :auto;
-  margin-right :auto;
-  color :#000000;
-  background-color :#0000ff;
+  padding :5px
 }

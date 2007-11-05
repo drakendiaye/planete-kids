@@ -4,17 +4,17 @@
 <s:url id="url_content" namespace="/" action="index_content" includeParams="none"/>
 <s:url id="url_location" namespace="/" action="index_location" includeParams="none"/>
 <s:url id="url_contextualmenu" namespace="/" action="index_contextualmenu" includeParams="none"/>
-<s:a onclick="navGo([new navRequest('%{url_content}', 'content'),
-                     new navRequest('%{url_location}', 'location'),
-                     new navRequest('%{url_contextualmenu}', 'contextualmenu')])">
+<s:a onclick="navGo([new navRequest('content', '%{url_content}'),
+                     new navRequest('location', '%{url_location}'),
+                     new navRequest('contextualmenu', '%{url_contextualmenu}')])">
     Planete-Kids>>
 </s:a>
 
 <s:url id="url_content" namespace="/questionnaire" action="index_content" includeParams="none"/>
 <s:url id="url_location" namespace="/questionnaire" action="index_location" includeParams="none"/>
 <s:url id="url_contextualmenu" namespace="/questionnaire" action="index_contextualmenu" includeParams="none"/>
-<s:a onclick="navGo([new navRequest('%{url_content}', 'content'),
-                     new navRequest('%{url_location}', 'location'),
-                     new navRequest('%{url_contextualmenu}', 'contextualmenu')])">
-    <s:text name="questionnaire"/>
+<s:a onclick="navGo([new navRequest('content', '%{url_content}'),
+                     new navRequest('location', '%{url_location}'),
+                     new navRequest('contextualmenu', '%{url_contextualmenu}')])">
+    questionnaire
 </s:a>
