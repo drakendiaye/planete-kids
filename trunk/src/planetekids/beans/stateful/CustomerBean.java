@@ -13,6 +13,7 @@ import planetekids.beans.entity.AnswerBean;
 import planetekids.beans.entity.LocaleBean;
 import planetekids.beans.entity.QuestionBean;
 import planetekids.beans.entity.QuestionnaireBean;
+import planetekids.beans.entity.ResultBean;
 
 @Stateful
 public class CustomerBean implements CustomerRemote{
@@ -129,6 +130,13 @@ public class CustomerBean implements CustomerRemote{
     
     public QuestionnaireBean getQuestionnaire(int questionnaire_id) {
         return entityManager.find(QuestionnaireBean.class, questionnaire_id);
+    }
+    
+    public void createResult(int id, String value, String comment) throws Exception {
+        AnswerBean answer = entityManager.find(AnswerBean.class, id);
+        if(answer == null) throw new Exception("Cannot find AnswerBean : id="+String.valueOf(id));
+        ResultBean result = new ResultBean(answer, value, comment);
+        entityManager.persist(result);
     }
     
     @PostConstruct

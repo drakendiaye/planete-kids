@@ -6,7 +6,7 @@
     <p><s:property value="getQuestionnaire().getDescription(getLocale())" /></p>
     
     <s:if test="getQuestionnaire().getQuestions().size() > 0">
-        <form id="questionnaire" name="questionnaire" action="questionnaire_submit" >
+        <form id="questionnaire" method="post" action="<s:url namespace="/questionnaire" action="questionnaire_submit" includeParams="none"/>">
             <s:iterator value="getQuestionnaire().getQuestions()">
                 <s:div cssClass="question">
                     <s:property value="getText(getLocale())" />
@@ -66,10 +66,10 @@
                         <s:elseif test="getPattern().toString() == 'VALUE'">
                             <s:if test="getAnswers().size() > 0">
                                 <s:iterator value="getAnswers()">
-                                    <input id="answer_%{getId()}_value" name="answer_%{getId()}_value" type="text"/>
+                                    <input id="answer_<s:property value="getId()"/>_value" name="answer_<s:property value="getId()"/>_value" type="text"/>
                                     <s:property value="%{getText(getLocale())}" />
                                     <s:if test="getCommentable()">
-                                        <input id="answer_%{getId()}_comment" name="answer_%{getId()}_comment" type="text"/>
+                                        <input id="answer_<s:property value="getId()"/>_comment" name="answer_<s:property value="getId()"/>_comment" type="text"/>
                                     </s:if>
                                     <br/>
                                 </s:iterator>
@@ -78,7 +78,6 @@
                     </s:div>
                 </s:div>
             </s:iterator>
-            <s:submit value="submit" />
         </form>
     </s:if>
 </s:div>

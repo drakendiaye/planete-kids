@@ -20,14 +20,6 @@
                 this.target = target;
             }
             
-            
-            function navExecJS(data) {
-                var reg = new RegExp("<script.*/script>", "gi");
-                var scripts = data.replace(reg,"coucou");
-                alert(scripts);
-                //eval();
-            }
-            
             function navExec(target, url) {
                 dojo.io.bind({
                     url:        url,
@@ -35,11 +27,14 @@
                                     dojo.byId(target).innerHTML = data;
                                     var scripts = dojo.byId(target).getElementsByTagName("script");
                                     for each (script in scripts) {
-                                        window.eval(script.text);
+                                        if(script != null) window.eval(script.text);
                                     }
                                 },
                     error:      function(type, errorObject) {
                                     dojo.byId(target).innerHTML = "Error...";
+                                    for each (test in errorObject) {
+                                        dojo.byId(target).innerHTML += test+"<br/>";                                    
+                                }
                                 }
                 });
             }
@@ -69,11 +64,33 @@
                 else dojo.byId("img_next").src = "images/next_enable.png";
             }
             
-            function navGo(link) {
+            function navGo(link, form) {
+                if(form != null) 
                 if(link_current != null) link_previous.push(link_current);
                 link_current = link;
                 link_next = new Array();
                 navRefresh(false);
+            }
+            
+            function navSubmit(form, target) {
+                var url = dojo.byId(form).action;
+                dojo.io.bind({
+                    url:        url,
+                    formNode:   dojo.byId(form), 
+                    load:       function(type, data, event) {
+                                    dojo.byId(target).innerHTML = data;
+                                    var scripts = dojo.byId(target).getElementsByTagName("script");
+                                    for each (script in scripts) {
+                                        if(script != null) window.eval(script.text);
+                                    }
+                                },
+                    error:      function(type, errorObject) {
+                                    dojo.byId(target).innerHTML = "Error...";
+                                    for each (test in errorObject) {
+                                        dojo.byId(target).innerHTML += test+"<br/>";                                    
+                                }
+                                }
+                });
             }
             
             function navLocale(locale) {
