@@ -8,13 +8,40 @@
     
     <s:if test="getQuestionnaire().getQuestions().size() > 0">
         <form id="questionnaire_form" method="post">
-            <s:iterator value="getQuestionnaire().getQuestions()">
+            <s:iterator id="test" value="getQuestionnaire().getQuestions()">
                 <s:div cssClass="question">
                     <s:property value="getText(getLocale())" />
                     <s:div>
                         <s:if test="getPattern().toString() == 'SINGLE_CHOICE'">
                             <s:if test="getAnswers().size() > 0">
-                                <script type="text/javascript">
+                                <script type="text/javascript">combo_load('question_<s:property value="getId()" />');</script>
+                                <s:hidden id="question_%{getId()}" value="{ init : false, select_img : 'images/radio_selected.png', deselect_img : 'images/radio_deselected.png', items : %{getAnswerIds('answer_')}}"/>
+                                
+                                <s:iterator id="answer" value="getAnswers()">
+                                    <s:hidden id="answer_%{getId()}" name="answer_%{getId()}"/>
+                                    <img id="answer_<s:property value="getId()"/>_img" width="20px" onclick="combo_click('question_<s:property value="getQuestion().getId()" />','answer_<s:property value="getId()"/>')"/>
+                                    <s:property value="%{getText(getLocale())}"/>
+                                    <s:if test="getCommentable()">
+                                        <script type="text/javascript">
+                                            dojo.byId('answer_<s:property value="getId()"/>_comment_field').value = dojo.byId('answer_<s:property value="getId()"/>_comment').value;
+                                        </script>
+                                        <s:hidden id="answer_%{getId()}_comment" name="answer_%{getId()}_comment"/>
+                                        <s:textfield id="answer_%{getId()}_comment_field" onchange="dojo.byId('answer_%{getId()}_comment').value = this.value"/>
+                                    </s:if>
+                                    <br/>
+                                </s:iterator>
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                <!--<script type="text/javascript">
                                     function radioClick_<s:property value="getId()"/>(id) {
                                         <s:iterator value="getAnswers()">
                                             dojo.byId("answer_<s:property value="getId()"/>").value = "false";
@@ -39,7 +66,7 @@
                                         <s:textfield id="answer_%{getId()}_comment_field" onchange="dojo.byId('answer_%{getId()}_comment').value = this.value"/>
                                     </s:if>
                                     <br/>
-                                </s:iterator>
+                                </s:iterator>-->
                             </s:if>
                         </s:if>
                         <s:elseif test="getPattern().toString() == 'MULTI_CHOICE'">

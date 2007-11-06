@@ -7,10 +7,8 @@
         <title>Planete-kids</title>
         <s:head theme="ajax" debug="true" />
         <link href="<s:url value='/style.css'/>" rel="stylesheet" type="text/css"/>
-    	
-    	<script type="text/javascript" src="navigation_script.js">
-    	</script>
-    	
+        <script type="text/javascript" src="includes/toolkit.js"></script>
+        <script type="text/javascript" src="includes/navigation.js"></script>
     </head>
     <body onload="navGo([new navRequest('cart', '<s:url namespace="%{getCart_namespace()}" action="%{getCart_action()}" includeParams="none"/>'),
                          new navRequest('catalogue', '<s:url namespace="%{getCatalogue_namespace()}" action="%{getCatalogue_action()}" includeParams="none"/>'),
@@ -71,4 +69,3 @@
         </s:div>
     </body>
 </html>
-

@@ -1,6 +1,7 @@
 package planetekids.beans.entity;
 
 import java.io.Serializable;
+import java.util.Iterator;
 import java.util.SortedSet;
 import java.util.TreeSet;
 import javax.persistence.CascadeType;
@@ -99,6 +100,17 @@ public class QuestionBean implements Serializable, Comparable<QuestionBean> {
 
     public void setNumber(int order) {
         this.number = order;
+    }
+    
+    public String getAnswerIds(String prefix) {
+        String ids = "[";
+        Iterator<AnswerBean> iter = getAnswers().iterator();
+        while(iter.hasNext()) {
+            ids += "'" + prefix + String.valueOf(iter.next().getId()) + "'";
+            if(iter.hasNext()) ids += ",";
+        }
+        ids += "]";
+        return(ids);
     }
 
     public int compareTo(QuestionBean o) {
