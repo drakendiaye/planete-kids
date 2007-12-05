@@ -12,7 +12,6 @@ h1 {
 h2 {
   margin :0px;
   font-size :14pt;
-  background-color :#ff0000;
 }
 
 h3 {
@@ -136,7 +135,7 @@ img {
 	height : 70px;
 	margin : 1px;
 	background-color : #6bbfff;
-	background-image : url('images/earth2resized.png');
+	background-image : url('images/earth.png');
 	background-repeat : no-repeat;
 	background-position : 0% 0%;
 }
