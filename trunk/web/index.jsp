@@ -1,3 +1,4 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <%@ page contentType="text/html; charset=UTF-8" %>
 <%@ taglib prefix="s" uri="/struts-tags" %>
 
@@ -10,7 +11,14 @@
         <script type="text/javascript" src="includes/toolkit.js"></script>
         <script type="text/javascript" src="includes/navigation.js"></script>
     </head>
-    <body>
+    <body onload="navGo([new navRequest('cart', '<s:url namespace="%{getCart_namespace()}" action="%{getCart_action()}" includeParams="none"/>'),
+                         new navRequest('catalogue', '<s:url namespace="%{getCatalogue_namespace()}" action="%{getCatalogue_action()}" includeParams="none"/>'),
+                         new navRequest('contextualmenu', '<s:url namespace="%{getContextualmenu_namespace()}" action="%{getContextualmenu_action()}" includeParams="none"/>'),
+                         new navRequest('content', '<s:url namespace="%{getContent_namespace()}" action="%{getContent_action()}" includeParams="none"/>'),
+                         new navRequest('footer', '<s:url namespace="%{getFooter_namespace()}" action="%{getFooter_action()}" includeParams="none"/>'),
+                         new navRequest('generalmenu', '<s:url namespace="%{getGeneralmenu_namespace()}" action="%{getGeneralmenu_action()}" includeParams="none"/>'),
+                         new navRequest('header', '<s:url namespace="%{getHeader_namespace()}" action="%{getHeader_action()}" includeParams="none"/>'),
+                         new navRequest('location', '<s:url namespace="%{getLocation_namespace()}" action="%{getLocation_action()}" includeParams="none"/>')]);">
         <s:div id="container">
             <s:div id="header" />
             <s:div id="page">
@@ -62,13 +70,3 @@
         </s:div>
     </body>
 </html>
-<script type="text/javascript">
-    navGo([new navRequest('cart', '<s:url namespace="%{getCart_namespace()}" action="%{getCart_action()}" includeParams="none"/>'),
-           new navRequest('catalogue', '<s:url namespace="%{getCatalogue_namespace()}" action="%{getCatalogue_action()}" includeParams="none"/>'),
-           new navRequest('contextualmenu', '<s:url namespace="%{getContextualmenu_namespace()}" action="%{getContextualmenu_action()}" includeParams="none"/>'),
-           new navRequest('content', '<s:url namespace="%{getContent_namespace()}" action="%{getContent_action()}" includeParams="none"/>'),
-           new navRequest('footer', '<s:url namespace="%{getFooter_namespace()}" action="%{getFooter_action()}" includeParams="none"/>'),
-           new navRequest('generalmenu', '<s:url namespace="%{getGeneralmenu_namespace()}" action="%{getGeneralmenu_action()}" includeParams="none"/>'),
-           new navRequest('header', '<s:url namespace="%{getHeader_namespace()}" action="%{getHeader_action()}" includeParams="none"/>'),
-           new navRequest('location', '<s:url namespace="%{getLocation_namespace()}" action="%{getLocation_action()}" includeParams="none"/>')]);
-</script>
