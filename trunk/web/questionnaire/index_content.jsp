@@ -14,12 +14,12 @@
             <s:param name="id"><s:property value="getId()"/></s:param>
         </s:url>
         <s:a cssClass="questionnaire" onclick="navGo([new navRequest('content', '%{url_content}'),
-                                     new navRequest('location', '%{url_location}'),
-                                     new navRequest('contextualmenu', '%{url_contextualmenu}')])})">
-            <!--<s:div>
+                                                          new navRequest('location', '%{url_location}'),
+                                                          new navRequest('contextualmenu', '%{url_contextualmenu}')])">
+            <s:div>
                 <h4><s:property value="getTitle(getLocale())" /></h4>
                 <p><s:property value="getDescription(getLocale())" /></p>
-            </s:div>-->
+            </s:div>
 
         </s:a>
     </s:iterator>

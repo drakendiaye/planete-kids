@@ -23,7 +23,6 @@
 				    
                                     for (script in scripts) {
                                         if (scripts[script] != null && scripts[script].text != null) {
-					    alert(scripts[script].text);
 					    window.eval(scripts[script].text);
 					}
 				    }
