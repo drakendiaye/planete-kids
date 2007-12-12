@@ -9,6 +9,7 @@ import javax.ejb.Remove;
 import javax.ejb.Stateful;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import planetekids.beans.entity.AccountBean;
 import planetekids.beans.entity.AnswerBean;
 import planetekids.beans.entity.LocaleBean;
 import planetekids.beans.entity.QuestionBean;
@@ -22,6 +23,18 @@ public class CustomerBean implements CustomerRemote{
     private EntityManager entityManager;
     
     public void init() {
+	AccountBean account = new AccountBean("clemplantier@gmail.com");
+	account.setFirstName("Clément");
+	account.setLastName("Plantier");
+	account.setZipCode(38400);
+	account.setCity("Saint Martin d'Hères");
+	account.setAddressLine1("2 rue de la Poste");
+	account.setPhoneNumber("O6 81 42 38 49");
+	account.setPassword("azerty");
+	
+	
+	entityManager.persist(account);
+/*	
         QuestionnaireBean questionnaire = new QuestionnaireBean(new LocaleBean("Planete Kids ouvre bientôt ses portes sur le net.", "Planete Kids opens to the web soon."),
                               new LocaleBean("Aidez-nous à créer un site à  votre image !", "Help us to create a website that fits you!"));
         
@@ -162,6 +175,7 @@ public class CustomerBean implements CustomerRemote{
         questionnaire.getQuestions().add(question);
         
         entityManager.persist(questionnaire);
+ */
     }
     
     public List<QuestionnaireBean> getQuestionnaires() {
