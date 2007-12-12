@@ -7,7 +7,7 @@
 <s:a onclick="navGo([new navRequest('content', '%{url_content}'),
                      new navRequest('location', '%{url_location}'),
                      new navRequest('contextualmenu', '%{url_contextualmenu}')])">
-    Planete-Kids>>
+    Planete-Kids
 </s:a>
 
 <s:url id="url_content" namespace="/questionnaire" action="index_content" includeParams="none"/>

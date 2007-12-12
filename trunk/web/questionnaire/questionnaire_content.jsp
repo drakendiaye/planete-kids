@@ -30,17 +30,6 @@
                                     </s:if>
                                     <br/>
                                 </s:iterator>
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
                                 <!--<script type="text/javascript">
                                     function radioClick_<s:property value="getId()"/>(id) {
                                         <s:iterator value="getAnswers()">

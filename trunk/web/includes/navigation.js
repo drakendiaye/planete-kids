@@ -20,14 +20,18 @@
                     load:       function(type, data, event) {
                                     dojo.byId(request.target).innerHTML = data;
                                     var scripts = dojo.byId(request.target).getElementsByTagName("script");
-                                    for each (script in scripts) {
-                                        if(script != null) window.eval(script.text);
-                                    }
+				    
+                                    for (script in scripts) {
+                                        if (scripts[script] != null && scripts[script].text != null) {
+					    alert(scripts[script].text);
+					    window.eval(scripts[script].text);
+					}
+				    }
                                 },
                     error:      function(type, errorObject) {
-                                    dojo.byId(target).innerHTML = request.error;
-                                    for each (test in errorObject) {
-                                        dojo.byId(target).innerHTML += "<br/>"+test+"<br/>";                                    
+                                    dojo.byId(request.target).innerHTML = request.error;
+                                    for (test in errorObject) {
+                                        dojo.byId(request.target).innerHTML += "<br/>"+errorObject[test]+"<br/>";                                    
                                     }
                                 }
                 }
@@ -48,9 +52,9 @@
             }
             
             function navGo(requests) {
-                for each(request in requests) {
-                    request.inner_previous = dojo.byId(request.target).innerHTML;
-                    navExec(request);
+                for (request in requests) {
+                    requests[request].inner_previous = dojo.byId(requests[request].target).innerHTML;
+                    navExec(requests[request]);
                 }
                 
                 if(nav_current) nav_previous.push(nav_current);
@@ -66,12 +70,12 @@
                 nav_locale = locale;
                 var temp = new Array();
                 
-                for each (requests in nav_previous)
-                    for each (request in requests)
-                        temp[request.target] = new navRequest(request.target, request.url, request.loading, request.error, request.form);
+                for (requests in nav_previous)
+                    for (request in nav_previous[requests])
+                        temp[nav_previous[requests][request].target] = new navRequest(nav_previous[requests][request].target, nav_previous[requests][request].url, nav_previous[requests][request].loading, nav_previous[requests][request].error, nav_previous[requests][request].form);
                 
-                for each (var request in nav_current)
-                    temp[request.target] = new navRequest(request.target, request.url, request.loading, request.error, request.form);
+                for (var request in nav_current)
+                    temp[nav_current[request].target] = new navRequest(nav_current[request].target, nav_current[request].url, nav_current[request].loading, nav_current[request].error, nav_current[request].form);
                 
                 navGo(temp);
             }
@@ -79,12 +83,12 @@
             function navRefresh() {
                 var temp = new Array();
                 
-                for each (requests in nav_previous)
-                    for each (request in requests)
-                        temp[request.target] = new navRequest(request.target, request.url, request.loading, request.error, request.form);
+                for (requests in nav_previous)
+                    for (request in nav_previous[requests])
+                        temp[nav_previous[requests][request].target] = new navRequest(nav_previous[requests][request].target, nav_previous[requests][request].url, nav_previous[requests][request].loading, nav_previous[requests][request].error, nav_previous[requests][request].form);
                 
-                for each (var request in nav_current)
-                    temp[request.target] = new navRequest(request.target, request.url, request.loading, request.error, request.form);
+                for (var request in nav_current)
+                    temp[nav_current[request].target] = new navRequest(nav_current[request].target, nav_current[request].url, nav_current[request].loading, nav_current[request].error, nav_current[request].form);
                 
                 for (key in temp)
                     navExec(temp[key]);
@@ -92,12 +96,12 @@
             
             function navPrevious() {
                 if(nav_previous.length > 0) {
-                    for each(request in nav_current) {
-                        request.inner_next = dojo.byId(request.target).innerHTML;
-                        dojo.byId(request.target).innerHTML = request.inner_previous;
-                        var scripts = dojo.byId(request.target).getElementsByTagName("script");
-                        for each (script in scripts) {
-                            if(script != null) window.eval(script.text);
+                    for (request in nav_current) {
+                        nav_current[request].inner_next = dojo.byId(nav_current[request].target).innerHTML;
+                        dojo.byId(nav_current[request].target).innerHTML = nav_current[request].inner_previous;
+                        var scripts = dojo.byId(nav_current[request].target).getElementsByTagName("script");
+                        for (script in scripts) {
+                            if(scripts[script] != null) window.eval(scripts[script].text);
                         }
                     }
                     
@@ -114,12 +118,12 @@
                     nav_previous.push(nav_current);
                     nav_current = nav_next.pop();
                     
-                    for each(request in nav_current) {
-                        request.inner_previous = dojo.byId(request.target).innerHTML;
-                        dojo.byId(request.target).innerHTML = request.inner_next;
-                        var scripts = dojo.byId(request.target).getElementsByTagName("script");
-                        for each (script in scripts) {
-                            if(script != null) window.eval(script.text);
+                    for (request in nav_current) {
+                        nav_current[request].inner_previous = dojo.byId(nav_current[request].target).innerHTML;
+                        dojo.byId(nav_current[request].target).innerHTML = nav_current[request].inner_next;
+                        var scripts = dojo.byId(nav_current[request].target).getElementsByTagName("script");
+                        for (script in scripts) {
+                            if(scripts[script] != null) window.eval(scripts[script].text);
                         }
                     }
                     
