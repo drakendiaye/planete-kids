@@ -64,19 +64,7 @@ public class IndexAction extends ActionSupport implements SessionAware {
         String namespace = (String)session.remove("content_namespace");
         if(namespace == null) return "/";
         else return namespace;
-    }
-    
-    public String getContextualmenu_action() {
-        String action = (String)session.remove("contextualmenu_action");
-        if(action == null) return "index_contextualmenu";
-        else return action;
-    }
-    
-    public String getContextualmenu_namespace() {
-        String namespace = (String)session.remove("contextualmenu_namespace");
-        if(namespace == null) return "/";
-        else return namespace;
-    }
+    }    
     
     public String getFooter_action() {
         String action = (String)session.remove("footer_action");

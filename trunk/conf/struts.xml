@@ -18,10 +18,6 @@
             <result>/index_content.jsp</result>
             <result name="error">/error.jsp</result>
         </action>
-        <action name="index_contextualmenu" class="planetekids.actions.IndexAction" >
-            <result>/index_contextualmenu.jsp</result>
-            <result name="error">/error.jsp</result>
-        </action>
         <action name="index_footer" class="planetekids.actions.IndexAction" >
             <result>/index_footer.jsp</result>
             <result name="error">/error.jsp</result>
@@ -39,6 +35,25 @@
             <result name="error">/error.jsp</result>
         </action>
     </package>
+    
+    <package name="account" namespace="/account" extends="struts-default">
+        <action name="index" class="planetekids.actions.account.IndexAction" method="redirect" >
+            <result type="redirect-action">
+                <param name="namespace">/</param>
+                <param name="actionName">index</param>
+            </result>
+            <result name="error">/error.jsp</result>
+        </action>
+        <action name="index_content" class="planetekids.actions.account.IndexAction">
+            <result>/account/index_content.jsp</result>
+            <result name="error">/error.jsp</result>
+        </action>
+        <action name="index_location" class="planetekids.actions.account.IndexAction" >
+            <result>/account/index_location.jsp</result>
+            <result name="error">/error.jsp</result>
+        </action>
+    </package>
+	
     <package name="questionnaire" namespace="/questionnaire" extends="struts-default">
         <action name="index" class="planetekids.actions.questionnaire.IndexAction" method="redirect" >
             <result type="redirect-action">
@@ -51,20 +66,12 @@
             <result>/questionnaire/index_content.jsp</result>
             <result name="error">/error.jsp</result>
         </action>
-        <action name="index_contextualmenu" class="planetekids.actions.questionnaire.IndexAction" >
-            <result>/questionnaire/index_contextualmenu.jsp</result>
-            <result name="error">/error.jsp</result>
-        </action>
         <action name="index_location" class="planetekids.actions.questionnaire.IndexAction" >
             <result>/questionnaire/index_location.jsp</result>
             <result name="error">/error.jsp</result>
         </action>
         <action name="questionnaire_content" class="planetekids.actions.questionnaire.QuestionnaireAction">
             <result>/questionnaire/questionnaire_content.jsp</result>
-            <result name="error">/error.jsp</result>
-        </action>
-        <action name="questionnaire_contextualmenu" class="planetekids.actions.questionnaire.QuestionnaireAction" >
-            <result>/questionnaire/questionnaire_contextualmenu.jsp</result>
             <result name="error">/error.jsp</result>
         </action>
         <action name="questionnaire_location" class="planetekids.actions.questionnaire.QuestionnaireAction" >

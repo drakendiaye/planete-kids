@@ -1,4 +1,4 @@
-package planetekids.actions.questionnaire;
+package planetekids.actions.account;
 
 import com.opensymphony.xwork2.ActionSupport;
 import java.util.List;
@@ -34,15 +34,10 @@ public class IndexAction extends ActionSupport implements SessionAware {
     
     public String redirect() throws Exception {
         session.put("content_action", "index_content");
-        session.put("content_namespace", "/questionnaire");
+        session.put("content_namespace", "/account");
         session.put("location_action", "index_location");
-        session.put("location_namespace", "/questionnaire");
+        session.put("location_namespace", "/account");
         return execute();
     }
-    
-    
-    public List<QuestionnaireBean> getQuestionnaires() {
-        return getCustomer().getQuestionnaires();
-    }
-            
+                
 }
