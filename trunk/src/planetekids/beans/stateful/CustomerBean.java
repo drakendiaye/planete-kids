@@ -23,7 +23,7 @@ public class CustomerBean implements CustomerRemote{
     private EntityManager entityManager;
     
     public void init() {
-	AccountBean account = new AccountBean("clemplantier@gmail.com");
+	/*AccountBean account = new AccountBean("clemplantier@gmail.com");
 	account.setFirstName("Clément");
 	account.setLastName("Plantier");
 	account.setZipCode(38400);
@@ -33,8 +33,8 @@ public class CustomerBean implements CustomerRemote{
 	account.setPassword("azerty");
 	
 	
-	entityManager.persist(account);
-/*	
+	entityManager.persist(account);*/
+	
         QuestionnaireBean questionnaire = new QuestionnaireBean(new LocaleBean("Planete Kids ouvre bientôt ses portes sur le net.", "Planete Kids opens to the web soon."),
                               new LocaleBean("Aidez-nous à créer un site à  votre image !", "Help us to create a website that fits you!"));
         
@@ -175,7 +175,6 @@ public class CustomerBean implements CustomerRemote{
         questionnaire.getQuestions().add(question);
         
         entityManager.persist(questionnaire);
- */
     }
     
     public List<QuestionnaireBean> getQuestionnaires() {
