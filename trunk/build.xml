@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="planete-kids" default="build" basedir=".">
+    <property environment="myenv" />
+    <property name="jonas.root" value="${myenv.JONAS_ROOT}" />
+    
+    <target name="build">
+        <mkdir dir="build" />
+        
+        <javac srcdir="src" destdir="build" debug="on" deprecation="off" optimize="off" verbose="off" compiler="modern" nowarn="off">
+            <classpath>
+                <fileset dir="lib" includes="**/*.jar" />
+            </classpath>
+        </javac>
+        
+        <jar jarfile="build/planete-kids.jar">
+            <metainf dir="conf" includes="persistence.xml"/>
+            <zipfileset dir="build" includes="planetekids/beans/**/*.class" />
+        </jar>
+        
+        <jar jarfile="build/admin-client.jar">
+            <manifest>
+                <attribute name="Main-Class" value="planetekids.clients.AdminClient" />
+            </manifest>
+           <metainf dir="conf" includes="application-client.xml" />
+            <fileset dir="build" includes="planetekids/clients/AdminClient.class" />
+            <fileset dir="build" includes="planetekids/clients/Tx.class" />
+            <fileset dir="build" includes="planetekids/beans/**/*.class" />
+        </jar>
+
+        <jar jarfile="build/customer-client.jar">
+            <manifest>
+                <attribute name="Main-Class" value="planetekids.clients.CustomerClient" />
+            </manifest>
+            <metainf dir="conf" includes="application-client.xml" />
+            <fileset dir="build" includes="planetekids/clients/CustomerClient.class" />
+            <fileset dir="build" includes="planetekids/clients/Tx.class" />
+            <fileset dir="build" includes="planetekids/beans/**/*.class" />
+        </jar>
+
+        <jar jarfile="build/init-data-client.jar">
+            <manifest>
+                <attribute name="Main-Class" value="planetekids.clients.InitDataBaseClient" />
+            </manifest>
+            <metainf dir="conf" includes="application-client.xml" />
+            <fileset dir="build" includes="planetekids/clients/InitDataBaseClient.class" />
+            <fileset dir="build" includes="planetekids/clients/Tx.class" />
+            <fileset dir="build" includes="planetekids/beans/**/*.class" />
+        </jar>
+        
+        <war warfile="build/planete-kids.war" webxml="conf/web.xml">
+           <zipfileset dir="web" includes="**"/>
+           <classes dir="conf" includes="struts.xml" />
+           <classes dir="src" includes="planetekids/actions/**/*.properties" />
+           <classes dir="build" includes="planetekids/beans/**/*.class" />
+           <classes dir="build" includes="planetekids/actions/**/*.class" />
+           <classes dir="build" includes="planetekids/servlets/**/*.class" />
+        </war>
+        
+        <ear earfile="build/planete-kids.ear" appxml="conf/application.xml">
+            <zipfileset dir="build" includes="planete-kids.jar" />
+            <zipfileset dir="build" includes="planete-kids.war" />
+            <zipfileset dir="build" includes="admin-client.jar" />
+            <zipfileset dir="build" includes="customer-client.jar" />
+            <zipfileset dir="build" includes="init-data-client.jar" />
+            <zipfileset prefix="lib" dir="lib/struts2" includes="**/*.jar" />
+        </ear>
+    </target>
+
+    <target name="clean">
+        <delete dir="build" />
+    </target>
+    
+    <target name="deploy" depends="build">
+        <copy todir="${jonas.root}/deploy">
+            <fileset dir="build" includes="planete-kids.ear" />
+        </copy>
+    </target>
+    
+    <target name="undeploy">
+        <delete>
+            <fileset dir="${jonas.root}/deploy" includes="planete-kids.ear" />
+        </delete>
+    </target>
+</project>
