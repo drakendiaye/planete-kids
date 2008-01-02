@@ -21,7 +21,9 @@
             <manifest>
                 <attribute name="Main-Class" value="planetekids.clients.AdminClient" />
             </manifest>
+           <metainf dir="conf" includes="application-client.xml" />
             <fileset dir="build" includes="planetekids/clients/AdminClient.class" />
+            <fileset dir="build" includes="planetekids/clients/Tx.class" />
             <fileset dir="build" includes="planetekids/beans/**/*.class" />
         </jar>
 
@@ -29,7 +31,9 @@
             <manifest>
                 <attribute name="Main-Class" value="planetekids.clients.CustomerClient" />
             </manifest>
+            <metainf dir="conf" includes="application-client.xml" />
             <fileset dir="build" includes="planetekids/clients/CustomerClient.class" />
+            <fileset dir="build" includes="planetekids/clients/Tx.class" />
             <fileset dir="build" includes="planetekids/beans/**/*.class" />
         </jar>
 
@@ -37,7 +41,9 @@
             <manifest>
                 <attribute name="Main-Class" value="planetekids.clients.InitDataBaseClient" />
             </manifest>
+            <metainf dir="conf" includes="application-client.xml" />
             <fileset dir="build" includes="planetekids/clients/InitDataBaseClient.class" />
+            <fileset dir="build" includes="planetekids/clients/Tx.class" />
             <fileset dir="build" includes="planetekids/beans/**/*.class" />
         </jar>
         

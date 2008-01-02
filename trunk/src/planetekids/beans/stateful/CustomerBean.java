@@ -36,7 +36,7 @@ public class CustomerBean implements CustomerRemote{
 	entityManager.persist(account);*/
 	
         QuestionnaireBean questionnaire = new QuestionnaireBean(new LocaleBean("Planete Kids ouvre bientôt ses portes sur le net.", "Planete Kids opens to the web soon."),
-                              new LocaleBean("Aidez-nous à créer un site à  votre image !", "Help us to create a website that fits you!"));
+        new LocaleBean("Aidez-nous à créer un site à  votre image !", "Help us to create a website that fits you!"));
         
         QuestionBean question = new QuestionBean(questionnaire, new LocaleBean("Quel type de connexion internet utilisez-vous ?", "What kind of internet connection do you use?"), QuestionBean.Pattern.SINGLE_CHOICE, 1);
         AnswerBean answer = new AnswerBean(question, new LocaleBean("Connexion par modem", "Modem connection"), false, 1);

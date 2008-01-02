@@ -46,7 +46,7 @@ public class PlaneteKidsShell extends Shell implements PlaneteKidsShellConstante
 		//addCommand(new ecom.shell.CurrencyCommandImpl(context));
 		// Add "output" command.
 		addCommand(new planetekids.shell.OutputCommandImpl(context));
-
+                addCommand(new planetekids.shell.MarkCommandImpl(context));
 		// put the EBs' homes in the context
 		//context.put(ACCOUNT_HOME,...);
 		//context.put(PRODUCT_HOME,...);
