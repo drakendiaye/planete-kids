@@ -99,7 +99,7 @@ public class MarkCommandImpl implements ShellCommand, PlaneteKidsShellConstantes
                         System.setProperty(Context.INITIAL_CONTEXT_FACTORY, "org.ow2.easybeans.component.smartclient.spi.SmartContextFactory");
                         Context initialContext = new InitialContext();
                         AdminRemote admin = (AdminRemote)initialContext.lookup(AdminBean.class.getName() + "_" + AdminRemote.class.getName() + "@Remote");
-                        admin.modifyMark(Integer.parseInt(id), name, description, site, image);
+                        admin.modifyLabel(Integer.parseInt(id), name, description, site, image);
                     } catch (Exception ex) {
                         ex.printStackTrace(err);
                         return;
@@ -147,7 +147,7 @@ public class MarkCommandImpl implements ShellCommand, PlaneteKidsShellConstantes
                     try {
                         Context initialContext = new InitialContext();
                         AdminRemote admin = (AdminRemote)initialContext.lookup(AdminBean.class.getName() + "_" + AdminRemote.class.getName() + "@Remote");
-                        admin.createMark(name, description, site, image);
+                        admin.createLabel(name, description, site, image);
                     } catch (Exception ex) {
                         ex.printStackTrace(err);
                         return;
