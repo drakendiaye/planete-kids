@@ -12,6 +12,7 @@ import planetekids.beans.entity.AccountBean;
 import planetekids.beans.entity.CategoryBean;
 import planetekids.beans.entity.ColorBean;
 import planetekids.beans.entity.LabelBean;
+import planetekids.beans.entity.LocaleBean;
 import planetekids.beans.entity.ProductBean;
 import planetekids.beans.entity.QuestionBean;
 
@@ -80,4 +81,7 @@ public interface AdminRemote {
     public void setCity (String email, String city) throws Exception;
     public void setPhoneNumber (String email, String phoneNumber) throws Exception;
     public void setFaxNumber (String email, String faxNumber) throws Exception;
+    
+    public int createLabel(LocaleBean name, String site, String image_large, String image_medium, String image_small) throws Exception;
+    public void setName(int id, LocaleBean name) throws Exception;
 }
