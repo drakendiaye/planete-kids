@@ -135,3 +135,31 @@ function text_press(text_id) {
     dojo.byId(text_id).value = dojo.byId(text_id).value.replace(new RegExp("value *: *'" + text.value + "'", "gi"), "value : '" + dojo.byId(text_id + "_field").value + "'");
     text.value = dojo.byId(text_id + "_field").value;
 }
+
+function coldiv_load(coldiv_id) {
+    window.eval("var coldiv = " + dojo.byId(coldiv_id).value + ";");
+    if(!coldiv.init) {
+        dojo.byId(coldiv_id).value = dojo.byId(coldiv_id).value.replace(new RegExp("init *: *false", "gi"), "init : true");
+        dojo.byId(coldiv_id + "_img").src = coldiv.col_img;
+        dojo.byId(coldiv_id + "_div").style.display = "none";
+    }
+}
+
+function coldiv_click(coldiv_id) {
+    window.eval("var coldiv = " + dojo.byId(coldiv_id).value + ";");
+    if (dojo.byId(coldiv_id + "_div").style.display == "block") {
+        dojo.byId(coldiv_id + "_img").src = coldiv.col_img;
+        dojo.byId(coldiv_id + "_div").style.display = "none";
+    } else {
+        dojo.byId(coldiv_id + "_img").src = coldiv.uncol_img;
+        dojo.byId(coldiv_id + "_div").style.display = "block";
+    }
+}
+
+function show(id) {
+    dojo.byId(id).style.display = "block";
+}
+
+function hide(id) {
+    dojo.byId(id).style.display = "none";
+}

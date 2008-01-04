@@ -6,7 +6,7 @@ import java.util.Map;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import org.apache.struts2.interceptor.SessionAware;
-import planetekids.beans.entity.QuestionnaireBean;
+import planetekids.beans.entity.CategoryBean;
 import planetekids.beans.stateful.CustomerBean;
 import planetekids.beans.stateful.CustomerRemote;
 
@@ -39,5 +39,12 @@ public class IndexAction extends ActionSupport implements SessionAware {
         session.put("location_namespace", "/category");
         return execute();
     }
-            
+    
+    public List getCategories() throws Exception {
+        return getCustomer().getCategories();
+    }
+    
+    public CategoryBean getCategory(int id) throws Exception {
+        return getCustomer().getCategory(id);
+    }       
 }

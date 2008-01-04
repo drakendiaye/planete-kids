@@ -53,6 +53,13 @@ public class CategoryBean implements Serializable {
         this.id = id;
     }
 
+    public String getName(String locale) {
+        if (locale.equals("fr"))
+            return name.getFr();
+        else
+            return name.getEn();
+    }
+
     public LocaleBean getName() {
         return name;
     }
