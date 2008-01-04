@@ -3,9 +3,9 @@ package planetekids.clients;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-import javax.transaction.*;
 import javax.naming.Context;
 import javax.naming.InitialContext;
+import javax.transaction.UserTransaction;
 import planetekids.beans.entity.CategoryBean;
 import planetekids.beans.entity.ColorBean;
 import planetekids.beans.entity.LabelBean;
@@ -753,23 +753,29 @@ public class AdminClient {
                     System.out.print("Categories (coma separated) : ");
                     String categories = Tx.readString();
                     List<Integer> category_ids = new ArrayList<Integer>();
-                    ids = categories.split(",");
-                    for(int i=0;i<ids.length;i++) {
-                        category_ids.add(Integer.valueOf(ids[i]));
+                    if(!categories.equals("")) {
+                        ids = categories.split(",");
+                        for(int i=0;i<ids.length;i++) {
+                            category_ids.add(Integer.valueOf(ids[i]));
+                        }
                     }
                     System.out.print("Colors (coma separated) : ");
                     String colors = Tx.readString();
                     List<Integer> color_ids = new ArrayList<Integer>();
-                    ids = colors.split(",");
-                    for(int i=0;i<ids.length;i++) {
-                        color_ids.add(Integer.valueOf(ids[i]));
+                    if(!colors.equals("")) {
+                        ids = colors.split(",");
+                        for(int i=0;i<ids.length;i++) {
+                            color_ids.add(Integer.valueOf(ids[i]));
+                        }
                     }
                     System.out.print("Labels (coma separated) : ");
                     String labels = Tx.readString();
                     List<Integer> label_ids = new ArrayList<Integer>();
-                    ids = labels.split(",");
-                    for(int i=0;i<ids.length;i++) {
-                        label_ids.add(Integer.valueOf(ids[i]));
+                    if(!labels.equals("")) {
+                        ids = labels.split(",");
+                        for(int i=0;i<ids.length;i++) {
+                            label_ids.add(Integer.valueOf(ids[i]));
+                        }
                     }
                     System.out.print("operation (and/or) : ");
                     String operation = Tx.readString();
