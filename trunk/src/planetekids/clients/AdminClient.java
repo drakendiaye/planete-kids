@@ -1,9 +1,3 @@
-/*-----------------------------------------------------------------------------*/
-/* ExternAdmin.java                                                              */
-/* external administrator for ecom application                                 */
-/* Fabienne Boyer - Didier Donsez may 2006                                     */
-/*-----------------------------------------------------------------------------*/
-
 package planetekids.clients;
 
 import java.util.ArrayList;
@@ -12,7 +6,6 @@ import java.util.List;
 import javax.transaction.*;
 import javax.naming.Context;
 import javax.naming.InitialContext;
-import javax.naming.NamingException;
 import planetekids.beans.entity.CategoryBean;
 import planetekids.beans.entity.ColorBean;
 import planetekids.beans.entity.LabelBean;
@@ -20,93 +13,56 @@ import planetekids.beans.entity.ProductBean;
 import planetekids.beans.stateful.AdminBean;
 import planetekids.beans.stateful.AdminRemote;
 
-// RMI administrator for the ecom application.
-
 public class AdminClient {
-    
-    int accountId = 0;
-    Context initialContext = null;
-    UserTransaction utx = null;
-    
-    
     public static void main(String[] args) {
+        Context initialContext = null;
+        UserTransaction utx = null;
+        AdminRemote admin = null;
         try {
-            
-            System.out.println("Begining Client...");
-            
-            // if user don't use jclient/client container
             System.setProperty(Context.INITIAL_CONTEXT_FACTORY, "org.ow2.easybeans.component.smartclient.spi.SmartContextFactory");
+            initialContext = initialContext = new InitialContext();
             
-            parseArgs(args);
+            utx = (UserTransaction) initialContext.lookup("javax.transaction.UserTransaction");
             
-            // get JNDI initial context
-            Context initialContext = null;
-            try {
-                initialContext = new InitialContext();
-            } catch (Exception e) {
-                System.err.println("Cannot get initial context for JNDI: " + e);
-                System.exit(2);
-            }
-            
-            // We want to start transactions from client: get UserTransaction
-            UserTransaction utx = null;
-            try {
-                utx = (UserTransaction) initialContext.lookup("javax.transaction.UserTransaction");
-            } catch (NamingException e) {
-                System.err.println("Cannot lookup UserTransaction: " + e);
-                System.exit(2);
-            }
-            
-            AdminRemote admin = null;
-            try {
-                admin = (AdminRemote) initialContext.lookup(AdminBean.class.getName() + "_" + AdminRemote.class.getName() + "@Remote");
-            } catch (NamingException e) {
-                System.err.println("Cannot get EcomAdminBean : " + e);
-                System.exit(2);
-            }
-            
-            while (true) {
-                try {
-                    System.out.println("------------------------------------------------------");
-                    System.out.println("Main Menu");
-                    System.out.println("0 = quit the application");
-                    System.out.println("1 = manage labels");
-                    System.out.println("2 = manage colors");
-                    System.out.println("3 = manage categories");
-                    System.out.println("4 = manage products");
-                    System.out.println("------------------------------------------------------");
-                    System.out.print(">");
-                    int choice = Tx.readInt();
-                    
-                    if (choice == 0) {
-                        System.exit(2);
-                    } else if (choice == 1) {
-                        manageLabels(admin);
-                    } else if (choice == 2) {
-                        manageColors(admin);
-                    } else if (choice == 3) {
-                        manageCategories(admin);
-                    } else if (choice == 4) {
-                        manageProducts(admin);
-                    } else {
-                        System.out.println("Bad choice");
-                    }
-                } catch (Exception ex) {
-                    System.out.println("error : " + ex.getMessage());
-                }
-            }
+            admin = (AdminRemote) initialContext.lookup(AdminBean.class.getName() + "_" + AdminRemote.class.getName() + "@Remote");
         } catch (Exception e) {
-            System.err.println("Client get an exception " + e);
-            e.printStackTrace(System.err);
+            System.err.println("Error : " + e.getMessage());
             System.exit(2);
+        }
+        
+        while (true) {
+            try {
+                System.out.println("------------------------------------------------------");
+                System.out.println("Main Menu");
+                System.out.println("0 = quit the application");
+                System.out.println("1 = manage labels");
+                System.out.println("2 = manage colors");
+                System.out.println("3 = manage categories");
+                System.out.println("4 = manage products");
+                System.out.println("------------------------------------------------------");
+                System.out.print(">");
+                int choice = Tx.readInt();
+                
+                if (choice == 0) {
+                    System.exit(2);
+                } else if (choice == 1) {
+                    manageLabels(utx, admin);
+                } else if (choice == 2) {
+                    manageColors(utx, admin);
+                } else if (choice == 3) {
+                    manageCategories(utx, admin);
+                } else if (choice == 4) {
+                    manageProducts(utx, admin);
+                } else {
+                    System.out.println("Bad choice");
+                }
+            } catch (Exception ex) {
+                System.out.println("error : " + ex.getMessage());
+            }
         }
     }
     
-    static void parseArgs(String args[]) {
-        System.out.println("ParseArgs not yet implemented");
-    }
-    
-    static void manageLabels(AdminRemote admin) throws Exception {
+    static void manageLabels(UserTransaction utx, AdminRemote admin) throws Exception {
         while (true) {
             try {
                 System.out.println("------------------------------------------------------");
@@ -123,7 +79,15 @@ public class AdminClient {
                 if (choice == 0) {
                     return;
                 } else if (choice == 1) {
-                    List<LabelBean> labels = admin.getLabels();
+                    List<LabelBean> labels = null;
+                    try {
+                        utx.begin();
+                        labels = admin.getLabels();
+                        utx.commit();
+                    } catch (Exception ex) {
+                        utx.rollback();
+                        throw ex;
+                    }
                     if(labels != null) {
                         Iterator iterator = labels.iterator();
                         while(iterator.hasNext()) {
@@ -151,14 +115,29 @@ public class AdminClient {
                     String image_medium = Tx.readString();
                     System.out.print("image small : ");
                     String image_small = Tx.readString();
-                    admin.createLabel(name_fr, name_en, site, image_large, image_medium, image_small);
+                    try {
+                        utx.begin();
+                        admin.createLabel(name_fr, name_en, site, image_large, image_medium, image_small);
+                        utx.commit();
+                    } catch (Exception ex) {
+                        utx.rollback();
+                        throw ex;
+                    }
                     System.out.println("label successfully created");
                 } else if (choice == 3) {
                     System.out.print("id : ");
                     int id = Tx.readInt();
                     while (true) {
                         try {
-                            LabelBean label = admin.getLabel(id);
+                            LabelBean label;
+                            try {
+                                utx.begin();
+                                label = admin.getLabel(id);
+                                utx.commit();
+                            } catch (Exception ex) {
+                                utx.rollback();
+                                throw ex;
+                            }
                             if(label == null) {
                                 System.out.println("Label id " + id + " does not exist");
                                 break;
@@ -189,32 +168,74 @@ public class AdminClient {
                             } else if (choice == 1) {
                                 System.out.print("name french : ");
                                 String name = Tx.readString();
-                                admin.setLabelNameFr(id, name);
+                                try {
+                                    utx.begin();
+                                    admin.setLabelNameFr(id, name);
+                                    utx.commit();
+                                } catch (Exception ex) {
+                                    utx.rollback();
+                                    throw ex;
+                                }
                                 System.out.println("label successfully updated");
                             } else if (choice == 2) {
                                 System.out.print("name en : ");
                                 String name = Tx.readString();
-                                admin.setLabelNameEn(id, name);
+                                try {
+                                    utx.begin();
+                                    admin.setLabelNameEn(id, name);
+                                    utx.commit();
+                                } catch (Exception ex) {
+                                    utx.rollback();
+                                    throw ex;
+                                }
                                 System.out.println("label successfully updated");
                             } else if (choice == 3) {
                                 System.out.print("site : ");
                                 String site = Tx.readString();
-                                admin.setLabelSite(id, site);
+                                try {
+                                    utx.begin();
+                                    admin.setLabelSite(id, site);
+                                    utx.commit();
+                                } catch (Exception ex) {
+                                    utx.rollback();
+                                    throw ex;
+                                }
                                 System.out.println("label successfully updated");
                             } else if (choice == 4) {
                                 System.out.print("image large : ");
                                 String image = Tx.readString();
-                                admin.setLabelImageLarge(id, image);
+                                try {
+                                    utx.begin();
+                                    admin.setLabelImageLarge(id, image);
+                                    utx.commit();
+                                } catch (Exception ex) {
+                                    utx.rollback();
+                                    throw ex;
+                                }
                                 System.out.println("label successfully updated");
                             } else if (choice == 5) {
                                 System.out.print("image medium : ");
                                 String image = Tx.readString();
-                                admin.setLabelImageMedium(id, image);
+                                try {
+                                    utx.begin();
+                                    admin.setLabelImageMedium(id, image);
+                                    utx.commit();
+                                } catch (Exception ex) {
+                                    utx.rollback();
+                                    throw ex;
+                                }
                                 System.out.println("label successfully updated");
                             } else if (choice == 6) {
                                 System.out.print("image small : ");
                                 String image = Tx.readString();
-                                admin.setLabelImageSmall(id, image);
+                                try {
+                                    utx.begin();
+                                    admin.setLabelImageSmall(id, image);
+                                    utx.commit();
+                                } catch (Exception ex) {
+                                    utx.rollback();
+                                    throw ex;
+                                }
                                 System.out.println("label successfully updated");
                             } else {
                                 System.out.println("Bad choice");
@@ -227,12 +248,13 @@ public class AdminClient {
                     System.out.println("Bad choice");
                 }
             } catch (Exception ex) {
-                System.out.println("error : " + ex.getMessage());
+                ex.printStackTrace();
+                //System.out.println("error : " + ex.getMessage());
             }
         }
     }
     
-    static void manageColors(AdminRemote admin) throws Exception {
+    static void manageColors(UserTransaction utx, AdminRemote admin) throws Exception {
         while (true) {
             try {
                 System.out.println("------------------------------------------------------");
@@ -249,7 +271,15 @@ public class AdminClient {
                 if (choice == 0) {
                     return;
                 } else if (choice == 1) {
-                    List<ColorBean> colors = admin.getColors();
+                    List<ColorBean> colors = null;
+                    try {
+                        utx.begin();
+                        colors = admin.getColors();
+                        utx.commit();
+                    } catch (Exception ex) {
+                        utx.rollback();
+                        throw ex;
+                    }
                     if(colors != null) {
                         Iterator iterator = colors.iterator();
                         while(iterator.hasNext()) {
@@ -274,14 +304,29 @@ public class AdminClient {
                     String image_medium = Tx.readString();
                     System.out.print("image small : ");
                     String image_small = Tx.readString();
-                    admin.createColor(name_fr, name_en, image_large, image_medium, image_small);
+                    try {
+                        utx.begin();
+                        admin.createColor(name_fr, name_en, image_large, image_medium, image_small);
+                        utx.commit();
+                    } catch (Exception ex) {
+                        utx.rollback();
+                        throw ex;
+                    }
                     System.out.println("color successfully created");
                 } else if (choice == 3) {
                     System.out.print("id : ");
                     int id = Tx.readInt();
                     while (true) {
                         try {
-                            ColorBean color = admin.getColor(id);
+                            ColorBean color = null;
+                            try {
+                                utx.begin();
+                                color = admin.getColor(id);
+                                utx.commit();
+                            } catch (Exception ex) {
+                                utx.rollback();
+                                throw ex;
+                            }
                             if(color == null) {
                                 System.out.println("Color id " + id + " does not exist");
                                 break;
@@ -310,27 +355,62 @@ public class AdminClient {
                             } else if (choice == 1) {
                                 System.out.print("name french : ");
                                 String name = Tx.readString();
-                                admin.setColorNameFr(id, name);
+                                try {
+                                    utx.begin();
+                                    admin.setColorNameFr(id, name);
+                                    utx.commit();
+                                } catch (Exception ex) {
+                                    utx.rollback();
+                                    throw ex;
+                                }
                                 System.out.println("color successfully updated");
                             } else if (choice == 2) {
                                 System.out.print("name en : ");
                                 String name = Tx.readString();
-                                admin.setColorNameEn(id, name);
+                                try {
+                                    utx.begin();
+                                    admin.setColorNameEn(id, name);
+                                    utx.commit();
+                                } catch (Exception ex) {
+                                    utx.rollback();
+                                    throw ex;
+                                }
                                 System.out.println("color successfully updated");
                             } else if (choice == 3) {
                                 System.out.print("image large : ");
                                 String image = Tx.readString();
-                                admin.setColorImageLarge(id, image);
+                                try {
+                                    utx.begin();
+                                    admin.setColorImageLarge(id, image);
+                                    utx.commit();
+                                } catch (Exception ex) {
+                                    utx.rollback();
+                                    throw ex;
+                                }
                                 System.out.println("color successfully updated");
                             } else if (choice == 4) {
                                 System.out.print("image medium : ");
                                 String image = Tx.readString();
-                                admin.setColorImageMedium(id, image);
+                                try {
+                                    utx.begin();
+                                    admin.setColorImageMedium(id, image);
+                                    utx.commit();
+                                } catch (Exception ex) {
+                                    utx.rollback();
+                                    throw ex;
+                                }
                                 System.out.println("color successfully updated");
                             } else if (choice == 5) {
                                 System.out.print("image small : ");
                                 String image = Tx.readString();
-                                admin.setColorImageSmall(id, image);
+                                try {
+                                    utx.begin();
+                                    admin.setColorImageSmall(id, image);
+                                    utx.commit();
+                                } catch (Exception ex) {
+                                    utx.rollback();
+                                    throw ex;
+                                }
                                 System.out.println("color successfully updated");
                             } else {
                                 System.out.println("Bad choice");
@@ -348,7 +428,7 @@ public class AdminClient {
         }
     }
     
-    static void manageCategories(AdminRemote admin) throws Exception {
+    static void manageCategories(UserTransaction utx, AdminRemote admin) throws Exception {
         while (true) {
             try {
                 System.out.println("------------------------------------------------------");
@@ -365,7 +445,15 @@ public class AdminClient {
                 if (choice == 0) {
                     return;
                 } else if (choice == 1) {
-                    List<CategoryBean> categories = admin.getCategories();
+                    List<CategoryBean> categories = null;
+                    try {
+                        utx.begin();
+                        categories = admin.getCategories();
+                        utx.commit();
+                    } catch (Exception ex) {
+                        utx.rollback();
+                        throw ex;
+                    }
                     if(categories != null) {
                         Iterator iterator = categories.iterator();
                         while(iterator.hasNext()) {
@@ -390,14 +478,29 @@ public class AdminClient {
                     String image_medium = Tx.readString();
                     System.out.print("image small : ");
                     String image_small = Tx.readString();
-                    admin.createCategory(name_fr, name_en, image_large, image_medium, image_small);
+                    try {
+                        utx.begin();
+                        admin.createCategory(name_fr, name_en, image_large, image_medium, image_small);
+                        utx.commit();
+                    } catch (Exception ex) {
+                        utx.rollback();
+                        throw ex;
+                    }
                     System.out.println("category successfully created");
                 } else if (choice == 3) {
                     System.out.print("id : ");
                     int id = Tx.readInt();
                     while (true) {
                         try {
-                            CategoryBean category = admin.getCategory(id);
+                            CategoryBean category = null;
+                            try {
+                                utx.begin();
+                                category = admin.getCategory(id);
+                                utx.commit();
+                            } catch (Exception ex) {
+                                utx.rollback();
+                                throw ex;
+                            }
                             if(category == null) {
                                 System.out.println("Category id " + id + " does not exist");
                                 break;
@@ -426,27 +529,62 @@ public class AdminClient {
                             } else if (choice == 1) {
                                 System.out.print("name french : ");
                                 String name = Tx.readString();
-                                admin.setCategoryNameFr(id, name);
+                                try {
+                                    utx.begin();
+                                    admin.setCategoryNameFr(id, name);
+                                    utx.commit();
+                                } catch (Exception ex) {
+                                    utx.rollback();
+                                    throw ex;
+                                }
                                 System.out.println("category successfully updated");
                             } else if (choice == 2) {
                                 System.out.print("name en : ");
                                 String name = Tx.readString();
-                                admin.setCategoryNameEn(id, name);
+                                try {
+                                    utx.begin();
+                                    admin.setCategoryNameEn(id, name);
+                                    utx.commit();
+                                } catch (Exception ex) {
+                                    utx.rollback();
+                                    throw ex;
+                                }
                                 System.out.println("category successfully updated");
                             } else if (choice == 3) {
                                 System.out.print("image large : ");
                                 String image = Tx.readString();
-                                admin.setCategoryImageLarge(id, image);
+                                try {
+                                    utx.begin();
+                                    admin.setCategoryImageLarge(id, image);
+                                    utx.commit();
+                                } catch (Exception ex) {
+                                    utx.rollback();
+                                    throw ex;
+                                }
                                 System.out.println("category successfully updated");
                             } else if (choice == 4) {
                                 System.out.print("image medium : ");
                                 String image = Tx.readString();
-                                admin.setCategoryImageMedium(id, image);
+                                try {
+                                    utx.begin();
+                                    admin.setCategoryImageMedium(id, image);
+                                    utx.commit();
+                                } catch (Exception ex) {
+                                    utx.rollback();
+                                    throw ex;
+                                }
                                 System.out.println("category successfully updated");
                             } else if (choice == 5) {
                                 System.out.print("image small : ");
                                 String image = Tx.readString();
-                                admin.setCategoryImageSmall(id, image);
+                                try {
+                                    utx.begin();
+                                    admin.setCategoryImageSmall(id, image);
+                                    utx.commit();
+                                } catch (Exception ex) {
+                                    utx.rollback();
+                                    throw ex;
+                                }
                                 System.out.println("category successfully updated");
                             } else {
                                 System.out.println("Bad choice");
@@ -464,7 +602,7 @@ public class AdminClient {
         }
     }
     
-    static void manageProducts(AdminRemote admin) throws Exception {
+    static void manageProducts(UserTransaction utx, AdminRemote admin) throws Exception {
         while (true) {
             try {
                 System.out.println("------------------------------------------------------");
@@ -485,7 +623,15 @@ public class AdminClient {
                 if (choice == 0) {
                     return;
                 } else if (choice == 1) {
-                    List<ProductBean> products = admin.getProducts();
+                    List<ProductBean> products = null;
+                    try {
+                        utx.begin();
+                        products = admin.getProducts();
+                        utx.commit();
+                    } catch (Exception ex) {
+                        utx.rollback();
+                        throw ex;
+                    }
                     if(products != null) {
                         Iterator iterator = products.iterator();
                         while(iterator.hasNext()) {
@@ -509,7 +655,15 @@ public class AdminClient {
                 } else if (choice == 2) {
                     System.out.print("category : ");
                     int category_id = Tx.readInt();
-                    List<ProductBean> products = admin.getProductsByCategory(category_id);
+                    List<ProductBean> products = null;
+                    try {
+                        utx.begin();
+                        products = admin.getProductsByCategory(category_id);
+                        utx.commit();
+                    } catch (Exception ex) {
+                        utx.rollback();
+                        throw ex;
+                    }
                     if(products != null) {
                         Iterator iterator = products.iterator();
                         while(iterator.hasNext()) {
@@ -533,7 +687,15 @@ public class AdminClient {
                 } else if (choice == 3) {
                     System.out.print("color : ");
                     int color_id = Tx.readInt();
-                    List<ProductBean> products = admin.getProductsByColor(color_id);
+                    List<ProductBean> products = null;
+                    try {
+                        utx.begin();
+                        products = admin.getProductsByColor(color_id);
+                        utx.commit();
+                    } catch (Exception ex) {
+                        utx.rollback();
+                        throw ex;
+                    }
                     if(products != null) {
                         Iterator iterator = products.iterator();
                         while(iterator.hasNext()) {
@@ -557,7 +719,15 @@ public class AdminClient {
                 } else if (choice == 4) {
                     System.out.print("label : ");
                     int label_id = Tx.readInt();
-                    List<ProductBean> products = admin.getProductsByLabel(label_id);
+                    List<ProductBean> products = null;
+                    try {
+                        utx.begin();
+                        products = admin.getProductsByLabel(label_id);
+                        utx.commit();
+                    } catch (Exception ex) {
+                        utx.rollback();
+                        throw ex;
+                    }
                     if(products != null) {
                         Iterator iterator = products.iterator();
                         while(iterator.hasNext()) {
@@ -611,7 +781,15 @@ public class AdminClient {
                     } else {
                         throw new Exception("bad operation");
                     }
-                    List<ProductBean> products = admin.getProductsByFilter(category_ids, color_ids, label_ids, and);
+                    List<ProductBean> products = null;
+                    try {
+                        utx.begin();
+                        products = admin.getProductsByFilter(category_ids, color_ids, label_ids, and);
+                        utx.commit();
+                    } catch (Exception ex) {
+                        utx.rollback();
+                        throw ex;
+                    }
                     if(products != null) {
                         Iterator iterator = products.iterator();
                         while(iterator.hasNext()) {
@@ -657,14 +835,29 @@ public class AdminClient {
                     String image_medium = Tx.readString();
                     System.out.print("image small : ");
                     String image_small = Tx.readString();
-                    admin.createProduct(name_fr, name_en, description_fr, description_en, category_id, color_id, label_id, price, stock, image_large, image_medium, image_small);
+                    try {
+                        utx.begin();
+                        admin.createProduct(name_fr, name_en, description_fr, description_en, category_id, color_id, label_id, price, stock, image_large, image_medium, image_small);
+                        utx.commit();
+                    } catch (Exception ex) {
+                        utx.rollback();
+                        throw ex;
+                    }
                     System.out.println("product successfully created");
                 } else if (choice == 7) {
                     System.out.print("id : ");
                     int id = Tx.readInt();
                     while (true) {
                         try {
-                            ProductBean product = admin.getProduct(id);
+                            ProductBean product = null;
+                            try {
+                                utx.begin();
+                                product = admin.getProduct(id);
+                                utx.commit();
+                            } catch (Exception ex) {
+                                utx.rollback();
+                                throw ex;
+                            }
                             if(product == null) {
                                 System.out.println("Product id " + id + " does not exist");
                                 break;
@@ -707,62 +900,146 @@ public class AdminClient {
                             } else if (choice == 1) {
                                 System.out.print("name french : ");
                                 String name = Tx.readString();
-                                admin.setProductNameFr(id, name);
+                                try {
+                                    utx.begin();
+                                    admin.setProductNameFr(id, name);
+                                    utx.commit();
+                                } catch (Exception ex) {
+                                    utx.rollback();
+                                    throw ex;
+                                }
                                 System.out.println("product successfully updated");
                             } else if (choice == 2) {
                                 System.out.print("name en : ");
                                 String name = Tx.readString();
-                                admin.setProductNameEn(id, name);
+                                try {
+                                    utx.begin();
+                                    admin.setProductNameEn(id, name);
+                                    utx.commit();
+                                } catch (Exception ex) {
+                                    utx.rollback();
+                                    throw ex;
+                                }
                                 System.out.println("product successfully updated");
                             } else if (choice == 3) {
                                 System.out.print("description french : ");
                                 String description = Tx.readString();
-                                admin.setProductDescriptionFr(id, description);
+                                try {
+                                    utx.begin();
+                                    admin.setProductDescriptionFr(id, description);
+                                    utx.commit();
+                                } catch (Exception ex) {
+                                    utx.rollback();
+                                    throw ex;
+                                }
                                 System.out.println("product successfully updated");
                             } else if (choice == 4) {
                                 System.out.print("description en : ");
                                 String description = Tx.readString();
-                                admin.setProductDescriptionEn(id, description);
+                                try {
+                                    utx.begin();
+                                    admin.setProductDescriptionEn(id, description);
+                                    utx.commit();
+                                } catch (Exception ex) {
+                                    utx.rollback();
+                                    throw ex;
+                                }
                                 System.out.println("product successfully updated");
                             } else if (choice == 5) {
                                 System.out.print("category : ");
                                 int category_id = Tx.readInt();
-                                admin.setProductCategory(id, category_id);
+                                try {
+                                    utx.begin();
+                                    admin.setProductCategory(id, category_id);
+                                    utx.commit();
+                                } catch (Exception ex) {
+                                    utx.rollback();
+                                    throw ex;
+                                }
                                 System.out.println("product successfully updated");
                             } else if (choice == 6) {
                                 System.out.print("color : ");
                                 int color_id = Tx.readInt();
-                                admin.setProductColor(id, color_id);
+                                try {
+                                    utx.begin();
+                                    admin.setProductColor(id, color_id);
+                                    utx.commit();
+                                } catch (Exception ex) {
+                                    utx.rollback();
+                                    throw ex;
+                                }
                                 System.out.println("product successfully updated");
                             } else if (choice == 7) {
                                 System.out.print("label : ");
                                 int label_id = Tx.readInt();
-                                admin.setProductLabel(id, label_id);
+                                try {
+                                    utx.begin();
+                                    admin.setProductLabel(id, label_id);
+                                    utx.commit();
+                                } catch (Exception ex) {
+                                    utx.rollback();
+                                    throw ex;
+                                }
                                 System.out.println("product successfully updated");
                             } else if (choice == 8) {
                                 System.out.print("price : ");
                                 float price = Tx.readFloat();
-                                admin.setProductPrice(id, price);
+                                try {
+                                    utx.begin();
+                                    admin.setProductPrice(id, price);
+                                    utx.commit();
+                                } catch (Exception ex) {
+                                    utx.rollback();
+                                    throw ex;
+                                }
                                 System.out.println("product successfully updated");
                             } else if (choice == 9) {
                                 System.out.print("stock : ");
                                 int stock = Tx.readInt();
-                                admin.setProductStock(id, stock);
+                                try {
+                                    utx.begin();
+                                    admin.setProductStock(id, stock);
+                                    utx.commit();
+                                } catch (Exception ex) {
+                                    utx.rollback();
+                                    throw ex;
+                                }
                                 System.out.println("product successfully updated");
                             } else if (choice == 10) {
                                 System.out.print("image large : ");
                                 String image = Tx.readString();
-                                admin.setProductImageLarge(id, image);
+                                try {
+                                    utx.begin();
+                                    admin.setProductImageLarge(id, image);
+                                    utx.commit();
+                                } catch (Exception ex) {
+                                    utx.rollback();
+                                    throw ex;
+                                }
                                 System.out.println("product successfully updated");
                             } else if (choice == 11) {
                                 System.out.print("image medium : ");
                                 String image = Tx.readString();
-                                admin.setProductImageMedium(id, image);
+                                try {
+                                    utx.begin();
+                                    admin.setProductImageMedium(id, image);
+                                    utx.commit();
+                                } catch (Exception ex) {
+                                    utx.rollback();
+                                    throw ex;
+                                }
                                 System.out.println("product successfully updated");
                             } else if (choice == 12) {
                                 System.out.print("image small : ");
                                 String image = Tx.readString();
-                                admin.setProductImageSmall(id, image);
+                                try {
+                                    utx.begin();
+                                    admin.setProductImageSmall(id, image);
+                                    utx.commit();
+                                } catch (Exception ex) {
+                                    utx.rollback();
+                                    throw ex;
+                                }
                                 System.out.println("product successfully updated");
                             } else {
                                 System.out.println("Bad choice");

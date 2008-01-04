@@ -52,7 +52,7 @@ public class InitDataBase {
             System.exit(2);
         }
 		
-	utx.begin();  
+	/*utx.begin();  
 	admin.createAccount(101,"Antoine de St Exupery", 200.00);
 	admin.createAccount(102,"Alexandre Dumas fils", 400.00);
 	admin.createAccount(103,"Conan Doyle", 500.00);
@@ -75,7 +75,7 @@ public class InitDataBase {
 	admin.createProduct(13, "assiette", 25.00, 1002, "Grenoble");
 	admin.createProduct(14, "assiette", 30.00, 1002, "Grenoble");
 	admin.createProduct(15, "nappe", 130.00, 2002, "Lyon");
-	utx.commit(); 
+	utx.commit();*/
 	
   } catch (Exception e) {
 	 System.err.println("InitDataBase program get an exception " + e);
