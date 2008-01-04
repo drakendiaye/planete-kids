@@ -12,6 +12,7 @@ import planetekids.beans.entity.CategoryBean;
 import planetekids.beans.entity.ColorBean;
 import planetekids.beans.entity.LabelBean;
 import planetekids.beans.entity.ProductBean;
+import planetekids.beans.entity.QuestionBean;
 
 public interface AdminRemote {
     public List<LabelBean> getLabels() throws Exception;
@@ -61,4 +62,9 @@ public interface AdminRemote {
     public void setProductImageMedium(int id, String image) throws Exception;
     public void setProductImageSmall(int id, String image) throws Exception;
     public void createProduct(String name_fr, String name_en, String description_fr, String description_en, int category_id, int color_id, int label_id, float price, int stock, String image_large, String image_medium, String image_small) throws Exception;
+    
+    public int createQuestionnaire (String nameFr, String nameEn, String descFr, String descEn) throws Exception;
+    public int createQuestion (int questionnaireId, String questionNameFr, String questionNameEn, QuestionBean.Pattern pattern, int order) throws Exception;
+    public int createAnswer (int questionId, String answerNameFr, String answerNameEn, Boolean commentable, int order) throws Exception;
+
 }

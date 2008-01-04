@@ -17,11 +17,14 @@ import javax.ejb.Stateful;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
+import planetekids.beans.entity.AnswerBean;
 import planetekids.beans.entity.CategoryBean;
 import planetekids.beans.entity.ColorBean;
 import planetekids.beans.entity.LabelBean;
 import planetekids.beans.entity.LocaleBean;
 import planetekids.beans.entity.ProductBean;
+import planetekids.beans.entity.QuestionBean;
+import planetekids.beans.entity.QuestionnaireBean;
 
 @Stateful
 @Remote(AdminRemote.class)
@@ -284,5 +287,33 @@ public class AdminBean implements AdminRemote{
         LabelBean label = entityManager.find(LabelBean.class, label_id);
         ProductBean product = new ProductBean(new LocaleBean(name_fr, name_en), new LocaleBean(description_fr, description_en), category, color, label, price, stock, image_large, image_medium, image_small);
         entityManager.persist(product);
+    }
+    
+    public int createQuestionnaire (String nameFr, String nameEn, String descFr, String descEn) throws Exception {
+	QuestionnaireBean questionnaire = new QuestionnaireBean(new LocaleBean(nameFr, nameEn),new LocaleBean(descFr, descEn));
+	
+	entityManager.persist(questionnaire);
+	
+	return questionnaire.getId();
+    }
+    
+    public int createQuestion (int questionnaireId, String questionNameFr, String questionNameEn, QuestionBean.Pattern pattern, int order) throws Exception {
+	QuestionnaireBean questionnaire = entityManager.find(QuestionnaireBean.class, questionnaireId);
+	
+	QuestionBean question = new QuestionBean (questionnaire, new LocaleBean(questionNameFr, questionNameEn), pattern, order);
+	
+	entityManager.persist(question);
+	
+	return question.getId();
+    }
+    
+    public int createAnswer (int questionId, String answerNameFr, String answerNameEn, Boolean commentable, int order) throws Exception {
+	QuestionBean question = entityManager.find(QuestionBean.class, questionId);
+
+	AnswerBean answer = new AnswerBean (question, new LocaleBean(answerNameFr, answerNameEn), commentable, order);
+	
+	entityManager.persist(answer);
+	
+	return answer.getId();
     }
 }
