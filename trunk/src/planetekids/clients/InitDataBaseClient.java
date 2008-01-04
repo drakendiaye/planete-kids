@@ -11,7 +11,6 @@ import javax.naming.InitialContext;
 import planetekids.beans.entity.QuestionBean;
 import planetekids.beans.stateful.AdminBean;
 import planetekids.beans.stateful.AdminRemote;
-import sun.misc.CRC16;
 
 public class InitDataBaseClient {
 
