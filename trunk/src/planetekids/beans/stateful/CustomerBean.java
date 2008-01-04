@@ -18,9 +18,7 @@ import planetekids.beans.entity.AnswerBean;
 import planetekids.beans.entity.CategoryBean;
 import planetekids.beans.entity.ColorBean;
 import planetekids.beans.entity.LabelBean;
-import planetekids.beans.entity.LocaleBean;
 import planetekids.beans.entity.ProductBean;
-import planetekids.beans.entity.QuestionBean;
 import planetekids.beans.entity.QuestionnaireBean;
 import planetekids.beans.entity.ResultBean;
 
