@@ -36,6 +36,8 @@ public class InitDataBaseClient {
 	    /* Création des comptes clients */
 	    admin.createAccount("clemplantier@gmail.com", "azerty", "Clément", "Plantier", "2 rue de la Poste", "", "", 38400, "ST Martin d'Hères", "06 00 00 00 00", "");
 	    admin.createAccount("guillaumerenault@yahoo.fr", "azerty", "Guillaume", "Renault", "11 rue Pasteur", "", "", 38400, "ST Martin d'Hères", "06 00 00 00 01", "");
+	    admin.createAccount("marcosoft74@yahoo.fr", "azerty", "Marc", "Schaller", "18 avenue G. Peri", "", "", 38400, "ST Martin d'Hères", "06 00 00 00 02", "");
+	    admin.createAccount("missog@club-internet.fr", "azerty", "Guillaume", "Missonnier", "51 avenue du Vercors", "", "", 38170, "Seyssinet", "06 00 00 00 03", "");
 	    
 	    /* Création du questionnaire */
 	    int questionnaireId = admin.createQuestionnaire("Planete Kids ouvre bientôt ses portes sur le net.", "Planete Kids opens to the web soon.", "Aidez-nous à créer un site à  votre image !", "Help us to create a website that fits you!");
