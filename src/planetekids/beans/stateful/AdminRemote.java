@@ -8,6 +8,7 @@
 package planetekids.beans.stateful;
 
 import java.util.List;
+import planetekids.beans.entity.AccountBean;
 import planetekids.beans.entity.CategoryBean;
 import planetekids.beans.entity.ColorBean;
 import planetekids.beans.entity.LabelBean;
@@ -67,4 +68,16 @@ public interface AdminRemote {
     public int createQuestion (int questionnaireId, String questionNameFr, String questionNameEn, QuestionBean.Pattern pattern, int order) throws Exception;
     public int createAnswer (int questionId, String answerNameFr, String answerNameEn, Boolean commentable, int order) throws Exception;
 
+    public String createAccount (String email, String password, String firstName, String lastName, String addressLine1, String addressLine2, String addressLine3, int zipCode, String city, String phoneNumber, String faxNumber) throws Exception;
+    public AccountBean getAccount (String email) throws Exception;
+    public void setAccountPassword (String email, String password) throws Exception;
+    public void setAccountFirstName (String email, String firstName) throws Exception;
+    public void setAccountLastName (String email, String lastName) throws Exception;
+    public void setAddressLine1 (String email, String addressLine1) throws Exception;
+    public void setAddressLine2 (String email, String addressLine2) throws Exception;
+    public void setAddressLine3 (String email, String addressLine3) throws Exception;
+    public void setZipCode (String email, int zipCode) throws Exception;
+    public void setCity (String email, String city) throws Exception;
+    public void setPhoneNumber (String email, String phoneNumber) throws Exception;
+    public void setFaxNumber (String email, String faxNumber) throws Exception;
 }
