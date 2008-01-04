@@ -6,6 +6,7 @@
 
 package planetekids.clients;
 
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import javax.transaction.*;
@@ -470,8 +471,12 @@ public class AdminClient {
                 System.out.println("Manage Products");
                 System.out.println("0 = return");
                 System.out.println("1 = view products list");
-                System.out.println("2 = create a product");
-                System.out.println("3 = modify a product");
+                System.out.println("2 = find products by category");
+                System.out.println("3 = find products by color");
+                System.out.println("4 = find products by label");
+                System.out.println("5 = find products by filter");
+                System.out.println("6 = create a product");
+                System.out.println("7 = modify a product");
                 System.out.println("------------------------------------------------------");
                 System.out.print(">");
                 
@@ -502,6 +507,132 @@ public class AdminClient {
                         }
                     }
                 } else if (choice == 2) {
+                    System.out.print("category : ");
+                    int category_id = Tx.readInt();
+                    List<ProductBean> products = admin.getProductsByCategory(category_id);
+                    if(products != null) {
+                        Iterator iterator = products.iterator();
+                        while(iterator.hasNext()) {
+                            ProductBean product = (ProductBean)iterator.next();
+                            System.out.println("id : " + product.getId());
+                            System.out.println("name french : " + product.getName().getFr());
+                            System.out.println("name english : " + product.getName().getEn());
+                            System.out.println("description french : " + product.getDescription().getFr());
+                            System.out.println("description english : " + product.getDescription().getEn());
+                            System.out.println("category : " + product.getCategory().getId());
+                            System.out.println("color : " + product.getColor().getId());
+                            System.out.println("label : " + product.getLabel().getId());
+                            System.out.println("price : " + product.getPrice());
+                            System.out.println("stock : " + product.getStock());
+                            System.out.println("image large : " + product.getImage_large());
+                            System.out.println("image medium : " + product.getImage_medium());
+                            System.out.println("image small : " + product.getImage_small());
+                            System.out.println("");
+                        }
+                    }
+                } else if (choice == 3) {
+                    System.out.print("color : ");
+                    int color_id = Tx.readInt();
+                    List<ProductBean> products = admin.getProductsByColor(color_id);
+                    if(products != null) {
+                        Iterator iterator = products.iterator();
+                        while(iterator.hasNext()) {
+                            ProductBean product = (ProductBean)iterator.next();
+                            System.out.println("id : " + product.getId());
+                            System.out.println("name french : " + product.getName().getFr());
+                            System.out.println("name english : " + product.getName().getEn());
+                            System.out.println("description french : " + product.getDescription().getFr());
+                            System.out.println("description english : " + product.getDescription().getEn());
+                            System.out.println("category : " + product.getCategory().getId());
+                            System.out.println("color : " + product.getColor().getId());
+                            System.out.println("label : " + product.getLabel().getId());
+                            System.out.println("price : " + product.getPrice());
+                            System.out.println("stock : " + product.getStock());
+                            System.out.println("image large : " + product.getImage_large());
+                            System.out.println("image medium : " + product.getImage_medium());
+                            System.out.println("image small : " + product.getImage_small());
+                            System.out.println("");
+                        }
+                    }
+                } else if (choice == 4) {
+                    System.out.print("label : ");
+                    int label_id = Tx.readInt();
+                    List<ProductBean> products = admin.getProductsByLabel(label_id);
+                    if(products != null) {
+                        Iterator iterator = products.iterator();
+                        while(iterator.hasNext()) {
+                            ProductBean product = (ProductBean)iterator.next();
+                            System.out.println("id : " + product.getId());
+                            System.out.println("name french : " + product.getName().getFr());
+                            System.out.println("name english : " + product.getName().getEn());
+                            System.out.println("description french : " + product.getDescription().getFr());
+                            System.out.println("description english : " + product.getDescription().getEn());
+                            System.out.println("category : " + product.getCategory().getId());
+                            System.out.println("color : " + product.getColor().getId());
+                            System.out.println("label : " + product.getLabel().getId());
+                            System.out.println("price : " + product.getPrice());
+                            System.out.println("stock : " + product.getStock());
+                            System.out.println("image large : " + product.getImage_large());
+                            System.out.println("image medium : " + product.getImage_medium());
+                            System.out.println("image small : " + product.getImage_small());
+                            System.out.println("");
+                        }
+                    }
+                } else if (choice == 5) {
+                    String[] ids;
+                    System.out.print("Categories (coma separated) : ");
+                    String categories = Tx.readString();
+                    List<Integer> category_ids = new ArrayList<Integer>();
+                    ids = categories.split(",");
+                    for(int i=0;i<ids.length;i++) {
+                        category_ids.add(Integer.valueOf(ids[i]));
+                    }
+                    System.out.print("Colors (coma separated) : ");
+                    String colors = Tx.readString();
+                    List<Integer> color_ids = new ArrayList<Integer>();
+                    ids = colors.split(",");
+                    for(int i=0;i<ids.length;i++) {
+                        color_ids.add(Integer.valueOf(ids[i]));
+                    }
+                    System.out.print("Labels (coma separated) : ");
+                    String labels = Tx.readString();
+                    List<Integer> label_ids = new ArrayList<Integer>();
+                    ids = labels.split(",");
+                    for(int i=0;i<ids.length;i++) {
+                        label_ids.add(Integer.valueOf(ids[i]));
+                    }
+                    System.out.print("operation (and/or) : ");
+                    String operation = Tx.readString();
+                    boolean and;
+                    if(operation.equals("and")) {
+                        and = true;
+                    } else if(operation.equals("or")) {
+                        and = false;
+                    } else {
+                        throw new Exception("bad operation");
+                    }
+                    List<ProductBean> products = admin.getProductsByFilter(category_ids, color_ids, label_ids, and);
+                    if(products != null) {
+                        Iterator iterator = products.iterator();
+                        while(iterator.hasNext()) {
+                            ProductBean product = (ProductBean)iterator.next();
+                            System.out.println("id : " + product.getId());
+                            System.out.println("name french : " + product.getName().getFr());
+                            System.out.println("name english : " + product.getName().getEn());
+                            System.out.println("description french : " + product.getDescription().getFr());
+                            System.out.println("description english : " + product.getDescription().getEn());
+                            System.out.println("category : " + product.getCategory().getId());
+                            System.out.println("color : " + product.getColor().getId());
+                            System.out.println("label : " + product.getLabel().getId());
+                            System.out.println("price : " + product.getPrice());
+                            System.out.println("stock : " + product.getStock());
+                            System.out.println("image large : " + product.getImage_large());
+                            System.out.println("image medium : " + product.getImage_medium());
+                            System.out.println("image small : " + product.getImage_small());
+                            System.out.println("");
+                        }
+                    }
+                } else if (choice == 6) {
                     System.out.print("name french: ");
                     String name_fr = Tx.readString();
                     System.out.print("name english: ");
@@ -528,7 +659,7 @@ public class AdminClient {
                     String image_small = Tx.readString();
                     admin.createProduct(name_fr, name_en, description_fr, description_en, category_id, color_id, label_id, price, stock, image_large, image_medium, image_small);
                     System.out.println("product successfully created");
-                } else if (choice == 3) {
+                } else if (choice == 7) {
                     System.out.print("id : ");
                     int id = Tx.readInt();
                     while (true) {
