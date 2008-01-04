@@ -23,3 +23,10 @@
                      new navRequest('location', '%{url_location}')])">
     <s:text name="account"/>
 </s:a>
+
+<s:url id="url_content" namespace="/category" action="index_content" includeParams="none"/>
+<s:url id="url_location" namespace="/category" action="index_location" includeParams="none"/>
+<s:a onclick="navGo([new navRequest('content', '%{url_content}'),
+                     new navRequest('location', '%{url_location}')])">
+    <s:text name="category"/>
+</s:a>

@@ -35,7 +35,7 @@
             <result name="error">/error.jsp</result>
         </action>
     </package>
-	
+    
     <package name="questionnaire" namespace="/questionnaire" extends="struts-default">
         <action name="index" class="planetekids.actions.questionnaire.IndexAction" method="redirect" >
             <result type="redirect-action">
@@ -68,7 +68,7 @@
     
     <package name="account" namespace="/account" extends="struts-default">
         
-	<action name="index" class="planetekids.actions.account.IndexAction" method="redirect" >
+        <action name="index" class="planetekids.actions.account.IndexAction" method="redirect" >
             <result type="redirect-action">
                 <param name="namespace">/</param>
                 <param name="actionName">index</param>
@@ -83,8 +83,8 @@
             <result>/account/index_location.jsp</result>
             <result name="error">/error.jsp</result>
         </action>
-	
-	 <action name="index" class="planetekids.actions.account.CreateAction" method="redirect" >
+        
+        <action name="index" class="planetekids.actions.account.CreateAction" method="redirect" >
             <result type="redirect-action">
                 <param name="namespace">/</param>
                 <param name="actionName">index</param>
@@ -99,8 +99,26 @@
             <result>/account/index_location.jsp</result>
             <result name="error">/error.jsp</result>
         </action>
-	
+        
     </package>
     
-    
+    <package name="category" namespace="/category" extends="struts-default">
+        
+        <action name="index" class="planetekids.actions.category.IndexAction" method="redirect" >
+            <result type="redirect-action">
+                <param name="namespace">/</param>
+                <param name="actionName">index</param>
+            </result>
+            <result name="error">/error.jsp</result>
+        </action>
+        <action name="index_content" class="planetekids.actions.category.IndexAction">
+            <result>/category/index_content.jsp</result>
+            <result name="error">/error.jsp</result>
+        </action>
+        <action name="index_location" class="planetekids.actions.category.IndexAction" >
+            <result>/category/index_location.jsp</result>
+            <result name="error">/error.jsp</result>
+        </action>
+        
+    </package>
 </struts>
