@@ -11,6 +11,7 @@ import javax.naming.InitialContext;
 import planetekids.beans.entity.QuestionBean;
 import planetekids.beans.stateful.AdminBean;
 import planetekids.beans.stateful.AdminRemote;
+import sun.misc.CRC16;
 
 public class InitDataBaseClient {
 
@@ -32,7 +33,12 @@ public class InitDataBaseClient {
 
 	try {
 	    utx.begin();
-
+	    
+	    /* Création des comptes clients */
+	    admin.createAccount("clemplantier@gmail.com", "azerty", "Clément", "Plantier", "2 rue de la Poste", "", "", 38400, "ST Martin d'Hères", "06 00 00 00 00", "");
+	    admin.createAccount("guillaumerenault@yahoo.fr", "azerty", "Guillaume", "Renault", "11 rue Pasteur", "", "", 38400, "ST Martin d'Hères", "06 00 00 00 01", "");
+	    
+	    /* Création du questionnaire */
 	    int questionnaireId = admin.createQuestionnaire("Planete Kids ouvre bientôt ses portes sur le net.", "Planete Kids opens to the web soon.", "Aidez-nous à créer un site à  votre image !", "Help us to create a website that fits you!");
 
 	    int questionId = admin.createQuestion(questionnaireId, "Quel type de connexion internet utilisez-vous ?", "What kind of internet connection do you use?", QuestionBean.Pattern.SINGLE_CHOICE, 1);

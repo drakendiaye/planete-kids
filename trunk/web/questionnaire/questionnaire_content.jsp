@@ -21,7 +21,7 @@
                                     <s:property value="%{getText(getLocale())}"/>
                                     <s:if test="getCommentable()">
                                         <script type="text/javascript">text_load('answer_<s:property value="getId()" />_comment');</script>
-                                        <s:hidden id="answer_%{getId()}_comment" name="answer_%{getId()}_comment" value="{ init : false, value : 'empty'}"/>
+                                        <s:hidden id="answer_%{getId()}_comment" name="answer_%{getId()}_comment" value="{ init : false, value : ''}"/>
                                         <s:textfield id="answer_%{getId()}_comment_field" onkeyup="text_press('answer_%{getId()}_comment')"/>
                                     </s:if>
                                     <br/>
@@ -38,7 +38,7 @@
                                     <s:property value="%{getText(getLocale())}"/>
                                     <s:if test="getCommentable()">
                                         <script type="text/javascript">text_load('answer_<s:property value="getId()" />_comment');</script>
-                                        <s:hidden id="answer_%{getId()}_comment" name="answer_%{getId()}_comment" value="{ init : false, value : 'empty'}"/>
+                                        <s:hidden id="answer_%{getId()}_comment" name="answer_%{getId()}_comment" value="{ init : false, value : ''}"/>
                                         <s:textfield id="answer_%{getId()}_comment_field" onkeyup="text_press('answer_%{getId()}_comment')"/>
                                     </s:if>
                                     <br/>
@@ -57,7 +57,7 @@
                                         <s:property id="answer_%{getId()}_lbl" value="%{getText(getLocale())}"/>
                                         <s:if test="getCommentable()">
                                             <script type="text/javascript">text_load('answer_<s:property value="getId()" />_comment');</script>
-                                            <s:hidden id="answer_%{getId()}_comment" name="answer_%{getId()}_comment" value="{ init : false, value : 'empty'}"/>
+                                            <s:hidden id="answer_%{getId()}_comment" name="answer_%{getId()}_comment" value="{ init : false, value : ''}"/>
                                             <s:textfield id="answer_%{getId()}_comment_field" onkeyup="text_press('answer_%{getId()}_comment')"/>
                                         </s:if>
                                     </s:div>
@@ -69,12 +69,12 @@
                             <s:if test="getAnswers().size() > 0">
                                 <s:iterator value="getAnswers()">
                                     <script type="text/javascript">text_load('answer_<s:property value="getId()" />');</script>
-                                    <s:hidden id="answer_%{getId()}" name="answer_%{getId()}" value="{ init : false, value : 'empty'}"/>
+                                    <s:hidden id="answer_%{getId()}" name="answer_%{getId()}" value="{ init : false, value : ''}"/>
                                     <s:textfield id="answer_%{getId()}_field" onkeyup="text_press('answer_%{getId()}')"/>
                                     <s:property value="%{getText(getLocale())}" />
                                     <s:if test="getCommentable()">
                                         <script type="text/javascript">text_load('answer_<s:property value="getId()" />_comment');</script>
-                                        <s:hidden id="answer_%{getId()}_comment" name="answer_%{getId()}_comment" value="{ init : false, value : 'empty'}"/>
+                                        <s:hidden id="answer_%{getId()}_comment" name="answer_%{getId()}_comment" value="{ init : false, value : ''}"/>
                                         <s:textfield id="answer_%{getId()}_comment_field" onkeyup="text_press('answer_%{getId()}_comment')"/>
                                     </s:if>
                                     <br/>

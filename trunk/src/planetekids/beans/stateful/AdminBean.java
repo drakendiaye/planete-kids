@@ -17,6 +17,7 @@ import javax.ejb.Stateful;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
+import planetekids.beans.entity.AccountBean;
 import planetekids.beans.entity.AnswerBean;
 import planetekids.beans.entity.CategoryBean;
 import planetekids.beans.entity.ColorBean;
@@ -315,5 +316,85 @@ public class AdminBean implements AdminRemote{
 	entityManager.persist(answer);
 	
 	return answer.getId();
+    }
+    
+    public List<QuestionnaireBean> getQuestionnaires() throws Exception {
+        return entityManager.createNamedQuery("getQuestionnaires").getResultList();
+    }
+    
+    public QuestionnaireBean getQuestionnaire(int questionnaire_id) throws Exception {
+        return entityManager.find(QuestionnaireBean.class, questionnaire_id);
+    }
+    
+    public String createAccount (String email, String password, String firstName, String lastName, String addressLine1, String addressLine2, String addressLine3, int zipCode, String city, String phoneNumber, String faxNumber) throws Exception {
+	AccountBean account = new AccountBean(email);
+	account.setPassword(password);
+	account.setFirstName(firstName);
+	account.setLastName(lastName);
+	account.setAddressLine1(addressLine1);
+	account.setAddressLine2(addressLine2);
+	account.setAddressLine3(addressLine3);
+	account.setZipCode(zipCode);
+	account.setCity(city);
+	account.setPhoneNumber(phoneNumber);
+	account.setFaxNumber(faxNumber);
+	
+	entityManager.persist(account);
+	
+	return account.getEmailAddress();
+    }
+    
+    public AccountBean getAccount (String email) throws Exception {
+	return entityManager.find(AccountBean.class, email);
+    }
+    
+    public void setAccountPassword (String email, String password) throws Exception {
+	AccountBean account = entityManager.find(AccountBean.class, email);
+	account.setPassword(password);
+    }
+    
+    public void setAccountFirstName (String email, String firstName) throws Exception {
+	AccountBean account = entityManager.find(AccountBean.class, email);
+	account.setFirstName(firstName);
+    }
+    
+    public void setAccountLastName (String email, String lastName) throws Exception {
+	AccountBean account = entityManager.find(AccountBean.class, email);
+	account.setLastName(lastName);
+    }
+    
+    public void setAddressLine1 (String email, String addressLine1) throws Exception {
+	AccountBean account = entityManager.find(AccountBean.class, email);
+	account.setAddressLine1(addressLine1);
+    }
+    
+    public void setAddressLine2 (String email, String addressLine2) throws Exception {
+	AccountBean account = entityManager.find(AccountBean.class, email);
+	account.setAddressLine2(addressLine2);
+    }
+	
+    public void setAddressLine3 (String email, String addressLine3) throws Exception {
+	AccountBean account = entityManager.find(AccountBean.class, email);
+	account.setAddressLine3(addressLine3);
+    }
+    
+    public void setZipCode (String email, int zipCode) throws Exception {
+	AccountBean account = entityManager.find(AccountBean.class, email);
+	account.setZipCode(zipCode);
+    }
+    
+    public void setCity (String email, String city) throws Exception {
+	AccountBean account = entityManager.find(AccountBean.class, email);
+	account.setCity(city);
+    }
+
+    public void setPhoneNumber (String email, String phoneNumber) throws Exception {
+	AccountBean account = entityManager.find(AccountBean.class, email);
+	account.setPhoneNumber(phoneNumber);
+    }
+    
+    public void setFaxNumber (String email, String faxNumber) throws Exception {
+	AccountBean account = entityManager.find(AccountBean.class, email);
+	account.setFaxNumber(faxNumber);
     }
 }
