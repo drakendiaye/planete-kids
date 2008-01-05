@@ -20,9 +20,18 @@
                 <div style="float:left;">
                     <s:property value="getDescription(getLocale())" /><br/>
                     <s:text name="price"/>&nbsp;:&nbsp;<s:property value="getPrice()" />&nbsp;Euros<br/>
-                    <img src="<s:property value="getCategory().getImage_small()" />" width="20px" height="20px"/>
-                    <img src="<s:property value="getColor().getImage_small()" />" width="20px" height="20px"/>
-                    <img src="<s:property value="getLabel().getImage_small()" />" width="20px" height="20px"/>
+                    <img src="<s:property value="getCategory().getImage_small()" />" width="20px" height="20px" onmouseover="show('product_<s:property value="getId()" />_category')" onmouseout="hide('product_<s:property value="getId()" />_category')"/>
+                    <div id="product_<s:property value="getId()" />_category" style="display:none; z-index:1; position:absolute; background-color:white; border-color:black; border-width:1px; border-style: solid;">
+                        <s:property value="getCategory().getName(getLocale())" />
+                    </div>
+                    <img src="<s:property value="getColor().getImage_small()" />" width="20px" height="20px" onmouseover="show('product_<s:property value="getId()" />_color')" onmouseout="hide('product_<s:property value="getId()" />_color')"/>
+                    <div id="product_<s:property value="getId()" />_color" style="display:none; z-index:1; position:absolute; background-color:white; border-color:black; border-width:1px; border-style: solid;">
+                        <s:property value="getColor().getName(getLocale())" />
+                    </div>    
+                    <img src="<s:property value="getLabel().getImage_small()" />" width="20px" height="20px" onmouseover="show('product_<s:property value="getId()" />_label')" onmouseout="hide('product_<s:property value="getId()" />_label')"/>
+                    <div id="product_<s:property value="getId()" />_label" style="display:none; z-index:1; position:absolute; background-color:white; border-color:black; border-width:1px; border-style: solid;">
+                        <s:property value="getLabel().getName(getLocale())" />
+                    </div>
                 </div>
                 <br clear="both"/>
             </div>
