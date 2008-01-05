@@ -40,8 +40,8 @@ public class InitDataBaseClient {
 	    admin.createAccount("missog@club-internet.fr", "azerty", "Guillaume", "Missonnier", "51 avenue du Vercors", "", "", 38170, "Seyssinet", "06 00 00 00 03", "");
 
 	    /* Création des marques */
-	    admin.createLabel("Nike", "Nike", "www.nike.com", "", "", "");
-	    admin.createLabel("Adidas", "Adidas", "www.adidas.com", "", "", "");
+	    admin.createLabel("Nike", "Nike","marque americaine","American label", "www.nike.com", "", "", "");
+	    admin.createLabel("Adidas", "Adidas","Marque","Label", "www.adidas.com", "", "", "");
 	    
 	    /* Création du questionnaire */
 	    int questionnaireId = admin.createQuestionnaire("Planete Kids ouvre bientôt ses portes sur le net.", "Planete Kids opens to the web soon.", "Aidez-nous à créer un site à  votre image !", "Help us to create a website that fits you!");
