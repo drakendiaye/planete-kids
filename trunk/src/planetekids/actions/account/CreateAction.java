@@ -1,15 +1,12 @@
 package planetekids.actions.account;
 
-import com.opensymphony.xwork2.ActionSupport;import com.opensymphony.xwork2.validator.annotations.RequiredStringValidator;
-import com.opensymphony.xwork2.validator.annotations.Validation;
-import java.util.Map;
+import com.opensymphony.xwork2.ActionSupport;import java.util.Map;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import org.apache.struts2.interceptor.SessionAware;
 import planetekids.beans.stateful.CustomerBean;
 import planetekids.beans.stateful.CustomerRemote;
 
-@Validation
 public class CreateAction extends ActionSupport implements SessionAware {
   
     private Map session;
@@ -34,15 +31,24 @@ public class CreateAction extends ActionSupport implements SessionAware {
         return (CustomerRemote)session.get("customer");
     }
     
+    @Override
+    public String execute() throws Exception {
+        try {
+            if(getCustomer() == null) session.put("customer", new InitialContext().lookup(CustomerBean.class.getName() + "_" + CustomerRemote.class.getName() + "@Remote"));
+            return ActionSupport.SUCCESS;
+        } catch (NamingException ex) {
+            return ActionSupport.ERROR;
+        }
+    }
+    
     public String redirect() throws Exception {
-        session.put("content_action", "index_content");
+        session.put("content_action", "create_content");
         session.put("content_namespace", "/account");
-        session.put("location_action", "index_location");
+        session.put("location_action", "create_location");
         session.put("location_namespace", "/account");
         return execute();
     }
     
-    @RequiredStringValidator(message="Supply e-mail address")
     public String getEmailAddress() {
 	return emailAddress;
     }
@@ -51,7 +57,6 @@ public class CreateAction extends ActionSupport implements SessionAware {
 	this.emailAddress = emailAddress;
     }
 
-    @RequiredStringValidator(message="Supply password")
     public String getPassword() {
 	return password;
     }
@@ -130,15 +135,5 @@ public class CreateAction extends ActionSupport implements SessionAware {
 
     public void setFaxNumber(String faxNumber) {
 	this.faxNumber = faxNumber;
-    }
-    
-    @Override
-    public String execute() throws Exception {
-        try {
-            if(getCustomer() == null) session.put("customer", new InitialContext().lookup(CustomerBean.class.getName() + "_" + CustomerRemote.class.getName() + "@Remote"));
-            return ActionSupport.SUCCESS;
-        } catch (NamingException ex) {
-            return ActionSupport.ERROR;
-        }
     }
 }

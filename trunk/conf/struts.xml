@@ -6,6 +6,10 @@
             <result>/index.jsp</result>
             <result name="error">/error.jsp</result>
         </action>
+        <action name="index_callback" class="planetekids.actions.IndexAction" method="callback" >
+            <result>/index_callback.jsp</result>
+            <result name="error">/error.jsp</result>
+        </action>
         <action name="index_cart" class="planetekids.actions.IndexAction" >
             <result>/index_cart.jsp</result>
             <result name="error">/error.jsp</result>
@@ -77,14 +81,22 @@
         </action>
         <action name="index_content" class="planetekids.actions.account.IndexAction">
             <result>/account/index_content.jsp</result>
+            <result name="identify" type="redirect-action">
+                <param name="namespace">/account</param>
+                <param name="actionName">identify_content</param>
+            </result>
             <result name="error">/error.jsp</result>
         </action>
         <action name="index_location" class="planetekids.actions.account.IndexAction" >
             <result>/account/index_location.jsp</result>
+            <result name="identify" type="redirect-action">
+                <param name="namespace">/account</param>
+                <param name="actionName">identify_location</param>
+            </result>
             <result name="error">/error.jsp</result>
         </action>
         
-        <action name="index" class="planetekids.actions.account.CreateAction" method="redirect" >
+        <action name="create" class="planetekids.actions.account.CreateAction" method="redirect" >
             <result type="redirect-action">
                 <param name="namespace">/</param>
                 <param name="actionName">index</param>
@@ -92,11 +104,35 @@
             <result name="error">/error.jsp</result>
         </action>
         <action name="create_content" class="planetekids.actions.account.CreateAction">
-            <result>/account/index_content.jsp</result>
+            <result>/account/create_content.jsp</result>
             <result name="error">/error.jsp</result>
         </action>
         <action name="create_location" class="planetekids.actions.account.CreateAction" >
-            <result>/account/index_location.jsp</result>
+            <result>/account/create_location.jsp</result>
+            <result name="error">/error.jsp</result>
+        </action>
+        
+        <action name="identify" class="planetekids.actions.account.IdentifyAction" method="redirect" >
+            <result type="redirect-action">
+                <param name="namespace">/</param>
+                <param name="actionName">index</param>
+            </result>
+            <result name="error">/error.jsp</result>
+        </action>
+        <action name="identify_content" class="planetekids.actions.account.IdentifyAction">
+            <result>/account/identify_content.jsp</result>
+            <result name="error">/error.jsp</result>
+        </action>
+        <action name="identify_location" class="planetekids.actions.account.IdentifyAction" >
+            <result>/account/identify_location.jsp</result>
+            <result name="error">/error.jsp</result>
+        </action>
+        <action name="identify_submit" class="planetekids.actions.account.IdentifyAction" method="submit" >
+            <result type="redirect-action">
+                <param name="namespace">/</param>
+                <param name="actionName">index_callback</param>
+            </result>
+            <result name="badinput">/account/identify_content.jsp</result>
             <result name="error">/error.jsp</result>
         </action>
         
