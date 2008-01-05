@@ -48,48 +48,63 @@ public class AdminBean implements AdminRemote {
     }
     
     public void setLabelNameFr(int id, String name) throws Exception {
-        LabelBean label = entityManager.find(LabelBean.class, id);
+        LabelBean label = getLabel(id);
         label.getName().setFr(name);
     }
     
     public void setLabelNameEn(int id, String name) throws Exception {
-        LabelBean label = entityManager.find(LabelBean.class, id);
+        LabelBean label = getLabel(id);
         label.getName().setEn(name);
     }
     
     public void setLabelDescriptionFr(int id, String description) throws Exception {
-        LabelBean label = entityManager.find(LabelBean.class, id);
+        LabelBean label = getLabel(id);
         label.getDescription().setFr(description);
     }
     
     public void setLabelDescriptionEn(int id, String description) throws Exception {
-        LabelBean label = entityManager.find(LabelBean.class, id);
+        LabelBean label = getLabel(id);
         label.getDescription().setEn(description);
     }
     
     public void setLabelSite(int id, String site) throws Exception {
-        LabelBean label = entityManager.find(LabelBean.class, id);
+        LabelBean label = getLabel(id);
         label.setSite(site);
     }
     
     public void setLabelImageLarge(int id, String image) throws Exception {
-        LabelBean label = entityManager.find(LabelBean.class, id);
+        LabelBean label = getLabel(id);
         label.setImage_large(image);
     }
     
     public void setLabelImageMedium(int id, String image) throws Exception {
-        LabelBean label = entityManager.find(LabelBean.class, id);
+        LabelBean label = getLabel(id);
         label.setImage_medium(image);
     }
     
     public void setLabelImageSmall(int id, String image) throws Exception {
-        LabelBean label = entityManager.find(LabelBean.class, id);
+        LabelBean label = getLabel(id);
         label.setImage_small(image);
     }
     
     public void createLabel(String name_fr, String name_en, String description_fr, String description_en, String site, String image_large, String image_medium, String image_small) throws Exception {
         LabelBean label = new LabelBean(new LocaleBean(name_fr, name_en), new LocaleBean(description_fr, description_en), site, image_large, image_medium, image_small);
         entityManager.persist(label);
+    }
+    
+    public void deleteLabel(int id) throws Exception {
+	entityManager.remove(getLabel(id));
+    }
+    
+    public void deleteLabels() throws Exception {
+	List<LabelBean> labels = getLabels();
+	if (labels != null) {
+	    Iterator iterator = labels.iterator();
+	    while (iterator.hasNext()) {
+		LabelBean label = (LabelBean) iterator.next();
+		deleteLabel(label.getId());
+	    }
+	}
     }
 
     
@@ -107,37 +122,37 @@ public class AdminBean implements AdminRemote {
     }
     
     public void setColorNameFr(int id, String name) throws Exception {
-        ColorBean color = entityManager.find(ColorBean.class, id);
+        ColorBean color = getColor(id);
         color.getName().setFr(name);
     }
     
     public void setColorNameEn(int id, String name) throws Exception {
-        ColorBean color = entityManager.find(ColorBean.class, id);
+        ColorBean color = getColor(id);
         color.getName().setEn(name);
     }
     
     public void setColorDescriptionFr(int id, String description) throws Exception {
-        ColorBean color = entityManager.find(ColorBean.class, id);
+        ColorBean color = getColor(id);
         color.getDescription().setFr(description);
     }
     
     public void setColorDescriptionEn(int id, String description) throws Exception {
-        ColorBean color = entityManager.find(ColorBean.class, id);
+        ColorBean color = getColor(id);
         color.getDescription().setEn(description);
     }
     
     public void setColorImageLarge(int id, String image) throws Exception {
-        ColorBean color = entityManager.find(ColorBean.class, id);
+        ColorBean color = getColor(id);
         color.setImage_large(image);
     }
     
     public void setColorImageMedium(int id, String image) throws Exception {
-        ColorBean color = entityManager.find(ColorBean.class, id);
+        ColorBean color = getColor(id);
         color.setImage_medium(image);
     }
     
     public void setColorImageSmall(int id, String image) throws Exception {
-        ColorBean color = entityManager.find(ColorBean.class, id);
+        ColorBean color = getColor(id);
         color.setImage_small(image);
     }
     
@@ -385,6 +400,21 @@ public class AdminBean implements AdminRemote {
         return entityManager.find(QuestionnaireBean.class, questionnaire_id);
     }
     
+    public void deleteQuestionnaire(int questionnaire_id) throws Exception {
+	entityManager.remove(getQuestionnaire(questionnaire_id));
+    }
+    
+    public void deleteQuestionnaires() throws Exception {
+	List<QuestionnaireBean> questionnaires = getQuestionnaires();
+	if (questionnaires != null) {
+	    Iterator iterator = questionnaires.iterator();
+	    while (iterator.hasNext()) {
+		QuestionnaireBean questionnaire = (QuestionnaireBean) iterator.next();
+		deleteQuestionnaire(questionnaire.getId());
+	    }
+	}
+    }
+    
     /* Création des account */
     
     public String createAccount(String email, String password, String firstName, String lastName, String addressLine1, String addressLine2,
@@ -410,53 +440,72 @@ public class AdminBean implements AdminRemote {
         return entityManager.find(AccountBean.class, email);
     }
     
+    public List<AccountBean> getAccounts() throws Exception {
+        return entityManager.createNamedQuery("getAccounts").getResultList();
+    }
+    
+    public void deleteAccount(String email) throws Exception {
+	entityManager.remove(getAccount(email));
+    }
+    
+    public void deleteAccounts() throws Exception {
+	List<AccountBean> accounts = getAccounts();
+	if (accounts != null) {
+	    Iterator iterator = accounts.iterator();
+	    while (iterator.hasNext()) {
+		AccountBean account = (AccountBean) iterator.next();
+		deleteAccount(account.getEmailAddress());
+	    }
+	}
+    }
+    
     public void setAccountPassword(String email, String password) throws Exception {
-        AccountBean account = entityManager.find(AccountBean.class, email);
+        AccountBean account = getAccount(email);
         account.setPassword(password);
     }
     
     public void setAccountFirstName(String email, String firstName) throws Exception {
-        AccountBean account = entityManager.find(AccountBean.class, email);
+        AccountBean account = getAccount(email);
         account.setFirstName(firstName);
     }
     
     public void setAccountLastName(String email, String lastName) throws Exception {
-        AccountBean account = entityManager.find(AccountBean.class, email);
+        AccountBean account = getAccount(email);
         account.setLastName(lastName);
     }
     
     public void setAccountAddressLine1(String email, String addressLine1) throws Exception {
-        AccountBean account = entityManager.find(AccountBean.class, email);
+        AccountBean account = getAccount(email);
         account.setAddressLine1(addressLine1);
     }
     
     public void setAccountAddressLine2(String email, String addressLine2) throws Exception {
-        AccountBean account = entityManager.find(AccountBean.class, email);
+        AccountBean account = getAccount(email);
         account.setAddressLine2(addressLine2);
     }
     
     public void setAccountAddressLine3(String email, String addressLine3) throws Exception {
-        AccountBean account = entityManager.find(AccountBean.class, email);
+        AccountBean account = getAccount(email);
         account.setAddressLine3(addressLine3);
     }
     
     public void setAccountZipCode(String email, int zipCode) throws Exception {
-        AccountBean account = entityManager.find(AccountBean.class, email);
+        AccountBean account = getAccount(email);
         account.setZipCode(zipCode);
     }
     
     public void setAccountCity(String email, String city) throws Exception {
-        AccountBean account = entityManager.find(AccountBean.class, email);
+        AccountBean account = getAccount(email);
         account.setCity(city);
     }
     
     public void setAccountPhoneNumber(String email, String phoneNumber) throws Exception {
-        AccountBean account = entityManager.find(AccountBean.class, email);
+        AccountBean account = getAccount(email);
         account.setPhoneNumber(phoneNumber);
     }
     
     public void setAccountFaxNumber(String email, String faxNumber) throws Exception {
-        AccountBean account = entityManager.find(AccountBean.class, email);
+        AccountBean account = getAccount(email);
         account.setFaxNumber(faxNumber);
     }
     

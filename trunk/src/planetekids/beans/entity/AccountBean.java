@@ -9,10 +9,11 @@ package planetekids.beans.entity;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.Table;
-
+import javax.persistence.NamedQuery;
+import javax.persistence.NamedQueries;
 
 @Entity
+@NamedQuery(name = "getAccounts", query = "select o FROM AccountBean o")
 public class AccountBean implements java.io.Serializable {
 
     @Id

@@ -15,6 +15,7 @@ import planetekids.beans.entity.LabelBean;
 import planetekids.beans.entity.LocaleBean;
 import planetekids.beans.entity.ProductBean;
 import planetekids.beans.entity.QuestionBean;
+import planetekids.beans.entity.QuestionnaireBean;
 
 public interface AdminRemote {
     public List<LabelBean> getLabels() throws Exception;
@@ -28,6 +29,8 @@ public interface AdminRemote {
     public void setLabelImageMedium(int id, String image) throws Exception;
     public void setLabelImageSmall(int id, String image) throws Exception;
     public void createLabel(String name_fr, String name_en, String description_fr, String description_en, String site, String image_large, String image_medium, String image_small) throws Exception;
+    public void deleteLabel(int id) throws Exception;
+    public void deleteLabels() throws Exception;
     
     public List<ColorBean> getColors() throws Exception;
     public ColorBean getColor(int id) throws Exception;
@@ -77,6 +80,13 @@ public interface AdminRemote {
     
     public String createAccount(String email, String password, String firstName, String lastName, String addressLine1, String addressLine2, String addressLine3, int zipCode, String city, String phoneNumber, String faxNumber) throws Exception;
     public AccountBean getAccount(String email) throws Exception;
+    public List<AccountBean> getAccounts() throws Exception;
+    public QuestionnaireBean getQuestionnaire(int questionnaire_id) throws Exception;
+    public void deleteQuestionnaire(int questionnaire_id) throws Exception;
+    public void deleteQuestionnaires() throws Exception;
+   
+    public void deleteAccount(String email) throws Exception;
+    public void deleteAccounts() throws Exception;
     public void setAccountPassword(String email, String password) throws Exception;
     public void setAccountFirstName(String email, String firstName) throws Exception;
     public void setAccountLastName(String email, String lastName) throws Exception;
@@ -87,5 +97,4 @@ public interface AdminRemote {
     public void setAccountCity(String email, String city) throws Exception;
     public void setAccountPhoneNumber(String email, String phoneNumber) throws Exception;
     public void setAccountFaxNumber(String email, String faxNumber) throws Exception;
-    
 }
