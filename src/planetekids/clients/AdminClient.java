@@ -6,6 +6,7 @@ import java.util.List;
 import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.transaction.UserTransaction;
+import planetekids.beans.entity.AccountBean;
 import planetekids.beans.entity.CategoryBean;
 import planetekids.beans.entity.ColorBean;
 import planetekids.beans.entity.LabelBean;
@@ -39,6 +40,7 @@ public class AdminClient {
                 System.out.println("2 = manage colors");
                 System.out.println("3 = manage categories");
                 System.out.println("4 = manage products");
+		System.out.println("5 = manage customers");
                 System.out.println("------------------------------------------------------");
                 System.out.print(">");
                 int choice = Tx.readInt();
@@ -53,7 +55,9 @@ public class AdminClient {
                     manageCategories(utx, admin);
                 } else if (choice == 4) {
                     manageProducts(utx, admin);
-                } else {
+                } else if (choice == 5) {
+                    manageCustomers(utx, admin);
+		} else {
                     System.out.println("Bad choice");
                 }
             } catch (Exception ex) {
@@ -1160,6 +1164,278 @@ public class AdminClient {
                 }
             } catch (Exception ex) {
                 System.out.println("error : " + ex.getMessage());
+            }
+        }
+    }
+    
+    static void manageCustomers(UserTransaction utx, AdminRemote admin) throws Exception {
+        while (true) {
+            try {
+                System.out.println("------------------------------------------------------");
+                System.out.println("Manage Customers");
+                System.out.println("0 = return");
+                System.out.println("1 = view customer list");
+                System.out.println("2 = create a customer");
+                System.out.println("3 = modify a customer");
+		System.out.println("4 = delete a customer");
+                System.out.println("------------------------------------------------------");
+                System.out.print(">");
+                
+                int choice = Tx.readInt();
+                
+                if (choice == 0) {
+                    return;
+                } else if (choice == 1) {
+                    List<AccountBean> accounts = null;
+                    try {
+                        utx.begin();
+                        accounts = admin.getAccounts();
+                        utx.commit();
+                    } catch (Exception ex) {
+                        utx.rollback();
+                        throw ex;
+                    }
+                    if(accounts != null) {
+                        Iterator iterator = accounts.iterator();
+                        while(iterator.hasNext()) {
+                            AccountBean account = (AccountBean)iterator.next();
+			    System.out.println("------------------------------------------------------");
+                            System.out.println("E-mail address: " + account.getEmailAddress());
+			    System.out.println("Password: " + account.getPassword());
+			    System.out.println("First name: " + account.getFirstName());
+			    System.out.println("Last name: " + account.getLastName());
+			    System.out.println("Address Line 1: " + account.getAddressLine1());
+			    System.out.println("Address Line 2: " + account.getAddressLine2());
+			    System.out.println("Address Line 3: " + account.getAddressLine3());
+			    System.out.println("Zip Code: " + account.getZipCode());
+			    System.out.println("City: " + account.getCity());
+			    System.out.println("Phone number: " + account.getPhoneNumber());
+			    System.out.println("Fax number: " + account.getFaxNumber());
+                            System.out.println("");
+                        }
+                    } else {
+			System.out.println("There is no customer account");
+		    }
+                } else if (choice == 2) {
+                    System.out.print("E-mail address: ");
+		    String email = Tx.readString();
+                    System.out.print("Password: ");
+		    String password = Tx.readString();
+                    System.out.print("First name: ");
+		    String firstName = Tx.readString();
+                    System.out.print("Last name: ");
+		    String lastName = Tx.readString();
+                    System.out.print("Address Line 1: ");
+		    String addressLine1 = Tx.readString();
+                    System.out.print("Address Line 2: ");
+		    String addressLine2 = Tx.readString();
+                    System.out.print("Address Line 3: ");
+		    String addressLine3 = Tx.readString();
+                    System.out.print("Zip Code: ");
+		    int zipCode = Tx.readInt();
+		    System.out.print("City: ");
+		    String city = Tx.readString();
+		    System.out.print("Phone number: ");
+		    String phoneNumber = Tx.readString();
+		    System.out.print("Fax number: ");
+		    String faxNumber = Tx.readString();
+		    
+                    try {
+                        utx.begin();
+                        admin.createAccount(email, password, firstName, lastName, addressLine1, addressLine2, addressLine3, zipCode, city, phoneNumber, faxNumber);
+                        utx.commit();
+                    } catch (Exception ex) {
+                        utx.rollback();
+                        throw ex;
+                    }
+                    System.out.println("Account successfully created");
+                } else if (choice == 3) {
+                    System.out.print("E-mail address: ");
+                    String email = Tx.readString();
+                    while (true) {
+                        try {
+                            AccountBean account;
+                            try {
+                                utx.begin();
+                                account = admin.getAccount(email);
+                                utx.commit();
+                            } catch (Exception ex) {
+                                utx.rollback();
+                                throw ex;
+                            }
+                            if(account == null) {
+                                System.out.println("Customer with e-mail address \"" + email + "\" does not exist");
+                                break;
+                            }
+
+                            System.out.println("Modify account with e-mail address \"" + account.getEmailAddress() + "\"");
+			    System.out.println("1 - Password: " + account.getPassword());
+			    System.out.println("2 - First name: " + account.getFirstName());
+			    System.out.println("3 - Last name: " + account.getLastName());
+			    System.out.println("4 - Address Line 1: " + account.getAddressLine1());
+			    System.out.println("5 - Address Line 2: " + account.getAddressLine2());
+			    System.out.println("6 - Address Line 3: " + account.getAddressLine3());
+			    System.out.println("7 - Zip Code: " + account.getZipCode());
+			    System.out.println("8 - City: " + account.getCity());
+			    System.out.println("9 - Phone number: " + account.getPhoneNumber());
+			    System.out.println("10 - Fax number: " + account.getFaxNumber());
+                            System.out.println("\nPlease enter the number of the field to be modified, or type 0 to exit");
+                            System.out.print(">");
+                            choice = Tx.readInt();
+                            
+                            if (choice == 0) {
+                                break;
+                            } else if (choice == 1) {
+                                System.out.print("Password: ");
+                                String newValue = Tx.readString();
+                                try {
+                                    utx.begin();
+                                    admin.setAccountPassword(email, newValue);
+                                    utx.commit();
+                                } catch (Exception ex) {
+                                    utx.rollback();
+                                    throw ex;
+                                }
+                                System.out.println("Account successfully updated");
+                            } else if (choice == 2) {
+				System.out.print("First name: ");
+                                String newValue = Tx.readString();
+                                try {
+                                    utx.begin();
+                                    admin.setAccountFirstName(email, newValue);
+                                    utx.commit();
+                                } catch (Exception ex) {
+                                    utx.rollback();
+                                    throw ex;
+                                }
+                                System.out.println("Account successfully updated");
+                            } else if (choice == 3) {
+                                System.out.print("Last name: ");
+                                String newValue = Tx.readString();
+                                try {
+                                    utx.begin();
+                                    admin.setAccountLastName(email, newValue);
+                                    utx.commit();
+                                } catch (Exception ex) {
+                                    utx.rollback();
+                                    throw ex;
+                                }
+                                System.out.println("Account successfully updated");
+                            } else if (choice == 4) {
+                                System.out.print("Address Line 1: ");
+                                String newValue = Tx.readString();
+                                try {
+                                    utx.begin();
+                                    admin.setAccountAddressLine1(email, newValue);
+                                    utx.commit();
+                                } catch (Exception ex) {
+                                    utx.rollback();
+                                    throw ex;
+                                }
+                                System.out.println("Account successfully updated");
+                            } else if (choice == 5) {
+                                System.out.print("Address Line 2: ");
+                                String newValue = Tx.readString();
+                                try {
+                                    utx.begin();
+                                    admin.setAccountAddressLine2(email, newValue);
+                                    utx.commit();
+                                } catch (Exception ex) {
+                                    utx.rollback();
+                                    throw ex;
+                                }
+                                System.out.println("Account successfully updated");
+                            } else if (choice == 6) {
+                                System.out.print("Address Line 3: ");
+                                String newValue = Tx.readString();
+                                try {
+                                    utx.begin();
+                                    admin.setAccountAddressLine3(email, newValue);
+                                    utx.commit();
+                                } catch (Exception ex) {
+                                    utx.rollback();
+                                    throw ex;
+                                }
+                                System.out.println("Account successfully updated");
+                            } else if (choice == 7) {
+                                System.out.print("Zip Code: ");
+                                int newValue = Tx.readInt();
+                                try {
+                                    utx.begin();
+                                    admin.setAccountZipCode(email, newValue);
+                                    utx.commit();
+                                } catch (Exception ex) {
+                                    utx.rollback();
+                                    throw ex;
+                                }
+                                System.out.println("Account successfully updated");
+                            } else if (choice == 8) {
+                                System.out.print("City: ");
+                                String newValue = Tx.readString();
+                                try {
+                                    utx.begin();
+                                    admin.setAccountCity(email, newValue);
+                                    utx.commit();
+                                } catch (Exception ex) {
+                                    utx.rollback();
+                                    throw ex;
+                                }
+                                System.out.println("Account successfully updated");
+			} else if (choice == 9) {
+                                System.out.print("Phone number: ");
+                                String newValue = Tx.readString();
+                                try {
+                                    utx.begin();
+                                    admin.setAccountPhoneNumber(email, newValue);
+                                    utx.commit();
+                                } catch (Exception ex) {
+                                    utx.rollback();
+                                    throw ex;
+                                }
+                                System.out.println("Account successfully updated");
+			} else if (choice == 10) {
+                                System.out.print("Fax number: ");
+                                String newValue = Tx.readString();
+                                try {
+                                    utx.begin();
+                                    admin.setAccountFaxNumber(email, newValue);
+                                    utx.commit();
+                                } catch (Exception ex) {
+                                    utx.rollback();
+                                    throw ex;
+                                }
+                                System.out.println("Account successfully updated");
+                            } else {
+                                System.out.println("Bad choice");
+                            }
+                        } catch (Exception ex) {
+                            System.out.println("Error: " + ex.getMessage());
+                        }
+                    }
+		} else if (choice == 4) {
+		    System.out.print("E-mail address: ");
+		    String email = Tx.readString();
+		    AccountBean account;
+		    try {
+			utx.begin();
+			account = admin.getAccount(email);
+			utx.commit();
+		    } catch (Exception ex) {
+			utx.rollback();
+			throw ex;
+		    }
+		    if (account == null) {
+			System.out.println("Customer with e-mail address \"" + email + "\" does not exist");
+			break;
+		    }
+		    utx.begin();
+		    admin.deleteAccount(email);
+		    utx.commit();
+		} else {
+		    System.out.println("Bad choice");
+		}
+	    } catch (Exception ex) {
+		System.out.println("error : " + ex.getMessage());
             }
         }
     }

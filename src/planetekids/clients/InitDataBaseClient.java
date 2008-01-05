@@ -5,9 +5,12 @@
 /*-----------------------------------------------------------------------------*/
 package planetekids.clients;
 
+import java.util.Iterator;
+import java.util.List;
 import javax.transaction.*;
 import javax.naming.Context;
 import javax.naming.InitialContext;
+import planetekids.beans.entity.LabelBean;
 import planetekids.beans.entity.QuestionBean;
 import planetekids.beans.stateful.AdminBean;
 import planetekids.beans.stateful.AdminRemote;
@@ -32,18 +35,21 @@ public class InitDataBaseClient {
 
 	try {
 	    utx.begin();
-	    
+
 	    /* Création des comptes clients */
+	    admin.deleteAccounts();
 	    admin.createAccount("clemplantier@gmail.com", "azerty", "Clément", "Plantier", "2 rue de la Poste", "", "", 38400, "ST Martin d'Hères", "06 00 00 00 00", "");
 	    admin.createAccount("guillaumerenault@yahoo.fr", "azerty", "Guillaume", "Renault", "11 rue Pasteur", "", "", 38400, "ST Martin d'Hères", "06 00 00 00 01", "");
 	    admin.createAccount("marcosoft74@yahoo.fr", "azerty", "Marc", "Schaller", "18 avenue G. Peri", "", "", 38400, "ST Martin d'Hères", "06 00 00 00 02", "");
 	    admin.createAccount("missog@club-internet.fr", "azerty", "Guillaume", "Missonnier", "51 avenue du Vercors", "", "", 38170, "Seyssinet", "06 00 00 00 03", "");
 
 	    /* Création des marques */
-	    admin.createLabel("Nike", "Nike","Marque americaine","American label", "www.nike.com", "", "", "");
-	    admin.createLabel("Adidas", "Adidas","Marque","Label", "www.adidas.com", "", "", "");
-	    
+	    admin.deleteLabels();
+	    admin.createLabel("Nike", "Nike", "Marque americaine", "American label", "www.nike.com", "", "", "");
+	    admin.createLabel("Adidas", "Adidas", "Marque", "Label", "www.adidas.com", "", "", "");
+
 	    /* Création du questionnaire */
+	    admin.deleteQuestionnaires();
 	    int questionnaireId = admin.createQuestionnaire("Planete Kids ouvre bientôt ses portes sur le net.", "Planete Kids opens to the web soon.", "Aidez-nous à créer un site à  votre image !", "Help us to create a website that fits you!");
 
 	    int questionId = admin.createQuestion(questionnaireId, "Quel type de connexion internet utilisez-vous ?", "What kind of internet connection do you use?", QuestionBean.Pattern.SINGLE_CHOICE, 1);
