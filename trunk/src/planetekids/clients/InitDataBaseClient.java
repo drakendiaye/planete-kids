@@ -5,12 +5,9 @@
 /*-----------------------------------------------------------------------------*/
 package planetekids.clients;
 
-import java.util.Iterator;
-import java.util.List;
 import javax.transaction.*;
 import javax.naming.Context;
 import javax.naming.InitialContext;
-import planetekids.beans.entity.LabelBean;
 import planetekids.beans.entity.QuestionBean;
 import planetekids.beans.stateful.AdminBean;
 import planetekids.beans.stateful.AdminRemote;
