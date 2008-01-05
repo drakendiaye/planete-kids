@@ -34,6 +34,11 @@ public class AdminBean implements AdminRemote {
     @PersistenceContext
     private EntityManager entityManager;
     
+    
+    /*------------------------------------------------------------------*/
+    /*					Creation des marques							*/
+    /*------------------------------------------------------------------*/
+    
     public List<LabelBean> getLabels() throws Exception {
         return entityManager.createNamedQuery("getLabels").getResultList();
     }
@@ -86,6 +91,12 @@ public class AdminBean implements AdminRemote {
         LabelBean label = new LabelBean(new LocaleBean(name_fr, name_en), new LocaleBean(description_fr, description_en), site, image_large, image_medium, image_small);
         entityManager.persist(label);
     }
+
+    
+    /*------------------------------------------------------------------*/
+    /*					Creation des couleurs							*/
+    /*------------------------------------------------------------------*/
+    
     
     public List<ColorBean> getColors() throws Exception {
         return entityManager.createNamedQuery("getColors").getResultList();
@@ -135,6 +146,11 @@ public class AdminBean implements AdminRemote {
         entityManager.persist(color);
     }
     
+    
+    /*------------------------------------------------------------------*/
+    /*					Creation des categories							*/
+    /*------------------------------------------------------------------*/
+
     public List<CategoryBean> getCategories() throws Exception {
         return entityManager.createNamedQuery("getCategories").getResultList();
     }
@@ -183,6 +199,11 @@ public class AdminBean implements AdminRemote {
         entityManager.persist(category);
     }
     
+    
+    /*------------------------------------------------------------------*/
+    /*					Creation des produits							*/
+    /*------------------------------------------------------------------*/
+
     public List<ProductBean> getProducts() throws Exception {
         return entityManager.createNamedQuery("getProducts").getResultList();
     }
@@ -320,6 +341,13 @@ public class AdminBean implements AdminRemote {
         entityManager.persist(product);
     }
     
+    
+    
+    /*------------------------------------------------------------------*/
+    /*					Creation des questionnaires						*/
+    /*------------------------------------------------------------------*/
+    
+    
     public int createQuestionnaire(String nameFr, String nameEn, String descFr, String descEn) throws Exception {
         QuestionnaireBean questionnaire = new QuestionnaireBean(new LocaleBean(nameFr, nameEn), new LocaleBean(descFr, descEn));
         
@@ -397,60 +425,39 @@ public class AdminBean implements AdminRemote {
         account.setLastName(lastName);
     }
     
-    public void setAddressLine1(String email, String addressLine1) throws Exception {
+    public void setAccountAddressLine1(String email, String addressLine1) throws Exception {
         AccountBean account = entityManager.find(AccountBean.class, email);
         account.setAddressLine1(addressLine1);
     }
     
-    public void setAddressLine2(String email, String addressLine2) throws Exception {
+    public void setAccountAddressLine2(String email, String addressLine2) throws Exception {
         AccountBean account = entityManager.find(AccountBean.class, email);
         account.setAddressLine2(addressLine2);
     }
     
-    public void setAddressLine3(String email, String addressLine3) throws Exception {
+    public void setAccountAddressLine3(String email, String addressLine3) throws Exception {
         AccountBean account = entityManager.find(AccountBean.class, email);
         account.setAddressLine3(addressLine3);
     }
     
-    public void setZipCode(String email, int zipCode) throws Exception {
+    public void setAccountZipCode(String email, int zipCode) throws Exception {
         AccountBean account = entityManager.find(AccountBean.class, email);
         account.setZipCode(zipCode);
     }
     
-    public void setCity(String email, String city) throws Exception {
+    public void setAccountCity(String email, String city) throws Exception {
         AccountBean account = entityManager.find(AccountBean.class, email);
         account.setCity(city);
     }
     
-    public void setPhoneNumber(String email, String phoneNumber) throws Exception {
+    public void setAccountPhoneNumber(String email, String phoneNumber) throws Exception {
         AccountBean account = entityManager.find(AccountBean.class, email);
         account.setPhoneNumber(phoneNumber);
     }
     
-    public void setFaxNumber(String email, String faxNumber) throws Exception {
+    public void setAccountFaxNumber(String email, String faxNumber) throws Exception {
         AccountBean account = entityManager.find(AccountBean.class, email);
         account.setFaxNumber(faxNumber);
-    }
-    
-    /* Création des marques */
-    
-    public int createLabel(LocaleBean name, String site, String image_large, String image_medium, String image_small) throws Exception{
-        LabelBean label = new LabelBean();
-        
-        label.setName(name);
-        label.setSite(site);
-        label.setImage_large(image_large);
-        label.setImage_medium(image_medium);
-        label.setImage_small(image_small);
-        
-        entityManager.persist(label);
-        
-        return label.getId();
-    }
-    
-    public void setName(int id, LocaleBean name) throws Exception {
-        LabelBean label = entityManager.find(LabelBean.class, id);
-        label.setName(name);
     }
     
 }

@@ -80,14 +80,12 @@ public interface AdminRemote {
     public void setAccountPassword(String email, String password) throws Exception;
     public void setAccountFirstName(String email, String firstName) throws Exception;
     public void setAccountLastName(String email, String lastName) throws Exception;
-    public void setAddressLine1(String email, String addressLine1) throws Exception;
-    public void setAddressLine2(String email, String addressLine2) throws Exception;
-    public void setAddressLine3(String email, String addressLine3) throws Exception;
-    public void setZipCode(String email, int zipCode) throws Exception;
-    public void setCity(String email, String city) throws Exception;
-    public void setPhoneNumber(String email, String phoneNumber) throws Exception;
-    public void setFaxNumber(String email, String faxNumber) throws Exception;
+    public void setAccountAddressLine1(String email, String addressLine1) throws Exception;
+    public void setAccountAddressLine2(String email, String addressLine2) throws Exception;
+    public void setAccountAddressLine3(String email, String addressLine3) throws Exception;
+    public void setAccountZipCode(String email, int zipCode) throws Exception;
+    public void setAccountCity(String email, String city) throws Exception;
+    public void setAccountPhoneNumber(String email, String phoneNumber) throws Exception;
+    public void setAccountFaxNumber(String email, String faxNumber) throws Exception;
     
-    public int createLabel(LocaleBean name, String site, String image_large, String image_medium, String image_small) throws Exception;
-    public void setName(int id, LocaleBean name) throws Exception;
 }
