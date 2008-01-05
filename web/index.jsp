@@ -62,8 +62,7 @@
         <s:div id="content" />
         </s:div>
         <s:div id="rightmenu">
-        <s:div id="cart" />
-            <s:div id="contextualmenu" />
+            <s:div id="cart" />
             </s:div>
             <br style="clear:both;" />
         </s:div>

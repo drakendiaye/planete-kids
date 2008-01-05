@@ -1,8 +1,8 @@
-        // Variable d&eacute;terminant si l'infobulle est visible
+        // Variable déterminant si l'infobulle est visible
 	var isVisible = false;
  
  
-	// Fonction servant &agrave; bouger l'infobulle
+	// Fonction servant à bouger l'infobulle
 	function move(e) {
 		if (isVisible) {
 			// Pour les navigateurs autres que IE
@@ -44,5 +44,5 @@
 		}
 	}
 	
-	// D&egrave;s que la souris bouge, on r&eacute;actualise la position de l'infobulle
+	// Dès que la souris bouge, on réactualise la position de l'infobulle
 	document.onmousemove = move;

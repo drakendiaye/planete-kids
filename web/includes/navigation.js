@@ -6,8 +6,8 @@
             function navRequest(target, url, loading, error, form) {
                 this.target = target;
                 this.url = url;
-                this.loading = (loading)?loading:"loading...";
-                this.error = (error)?error:"error...";
+                this.loading = (loading)?loading:"Loading...";
+                this.error = (error)?error:"Error.";
                 this.form = form;
                 this.inner_previous = "";
                 this.inner_next = "";
