@@ -36,8 +36,6 @@ public class CustomerBean implements CustomerRemote {
 
     public boolean Authenticate(String account_id, String password) throws Exception {
         AccountBean account = entityManager.find(AccountBean.class, account_id);
-        System.out.println(account_id);
-        System.out.println(password);
         if(account == null || !account.getPassword().equals(password)) {
             return false;
         } else {
