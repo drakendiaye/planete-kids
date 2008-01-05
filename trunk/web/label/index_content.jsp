@@ -21,11 +21,17 @@
             <div id="label_<s:property value="getId()" />_div">
                 <hr/>
                 <div style="float:left;">
-                    <img src="<s:property value="getImage_medium()" />" onmouseover="show('<img src=<s:property value="getImage_large()"/> width=100px height=100px/>')" onmouseout="hide()" width="50px" height="50px"/>
-                </div>
-                <div style="float:left;">
-                    <s:property value="getDescription(getLocale())" /><br/>
-                    <s:a href="%{getSite()}"><s:property value="getSite()" /></s:a>
+                    <table width="99%">
+                        <tr>
+                            <td>
+                                <img src="<s:property value="getImage_medium()" />" onmouseover="show('<img src=<s:property value="getImage_large()"/> width=100px height=100px/>')" onmouseout="hide()" width="50px" height="50px"/>
+                            </td>
+                            <td>
+                                <s:property value="getDescription(getLocale())" /><br/>
+                                <s:a href="%{getSite()}"><s:property value="getSite()" /></s:a>
+                            </td>
+                        </tr>
+                    </table>
                 </div>
                 <br clear="both"/>
             </div>
