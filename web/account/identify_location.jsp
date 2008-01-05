@@ -15,9 +15,9 @@
     <s:text name="account"/>>>
 </s:a>
 
-<s:url id="url_content" namespace="/account" action="create_content" includeParams="none"/>
-<s:url id="url_location" namespace="/account" action="create_location" includeParams="none"/>
+<s:url id="url_content" namespace="/account" action="identify_content" includeParams="none"/>
+<s:url id="url_location" namespace="/account" action="identify_location" includeParams="none"/>
 <s:a onclick="navGo([new navRequest('content', '%{url_content}'),
                      new navRequest('location', '%{url_location}')])">
-    <s:text name="create"/>
+    <s:text name="identify"/>
 </s:a>

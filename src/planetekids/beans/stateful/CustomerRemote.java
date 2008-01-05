@@ -2,6 +2,7 @@ package planetekids.beans.stateful;
 
 import java.util.List;
 import javax.ejb.Remote;
+import planetekids.beans.entity.AccountBean;
 import planetekids.beans.entity.CategoryBean;
 import planetekids.beans.entity.ColorBean;
 import planetekids.beans.entity.LabelBean;
@@ -11,8 +12,12 @@ import planetekids.beans.entity.QuestionnaireBean;
 @Remote
 public interface CustomerRemote {
     public void init();
-    public List<QuestionnaireBean> getQuestionnaires();
-    public QuestionnaireBean getQuestionnaire(int questionnaire_id);
+    
+    public boolean Authenticate(String email, String password) throws Exception;
+    public AccountBean getAccount() throws Exception;
+    
+    public List<QuestionnaireBean> getQuestionnaires() throws Exception;
+    public QuestionnaireBean getQuestionnaire(int questionnaire_id) throws Exception;
     public void createResult(int id, String value, String comment) throws Exception;
     
     public List<LabelBean> getLabels() throws Exception;

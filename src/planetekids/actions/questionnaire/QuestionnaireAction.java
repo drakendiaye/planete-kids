@@ -1,15 +1,12 @@
 package planetekids.actions.questionnaire;
 
 import com.opensymphony.xwork2.ActionSupport;
-import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.List;
 import java.util.Map;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import org.apache.struts2.interceptor.ParameterAware;
 import org.apache.struts2.interceptor.SessionAware;
-import planetekids.beans.entity.AnswerBean;
 import planetekids.beans.entity.QuestionnaireBean;
 import planetekids.beans.stateful.CustomerBean;
 import planetekids.beans.stateful.CustomerRemote;
@@ -52,7 +49,7 @@ public class QuestionnaireAction extends ActionSupport implements SessionAware, 
         this.id = id;
     }
 
-    public QuestionnaireBean getQuestionnaire() {
+    public QuestionnaireBean getQuestionnaire() throws Exception {
         return getCustomer().getQuestionnaire(id);
     }
 

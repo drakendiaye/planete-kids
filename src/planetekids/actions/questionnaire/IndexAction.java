@@ -41,8 +41,7 @@ public class IndexAction extends ActionSupport implements SessionAware {
     }
     
     
-    public List<QuestionnaireBean> getQuestionnaires() {
+    public List<QuestionnaireBean> getQuestionnaires() throws Exception {
         return getCustomer().getQuestionnaires();
     }
-            
 }
