@@ -1,3 +1,4 @@
+
 /*-----------------------------------------------------------------------------*/
 /* InitDataBase.java                                                           */
 /* Program that initializes the ecom databaseby creating beans			 */
@@ -5,9 +6,12 @@
 /*-----------------------------------------------------------------------------*/
 package planetekids.clients;
 
+import java.util.Iterator;
+import java.util.List;
 import javax.transaction.*;
 import javax.naming.Context;
 import javax.naming.InitialContext;
+import planetekids.beans.entity.LabelBean;
 import planetekids.beans.entity.QuestionBean;
 import planetekids.beans.stateful.AdminBean;
 import planetekids.beans.stateful.AdminRemote;
@@ -44,12 +48,25 @@ public class InitDataBaseClient {
 		    "Seyssinet", "06 00 00 00 03", "");
 
 	    /* Création des marques */
+
+	    // id = 1
 	    admin.createLabel("Nike", "Nike", "Marque americaine", "American label", "www.nike.com", "images/nike_large.png",
 		    "images/nike_medium.png", "images/nike_small.png");
+	    // id = 2
 	    admin.createLabel("Adidas", "Adidas", "Marque", "Label", "www.adidas.com", "images/adidas_large.png",
 		    "images/adidas_medium.png", "images/adidas_small.png");
+	    // id = 3
 	    admin.createLabel("Rebook", "Rebook", "Marque encore", "Label again", "www.rebook.com", "images/rebook_large.png",
 		    "images/rebook_medium.png", "images/rebook_small.png");
+	    // id = 4
+	    admin.createLabel("QuikSilver", "QuikSilver", "Description en francais", "Description in english", "www.quiksilver.com",
+		    "images/quiksilver_large.png", "images/quiksilver_medium.png", "images/quiksilver_small.png");
+	    // id = 5
+	    admin.createLabel("Chevignon", "Chevignon", "Description en francais", "Description in english", "www.chevignon.com",
+		    "images/chevignon_large.png", "images/chevignon_medium.png", "images/chevignon_small.png");
+	    // id = 6
+	    admin.createLabel("Naf Naf", "Naf Naf", "Description en francais", "Description in english", "www.nafnaf.com",
+		    "images/nafnaf_large.png", "images/nafnaf_medium.png", "images/nafnaf_small.png");
 
 	    /* Création des couleurs */
 
@@ -94,23 +111,41 @@ public class InitDataBaseClient {
 
 	    // id = 1
 	    admin.createCategory("Veste", "Jacket", "Pratique par temps de pluie ou grand froid",
-		    "Useful when raining or when it's very cold", "", "", "");
+		    "Useful when raining or when it's very cold", "images/jacket_large.png", "images/jacket_medium.png",
+		    "images/jacket_small.png");
 	    // id = 2
-	    admin.createCategory("T-Shirt", "T-Shirt", "Desciption en francais", "Description in english", "", "", "");
+	    admin.createCategory("T-Shirt", "T-Shirt", "Desciption en francais", "Description in english", "images/t-shirt_large.png",
+		    "images/t-shirt_medium.png", "images/t-shirt_small.png");
 	    // id = 3
-	    admin.createCategory("Chemisiers", "Blouses", "Desciption en francais", "Description in english", "", "", "");
+	    admin.createCategory("Chemises", "Shirt", "Desciption en francais", "Description in english", "images/shirt_large.png",
+		    "images/shirt_medium.png", "images/shirt_small.png");
 	    // id = 4
-	    admin.createCategory("Pull", "Sweaters", "Desciption en francais", "Description in english", "", "", "");
+	    admin.createCategory("Chemisiers", "Blouses", "Desciption en francais", "Description in english", "images/blouses_large.png",
+		    "images/blouses_medium.png", "images/blouses_small.png");
 	    // id = 5
-	    admin.createCategory("Jupes", "Skirts", "Desciption en francais", "Description in english", "", "", "");
+	    admin.createCategory("Pull", "Sweaters", "Desciption en francais", "Description in english", "images/sweat_large.png",
+		    "images/sweat_medium.png", "images/sweat_small.png");
 	    // id = 6
-	    admin.createCategory("Short", "Shorts", "Desciption en francais", "Description in english", "", "", "");
+	    admin.createCategory("Jupes", "Skirts", "Desciption en francais", "Description in english", "images/skirt_large.png",
+		    "images/skirt_medium.png", "images/skirt_small.png");
 	    // id = 7
-	    admin.createCategory("Pantalon", "Trousers", "On le met de bas en haut", "From Paris to Berlin", "", "", "");
+	    admin.createCategory("Short", "Shorts", "Desciption en francais", "Description in english", "images/short_large.png",
+		    "images/short_medium.png", "images/short_small.png");
+	    // id = 8
+	    admin.createCategory("Pantalon", "Trousers", "On le met de bas en haut", "From Paris to Berlin", "images/trousers_large.png",
+		    "images/trousers_medium.png", "images/trousers_small.png");
+	    // id = 9
+	    admin.createCategory("Robe", "Dress", "Description en francais", "Description in english", "images/dress_large.png",
+		    "images/dress_medium.png", "images/dress_small.png");
 
 	    /* Création des produits */
+
+	    // id = 1
 	    admin.createProduct("Pantalon Naf-Naf", "Naf-Naf trousers", "Etanche pour bébé", "For baby, waterproof", 1, 1, 1, 23, 90, "",
 		    "", "");
+	    // id = 2
+	    admin.createProduct("Veste", "Jacket", "Veste en coton, quand il ne fait pas froid",
+		    "A coton Jacket, to wear when it's war olny", 1, 4, 2, 123, 45, "", "", "");
 
 	    /* Création du questionnaire */
 	    int questionnaireId = admin.createQuestionnaire("Planete Kids ouvre bientôt ses portes sur le net.",
