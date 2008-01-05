@@ -155,11 +155,3 @@ function coldiv_click(coldiv_id) {
         dojo.byId(coldiv_id + "_div").style.display = "block";
     }
 }
-
-function show(id) {
-    dojo.byId(id).style.display = "block";
-}
-
-function hide(id) {
-    dojo.byId(id).style.display = "none";
-}
