@@ -14,24 +14,14 @@
             </h3>
             <div id="product_<s:property value="getId()" />_div">
                 <div style="float:left;">
-                    <img src="<s:property value="getImage_medium()" />" onmouseover="show('product_<s:property value="getId()" />_imgLarge')" onmouseout="hide('product_<s:property value="getId()" />_imgLarge')" width="50px" height="50px"/>
-                    <img id="product_<s:property value="getId()" />_imgLarge" src="<s:property value="getImage_large()"/>" style="display:none; z-index:1; position:absolute; background-color:white; border-color:black; border-width:1px; border-style: solid;" width="100px" height="100px"/>
+                    <img src="<s:property value="getImage_medium()" />" onmouseover="show('<img src=<s:property value="getImage_large()"/> width=100px height=100px/>')" onmouseout="hide()" width="50px" height="50px"/>
                 </div>
                 <div style="float:left;">
                     <s:property value="getDescription(getLocale())" /><br/>
                     <s:text name="price"/>&nbsp;:&nbsp;<s:property value="getPrice()" />&nbsp;Euros<br/>
-                    <img src="<s:property value="getCategory().getImage_small()" />" width="20px" height="20px" onmouseover="show('product_<s:property value="getId()" />_category')" onmouseout="hide('product_<s:property value="getId()" />_category')"/>
-                    <div id="product_<s:property value="getId()" />_category" style="display:none; z-index:1; position:absolute; background-color:white; border-color:black; border-width:1px; border-style: solid;">
-                        <s:property value="getCategory().getName(getLocale())" />
-                    </div>
-                    <img src="<s:property value="getColor().getImage_small()" />" width="20px" height="20px" onmouseover="show('product_<s:property value="getId()" />_color')" onmouseout="hide('product_<s:property value="getId()" />_color')"/>
-                    <div id="product_<s:property value="getId()" />_color" style="display:none; z-index:1; position:absolute; background-color:white; border-color:black; border-width:1px; border-style: solid;">
-                        <s:property value="getColor().getName(getLocale())" />
-                    </div>    
-                    <img src="<s:property value="getLabel().getImage_small()" />" width="20px" height="20px" onmouseover="show('product_<s:property value="getId()" />_label')" onmouseout="hide('product_<s:property value="getId()" />_label')"/>
-                    <div id="product_<s:property value="getId()" />_label" style="display:none; z-index:1; position:absolute; background-color:white; border-color:black; border-width:1px; border-style: solid;">
-                        <s:property value="getLabel().getName(getLocale())" />
-                    </div>
+                    <img src="<s:property value="getCategory().getImage_small()" />" width="20px" height="20px" onmouseover="show('<s:property value="getCategory().getName(getLocale())" />')" onmouseout="hide()"/>
+                    <img src="<s:property value="getColor().getImage_small()" />" width="20px" height="20px" onmouseover="show('<s:property value="getColor().getName(getLocale())" />')" onmouseout="hide()"/>   
+                    <img src="<s:property value="getLabel().getImage_small()" />" width="20px" height="20px" onmouseover="show('<s:property value="getLabel().getName(getLocale())" />')" onmouseout="hide()"/>
                 </div>
                 <br clear="both"/>
             </div>

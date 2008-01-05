@@ -14,8 +14,7 @@
             </h3>
             <div id="category_<s:property value="getId()" />_div">
                 <div style="float:left;">
-                    <img src="<s:property value="getImage_medium()" />" onmouseover="show('category_<s:property value="getId()" />_imgLarge')" onmouseout="hide('category_<s:property value="getId()" />_imgLarge')" width="50px" height="50px"/>
-                    <img id="category_<s:property value="getId()" />_imgLarge" src="<s:property value="getImage_large()"/>" style="display:none; z-index:1; position:absolute; background-color:white; border-color:black; border-width:1px; border-style: solid;" width="100px" height="100px"/>
+                    <img src="<s:property value="getImage_medium()" />" onmouseover="show('<img src=<s:property value="getImage_large()"/> width=100px height=100px/>')" onmouseout="hide()" width="50px" height="50px"/>
                 </div>
                 <div style="float:left;">
                     <s:property value="getDescription(getLocale())" />
