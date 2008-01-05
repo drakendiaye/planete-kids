@@ -95,6 +95,8 @@ public class AdminClient {
                             System.out.println("id : " + label.getId());
                             System.out.println("name french : " + label.getName().getFr());
                             System.out.println("name english : " + label.getName().getEn());
+                            System.out.println("description french : " + label.getDescription().getFr());
+                            System.out.println("description english : " + label.getDescription().getEn());
                             System.out.println("site : " + label.getSite());
                             System.out.println("image large : " + label.getImage_large());
                             System.out.println("image medium : " + label.getImage_medium());
@@ -107,6 +109,10 @@ public class AdminClient {
                     String name_fr = Tx.readString();
                     System.out.print("name english: ");
                     String name_en = Tx.readString();
+                    System.out.print("description french: ");
+                    String description_fr = Tx.readString();
+                    System.out.print("description english: ");
+                    String description_en = Tx.readString();
                     System.out.print("site : ");
                     String site = Tx.readString();
                     System.out.print("image large : ");
@@ -117,7 +123,7 @@ public class AdminClient {
                     String image_small = Tx.readString();
                     try {
                         utx.begin();
-                        admin.createLabel(name_fr, name_en, site, image_large, image_medium, image_small);
+                        admin.createLabel(name_fr, name_en, description_fr, description_en, site, image_large, image_medium, image_small);
                         utx.commit();
                     } catch (Exception ex) {
                         utx.rollback();
@@ -147,6 +153,8 @@ public class AdminClient {
                             System.out.println("id : " + label.getId());
                             System.out.println("name french : " + label.getName().getFr());
                             System.out.println("name english : " + label.getName().getEn());
+                            System.out.println("description french : " + label.getDescription().getFr());
+                            System.out.println("description english : " + label.getDescription().getEn());
                             System.out.println("site : " + label.getSite());
                             System.out.println("image large : " + label.getImage_large());
                             System.out.println("image medium : " + label.getImage_medium());
@@ -155,10 +163,12 @@ public class AdminClient {
                             System.out.println("0 = return");
                             System.out.println("1 = modify name french");
                             System.out.println("2 = modify name english");
-                            System.out.println("3 = modify site");
-                            System.out.println("4 = modify image_large");
-                            System.out.println("5 = modify image_medium");
-                            System.out.println("6 = modify image_small");
+                            System.out.println("3 = modify description french");
+                            System.out.println("4 = modify description english");
+                            System.out.println("5 = modify site");
+                            System.out.println("6 = modify image_large");
+                            System.out.println("7 = modify image_medium");
+                            System.out.println("8 = modify image_small");
                             System.out.println("------------------------------------------------------");
                             System.out.print(">");
                             choice = Tx.readInt();
@@ -190,6 +200,30 @@ public class AdminClient {
                                 }
                                 System.out.println("label successfully updated");
                             } else if (choice == 3) {
+                                System.out.print("description french : ");
+                                String description = Tx.readString();
+                                try {
+                                    utx.begin();
+                                    admin.setLabelDescriptionFr(id, description);
+                                    utx.commit();
+                                } catch (Exception ex) {
+                                    utx.rollback();
+                                    throw ex;
+                                }
+                                System.out.println("label successfully updated");
+                            } else if (choice == 4) {
+                                System.out.print("description en : ");
+                                String description = Tx.readString();
+                                try {
+                                    utx.begin();
+                                    admin.setLabelDescriptionEn(id, description);
+                                    utx.commit();
+                                } catch (Exception ex) {
+                                    utx.rollback();
+                                    throw ex;
+                                }
+                                System.out.println("label successfully updated");
+                            } else if (choice == 5) {
                                 System.out.print("site : ");
                                 String site = Tx.readString();
                                 try {
@@ -201,7 +235,7 @@ public class AdminClient {
                                     throw ex;
                                 }
                                 System.out.println("label successfully updated");
-                            } else if (choice == 4) {
+                            } else if (choice == 6) {
                                 System.out.print("image large : ");
                                 String image = Tx.readString();
                                 try {
@@ -213,7 +247,7 @@ public class AdminClient {
                                     throw ex;
                                 }
                                 System.out.println("label successfully updated");
-                            } else if (choice == 5) {
+                            } else if (choice == 7) {
                                 System.out.print("image medium : ");
                                 String image = Tx.readString();
                                 try {
@@ -225,7 +259,7 @@ public class AdminClient {
                                     throw ex;
                                 }
                                 System.out.println("label successfully updated");
-                            } else if (choice == 6) {
+                            } else if (choice == 8) {
                                 System.out.print("image small : ");
                                 String image = Tx.readString();
                                 try {
@@ -248,8 +282,7 @@ public class AdminClient {
                     System.out.println("Bad choice");
                 }
             } catch (Exception ex) {
-                ex.printStackTrace();
-                //System.out.println("error : " + ex.getMessage());
+                System.out.println("error : " + ex.getMessage());
             }
         }
     }
@@ -287,6 +320,8 @@ public class AdminClient {
                             System.out.println("id : " + color.getId());
                             System.out.println("name french : " + color.getName().getFr());
                             System.out.println("name english : " + color.getName().getEn());
+                            System.out.println("description french : " + color.getDescription().getFr());
+                            System.out.println("description english : " + color.getDescription().getEn());
                             System.out.println("image large : " + color.getImage_large());
                             System.out.println("image medium : " + color.getImage_medium());
                             System.out.println("image small : " + color.getImage_small());
@@ -298,6 +333,10 @@ public class AdminClient {
                     String name_fr = Tx.readString();
                     System.out.print("name english: ");
                     String name_en = Tx.readString();
+                    System.out.print("description french: ");
+                    String description_fr = Tx.readString();
+                    System.out.print("description english: ");
+                    String description_en = Tx.readString();
                     System.out.print("image large : ");
                     String image_large = Tx.readString();
                     System.out.print("image medium : ");
@@ -306,7 +345,7 @@ public class AdminClient {
                     String image_small = Tx.readString();
                     try {
                         utx.begin();
-                        admin.createColor(name_fr, name_en, image_large, image_medium, image_small);
+                        admin.createColor(name_fr, name_en, description_fr, description_en, image_large, image_medium, image_small);
                         utx.commit();
                     } catch (Exception ex) {
                         utx.rollback();
@@ -336,6 +375,8 @@ public class AdminClient {
                             System.out.println("id : " + color.getId());
                             System.out.println("name french : " + color.getName().getFr());
                             System.out.println("name english : " + color.getName().getEn());
+                            System.out.println("description french : " + color.getDescription().getFr());
+                            System.out.println("description english : " + color.getDescription().getEn());
                             System.out.println("image large : " + color.getImage_large());
                             System.out.println("image medium : " + color.getImage_medium());
                             System.out.println("image small : " + color.getImage_small());
@@ -343,9 +384,11 @@ public class AdminClient {
                             System.out.println("0 = return");
                             System.out.println("1 = modify name french");
                             System.out.println("2 = modify name english");
-                            System.out.println("3 = modify image_large");
-                            System.out.println("4 = modify image_medium");
-                            System.out.println("5 = modify image_small");
+                            System.out.println("3 = modify description french");
+                            System.out.println("4 = modify description english");
+                            System.out.println("5 = modify image_large");
+                            System.out.println("6 = modify image_medium");
+                            System.out.println("7 = modify image_small");
                             System.out.println("------------------------------------------------------");
                             System.out.print(">");
                             choice = Tx.readInt();
@@ -377,6 +420,30 @@ public class AdminClient {
                                 }
                                 System.out.println("color successfully updated");
                             } else if (choice == 3) {
+                                System.out.print("description french : ");
+                                String description = Tx.readString();
+                                try {
+                                    utx.begin();
+                                    admin.setColorDescriptionFr(id, description);
+                                    utx.commit();
+                                } catch (Exception ex) {
+                                    utx.rollback();
+                                    throw ex;
+                                }
+                                System.out.println("color successfully updated");
+                            } else if (choice == 4) {
+                                System.out.print("description en : ");
+                                String description = Tx.readString();
+                                try {
+                                    utx.begin();
+                                    admin.setColorDescriptionEn(id, description);
+                                    utx.commit();
+                                } catch (Exception ex) {
+                                    utx.rollback();
+                                    throw ex;
+                                }
+                                System.out.println("color successfully updated");
+                            } else if (choice == 5) {
                                 System.out.print("image large : ");
                                 String image = Tx.readString();
                                 try {
@@ -388,7 +455,7 @@ public class AdminClient {
                                     throw ex;
                                 }
                                 System.out.println("color successfully updated");
-                            } else if (choice == 4) {
+                            } else if (choice == 6) {
                                 System.out.print("image medium : ");
                                 String image = Tx.readString();
                                 try {
@@ -400,7 +467,7 @@ public class AdminClient {
                                     throw ex;
                                 }
                                 System.out.println("color successfully updated");
-                            } else if (choice == 5) {
+                            } else if (choice == 7) {
                                 System.out.print("image small : ");
                                 String image = Tx.readString();
                                 try {
@@ -461,6 +528,8 @@ public class AdminClient {
                             System.out.println("id : " + category.getId());
                             System.out.println("name french : " + category.getName().getFr());
                             System.out.println("name english : " + category.getName().getEn());
+                            System.out.println("description french : " + category.getDescription().getFr());
+                            System.out.println("description english : " + category.getDescription().getEn());
                             System.out.println("image large : " + category.getImage_large());
                             System.out.println("image medium : " + category.getImage_medium());
                             System.out.println("image small : " + category.getImage_small());
@@ -472,6 +541,10 @@ public class AdminClient {
                     String name_fr = Tx.readString();
                     System.out.print("name english: ");
                     String name_en = Tx.readString();
+                    System.out.print("description french: ");
+                    String description_fr = Tx.readString();
+                    System.out.print("description english: ");
+                    String description_en = Tx.readString();
                     System.out.print("image large : ");
                     String image_large = Tx.readString();
                     System.out.print("image medium : ");
@@ -480,7 +553,7 @@ public class AdminClient {
                     String image_small = Tx.readString();
                     try {
                         utx.begin();
-                        admin.createCategory(name_fr, name_en, image_large, image_medium, image_small);
+                        admin.createCategory(name_fr, name_en, description_fr, description_en, image_large, image_medium, image_small);
                         utx.commit();
                     } catch (Exception ex) {
                         utx.rollback();
@@ -510,6 +583,8 @@ public class AdminClient {
                             System.out.println("id : " + category.getId());
                             System.out.println("name french : " + category.getName().getFr());
                             System.out.println("name english : " + category.getName().getEn());
+                            System.out.println("description french : " + category.getDescription().getFr());
+                            System.out.println("description english : " + category.getDescription().getEn());
                             System.out.println("image large : " + category.getImage_large());
                             System.out.println("image medium : " + category.getImage_medium());
                             System.out.println("image small : " + category.getImage_small());
@@ -517,9 +592,11 @@ public class AdminClient {
                             System.out.println("0 = return");
                             System.out.println("1 = modify name french");
                             System.out.println("2 = modify name english");
-                            System.out.println("3 = modify image_large");
-                            System.out.println("4 = modify image_medium");
-                            System.out.println("5 = modify image_small");
+                            System.out.println("3 = modify description french");
+                            System.out.println("4 = modify description english");
+                            System.out.println("5 = modify image_large");
+                            System.out.println("6 = modify image_medium");
+                            System.out.println("7 = modify image_small");
                             System.out.println("------------------------------------------------------");
                             System.out.print(">");
                             choice = Tx.readInt();
@@ -551,6 +628,30 @@ public class AdminClient {
                                 }
                                 System.out.println("category successfully updated");
                             } else if (choice == 3) {
+                                System.out.print("description french : ");
+                                String description = Tx.readString();
+                                try {
+                                    utx.begin();
+                                    admin.setCategoryDescriptionFr(id, description);
+                                    utx.commit();
+                                } catch (Exception ex) {
+                                    utx.rollback();
+                                    throw ex;
+                                }
+                                System.out.println("category successfully updated");
+                            } else if (choice == 4) {
+                                System.out.print("description en : ");
+                                String description = Tx.readString();
+                                try {
+                                    utx.begin();
+                                    admin.setCategoryDescriptionEn(id, description);
+                                    utx.commit();
+                                } catch (Exception ex) {
+                                    utx.rollback();
+                                    throw ex;
+                                }
+                                System.out.println("category successfully updated");
+                            } else if (choice == 5) {
                                 System.out.print("image large : ");
                                 String image = Tx.readString();
                                 try {
@@ -562,7 +663,7 @@ public class AdminClient {
                                     throw ex;
                                 }
                                 System.out.println("category successfully updated");
-                            } else if (choice == 4) {
+                            } else if (choice == 6) {
                                 System.out.print("image medium : ");
                                 String image = Tx.readString();
                                 try {
@@ -574,7 +675,7 @@ public class AdminClient {
                                     throw ex;
                                 }
                                 System.out.println("category successfully updated");
-                            } else if (choice == 5) {
+                            } else if (choice == 7) {
                                 System.out.print("image small : ");
                                 String image = Tx.readString();
                                 try {

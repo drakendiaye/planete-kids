@@ -21,29 +21,35 @@ public interface AdminRemote {
     public LabelBean getLabel(int id) throws Exception;
     public void setLabelNameFr(int id, String name) throws Exception;
     public void setLabelNameEn(int id, String name) throws Exception;
+    public void setLabelDescriptionFr(int id, String description) throws Exception;
+    public void setLabelDescriptionEn(int id, String description) throws Exception;
     public void setLabelSite(int id, String site) throws Exception;
     public void setLabelImageLarge(int id, String image) throws Exception;
     public void setLabelImageMedium(int id, String image) throws Exception;
     public void setLabelImageSmall(int id, String image) throws Exception;
-    public void createLabel(String name_fr, String name_en, String site, String image_large, String image_medium, String image_small) throws Exception;
+    public void createLabel(String name_fr, String name_en, String description_fr, String description_en, String site, String image_large, String image_medium, String image_small) throws Exception;
     
     public List<ColorBean> getColors() throws Exception;
     public ColorBean getColor(int id) throws Exception;
     public void setColorNameFr(int id, String name) throws Exception;
     public void setColorNameEn(int id, String name) throws Exception;
+    public void setColorDescriptionFr(int id, String description) throws Exception;
+    public void setColorDescriptionEn(int id, String description) throws Exception;
     public void setColorImageLarge(int id, String image) throws Exception;
     public void setColorImageMedium(int id, String image) throws Exception;
     public void setColorImageSmall(int id, String image) throws Exception;
-    public void createColor(String name_fr, String name_en, String image_large, String image_medium, String image_small) throws Exception;
+    public void createColor(String name_fr, String name_en, String description_fr, String description_en, String image_large, String image_medium, String image_small) throws Exception;
     
     public List<CategoryBean> getCategories() throws Exception;
     public CategoryBean getCategory(int id) throws Exception;
     public void setCategoryNameFr(int id, String name) throws Exception;
     public void setCategoryNameEn(int id, String name) throws Exception;
+    public void setCategoryDescriptionFr(int id, String description) throws Exception;
+    public void setCategoryDescriptionEn(int id, String description) throws Exception;
     public void setCategoryImageLarge(int id, String image) throws Exception;
     public void setCategoryImageMedium(int id, String image) throws Exception;
     public void setCategoryImageSmall(int id, String image) throws Exception;
-    public void createCategory(String name_fr, String name_en, String image_large, String image_medium, String image_small) throws Exception;
+    public void createCategory(String name_fr, String name_en, String description_fr, String description_en, String image_large, String image_medium, String image_small) throws Exception;
     
     public List<ProductBean> getProducts() throws Exception;
     public List<ProductBean> getProductsByCategory(int category_id) throws Exception;
@@ -65,22 +71,22 @@ public interface AdminRemote {
     public void setProductImageSmall(int id, String image) throws Exception;
     public void createProduct(String name_fr, String name_en, String description_fr, String description_en, int category_id, int color_id, int label_id, float price, int stock, String image_large, String image_medium, String image_small) throws Exception;
     
-    public int createQuestionnaire (String nameFr, String nameEn, String descFr, String descEn) throws Exception;
-    public int createQuestion (int questionnaireId, String questionNameFr, String questionNameEn, QuestionBean.Pattern pattern, int order) throws Exception;
-    public int createAnswer (int questionId, String answerNameFr, String answerNameEn, Boolean commentable, int order) throws Exception;
-
-    public String createAccount (String email, String password, String firstName, String lastName, String addressLine1, String addressLine2, String addressLine3, int zipCode, String city, String phoneNumber, String faxNumber) throws Exception;
-    public AccountBean getAccount (String email) throws Exception;
-    public void setAccountPassword (String email, String password) throws Exception;
-    public void setAccountFirstName (String email, String firstName) throws Exception;
-    public void setAccountLastName (String email, String lastName) throws Exception;
-    public void setAddressLine1 (String email, String addressLine1) throws Exception;
-    public void setAddressLine2 (String email, String addressLine2) throws Exception;
-    public void setAddressLine3 (String email, String addressLine3) throws Exception;
-    public void setZipCode (String email, int zipCode) throws Exception;
-    public void setCity (String email, String city) throws Exception;
-    public void setPhoneNumber (String email, String phoneNumber) throws Exception;
-    public void setFaxNumber (String email, String faxNumber) throws Exception;
+    public int createQuestionnaire(String nameFr, String nameEn, String descFr, String descEn) throws Exception;
+    public int createQuestion(int questionnaireId, String questionNameFr, String questionNameEn, QuestionBean.Pattern pattern, int order) throws Exception;
+    public int createAnswer(int questionId, String answerNameFr, String answerNameEn, Boolean commentable, int order) throws Exception;
+    
+    public String createAccount(String email, String password, String firstName, String lastName, String addressLine1, String addressLine2, String addressLine3, int zipCode, String city, String phoneNumber, String faxNumber) throws Exception;
+    public AccountBean getAccount(String email) throws Exception;
+    public void setAccountPassword(String email, String password) throws Exception;
+    public void setAccountFirstName(String email, String firstName) throws Exception;
+    public void setAccountLastName(String email, String lastName) throws Exception;
+    public void setAddressLine1(String email, String addressLine1) throws Exception;
+    public void setAddressLine2(String email, String addressLine2) throws Exception;
+    public void setAddressLine3(String email, String addressLine3) throws Exception;
+    public void setZipCode(String email, int zipCode) throws Exception;
+    public void setCity(String email, String city) throws Exception;
+    public void setPhoneNumber(String email, String phoneNumber) throws Exception;
+    public void setFaxNumber(String email, String faxNumber) throws Exception;
     
     public int createLabel(LocaleBean name, String site, String image_large, String image_medium, String image_small) throws Exception;
     public void setName(int id, LocaleBean name) throws Exception;

@@ -242,3 +242,39 @@ div.answer {
   color :#000000;
   background-color :#75c45d;
 }
+
+div.category {
+  width :610px;
+  margin-top :20px;
+  margin-left :auto;
+  margin-right :auto;
+  color :#000000;
+  background-color :#75c45d;
+}
+
+div.color {
+  width :610px;
+  margin-top :20px;
+  margin-left :auto;
+  margin-right :auto;
+  color :#000000;
+  background-color :#75c45d;
+}
+
+div.label {
+  width :610px;
+  margin-top :20px;
+  margin-left :auto;
+  margin-right :auto;
+  color :#000000;
+  background-color :#75c45d;
+}
+
+div.product {
+  width :610px;
+  margin-top :20px;
+  margin-left :auto;
+  margin-right :auto;
+  color :#000000;
+  background-color :#75c45d;
+}

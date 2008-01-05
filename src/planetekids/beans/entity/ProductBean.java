@@ -71,12 +71,26 @@ public class ProductBean implements java.io.Serializable, Comparable<ProductBean
         this.id = id;
     }
     
+    public String getName(String locale) {
+        if (locale.equals("fr"))
+            return name.getFr();
+        else
+            return name.getEn();
+    }
+    
     public LocaleBean getName() {
         return name;
     }
     
     public void setName(LocaleBean name) {
         this.name = name;
+    }
+    
+    public String getDescription(String locale) {
+        if (locale.equals("fr"))
+            return description.getFr();
+        else
+            return description.getEn();
     }
     
     public LocaleBean getDescription() {
