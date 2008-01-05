@@ -13,8 +13,14 @@
                 <s:property value="getName(getLocale())" />
             </h3>
             <div id="category_<s:property value="getId()" />_div">
-                <img src="<s:property value="getImage_medium()" />" onmouseover="show('category_<s:property value="getId()" />_imgLarge')" onmouseout="hide('category_<s:property value="getId()" />_imgLarge')" width="50px" height="50px"/>
-                <img id="category_<s:property value="getId()" />_imgLarge" src="<s:property value="getImage_large()"/>" style="display:none; z-index:1; position:absolute; background-color:white; border-color:black; border-width:1px; border-style: solid;" width="100px" height="100px"/>
+                <div style="float:left;">
+                    <img src="<s:property value="getImage_medium()" />" onmouseover="show('category_<s:property value="getId()" />_imgLarge')" onmouseout="hide('category_<s:property value="getId()" />_imgLarge')" width="50px" height="50px"/>
+                    <img id="category_<s:property value="getId()" />_imgLarge" src="<s:property value="getImage_large()"/>" style="display:none; z-index:1; position:absolute; background-color:white; border-color:black; border-width:1px; border-style: solid;" width="100px" height="100px"/>
+                </div>
+                <div style="float:left;">
+                    <s:property value="getDescription(getLocale())" />
+                </div>
+                <br clear="both"/>
             </div>
         </div>
     </s:iterator>

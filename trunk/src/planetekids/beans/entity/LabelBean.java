@@ -26,6 +26,9 @@ public class LabelBean implements Serializable {
     @OneToOne(fetch=FetchType.EAGER, cascade=CascadeType.ALL, optional=false)
     private LocaleBean name;
     
+    @OneToOne(fetch=FetchType.EAGER, cascade=CascadeType.ALL, optional=false)
+    private LocaleBean description;
+    
     @OneToMany(mappedBy="category", fetch=FetchType.EAGER, cascade=CascadeType.ALL)
     @Sort(type=SortType.NATURAL)
     private SortedSet<ProductBean> products = new TreeSet<ProductBean>();
@@ -39,8 +42,9 @@ public class LabelBean implements Serializable {
         
     }
     
-    public LabelBean(LocaleBean name, String site, String image_large, String image_medium, String image_small) {
+    public LabelBean(LocaleBean name, LocaleBean description, String site, String image_large, String image_medium, String image_small) {
         this.setName(name);
+        this.setDescription(description);
         this.setSite(site);
         this.setImage_large(image_large);
         this.setImage_medium(image_medium);
@@ -54,6 +58,13 @@ public class LabelBean implements Serializable {
     public void setId(int id) {
         this.id = id;
     }
+    
+    public String getName(String locale) {
+        if (locale.equals("fr"))
+            return name.getFr();
+        else
+            return name.getEn();
+    }
 
     public LocaleBean getName() {
         return name;
@@ -61,6 +72,21 @@ public class LabelBean implements Serializable {
 
     public void setName(LocaleBean name) {
         this.name = name;
+    }
+    
+    public String getDescription(String locale) {
+        if (locale.equals("fr"))
+            return description.getFr();
+        else
+            return description.getEn();
+    }
+
+    public LocaleBean getDescription() {
+        return description;
+    }
+
+    public void setDescription(LocaleBean description) {
+        this.description = description;
     }
     
     public SortedSet<ProductBean> getProducts() {

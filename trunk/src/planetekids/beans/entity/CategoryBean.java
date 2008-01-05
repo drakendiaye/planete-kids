@@ -26,6 +26,9 @@ public class CategoryBean implements Serializable {
     @OneToOne(fetch=FetchType.EAGER, cascade=CascadeType.ALL, optional=false)
     private LocaleBean name;
     
+    @OneToOne(fetch=FetchType.EAGER, cascade=CascadeType.ALL, optional=false)
+    private LocaleBean description;
+    
     @OneToMany(mappedBy="category", fetch=FetchType.EAGER, cascade=CascadeType.ALL)
     @Sort(type=SortType.NATURAL)
     private SortedSet<ProductBean> products = new TreeSet<ProductBean>();
@@ -38,8 +41,9 @@ public class CategoryBean implements Serializable {
         
     }
     
-    public CategoryBean(LocaleBean name, String image_large, String image_medium, String image_small) {
+    public CategoryBean(LocaleBean name, LocaleBean description, String image_large, String image_medium, String image_small) {
         this.setName(name);
+        this.setDescription(description);
         this.setImage_large(image_large);
         this.setImage_medium(image_medium);
         this.setImage_small(image_small);
@@ -66,6 +70,21 @@ public class CategoryBean implements Serializable {
 
     public void setName(LocaleBean name) {
         this.name = name;
+    }
+    
+    public String getDescription(String locale) {
+        if (locale.equals("fr"))
+            return description.getFr();
+        else
+            return description.getEn();
+    }
+    
+    public LocaleBean getDescription() {
+        return description;
+    }
+
+    public void setDescription(LocaleBean description) {
+        this.description = description;
     }
 
     public SortedSet<ProductBean> getProducts() {
