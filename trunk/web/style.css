@@ -153,14 +153,6 @@ img {
 	background-color : #75c45d;
 }
 
-#contextualmenu {
-	width : 150px;
-	height : 235px;
-	overflow : hidden;
-	margin : 1px;
-	background-color : #75c45d;
-}
-
 #catalogue {
 	width : 150px;
 	height : 235px;
@@ -171,7 +163,7 @@ img {
 
 #cart {
 	width : 150px;
-	height : 235px;
+	height : 470px;
 	overflow : hidden;
 	margin : 1px;
 	background-color : #75c45d;
