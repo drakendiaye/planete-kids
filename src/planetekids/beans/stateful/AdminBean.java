@@ -161,6 +161,21 @@ public class AdminBean implements AdminRemote {
         entityManager.persist(color);
     }
     
+    public void deleteColor(int id) throws Exception {
+	entityManager.remove(getColor(id));
+    }
+    
+    public void deleteColors() throws Exception {
+	List<ColorBean> colors = getColors();
+	if (colors != null) {
+	    Iterator iterator = colors.iterator();
+	    while (iterator.hasNext()) {
+		ColorBean color = (ColorBean) iterator.next();
+		deleteColor(color.getId());
+	    }
+	}
+    }
+    
     
     /*------------------------------------------------------------------*/
     /*					Creation des categories							*/
@@ -175,43 +190,58 @@ public class AdminBean implements AdminRemote {
     }
     
     public void setCategoryNameFr(int id, String name) throws Exception {
-        CategoryBean category = entityManager.find(CategoryBean.class, id);
+        CategoryBean category = getCategory(id);
         category.getName().setFr(name);
     }
     
     public void setCategoryNameEn(int id, String name) throws Exception {
-        CategoryBean category = entityManager.find(CategoryBean.class, id);
+        CategoryBean category = getCategory(id);
         category.getName().setEn(name);
     }
     
     public void setCategoryDescriptionFr(int id, String description) throws Exception {
-        CategoryBean category = entityManager.find(CategoryBean.class, id);
+        CategoryBean category = getCategory(id);
         category.getDescription().setFr(description);
     }
     
     public void setCategoryDescriptionEn(int id, String description) throws Exception {
-        CategoryBean category = entityManager.find(CategoryBean.class, id);
+        CategoryBean category = getCategory(id);
         category.getDescription().setEn(description);
     }
     
     public void setCategoryImageLarge(int id, String image) throws Exception {
-        CategoryBean category = entityManager.find(CategoryBean.class, id);
+        CategoryBean category = getCategory(id);
         category.setImage_large(image);
     }
     
     public void setCategoryImageMedium(int id, String image) throws Exception {
-        CategoryBean category = entityManager.find(CategoryBean.class, id);
+        CategoryBean category = getCategory(id);
         category.setImage_medium(image);
     }
     
     public void setCategoryImageSmall(int id, String image) throws Exception {
-        CategoryBean category = entityManager.find(CategoryBean.class, id);
+        CategoryBean category = getCategory(id);
         category.setImage_small(image);
     }
     
     public void createCategory(String name_fr, String name_en, String description_fr, String description_en, String image_large, String image_medium, String image_small) throws Exception {
         CategoryBean category = new CategoryBean(new LocaleBean(name_fr, name_en), new LocaleBean(description_fr, description_en), image_large, image_medium, image_small);
-        entityManager.persist(category);
+	entityManager.persist(category);
+    }
+    
+    public void deleteCategory(int id) throws Exception {
+	entityManager.remove(getCategory(id));
+    }
+    
+    public void deleteCategories() throws Exception {
+	List<CategoryBean> categories = getCategories();
+	if (categories != null) {
+	    Iterator iterator = categories.iterator();
+	    while (iterator.hasNext()) {
+		CategoryBean category = (CategoryBean) iterator.next();
+		deleteCategory(category.getId());
+	    }
+	}
     }
     
     
@@ -286,77 +316,90 @@ public class AdminBean implements AdminRemote {
     }
     
     public void setProductNameFr(int id, String name) throws Exception {
-        ProductBean product = entityManager.find(ProductBean.class, id);
+        ProductBean product = getProduct(id);
         product.getName().setFr(name);
     }
     
     public void setProductNameEn(int id, String name) throws Exception {
-        ProductBean product = entityManager.find(ProductBean.class, id);
+        ProductBean product = getProduct(id);
         product.getName().setEn(name);
     }
     
     public void setProductDescriptionFr(int id, String description) throws Exception {
-        ProductBean product = entityManager.find(ProductBean.class, id);
+        ProductBean product = getProduct(id);
         product.getDescription().setFr(description);
     }
     
     public void setProductDescriptionEn(int id, String description) throws Exception {
-        ProductBean product = entityManager.find(ProductBean.class, id);
+        ProductBean product = getProduct(id);
         product.getDescription().setEn(description);
     }
     
     public void setProductCategory(int id, int category_id) throws Exception {
-        ProductBean product = entityManager.find(ProductBean.class, id);
-        CategoryBean category = entityManager.find(CategoryBean.class, category_id);
+        ProductBean product = getProduct(id);
+        CategoryBean category = getCategory(category_id);
         product.setCategory(category);
     }
     
     public void setProductColor(int id, int color_id) throws Exception {
-        ProductBean product = entityManager.find(ProductBean.class, id);
-        ColorBean color = entityManager.find(ColorBean.class, color_id);
+        ProductBean product = getProduct(id);
+        ColorBean color = getColor(color_id);
         product.setColor(color);
     }
     
     public void setProductLabel(int id, int label_id) throws Exception {
-        ProductBean product = entityManager.find(ProductBean.class, id);
-        LabelBean label = entityManager.find(LabelBean.class, label_id);
+        ProductBean product = getProduct(id);
+        LabelBean label = getLabel(label_id);
         product.setLabel(label);
     }
     
     public void setProductPrice(int id, float price) throws Exception {
-        ProductBean product = entityManager.find(ProductBean.class, id);
+        ProductBean product = getProduct(id);
         product.setPrice(price);
     }
     
     public void setProductStock(int id, int stock) throws Exception {
-        ProductBean product = entityManager.find(ProductBean.class, id);
+        ProductBean product = getProduct(id);
         product.setStock(stock);
     }
     
     public void setProductImageLarge(int id, String image) throws Exception {
-        ProductBean product = entityManager.find(ProductBean.class, id);
+        ProductBean product = getProduct(id);
         product.setImage_large(image);
     }
     
     public void setProductImageMedium(int id, String image) throws Exception {
-        ProductBean product = entityManager.find(ProductBean.class, id);
+        ProductBean product = getProduct(id);
         product.setImage_medium(image);
     }
     
     public void setProductImageSmall(int id, String image) throws Exception {
-        ProductBean product = entityManager.find(ProductBean.class, id);
+        ProductBean product = getProduct(id);
         product.setImage_small(image);
     }
     
     public void createProduct(String name_fr, String name_en, String description_fr, String description_en, int category_id, int color_id, int label_id, float price, int stock, String image_large, String image_medium, String image_small) throws Exception {
         CategoryBean category = entityManager.find(CategoryBean.class, category_id);
-        ColorBean color = entityManager.find(ColorBean.class, color_id);
-        LabelBean label = entityManager.find(LabelBean.class, label_id);
+        ColorBean color = getColor(color_id);
+        LabelBean label = getLabel(label_id);
         ProductBean product = new ProductBean(new LocaleBean(name_fr, name_en), new LocaleBean(description_fr, description_en), category, color, label, price, stock, image_large, image_medium, image_small);
         entityManager.persist(product);
     }
     
+    public void deleteProduct (int id) throws Exception {
+	entityManager.remove(getProduct(id));
+    }
     
+    public void deleteProducts() throws Exception {
+	List<ProductBean> products = getProducts();
+	if (products != null) {
+	    Iterator iterator = products.iterator();
+	    while (iterator.hasNext()) {
+		ProductBean product = (ProductBean) iterator.next();
+		deleteCategory(product.getId());
+	    }
+	}
+    }
     
     /*------------------------------------------------------------------*/
     /*					Creation des questionnaires						*/
@@ -365,7 +408,7 @@ public class AdminBean implements AdminRemote {
     
     public int createQuestionnaire(String nameFr, String nameEn, String descFr, String descEn) throws Exception {
         QuestionnaireBean questionnaire = new QuestionnaireBean(new LocaleBean(nameFr, nameEn), new LocaleBean(descFr, descEn));
-        
+
         entityManager.persist(questionnaire);
         
         return questionnaire.getId();
@@ -373,7 +416,7 @@ public class AdminBean implements AdminRemote {
     
     public int createQuestion(int questionnaireId, String questionNameFr, String questionNameEn, QuestionBean.Pattern pattern, int order)
     throws Exception {
-        QuestionnaireBean questionnaire = entityManager.find(QuestionnaireBean.class, questionnaireId);
+        QuestionnaireBean questionnaire = getQuestionnaire(questionnaireId);
         
         QuestionBean question = new QuestionBean(questionnaire, new LocaleBean(questionNameFr, questionNameEn), pattern, order);
         

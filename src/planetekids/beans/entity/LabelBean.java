@@ -29,7 +29,8 @@ public class LabelBean implements Serializable {
     @OneToOne(fetch=FetchType.EAGER, cascade=CascadeType.ALL, optional=false)
     private LocaleBean description;
     
-    @OneToMany(mappedBy="category", fetch=FetchType.EAGER, cascade=CascadeType.ALL)
+    @OneToMany(mappedBy="label", fetch=FetchType.EAGER, cascade=CascadeType.ALL)
+    @org.hibernate.annotations.Cascade(org.hibernate.annotations.CascadeType.DELETE_ORPHAN)
     @Sort(type=SortType.NATURAL)
     private SortedSet<ProductBean> products = new TreeSet<ProductBean>();
     

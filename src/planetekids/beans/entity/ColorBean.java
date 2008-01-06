@@ -30,6 +30,7 @@ public class ColorBean implements Serializable {
     private LocaleBean description;
     
     @OneToMany(mappedBy="color", fetch=FetchType.EAGER, cascade=CascadeType.ALL)
+    @org.hibernate.annotations.Cascade(org.hibernate.annotations.CascadeType.DELETE_ORPHAN)
     @Sort(type=SortType.NATURAL)
     private SortedSet<ProductBean> products = new TreeSet<ProductBean>();
     
