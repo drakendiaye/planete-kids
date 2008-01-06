@@ -11,14 +11,14 @@
                 <tr>
                     <td align="left">
                         <h3>
-                            <img id="product_<s:property value="getId()" />_img" onclick="coldiv_click('product_<s:property value="getId()"/>')" />
+                            <img id="product_<s:property value="getId()" />_img" onclick="coldiv_click('product_<s:property value="getId()"/>')" style="cursor: hand;" />
                             <img src="<s:property value="getImage_small()" />" width="20px" height="20px"/>
                             <s:property value="getName(getLocale())" />
                         </h3>
                     </td>
                     <td align="right">
                         <s:property value="getPrice()" />&nbsp;€
-                        <button type="button">Ajouter au panier</button>
+                        <input type="submit" value="Ajouter au panier" class="button">
                     </td>
                 </tr>
             </table>
