@@ -15,6 +15,12 @@
             <s:hidden id="password" value="{ init : false, value : ''}"/>
             <s:textfield id="password_field" name="password" onkeyup="text_press('password')"/>
             <br/>
+            <s:url id="url_create_location" namespace="/account" action="create_location" includeParams="none"/>
+            <s:url id="url_create_content" namespace="/account" action="create_content" includeParams="none"/>
+            <s:a onclick="navGo([new navRequest('location', '%{url_create_location}'),
+                                 new navRequest('content', '%{url_create_content}')])">
+                     Create account
+            </s:a>
             <s:url id="url_content" namespace="/account" action="identify_submit" includeParams="none"/>
             <s:submit onclick="navExec(new navRequest('content', '%{url_content}', null, null, 'identify'))"/>
         </form>

@@ -49,6 +49,11 @@ public class CreateAction extends ActionSupport implements SessionAware {
         return execute();
     }
     
+    public String submit() throws Exception {
+        //todo
+        return execute();
+    }
+    
     public String getEmailAddress() {
 	return emailAddress;
     }
