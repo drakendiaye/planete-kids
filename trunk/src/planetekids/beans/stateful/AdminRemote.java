@@ -42,6 +42,8 @@ public interface AdminRemote {
     public void setColorImageMedium(int id, String image) throws Exception;
     public void setColorImageSmall(int id, String image) throws Exception;
     public void createColor(String name_fr, String name_en, String description_fr, String description_en, String image_large, String image_medium, String image_small) throws Exception;
+    public void deleteColor(int id) throws Exception;
+    public void deleteColors() throws Exception;
     
     public List<CategoryBean> getCategories() throws Exception;
     public CategoryBean getCategory(int id) throws Exception;
@@ -53,6 +55,8 @@ public interface AdminRemote {
     public void setCategoryImageMedium(int id, String image) throws Exception;
     public void setCategoryImageSmall(int id, String image) throws Exception;
     public void createCategory(String name_fr, String name_en, String description_fr, String description_en, String image_large, String image_medium, String image_small) throws Exception;
+    public void deleteCategory(int id) throws Exception;
+    public void deleteCategories() throws Exception;
     
     public List<ProductBean> getProducts() throws Exception;
     public List<ProductBean> getProductsByCategory(int category_id) throws Exception;
@@ -73,6 +77,8 @@ public interface AdminRemote {
     public void setProductImageMedium(int id, String image) throws Exception;
     public void setProductImageSmall(int id, String image) throws Exception;
     public void createProduct(String name_fr, String name_en, String description_fr, String description_en, int category_id, int color_id, int label_id, float price, int stock, String image_large, String image_medium, String image_small) throws Exception;
+    public void deleteProduct (int id) throws Exception;
+    public void deleteProducts() throws Exception;
     
     public int createQuestionnaire(String nameFr, String nameEn, String descFr, String descEn) throws Exception;
     public int createQuestion(int questionnaireId, String questionNameFr, String questionNameEn, QuestionBean.Pattern pattern, int order) throws Exception;

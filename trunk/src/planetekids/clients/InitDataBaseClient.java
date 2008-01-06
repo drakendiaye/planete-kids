@@ -53,6 +53,7 @@ public class InitDataBaseClient {
 	    /* Création des marques */
 	    /*----------------------*/
 
+
 	    // id = 1
 	    admin.createLabel("Nike", "Nike", "Marque americaine", "American label", "www.nike.com", "images/nike_large.png",
 		    "images/nike_medium.png", "images/nike_small.png");
