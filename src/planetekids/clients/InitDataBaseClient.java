@@ -5,14 +5,12 @@
 /*-----------------------------------------------------------------------------*/
 package planetekids.clients;
 
-import java.util.Iterator;
-import java.util.List;
 import java.util.Random;
 
-import javax.transaction.*;
 import javax.naming.Context;
 import javax.naming.InitialContext;
-import planetekids.beans.entity.LabelBean;
+import javax.transaction.UserTransaction;
+
 import planetekids.beans.entity.QuestionBean;
 import planetekids.beans.stateful.AdminBean;
 import planetekids.beans.stateful.AdminRemote;
@@ -25,7 +23,7 @@ public class InitDataBaseClient {
 	AdminRemote admin = null;
 	try {
 	    System.setProperty(Context.INITIAL_CONTEXT_FACTORY, "org.ow2.easybeans.component.smartclient.spi.SmartContextFactory");
-	    initialContext = initialContext = new InitialContext();
+	    initialContext = new InitialContext();
 
 	    utx = (UserTransaction) initialContext.lookup("javax.transaction.UserTransaction");
 
