@@ -13,7 +13,8 @@ import planetekids.beans.entity.QuestionnaireBean;
 public interface CustomerRemote {
     public void init();
     
-    public boolean Authenticate(String email, String password) throws Exception;
+    public boolean LogIn(String email, String password) throws Exception;
+    public void LogOut() throws Exception;
     public AccountBean getAccount() throws Exception;
     
     public List<QuestionnaireBean> getQuestionnaires() throws Exception;

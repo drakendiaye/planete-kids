@@ -3,5 +3,11 @@
 
 <h2><s:text name="create"/></h2>
 <s:div cssClass="main">
-    
+    <div class="category">
+        <form id="create" method="post">
+            
+            <s:url id="url_content" namespace="/account" action="create_submit" includeParams="none"/>
+            <s:submit onclick="navExec(new navRequest('content', '%{url_content}', null, null, 'identify'))"/>
+        </form>
+    </div>
 </s:div>

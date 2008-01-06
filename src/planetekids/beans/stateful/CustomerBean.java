@@ -34,7 +34,7 @@ public class CustomerBean implements CustomerRemote {
 
     }
 
-    public boolean Authenticate(String account_id, String password) throws Exception {
+    public boolean LogIn(String account_id, String password) throws Exception {
         AccountBean account = entityManager.find(AccountBean.class, account_id);
         if(account == null || !account.getPassword().equals(password)) {
             return false;
@@ -42,6 +42,10 @@ public class CustomerBean implements CustomerRemote {
             this.account_id = account_id;
             return(true);
         }
+    }
+    
+    public void LogOut()  throws Exception {
+        this.account_id = null;
     }
     
     public AccountBean getAccount() throws Exception {

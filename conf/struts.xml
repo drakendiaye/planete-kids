@@ -111,6 +111,14 @@
             <result>/account/create_location.jsp</result>
             <result name="error">/error.jsp</result>
         </action>
+        <action name="create_submit" class="planetekids.actions.account.CreateAction" method="submit" >
+            <result type="redirect-action">
+                <param name="namespace">/</param>
+                <param name="actionName">index_callback</param>
+            </result>
+            <result name="badinput">/account/create_content.jsp</result>
+            <result name="error">/error.jsp</result>
+        </action>
         
         <action name="identify" class="planetekids.actions.account.IdentifyAction" method="redirect" >
             <result type="redirect-action">

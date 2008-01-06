@@ -49,7 +49,7 @@ public class IdentifyAction extends ActionSupport implements SessionAware, Param
             if(((String[])parameters.get("email"))[0] == null || ((String[])parameters.get("password"))[0] == null) {
                 return("badinput");
             }
-            if(!getCustomer().Authenticate(((String[])parameters.get("email"))[0], ((String[])parameters.get("password"))[0])) {
+            if(!getCustomer().LogIn(((String[])parameters.get("email"))[0], ((String[])parameters.get("password"))[0])) {
                 return("badinput");
             }
         }
