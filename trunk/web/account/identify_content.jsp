@@ -16,7 +16,7 @@
             <s:textfield id="password_field" name="password" onkeyup="text_press('password')"/>
             <br/>
             <s:url id="url_content" namespace="/account" action="identify_submit" includeParams="none"/>
-            <s:submit onclick="navGo([new navRequest('content', '%{url_content}', null, null, 'identify')])"/>
+            <s:submit onclick="navExec(new navRequest('content', '%{url_content}', null, null, 'identify'))"/>
         </form>
     </div>
 </s:div>
