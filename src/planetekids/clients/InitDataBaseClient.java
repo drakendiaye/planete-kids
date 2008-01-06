@@ -1,4 +1,3 @@
-
 /*-----------------------------------------------------------------------------*/
 /* InitDataBase.java                                                           */
 /* Program that initializes the ecom databaseby creating beans			 */
@@ -8,6 +7,8 @@ package planetekids.clients;
 
 import java.util.Iterator;
 import java.util.List;
+import java.util.Random;
+
 import javax.transaction.*;
 import javax.naming.Context;
 import javax.naming.InitialContext;
@@ -37,7 +38,10 @@ public class InitDataBaseClient {
 	try {
 	    utx.begin();
 
+	    /*------------------------------*/
 	    /* Création des comptes clients */
+	    /*------------------------------*/
+
 	    admin.createAccount("clemplantier@gmail.com", "azerty", "Clément", "Plantier", "2 rue de la Poste", "", "", 38400,
 		    "ST Martin d'Hères", "06 00 00 00 00", "");
 	    admin.createAccount("guillaumerenault@yahoo.fr", "azerty", "Guillaume", "Renault", "11 rue Pasteur", "", "", 38400,
@@ -47,7 +51,9 @@ public class InitDataBaseClient {
 	    admin.createAccount("missog@club-internet.fr", "azerty", "Guillaume", "Missonnier", "51 avenue du Vercors", "", "", 38170,
 		    "Seyssinet", "06 00 00 00 03", "");
 
+	    /*----------------------*/
 	    /* Création des marques */
+	    /*----------------------*/
 
 	    // id = 1
 	    admin.createLabel("Nike", "Nike", "Marque americaine", "American label", "www.nike.com", "images/nike_large.png",
@@ -68,7 +74,9 @@ public class InitDataBaseClient {
 	    admin.createLabel("Naf Naf", "Naf Naf", "Description en francais", "Description in english", "www.nafnaf.com",
 		    "images/nafnaf_large.png", "images/nafnaf_medium.png", "images/nafnaf_small.png");
 
+	    /*-----------------------*/
 	    /* Création des couleurs */
+	    /*-----------------------*/
 
 	    // id = 1
 	    admin.createColor("Blanc", "White", "Couleur blanche : 0xFFFFFF", "White Color : 0xFFFFFF", "images/white_large.png",
@@ -107,7 +115,9 @@ public class InitDataBaseClient {
 	    admin.createColor("Gris", "Grey", "Couleur Grise : 0xADADAD", "Grey Color : 0xADADAD", "images/grey_large.png",
 		    "images/grey_large.png", "images/grey_large.png");
 
+	    /*-------------------------*/
 	    /* Création des catégories */
+	    /*-------------------------*/
 
 	    // id = 1
 	    admin.createCategory("Veste", "Jacket", "Pratique par temps de pluie ou grand froid",
@@ -138,7 +148,9 @@ public class InitDataBaseClient {
 	    admin.createCategory("Robe", "Dress", "Description en francais", "Description in english", "images/dress_large.png",
 		    "images/dress_medium.png", "images/dress_small.png");
 
+	    /*-----------------------*/
 	    /* Création des produits */
+	    /*-----------------------*/
 
 	    // id = 1
 	    admin.createProduct("Pantalon Naf-Naf", "Naf-Naf trousers", "Etanche pour bébé", "For baby, waterproof", 1, 1, 1, 23, 90, "",
@@ -147,7 +159,129 @@ public class InitDataBaseClient {
 	    admin.createProduct("Veste", "Jacket", "Veste en coton, quand il ne fait pas froid",
 		    "A coton Jacket, to wear when it's war olny", 1, 4, 2, 123, 45, "", "", "");
 
+	    // creation de tous les produits :
+
+	    Random rand = new Random();
+
+	    // //////////
+	    // Vestes //
+	    // //////////
+	    // Pour toutes les couleurs
+	    for (int i = 1; i <= 12; i++) {
+		// Pour toutes les marques
+		for (int j = 1; j <= 6; j++) {
+		    admin.createProduct("Veste numero " + ((i - 1) * 6 + j), "Jacket number " + ((i - 1) * 6 + j),
+			    "Description en francais", "Description in english", 1, i, j, rand.nextFloat() * 34, rand.nextInt(20), "", "",
+			    "");
+		}
+	    }
+
+	    // ///////////
+	    // T-shirt //
+	    // ///////////
+	    // Pour toutes les couleurs
+	    for (int i = 1; i <= 12; i++) {
+		// Pour toutes les marques
+		for (int j = 1; j <= 6; j++) {
+		    admin.createProduct("T-shirt numero " + ((i - 1) * 6 + j), "T-shirt number " + ((i - 1) * 6 + j),
+			    "Description en francais", "Description in english", 2, i, j, rand.nextFloat() * 34, rand.nextInt(20), "", "",
+			    "");
+		}
+	    }
+
+	    // ////////////
+	    // Chemises //
+	    // ////////////
+	    // Pour toutes les couleurs
+	    for (int i = 1; i <= 12; i++) {
+		// Pour toutes les marques
+		for (int j = 1; j <= 6; j++) {
+		    admin.createProduct("Chemise numero " + ((i - 1) * 6 + j), "Shirt number " + ((i - 1) * 6 + j),
+			    "Description en francais", "Description in english", 3, i, j, rand.nextFloat() * 34, rand.nextInt(20), "", "",
+			    "");
+		}
+	    }
+
+	    // //////////////
+	    // chemisiers //
+	    // //////////////
+	    // Pour toutes les couleurs
+	    for (int i = 1; i <= 12; i++) {
+		// Pour toutes les marques
+		for (int j = 1; j <= 6; j++) {
+		    admin.createProduct("Chemisier numero " + ((i - 1) * 6 + j), "Blouse number " + ((i - 1) * 6 + j),
+			    "Description en francais", "Description in english", 4, i, j, rand.nextFloat() * 34, rand.nextInt(20), "", "",
+			    "");
+		}
+	    }
+
+	    // ////////
+	    // Pull //
+	    // ////////
+	    // Pour toutes les couleurs
+	    for (int i = 1; i <= 12; i++) {
+		// Pour toutes les marques
+		for (int j = 1; j <= 6; j++) {
+		    admin.createProduct("Pull numero " + ((i - 1) * 6 + j), "Sweater number " + ((i - 1) * 6 + j),
+			    "Description en francais", "Description in english", 5, i, j, rand.nextFloat() * 34, rand.nextInt(20), "", "",
+			    "");
+		}
+	    }
+
+	    // /////////
+	    // Jupes //
+	    // /////////
+	    // Pour toutes les couleurs
+	    for (int i = 1; i <= 12; i++) {
+		// Pour toutes les marques
+		for (int j = 1; j <= 6; j++) {
+		    admin.createProduct("Jupe numero " + ((i - 1) * 6 + j), "Skirt number " + ((i - 1) * 6 + j), "Description en francais",
+			    "Description in english", 6, i, j, rand.nextFloat() * 34, rand.nextInt(20), "", "", "");
+		}
+	    }
+
+	    // /////////
+	    // Short //
+	    // /////////
+	    // Pour toutes les couleurs
+	    for (int i = 1; i <= 12; i++) {
+		// Pour toutes les marques
+		for (int j = 1; j <= 6; j++) {
+		    admin.createProduct("Short numero " + ((i - 1) * 6 + j), "Short number " + ((i - 1) * 6 + j),
+			    "Description en francais", "Description in english", 7, i, j, rand.nextFloat() * 34, rand.nextInt(20), "", "",
+			    "");
+		}
+	    }
+
+	    // /////////////
+	    // Pantalons //
+	    // /////////////
+	    // Pour toutes les couleurs
+	    for (int i = 1; i <= 12; i++) {
+		// Pour toutes les marques
+		for (int j = 1; j <= 6; j++) {
+		    admin.createProduct("Pantalon numero " + ((i - 1) * 6 + j), "Pants number " + ((i - 1) * 6 + j),
+			    "Description en francais", "Description in english", 8, i, j, rand.nextFloat() * 34, rand.nextInt(20), "", "",
+			    "");
+		}
+	    }
+
+	    // /////////
+	    // Robes //
+	    // /////////
+	    // Pour toutes les couleurs
+	    for (int i = 1; i <= 12; i++) {
+		// Pour toutes les marques
+		for (int j = 1; j <= 6; j++) {
+		    admin.createProduct("Robe numero " + ((i - 1) * 6 + j), "Dress number " + ((i - 1) * 6 + j), "Description en francais",
+			    "Description in english", 9, i, j, rand.nextFloat() * 34, rand.nextInt(20), "", "", "");
+		}
+	    }
+
+	    /*---------------------------*/
 	    /* Création du questionnaire */
+	    /*---------------------------*/
+
 	    int questionnaireId = admin.createQuestionnaire("Planete Kids ouvre bientôt ses portes sur le net.",
 		    "Planete Kids opens to the web soon.", "Aidez-nous à créer un site à  votre image !",
 		    "Help us to create a website that fits you!");
