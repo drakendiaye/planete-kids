@@ -280,3 +280,14 @@ div.product {
 	font-size: 12px;
 	background-color: #FFFFCC;
 }
+
+
+.button {
+	border-style : solid;
+        border-color : black;
+        border-width : 1px;  
+	color: #ffffff;
+        background-color: #75c45d;
+	font-weight: bold;
+	cursor: hand;
+}
