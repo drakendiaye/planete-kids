@@ -29,11 +29,10 @@ import planetekids.beans.entity.QuestionnaireBean;
 
 @Stateful
 @Remote(AdminRemote.class)
-public class AdminBean implements AdminRemote {
+public class AdminBean implements AdminRemote  {
     
     @PersistenceContext
     private EntityManager entityManager;
-    
     
     /*------------------------------------------------------------------*/
     /*					Creation des marques							*/
@@ -93,7 +92,7 @@ public class AdminBean implements AdminRemote {
     }
     
     public void deleteLabel(int id) throws Exception {
-	entityManager.remove(getLabel(id));
+        entityManager.remove(getLabel(id));
     }
     
     public void deleteLabels() throws Exception {
@@ -162,7 +161,7 @@ public class AdminBean implements AdminRemote {
     }
     
     public void deleteColor(int id) throws Exception {
-	entityManager.remove(getColor(id));
+        entityManager.remove(getColor(id));
     }
     
     public void deleteColors() throws Exception {
@@ -230,7 +229,7 @@ public class AdminBean implements AdminRemote {
     }
     
     public void deleteCategory(int id) throws Exception {
-	entityManager.remove(getCategory(id));
+        entityManager.remove(getCategory(id));
     }
     
     public void deleteCategories() throws Exception {
@@ -387,7 +386,7 @@ public class AdminBean implements AdminRemote {
     }
     
     public void deleteProduct (int id) throws Exception {
-	entityManager.remove(getProduct(id));
+        entityManager.remove(getProduct(id));
     }
     
     public void deleteProducts() throws Exception {

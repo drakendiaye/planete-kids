@@ -1,8 +1,8 @@
 package planetekids.beans.entity;
 
 import java.io.Serializable;
-import java.util.SortedSet;
-import java.util.TreeSet;
+import java.util.HashSet;
+import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -12,8 +12,8 @@ import javax.persistence.Id;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
-import org.hibernate.annotations.Sort;
-import org.hibernate.annotations.SortType;
+import javax.persistence.PreRemove;
+import javax.persistence.Transient;
 
 @Entity
 @NamedQuery(name = "getCategories", query = "select o FROM CategoryBean o")
@@ -30,9 +30,7 @@ public class CategoryBean implements Serializable {
     private LocaleBean description;
     
     @OneToMany(mappedBy="category", fetch=FetchType.EAGER, cascade=CascadeType.ALL)
-    @org.hibernate.annotations.Cascade(org.hibernate.annotations.CascadeType.DELETE_ORPHAN)
-    @Sort(type=SortType.NATURAL)
-    private SortedSet<ProductBean> products = new TreeSet<ProductBean>();
+    private Set<ProductBean> products = new HashSet<ProductBean>();
     
     private String image_large;
     private String image_medium;
@@ -88,11 +86,11 @@ public class CategoryBean implements Serializable {
         this.description = description;
     }
 
-    public SortedSet<ProductBean> getProducts() {
+    public Set<ProductBean> getProducts() {
         return products;
     }
 
-    public void setProducts(SortedSet<ProductBean> products) {
+    public void setProducts(Set<ProductBean> products) {
         this.products = products;
     }
     
@@ -118,5 +116,13 @@ public class CategoryBean implements Serializable {
 
     public void setImage_small(String image_small) {
         this.image_small = image_small;
+    }
+    
+    @Transient
+    public boolean removing = false;
+
+    @PreRemove
+    public void cleanAssociations() {
+        removing = true;
     }
 }
