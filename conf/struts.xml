@@ -228,4 +228,24 @@
         </action>
         
     </package>
+    
+    <package name="admin" namespace="/admin" extends="struts-default">    
+        <action name="index" class="planetekids.actions.admin.IndexAction">
+            <result>/admin/index.jsp</result>
+            <result name="error">/error.jsp</result>
+        </action>
+	
+	<action name="labels" class="planetekids.actions.admin.IndexAction">
+            <result>/admin/labels.jsp</result>
+            <result name="error">/error.jsp</result>
+        </action>
+	
+	<action name="labels_modify" class="planetekids.actions.admin.IndexAction">
+            <result>/admin/labels_modify.jsp</result>
+            <result name="error">/error.jsp</result>
+        </action>
+	
+	
+    </package>
+    
 </struts>
