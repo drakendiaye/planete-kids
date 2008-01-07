@@ -30,25 +30,50 @@
         <s:div id="pagecenter">
         <s:div id="topmenu">
         <s:div id="previous" >
-            <s:a onclick="	navPrevious();
+            <s:a onclick="	
                  if(navHasPrevious()) {
-                 dojo.byId('img_next').src = 'images/next_enable.png';
-                 } else {
-                 dojo.byId('img_previous').src = 'images/previous_disable.png';
+                     navPrevious();
+                     dojo.byId('img_next').src = 'images/next_enable.png';
+                     if(!navHasPrevious()) {
+                        dojo.byId('img_previous').src = 'images/previous_disable.png';
+                     }
                  }
                  "><img id="img_previous" src="images/previous_disable.png" /></s:a>
         </s:div>
         <s:div id="next">
-            <s:a onclick="	navNext();
-                 if(navHasNext()) {
-                 dojo.byId('img_previous').src = 'images/previous_enable.png';
-                 } else {
-                 dojo.byId('img_next').src = 'images/next_disable.png';
-                 }
-                 "><img id="img_next" src="images/next_disable.png" /></s:a>
+            <s:a onclick="	
+                if(navHasNext()) {
+                    navNext();
+                    dojo.byId('img_previous').src = 'images/previous_enable.png';
+                    if(!navHasNext()) {
+                        dojo.byId('img_next').src = 'images/next_disable.png';
+                    }
+                }
+            "><img id="img_next" src="images/next_disable.png" /></s:a>
         </s:div>
         <s:div id="refresh">
             <s:a onclick="navRefresh(true)"><img id="refresh_img" src="images/refresh.png" /></s:a>
+        </s:div>
+        <s:div id="loginout">
+            <form id="logout_callback" method="post">
+                <s:hidden name="callback" value="
+                    navPrevious();
+                    nav_next = new Array();
+                    dojo.byId('img_next').src = 'images/next_disable.png';
+                    dojo.byId('loginout_img').src = 'images/login.png';
+                "/>
+            </form>
+            <s:url id="url_account_content" namespace="/account" action="index_content" includeParams="none"/>
+            <s:url id="url_account_location" namespace="/account" action="index_location" includeParams="none"/>
+            <s:url id="url_logout" namespace="/" action="index_logout" includeParams="none"/>
+            <s:a onclick="
+                if(dojo.byId('loginout_img').src.indexOf('images/login.png') != -1) {
+                    navGo([new navRequest('content', '%{url_account_content}'),
+                    new navRequest('location', '%{url_account_location}')]);
+                } else {
+                    navGo([new navRequest('content', '%{url_logout}', null, null, 'logout_callback')]);
+                }
+            "><img id="loginout_img" src="images/login.png" /></s:a>
         </s:div>
         <s:div id="location" />
             <s:div id="frflag" >

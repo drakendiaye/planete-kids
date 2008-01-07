@@ -25,7 +25,7 @@ public class QuestionnaireAction extends ActionSupport implements SessionAware, 
         this.parameters = parameters;
     }
 
-    private CustomerRemote getCustomer() {
+    public CustomerRemote getCustomer() {
         return (CustomerRemote) session.get("customer");
     }
 

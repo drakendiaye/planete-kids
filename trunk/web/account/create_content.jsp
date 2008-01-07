@@ -5,9 +5,9 @@
 <s:div cssClass="main">
     <div class="category">
         <form id="create" method="post">
-            
+            <s:hidden name="test" value="coucou"/>
             <s:url id="url_content" namespace="/account" action="create_submit" includeParams="none"/>
-            <s:submit onclick="navExec(new navRequest('content', '%{url_content}', null, null, 'identify'))"/>
+            <s:submit onclick="navExec(new navRequest('content', '%{url_content}', null, null, 'create'))"/>
         </form>
     </div>
 </s:div>
