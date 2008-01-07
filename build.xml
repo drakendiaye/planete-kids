@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project name="planete-kids" default="build" basedir=".">
     <property environment="myenv" />
-    <!--<property name="jonas.root" value="${myenv.JONAS_ROOT}" />-->
-    <property name="jonas.root" value="C:\Users\guillaume\Desktop\jonas" />
+    <property name="jonas.root" value="${myenv.JONAS_ROOT}" />
+    <!--<property name="jonas.root" value="C:\Users\guillaume\Desktop\jonas" />-->
     
     <target name="build">
         <mkdir dir="build" />
