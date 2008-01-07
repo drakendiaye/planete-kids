@@ -1,9 +1,9 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
 <%@ taglib prefix="s" uri="/struts-tags" %>
 
-<h2><s:text name="create"/></h2>
+<h2><s:text name="modify"/></h2>
 <s:div cssClass="main">
-    <form id="create" method="post" name="create">
+    <form id="modify" method="post" name="modify">
         <table class="account">
             <tr>
                 <td align="right">
@@ -87,7 +87,7 @@
             </tr>
             <tr>
                 <td colspan="2" align="center">
-                    <s:url id="url_content" namespace="/account" action="create_submit" includeParams="none"/>
+                    <s:url id="url_content" namespace="/account" action="modify_submit" includeParams="none"/>
                     <input type="submit" value="<s:text name="submit"/>" class="button" onclick="navExec(new navRequest('content', '<s:property value="url_content"/>', null, null, 'create'))"/>
                 </td>
             </tr>

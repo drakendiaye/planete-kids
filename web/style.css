@@ -1,6 +1,7 @@
 body {
 	background-image: url('images/background.png');
-	background-repeat: repeat-x
+	background-repeat: repeat-x;
+        background-color : #76c45d ;
 }
 
 h1 {
@@ -292,8 +293,22 @@ div.product {
 	border-style : solid;
         border-color : black;
         border-width : 1px;  
-	color: #ffffff;
-        background-color: #75c45d;
+	color: #75c45d;
+        background-color: #ffffff;
 	font-weight: bold;
 	cursor: hand;
+}
+
+
+table.account { 
+        width :610px;
+        margin-top :20px;
+        margin-left :auto;
+        margin-right :auto;
+        color :#000000;
+        background-color :#75c45d;
+        border : 3px;
+        border-style : solid;
+        border-color : black;
+        border-collapse: collapse;
 }
