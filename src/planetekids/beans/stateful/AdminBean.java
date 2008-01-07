@@ -86,9 +86,10 @@ public class AdminBean implements AdminRemote  {
         label.setImage_small(image);
     }
     
-    public void createLabel(String name_fr, String name_en, String description_fr, String description_en, String site, String image_large, String image_medium, String image_small) throws Exception {
+    public int createLabel(String name_fr, String name_en, String description_fr, String description_en, String site, String image_large, String image_medium, String image_small) throws Exception {
         LabelBean label = new LabelBean(new LocaleBean(name_fr, name_en), new LocaleBean(description_fr, description_en), site, image_large, image_medium, image_small);
         entityManager.persist(label);
+        return label.getId();
     }
     
     public void deleteLabel(int id) throws Exception {
@@ -155,9 +156,10 @@ public class AdminBean implements AdminRemote  {
         color.setImage_small(image);
     }
     
-    public void createColor(String name_fr, String name_en, String description_fr, String description_en, String image_large, String image_medium, String image_small) throws Exception {
+    public int createColor(String name_fr, String name_en, String description_fr, String description_en, String image_large, String image_medium, String image_small) throws Exception {
         ColorBean color = new ColorBean(new LocaleBean(name_fr, name_en), new LocaleBean(description_fr, description_en), image_large, image_medium, image_small);
         entityManager.persist(color);
+        return color.getId();
     }
     
     public void deleteColor(int id) throws Exception {
@@ -223,9 +225,10 @@ public class AdminBean implements AdminRemote  {
         category.setImage_small(image);
     }
     
-    public void createCategory(String name_fr, String name_en, String description_fr, String description_en, String image_large, String image_medium, String image_small) throws Exception {
+    public int createCategory(String name_fr, String name_en, String description_fr, String description_en, String image_large, String image_medium, String image_small) throws Exception {
         CategoryBean category = new CategoryBean(new LocaleBean(name_fr, name_en), new LocaleBean(description_fr, description_en), image_large, image_medium, image_small);
 	entityManager.persist(category);
+        return category.getId();
     }
     
     public void deleteCategory(int id) throws Exception {
@@ -377,12 +380,13 @@ public class AdminBean implements AdminRemote  {
         product.setImage_small(image);
     }
     
-    public void createProduct(String name_fr, String name_en, String description_fr, String description_en, int category_id, int color_id, int label_id, float price, int stock, String image_large, String image_medium, String image_small) throws Exception {
-        CategoryBean category = entityManager.find(CategoryBean.class, category_id);
+    public int createProduct(String name_fr, String name_en, String description_fr, String description_en, int category_id, int color_id, int label_id, float price, int stock, String image_large, String image_medium, String image_small) throws Exception {
+        CategoryBean category = getCategory(category_id);
         ColorBean color = getColor(color_id);
         LabelBean label = getLabel(label_id);
         ProductBean product = new ProductBean(new LocaleBean(name_fr, name_en), new LocaleBean(description_fr, description_en), category, color, label, price, stock, image_large, image_medium, image_small);
         entityManager.persist(product);
+        return product.getId();
     }
     
     public void deleteProduct (int id) throws Exception {

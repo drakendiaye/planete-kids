@@ -12,7 +12,6 @@ import planetekids.beans.entity.AccountBean;
 import planetekids.beans.entity.CategoryBean;
 import planetekids.beans.entity.ColorBean;
 import planetekids.beans.entity.LabelBean;
-import planetekids.beans.entity.LocaleBean;
 import planetekids.beans.entity.ProductBean;
 import planetekids.beans.entity.QuestionBean;
 import planetekids.beans.entity.QuestionnaireBean;
@@ -28,7 +27,7 @@ public interface AdminRemote {
     public void setLabelImageLarge(int id, String image) throws Exception;
     public void setLabelImageMedium(int id, String image) throws Exception;
     public void setLabelImageSmall(int id, String image) throws Exception;
-    public void createLabel(String name_fr, String name_en, String description_fr, String description_en, String site, String image_large, String image_medium, String image_small) throws Exception;
+    public int createLabel(String name_fr, String name_en, String description_fr, String description_en, String site, String image_large, String image_medium, String image_small) throws Exception;
     public void deleteLabel(int id) throws Exception;
     public void deleteLabels() throws Exception;
     
@@ -41,7 +40,7 @@ public interface AdminRemote {
     public void setColorImageLarge(int id, String image) throws Exception;
     public void setColorImageMedium(int id, String image) throws Exception;
     public void setColorImageSmall(int id, String image) throws Exception;
-    public void createColor(String name_fr, String name_en, String description_fr, String description_en, String image_large, String image_medium, String image_small) throws Exception;
+    public int createColor(String name_fr, String name_en, String description_fr, String description_en, String image_large, String image_medium, String image_small) throws Exception;
     public void deleteColor(int id) throws Exception;
     public void deleteColors() throws Exception;
     
@@ -54,7 +53,7 @@ public interface AdminRemote {
     public void setCategoryImageLarge(int id, String image) throws Exception;
     public void setCategoryImageMedium(int id, String image) throws Exception;
     public void setCategoryImageSmall(int id, String image) throws Exception;
-    public void createCategory(String name_fr, String name_en, String description_fr, String description_en, String image_large, String image_medium, String image_small) throws Exception;
+    public int createCategory(String name_fr, String name_en, String description_fr, String description_en, String image_large, String image_medium, String image_small) throws Exception;
     public void deleteCategory(int id) throws Exception;
     public void deleteCategories() throws Exception;
     
@@ -76,7 +75,7 @@ public interface AdminRemote {
     public void setProductImageLarge(int id, String image) throws Exception;
     public void setProductImageMedium(int id, String image) throws Exception;
     public void setProductImageSmall(int id, String image) throws Exception;
-    public void createProduct(String name_fr, String name_en, String description_fr, String description_en, int category_id, int color_id, int label_id, float price, int stock, String image_large, String image_medium, String image_small) throws Exception;
+    public int createProduct(String name_fr, String name_en, String description_fr, String description_en, int category_id, int color_id, int label_id, float price, int stock, String image_large, String image_medium, String image_small) throws Exception;
     public void deleteProduct (int id) throws Exception;
     public void deleteProducts() throws Exception;
     
