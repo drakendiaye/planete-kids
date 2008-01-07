@@ -108,6 +108,12 @@ img {
   float : left;
 }
 
+#loginout {
+  width :20px;
+  height :20px;
+  float : left;
+}
+
 #frflag {
   width :32px;
   height :20px;
@@ -121,7 +127,7 @@ img {
 }
 
 #location {
-  width :526px;
+  width :506px;
   height :20px;
   float : left;
   font-size :8px;

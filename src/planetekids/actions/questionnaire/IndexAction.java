@@ -18,7 +18,7 @@ public class IndexAction extends ActionSupport implements SessionAware {
         this.session = session;
     }
     
-    private CustomerRemote getCustomer() {
+    public CustomerRemote getCustomer() {
         return (CustomerRemote)session.get("customer");
     }
     
