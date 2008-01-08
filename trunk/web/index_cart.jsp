@@ -13,6 +13,17 @@
 </table>
 
 <s:div>
+    <s:property value="getCartPrice()"/>
+    <form id="product_<s:property value="getId()"/>_flush_form">
+        <s:hidden name="flush"/>
+        <s:url id="url" namespace="/" action="index_cart" includeParams="none"/>
+        <input type="submit" value="Vider le panier" class="button"onclick="navExec(new navRequest('cart', '<s:property value="url"/>', null, null, 'product_<s:property value="getId()" />_flush_form')); return(false);">
+    </form>
+    <form id="product_<s:property value="getId()"/>_validate_form">
+        <s:hidden name="validate"/>
+        <s:url id="url" namespace="/" action="index_cart" includeParams="none"/>
+        <input type="submit" value="Valider le panier" class="button"onclick="navExec(new navRequest('cart', '<s:property value="url"/>', null, null, 'product_<s:property value="getId()" />_validate_form')); return(false);">
+    </form>
     <s:iterator value="getCartProducts()">
         <script type="text/javascript">coldiv_load('cart_<s:property value="getId()" />');</script>
         <s:hidden id="cart_%{getId()}" value="{ init : false, col_img : 'images/down_enable.png', uncol_img : 'images/up_enable.png'}"/>

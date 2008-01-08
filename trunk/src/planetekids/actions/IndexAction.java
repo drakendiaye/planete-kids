@@ -88,6 +88,10 @@ public class IndexAction extends ActionSupport implements SessionAware, Paramete
     public int validateCart() throws Exception {
         return getCustomer().validateCart();
     }
+    
+    public float getCartPrice() throws Exception {
+        return getCustomer().getCartPrice();
+    }
 
     public List<ProductBean> getCartProducts() throws Exception {
         return getCustomer().getCartProducts();
