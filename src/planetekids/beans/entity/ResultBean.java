@@ -1,14 +1,11 @@
 package planetekids.beans.entity;
 
 import java.io.Serializable;
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
-import javax.persistence.PostRemove;
-import javax.persistence.PreRemove;
 
 @Entity
 public class ResultBean implements Serializable {
@@ -66,7 +63,7 @@ public class ResultBean implements Serializable {
         this.comment = comment;
     }
     
-    @PreRemove
+    /*@PreRemove
     public void titi() {
 	System.out.println("\n\n\nremoving result : " + this.getId() + "\n\n\n");
     }
@@ -74,5 +71,5 @@ public class ResultBean implements Serializable {
     @PostRemove
     public void toto(){
 	System.out.println("result id : " + this.getId() + " removed");
-    }
+    }*/
 }

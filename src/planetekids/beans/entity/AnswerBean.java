@@ -12,8 +12,6 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
-import javax.persistence.PostRemove;
-import javax.persistence.PreRemove;
 
 @Entity
 public class AnswerBean implements Serializable, Comparable<AnswerBean> {
@@ -104,7 +102,7 @@ public class AnswerBean implements Serializable, Comparable<AnswerBean> {
         return(0);
     }
     
-    @PreRemove
+    /*@PreRemove
     public void titi() {
 	System.out.println("removing answer : " + this.getId());
     }
@@ -112,5 +110,5 @@ public class AnswerBean implements Serializable, Comparable<AnswerBean> {
     @PostRemove
     public void toto(){
 	System.out.println("answer id : " + this.getId() + " removed");
-    }
+    }*/
 }

@@ -3,7 +3,6 @@ package planetekids.beans.entity;
 import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
-
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -13,7 +12,6 @@ import javax.persistence.Id;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
-import javax.persistence.PostRemove;
 import javax.persistence.PreRemove;
 import javax.persistence.Transient;
 
@@ -94,12 +92,12 @@ public class AgeBean implements Serializable{
 
     @PreRemove
     public void cleanAssociations() {
-	System.out.println("removing Age id : " +this.getId());
+	//System.out.println("removing Age id : " +this.getId());
 	removing = true;
     }
     
-    @PostRemove
+    /*@PostRemove
     public void toto(){
 	System.out.println("Age id : " + this.getId() + " removed");
-    }
+    }*/
 }
