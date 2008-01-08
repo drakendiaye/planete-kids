@@ -38,7 +38,7 @@
                         dojo.byId('img_previous').src = 'images/previous_disable.png';
                      }
                  }
-                 "><img id="img_previous" src="images/previous_disable.png" onmouseover="show('Précédent')" onmouseout="hide()" /></s:a>
+                 "><img id="img_previous" src="images/previous_disable.png" onmouseover="show('Prï¿½cï¿½dent')" onmouseout="hide()" /></s:a>
         </s:div>
         <s:div id="next">
             <s:a onclick="	
@@ -73,7 +73,7 @@
                 } else {
                     navGo([new navRequest('content', '%{url_logout}', null, null, 'logout_callback')]);
                 }
-            "><img id="loginout_img" src="images/login.png" onmouseover="if (dojo.byId('loginout_img').src == 'images/login.png') show('Se délogger') else show('Se logger');" onmouseout="hide()" /></s:a>
+            "><img id="loginout_img" src="images/login.png" onmouseover="if (dojo.byId('loginout_img').src == 'images/login.png') show('Se d&Eacute;logger'); else show('Se logger');" onmouseout="hide()" /></s:a>
         </s:div>
         <s:div id="location" />
             <s:div id="frflag" >

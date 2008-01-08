@@ -1,8 +1,21 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
 <%@ taglib prefix="s" uri="/struts-tags" %>
 
-<h2><s:text name="product"/></h2>
-<s:div cssClass="main">
+<s:div cssClass="contentHeader">
+    <h2>
+        <s:text name="product"/>
+        <s:if test="getPages().size() > 1">
+            <form id="pageForm" method="post" style="display: none">
+                <s:hidden id="page_number" name="page"/>
+            </form>
+            <s:url id="url" namespace="/product" action="index_content" includeParams="none"/>
+            <s:iterator value="getPages()">
+                <input type="button" class="button" value="<s:property value="intValue()"/>" onclick="dojo.byId('page_number').value = <s:property value="intValue()"/>;navExec(new navRequest('content', '<s:property value="url"/>', null, null, 'pageForm'));"/>
+            </s:iterator>
+        </s:if>
+    </h2>
+</s:div>
+<s:div cssClass="contentMain">
     <s:iterator value="getProducts()">
         <script type="text/javascript">coldiv_load('product_<s:property value="getId()" />');</script>
         <s:hidden id="product_%{getId()}" value="{ init : false, col_img : 'images/down_enable.png', uncol_img : 'images/up_enable.png'}"/>
