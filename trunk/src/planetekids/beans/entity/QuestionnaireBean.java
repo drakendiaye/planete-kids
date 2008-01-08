@@ -12,6 +12,8 @@ import javax.persistence.Id;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import javax.persistence.PreRemove;
+
 import org.hibernate.annotations.Sort;
 import org.hibernate.annotations.SortType;
 
@@ -83,4 +85,9 @@ public class QuestionnaireBean implements Serializable {
         this.description = description;
     }
 
+    @PreRemove
+    public void titi() {
+	System.out.println("removing questionnaire : " + this.getId());
+    }
+    
 }

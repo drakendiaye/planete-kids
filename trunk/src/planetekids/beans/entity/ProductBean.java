@@ -10,6 +10,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToOne;
+import javax.persistence.PostRemove;
 import javax.persistence.PreRemove;
 
 @Entity
@@ -186,5 +187,11 @@ public class ProductBean implements java.io.Serializable {
         if (!color.removing) color.getProducts().remove(this);
         if (!label.removing) label.getProducts().remove(this);
         if (!age.removing) age.getProducts().remove(this);
+        System.out.println("removing product id : " +this.getId());
+    }
+    
+    @PostRemove
+    public void toto(){
+	System.out.println("Product id : " + this.getId() + " removed");
     }
 }

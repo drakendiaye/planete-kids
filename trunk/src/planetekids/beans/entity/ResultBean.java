@@ -7,6 +7,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.PreRemove;
 
 @Entity
 public class ResultBean implements Serializable {
@@ -64,4 +65,8 @@ public class ResultBean implements Serializable {
         this.comment = comment;
     }
     
+    @PreRemove
+    public void titi() {
+	System.out.println("\n\n\nremoving result : " + this.getId() + "\n\n\n");
+    }
 }

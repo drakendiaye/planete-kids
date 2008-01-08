@@ -513,6 +513,7 @@ public class AdminBean implements AdminRemote  {
     }
     
     public void deleteQuestionnaires() throws Exception {
+	System.out.println("coucou");
 	List<QuestionnaireBean> questionnaires = getQuestionnaires();
 	if (questionnaires != null) {
 	    Iterator iterator = questionnaires.iterator();
@@ -557,6 +558,7 @@ public class AdminBean implements AdminRemote  {
     }
     
     public void deleteAccounts() throws Exception {
+	System.out.println("\n\ndelete accounts\n\n");
 	List<AccountBean> accounts = getAccounts();
 	if (accounts != null) {
 	    Iterator iterator = accounts.iterator();

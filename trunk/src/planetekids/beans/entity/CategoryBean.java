@@ -12,6 +12,7 @@ import javax.persistence.Id;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import javax.persistence.PostRemove;
 import javax.persistence.PreRemove;
 import javax.persistence.Transient;
 
@@ -122,7 +123,13 @@ public class CategoryBean implements Serializable {
     public boolean removing = false;
 
     @PreRemove
-    public void cleanAssociations() {
-        removing = true;
+    public void titi(){
+	System.out.println("removing category id : " +this.getId());
+	removing = true;
+    }
+    
+    @PostRemove
+    public void toto(){
+	System.out.println("category id : " + this.getId() + " removed");
     }
 }

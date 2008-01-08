@@ -12,6 +12,7 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import javax.persistence.PreRemove;
 
 @Entity
 public class AnswerBean implements Serializable, Comparable<AnswerBean> {
@@ -23,7 +24,7 @@ public class AnswerBean implements Serializable, Comparable<AnswerBean> {
     @ManyToOne(optional=false)
     private QuestionBean question;
     
-    @OneToMany(mappedBy="answer", fetch = FetchType.LAZY, cascade=CascadeType.ALL)
+    @OneToMany(mappedBy="answer", fetch = FetchType.EAGER, cascade=CascadeType.ALL)
     private Set<ResultBean> results = new HashSet<ResultBean>();
     
     @OneToOne(fetch=FetchType.EAGER, cascade=CascadeType.ALL, optional=false)
@@ -102,4 +103,8 @@ public class AnswerBean implements Serializable, Comparable<AnswerBean> {
         return(0);
     }
     
+    @PreRemove
+    public void titi() {
+	System.out.println("removing answer : " + this.getId());
+    }
 }
