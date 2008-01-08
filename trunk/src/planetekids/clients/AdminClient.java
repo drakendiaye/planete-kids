@@ -7,6 +7,7 @@ import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.transaction.UserTransaction;
 import planetekids.beans.entity.AccountBean;
+import planetekids.beans.entity.AgeBean;
 import planetekids.beans.entity.CategoryBean;
 import planetekids.beans.entity.ColorBean;
 import planetekids.beans.entity.LabelBean;
@@ -40,8 +41,9 @@ public class AdminClient {
 		System.out.println("1 = manage labels");
 		System.out.println("2 = manage colors");
 		System.out.println("3 = manage categories");
-		System.out.println("4 = manage products");
-		System.out.println("5 = manage customers");
+		System.out.println("4 = manage ages");
+		System.out.println("5 = manage products");
+		System.out.println("6 = manage customers");
 		System.out.println("------------------------------------------------------");
 		System.out.print(">");
 		int choice = Tx.readInt();
@@ -55,8 +57,10 @@ public class AdminClient {
 		} else if (choice == 3) {
 		    manageCategories(utx, admin);
 		} else if (choice == 4) {
-		    manageProducts(utx, admin);
+		    manageAges(utx, admin);
 		} else if (choice == 5) {
+		    manageProducts(utx, admin);
+		} else if (choice == 6) {
 		    manageCustomers(utx, admin);
 		} else {
 		    System.out.println("Bad choice");
@@ -773,6 +777,192 @@ public class AdminClient {
 	}
     }
 
+    static void manageAges(UserTransaction utx, AdminRemote admin) throws Exception {
+	while (true) {
+	    try {
+		System.out.println("------------------------------------------------------");
+		System.out.println("Manage Ages");
+		System.out.println("0 = return");
+		System.out.println("1 = view ages list");
+		System.out.println("2 = create an age");
+		System.out.println("3 = modify an age");
+		System.out.println("4 = delete an age");
+		System.out.println("------------------------------------------------------");
+		System.out.print(">");
+
+		int choice = Tx.readInt();
+
+		if (choice == 0) {
+		    return;
+		} else if (choice == 1) {
+		    List<AgeBean> ages = null;
+		    try {
+			utx.begin();
+			ages = admin.getAges();
+			utx.commit();
+		    } catch (Exception ex) {
+			utx.rollback();
+			throw ex;
+		    }
+		    if (ages != null) {
+			Iterator iterator = ages.iterator();
+			while (iterator.hasNext()) {
+			    AgeBean age = (AgeBean) iterator.next();
+			    System.out.println("id : " + age.getId());
+			    System.out.println("name french : " + age.getName().getFr());
+			    System.out.println("name english : " + age.getName().getEn());
+			    System.out.println("description french : " + age.getDescription().getFr());
+			    System.out.println("description english : " + age.getDescription().getEn());
+			    System.out.println("");
+			}
+		    }
+		} else if (choice == 2) {
+		    System.out.print("name french: ");
+		    String name_fr = Tx.readString();
+		    System.out.print("name english: ");
+		    String name_en = Tx.readString();
+		    System.out.print("description french: ");
+		    String description_fr = Tx.readString();
+		    System.out.print("description english: ");
+		    String description_en = Tx.readString();
+		    try {
+			utx.begin();
+			admin.createAge(name_fr, name_en, description_fr, description_en);
+			utx.commit();
+		    } catch (Exception ex) {
+			utx.rollback();
+			throw ex;
+		    }
+		    System.out.println("age successfully created");
+		} else if (choice == 3) {
+		    System.out.print("id : ");
+		    int id = Tx.readInt();
+		    while (true) {
+			try {
+			    AgeBean age = null;
+			    try {
+				utx.begin();
+				age = admin.getAge(id);
+				utx.commit();
+			    } catch (Exception ex) {
+				utx.rollback();
+				throw ex;
+			    }
+			    if (age == null) {
+				System.out.println("Age id " + id + " does not exist");
+				break;
+			    }
+			    System.out.println("------------------------------------------------------");
+			    System.out.println("Modify Age ");
+			    System.out.println("id : " + age.getId());
+			    System.out.println("name french : " + age.getName().getFr());
+			    System.out.println("name english : " + age.getName().getEn());
+			    System.out.println("description french : " + age.getDescription().getFr());
+			    System.out.println("description english : " + age.getDescription().getEn());
+			    System.out.println("------------------------------------------------------");
+			    System.out.println("0 = return");
+			    System.out.println("1 = modify name french");
+			    System.out.println("2 = modify name english");
+			    System.out.println("3 = modify description french");
+			    System.out.println("4 = modify description english");
+			    System.out.println("------------------------------------------------------");
+			    System.out.print(">");
+			    choice = Tx.readInt();
+
+			    if (choice == 0) {
+				break;
+			    } else if (choice == 1) {
+				System.out.print("name french : ");
+				String name = Tx.readString();
+				try {
+				    utx.begin();
+				    admin.setAgeNameFr(id, name);
+				    utx.commit();
+				} catch (Exception ex) {
+				    utx.rollback();
+				    throw ex;
+				}
+				System.out.println("age successfully updated");
+			    } else if (choice == 2) {
+				System.out.print("name en : ");
+				String name = Tx.readString();
+				try {
+				    utx.begin();
+				    admin.setAgeNameEn(id, name);
+				    utx.commit();
+				} catch (Exception ex) {
+				    utx.rollback();
+				    throw ex;
+				}
+				System.out.println("age successfully updated");
+			    } else if (choice == 3) {
+				System.out.print("description french : ");
+				String description = Tx.readString();
+				try {
+				    utx.begin();
+				    admin.setAgeDescriptionFr(id, description);
+				    utx.commit();
+				} catch (Exception ex) {
+				    utx.rollback();
+				    throw ex;
+				}
+				System.out.println("age successfully updated");
+			    } else if (choice == 4) {
+				System.out.print("description en : ");
+				String description = Tx.readString();
+				try {
+				    utx.begin();
+				    admin.setAgeDescriptionEn(id, description);
+				    utx.commit();
+				} catch (Exception ex) {
+				    utx.rollback();
+				    throw ex;
+				}
+				System.out.println("age successfully updated");
+			    } else {
+				System.out.println("Bad choice");
+			    }
+			} catch (Exception ex) {
+			    System.out.println("error : " + ex.getMessage());
+			}
+		    }
+		} else if (choice == 4) {
+		    System.out.print("id : ");
+		    int id = Tx.readInt();
+		    try {
+			AgeBean age;
+			try {
+			    utx.begin();
+			    age = admin.getAge(id);
+			    utx.commit();
+			} catch (Exception ex) {
+			    utx.rollback();
+			    throw ex;
+			}
+			if (age == null) {
+			    System.out.println("Age id " + id + " does not exist");
+			    break;
+			}
+			try {
+			    utx.begin();
+			    admin.deleteAge(id);
+			    utx.commit();
+			} catch (Exception ex) {
+			    utx.rollback();
+			    System.out.println("error : " + ex.getMessage());
+			}
+		    } catch (Exception ex) {
+			System.out.println("error : " + ex.getMessage());
+		    }
+		} else {
+		    System.out.println("Bad choice");
+		}
+	    } catch (Exception ex) {
+		System.out.println("error : " + ex.getMessage());
+	    }
+	}
+    }
+    
     static void manageProducts(UserTransaction utx, AdminRemote admin) throws Exception {
 	while (true) {
 	    try {
@@ -783,10 +973,11 @@ public class AdminClient {
 		System.out.println("2 = find products by category");
 		System.out.println("3 = find products by color");
 		System.out.println("4 = find products by label");
-		System.out.println("5 = find products by filter");
-		System.out.println("6 = create a product");
-		System.out.println("7 = modify a product");
-		System.out.println("8 = delete a product");
+		System.out.println("5 = find products by age");
+		System.out.println("6 = find products by filter");
+		System.out.println("7 = create a product");
+		System.out.println("8 = modify a product");
+		System.out.println("9 = delete a product");
 		System.out.println("------------------------------------------------------");
 		System.out.print(">");
 
@@ -816,6 +1007,7 @@ public class AdminClient {
 			    System.out.println("category : " + product.getCategory().getId());
 			    System.out.println("color : " + product.getColor().getId());
 			    System.out.println("label : " + product.getLabel().getId());
+			    System.out.println("age : " + product.getAge().getId());
 			    System.out.println("price : " + product.getPrice());
 			    System.out.println("stock : " + product.getStock());
 			    System.out.println("image large : " + product.getImage_large());
@@ -848,6 +1040,7 @@ public class AdminClient {
 			    System.out.println("category : " + product.getCategory().getId());
 			    System.out.println("color : " + product.getColor().getId());
 			    System.out.println("label : " + product.getLabel().getId());
+			    System.out.println("age : " + product.getAge().getId());
 			    System.out.println("price : " + product.getPrice());
 			    System.out.println("stock : " + product.getStock());
 			    System.out.println("image large : " + product.getImage_large());
@@ -880,6 +1073,7 @@ public class AdminClient {
 			    System.out.println("category : " + product.getCategory().getId());
 			    System.out.println("color : " + product.getColor().getId());
 			    System.out.println("label : " + product.getLabel().getId());
+			    System.out.println("age : " + product.getAge().getId());
 			    System.out.println("price : " + product.getPrice());
 			    System.out.println("stock : " + product.getStock());
 			    System.out.println("image large : " + product.getImage_large());
@@ -912,6 +1106,7 @@ public class AdminClient {
 			    System.out.println("category : " + product.getCategory().getId());
 			    System.out.println("color : " + product.getColor().getId());
 			    System.out.println("label : " + product.getLabel().getId());
+			    System.out.println("age : " + product.getAge().getId());
 			    System.out.println("price : " + product.getPrice());
 			    System.out.println("stock : " + product.getStock());
 			    System.out.println("image large : " + product.getImage_large());
@@ -921,6 +1116,39 @@ public class AdminClient {
 			}
 		    }
 		} else if (choice == 5) {
+		    System.out.print("age : ");
+		    int age_id = Tx.readInt();
+		    List<ProductBean> products = null;
+		    try {
+			utx.begin();
+			products = admin.getProductsByAge(age_id);
+			utx.commit();
+		    } catch (Exception ex) {
+			utx.rollback();
+			throw ex;
+		    }
+		    if (products != null) {
+			Iterator iterator = products.iterator();
+			while (iterator.hasNext()) {
+			    ProductBean product = (ProductBean) iterator.next();
+			    System.out.println("id : " + product.getId());
+			    System.out.println("name french : " + product.getName().getFr());
+			    System.out.println("name english : " + product.getName().getEn());
+			    System.out.println("description french : " + product.getDescription().getFr());
+			    System.out.println("description english : " + product.getDescription().getEn());
+			    System.out.println("category : " + product.getCategory().getId());
+			    System.out.println("color : " + product.getColor().getId());
+			    System.out.println("label : " + product.getLabel().getId());
+			    System.out.println("age : " + product.getAge().getId());
+			    System.out.println("price : " + product.getPrice());
+			    System.out.println("stock : " + product.getStock());
+			    System.out.println("image large : " + product.getImage_large());
+			    System.out.println("image medium : " + product.getImage_medium());
+			    System.out.println("image small : " + product.getImage_small());
+			    System.out.println("");
+			}
+		    }
+		} else if (choice == 6) {
 		    String[] ids;
 		    System.out.print("Categories (coma separated) : ");
 		    String categories = Tx.readString();
@@ -947,6 +1175,15 @@ public class AdminClient {
 			ids = labels.split(",");
 			for (int i = 0; i < ids.length; i++) {
 			    label_ids.add(Integer.valueOf(ids[i]));
+			}
+		    }
+		    System.out.print("Age (coma separated) : ");
+		    String ages = Tx.readString();
+		    List<Integer> age_ids = new ArrayList<Integer>();
+		    if (!ages.equals("")) {
+			ids = ages.split(",");
+			for (int i = 0; i < ids.length; i++) {
+			    age_ids.add(Integer.valueOf(ids[i]));
 			}
 		    }
 		    System.out.print("operation (and/or) : ");
@@ -980,6 +1217,7 @@ public class AdminClient {
 			    System.out.println("category : " + product.getCategory().getId());
 			    System.out.println("color : " + product.getColor().getId());
 			    System.out.println("label : " + product.getLabel().getId());
+			    System.out.println("age : " + product.getAge().getId());
 			    System.out.println("price : " + product.getPrice());
 			    System.out.println("stock : " + product.getStock());
 			    System.out.println("image large : " + product.getImage_large());
@@ -988,7 +1226,7 @@ public class AdminClient {
 			    System.out.println("");
 			}
 		    }
-		} else if (choice == 6) {
+		} else if (choice == 7) {
 		    System.out.print("name french: ");
 		    String name_fr = Tx.readString();
 		    System.out.print("name english: ");
@@ -1003,6 +1241,8 @@ public class AdminClient {
 		    int color_id = Tx.readInt();
 		    System.out.print("label : ");
 		    int label_id = Tx.readInt();
+		    System.out.print("age : ");
+		    int age_id = Tx.readInt();
 		    System.out.print("price : ");
 		    float price = Tx.readFloat();
 		    System.out.print("stock : ");
@@ -1015,14 +1255,15 @@ public class AdminClient {
 		    String image_small = Tx.readString();
 		    try {
 			utx.begin();
-			admin.createProduct(name_fr, name_en, description_fr, description_en, category_id, color_id, label_id, price, stock, image_large, image_medium, image_small);
+			admin.createProduct(name_fr, name_en, description_fr, description_en, category_id, color_id, label_id, age_id,
+				price, stock, image_large, image_medium, image_small);
 			utx.commit();
 		    } catch (Exception ex) {
 			utx.rollback();
 			throw ex;
 		    }
 		    System.out.println("product successfully created");
-		} else if (choice == 7) {
+		} else if (choice == 8) {
 		    System.out.print("id : ");
 		    int id = Tx.readInt();
 		    while (true) {
@@ -1050,6 +1291,7 @@ public class AdminClient {
 			    System.out.println("category : " + product.getCategory().getId());
 			    System.out.println("color : " + product.getColor().getId());
 			    System.out.println("label : " + product.getLabel().getId());
+			    System.out.println("age : " + product.getAge().getId());
 			    System.out.println("price : " + product.getPrice());
 			    System.out.println("stock : " + product.getStock());
 			    System.out.println("image large : " + product.getImage_large());
@@ -1064,11 +1306,12 @@ public class AdminClient {
 			    System.out.println("5 = modify category");
 			    System.out.println("6 = modify color");
 			    System.out.println("7 = modify label");
-			    System.out.println("8 = modify price");
-			    System.out.println("9 = modify stock");
-			    System.out.println("10 = modify image_large");
-			    System.out.println("11 = modify image_medium");
-			    System.out.println("12 = modify image_small");
+			    System.out.println("8 = modify age");
+			    System.out.println("9 = modify price");
+			    System.out.println("10 = modify stock");
+			    System.out.println("11 = modify image_large");
+			    System.out.println("12 = modify image_medium");
+			    System.out.println("13 = modify image_small");
 			    System.out.println("------------------------------------------------------");
 			    System.out.print(">");
 			    choice = Tx.readInt();
@@ -1160,6 +1403,18 @@ public class AdminClient {
 				}
 				System.out.println("product successfully updated");
 			    } else if (choice == 8) {
+				System.out.print("age : ");
+				int age_id = Tx.readInt();
+				try {
+				    utx.begin();
+				    admin.setProductAge(id, age_id);
+				    utx.commit();
+				} catch (Exception ex) {
+				    utx.rollback();
+				    throw ex;
+				}
+				System.out.println("product successfully updated");
+			    } else if (choice == 9) {
 				System.out.print("price : ");
 				float price = Tx.readFloat();
 				try {
@@ -1171,7 +1426,7 @@ public class AdminClient {
 				    throw ex;
 				}
 				System.out.println("product successfully updated");
-			    } else if (choice == 9) {
+			    } else if (choice == 10) {
 				System.out.print("stock : ");
 				int stock = Tx.readInt();
 				try {
@@ -1183,7 +1438,7 @@ public class AdminClient {
 				    throw ex;
 				}
 				System.out.println("product successfully updated");
-			    } else if (choice == 10) {
+			    } else if (choice == 11) {
 				System.out.print("image large : ");
 				String image = Tx.readString();
 				try {
@@ -1195,7 +1450,7 @@ public class AdminClient {
 				    throw ex;
 				}
 				System.out.println("product successfully updated");
-			    } else if (choice == 11) {
+			    } else if (choice == 12) {
 				System.out.print("image medium : ");
 				String image = Tx.readString();
 				try {
@@ -1207,7 +1462,7 @@ public class AdminClient {
 				    throw ex;
 				}
 				System.out.println("product successfully updated");
-			    } else if (choice == 12) {
+			    } else if (choice == 13) {
 				System.out.print("image small : ");
 				String image = Tx.readString();
 				try {
@@ -1226,7 +1481,7 @@ public class AdminClient {
 			    System.out.println("error : " + ex.getMessage());
 			}
 		    }
-		} else if (choice == 8) {
+		} else if (choice == 9) {
 		    System.out.print("id : ");
 		    int id = Tx.readInt();
 		    try {
@@ -1337,7 +1592,8 @@ public class AdminClient {
 
 		    try {
 			utx.begin();
-			admin.createAccount(email, password, firstName, lastName, addressLine1, addressLine2, addressLine3, zipCode, city, phoneNumber, faxNumber);
+			admin.createAccount(email, password, firstName, lastName, addressLine1, addressLine2, addressLine3, zipCode, city,
+				phoneNumber, faxNumber);
 			utx.commit();
 		    } catch (Exception ex) {
 			utx.rollback();

@@ -15,6 +15,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import planetekids.beans.entity.AccountBean;
+import planetekids.beans.entity.AgeBean;
 import planetekids.beans.entity.AnswerBean;
 import planetekids.beans.entity.CategoryBean;
 import planetekids.beans.entity.ColorBean;
@@ -92,6 +93,14 @@ public class CustomerBean implements CustomerRemote {
 
     public CategoryBean getCategory(int id) throws Exception {
         return entityManager.find(CategoryBean.class, id);
+    }
+
+    public List<AgeBean> getAges() throws Exception {
+	return entityManager.createNamedQuery("getAges").getResultList();
+    }
+    
+    public AgeBean getAge(int id) throws Exception {
+	return entityManager.find(AgeBean.class, id);
     }
 
     public List<ProductBean> getProducts() throws Exception {

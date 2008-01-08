@@ -3,6 +3,7 @@ package planetekids.beans.stateful;
 import java.util.List;
 import javax.ejb.Remote;
 import planetekids.beans.entity.AccountBean;
+import planetekids.beans.entity.AgeBean;
 import planetekids.beans.entity.CategoryBean;
 import planetekids.beans.entity.ColorBean;
 import planetekids.beans.entity.LabelBean;
@@ -29,6 +30,9 @@ public interface CustomerRemote {
     
     public List<CategoryBean> getCategories() throws Exception;
     public CategoryBean getCategory(int id) throws Exception;
+    
+    public List<AgeBean> getAges() throws Exception;
+    public AgeBean getAge(int id) throws Exception;
     
     public List<ProductBean> getProducts() throws Exception;
     public List<ProductBean> getProductsByCategory(int category_id) throws Exception;
