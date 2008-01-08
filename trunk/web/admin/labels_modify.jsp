@@ -24,11 +24,21 @@
 	<div align=left>
 	<form method="post" name="labelform">
 	<table>
-	<tr>
-	<td>Name:</td>
-	<td><input type="text" value="<s:property value="getLabel(getLabelId()).getName()" />" /></td>
-	</tr>
-	</table>
+	<tr><td align=right>Name
+        <td><input type="text" name="name" value="<s:property value="getLabel(getLabelId()).getName()" />" size="35"/>
+	<tr><td align=right>Description (en)
+        <td><input type="text" name="description_fr" value="<s:property value="getLabel(getLabelId()).getDescription('en')" />" size="35"/>
+	<tr><td align=right>Description (fr)
+        <td><input type="text" name="description_en" value="<s:property value="getLabel(getLabelId()).getDescription('fr')" />" size="35"/>
+	<tr><td align=right>Site
+        <td><input type="text" name="site" value="<s:property value="getLabel(getLabelId()).getSite()" />" size="35"/>
+	<tr><td align=right>Image (large)
+        <td><input type="text" name="image_large" value="<s:property value="getLabel(getLabelId()).getImage_large()" />" size="35"/>
+	<tr><td align=right>Image (medium)
+        <td><input type="text" name="image_medium" value="<s:property value="getLabel(getLabelId()).getImage_medium()" />" size="35"/>
+	<tr><td align=right>Image (small)
+        <td><input type="text" name="image_small" value="<s:property value="getLabel(getLabelId()).getImage_small()" />" size="35"/>
+	</table><br />
 	<input type="submit" value="Submit" />
 	</form>
 	</div>
