@@ -157,5 +157,176 @@ public class IndexAction extends ActionSupport implements SessionAware, Paramete
 
 	return id;
     }
+    
+    public String labelValid() throws Exception {
+	String ret = execute();
+
+	int id = getLabelId();
+
+	if (id < 0)
+	    return ret;
+	
+	if (parameters.get("name") != null) {
+	    String name = ((String[]) parameters.get("name"))[0];
+	    getAdmin().setLabelName(id, name);
+	}
+	
+	if (parameters.get("description_en") != null) {
+	    String name = ((String[]) parameters.get("description_en"))[0];
+	    getAdmin().setLabelDescriptionEn(id, name);
+	}
+	
+	if (parameters.get("description_fr") != null) {
+	    String name = ((String[]) parameters.get("description_fr"))[0];
+	    getAdmin().setLabelDescriptionFr(id, name);
+	}
+	
+	if (parameters.get("site") != null) {
+	    String name = ((String[]) parameters.get("site"))[0];
+	    getAdmin().setLabelSite(id, name);
+	}
+	
+	if (parameters.get("image_large") != null) {
+	    String name = ((String[]) parameters.get("image_large"))[0];
+	    getAdmin().setLabelImageLarge(id, name);
+	}
+	
+	if (parameters.get("image_medium") != null) {
+	    String name = ((String[]) parameters.get("image_medium"))[0];
+	    getAdmin().setLabelImageMedium(id, name);
+	}
+	
+	if (parameters.get("image_small") != null) {
+	    String name = ((String[]) parameters.get("image_small"))[0];
+	    getAdmin().setLabelImageSmall(id, name);
+	}
+	
+	return ret;
+    }
+    
+    public String labelDelete() throws Exception {
+	String ret = execute();
+
+	int id = getLabelId();
+
+	if (id < 0)
+	    return ret;
+	
+	getAdmin().deleteLabel(id);
+	
+	return ret;
+    }
+
+    public String categoryValid() throws Exception {
+	String ret = execute();
+
+	int id = getCategoryId();
+
+	if (id < 0)
+	    return ret;
+	
+	if (parameters.get("name_fr") != null) {
+	    String name = ((String[]) parameters.get("name_fr"))[0];
+	    getAdmin().setCategoryNameFr(id, name);
+	}
+	
+	if (parameters.get("name_en") != null) {
+	    String name = ((String[]) parameters.get("name_en"))[0];
+	    getAdmin().setCategoryNameEn(id, name);
+	}
+	
+	if (parameters.get("description_fr") != null) {
+	    String name = ((String[]) parameters.get("description_fr"))[0];
+	    getAdmin().setCategoryDescriptionFr(id, name);
+	}
+
+	if (parameters.get("description_en") != null) {
+	    String name = ((String[]) parameters.get("description_en"))[0];
+	    getAdmin().setCategoryDescriptionEn(id, name);
+	}
+	
+	
+	if (parameters.get("image_large") != null) {
+	    String name = ((String[]) parameters.get("image_large"))[0];
+	    getAdmin().setCategoryImageLarge(id, name);
+	}
+	
+	if (parameters.get("image_medium") != null) {
+	    String name = ((String[]) parameters.get("image_medium"))[0];
+	    getAdmin().setCategoryImageMedium(id, name);
+	}
+	
+	if (parameters.get("image_small") != null) {
+	    String name = ((String[]) parameters.get("image_small"))[0];
+	    getAdmin().setCategoryImageSmall(id, name);
+	}
+	
+	return ret;
+    }
+    
+    public String categoryDelete() throws Exception {
+	String ret = execute();
+
+	int id = getCategoryId();
+
+	if (id < 0)
+	    return ret;
+	
+	getAdmin().deleteCategory(id);
+	
+	return ret;
+    }
+    
+    public String colorDelete() throws Exception {
+	String ret = execute();
+
+	int id = getColorId();
+
+	if (id < 0)
+	    return ret;
+	
+	getAdmin().deleteColor(id);
+	
+	return ret;
+    }
+    
+    public String productDelete() throws Exception {
+	String ret = execute();
+
+	int id = getProductId();
+
+	if (id < 0)
+	    return ret;
+	
+	getAdmin().deleteProduct(id);
+	
+	return ret;
+    }
+    
+    public String customerDelete() throws Exception {
+	String ret = execute();
+
+	String id = getCustomerId();
+
+	if (id.compareTo("") == 0)
+	    return ret;
+	
+	getAdmin().deleteAccount(id);
+	
+	return ret;
+    }
+    
+    public String ageDelete() throws Exception {
+	String ret = execute();
+
+	int id = getAgeId();
+
+	if (id < 0)
+	    return ret;
+	
+	getAdmin().deleteAge(id);
+	
+	return ret;
+    }
 }
 

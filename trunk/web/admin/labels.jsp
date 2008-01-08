@@ -58,10 +58,19 @@
 	    <td align=center><img src="../<s:property value="getImage_large()" />"</td>
 	    <td align=center><img src="../<s:property value="getImage_medium()" />"</td>
 	    <td align=center><img src="../<s:property value="getImage_small()" />"</td>
+	    
+	    <td align=center>
+
 	    <s:url id="modify" namespace="/admin" action="labels_modify" includeParams="none">
-	    <s:param name="label_id" value="getId()"></s:param>
+	    <s:param name="label_id" value="getId()" />
 	    </s:url>
-	    <td align=center><s:a href="%{modify}">Modify</s:a><br />Delete</td>
+	    <s:a href="%{modify}">Modify</s:a><br />
+	    <s:url id="delete" namespace="/admin" action="label_delete" includeParams="none">
+	    <s:param name="label_id" value="getId()" />
+	    </s:url>
+	    <s:a href="%{delete}">Delete</s:a>
+
+	    </td>
 	    </tr>
 	</s:iterator>
 	</table>
