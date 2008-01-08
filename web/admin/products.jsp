@@ -29,33 +29,46 @@
 	
 	<s:url id="viewcustomers" namespace="/admin" action="customers" includeParams="none" />
 	<s:a href="%{viewcustomers}"><s:text name="customers" /></s:a>
+
 	<br /><br />
-	There are <s:property value="getLabels().size()" /> labels in the database.<br />
+	There are <s:property value="getProducts().size()" /> products in the database.<br />
 	<br />
 
 	<table border="2" align="center" cellpadding="2">
 	<tr>
-	<th>Name</th>
+	<th>Name (en)</th>
+	<th>Name (fr)</th>
 	<th>Description (en)</th>
 	<th>Description (fr)</th>
-	<th>Site</th>
+	<th>Category</th>
+	<th>Color</th>
+	<th>Label</th>
+	<th>Age</th>
+	<th>Price</th>
+	<th>Stock</th>
 	<th>Image (large)</th>
 	<th>Image (medium)</th>
 	<th>Image (small)</th>
 	<th>Action</th>
 	</tr>
 
-	<s:iterator value="getLabels()">
+	<s:iterator value="getProducts()">
 	    <tr>
-	    <td align=center><s:property value="getName()" /></td>
+	    <td align=center><s:property value="getName('en')" /></td>
+	    <td align=center><s:property value="getName('fr')" /></td>
 	    <td align=center><s:property value="getDescription('en')" /></td>
 	    <td align=center><s:property value="getDescription('fr')" /></td>
-	    <td align=center><s:property value="getSite()" /></td>
+	    <td align=center><s:property value="getCategory().getId()" /></td>
+	    <td align=center><s:property value="getColor().getId()" /></td>
+	    <td align=center><s:property value="getLabel().getId()" /></td>
+	    <td align=center><s:property value="getAge().getId()" /></td>
+	    <td align=center><s:property value="getPrice()" /></td>
+	    <td align=center><s:property value="getStock()" /></td>
 	    <td align=center><img src="../<s:property value="getImage_large()" />"</td>
 	    <td align=center><img src="../<s:property value="getImage_medium()" />"</td>
 	    <td align=center><img src="../<s:property value="getImage_small()" />"</td>
-	    <s:url id="modify" namespace="/admin" action="labels_modify" includeParams="none">
-	    <s:param name="label_id" value="getId()"></s:param>
+	    <s:url id="modify" namespace="/admin" action="products_modify" includeParams="none">
+	    <s:param name="product_id" value="getId()"></s:param>
 	    </s:url>
 	    <td align=center><s:a href="%{modify}">Modify</s:a><br />Delete</td>
 	    </tr>

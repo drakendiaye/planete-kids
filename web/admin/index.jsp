@@ -14,12 +14,22 @@
 	<div style="text-align:center">
 	<h1>Planete-Kids</h1>
 	<h2><s:text name="admin"/></h2>
-	<s:url id="viewlabels" namespace="/admin" action="labels" includeParams="none"></s:url>
+	
+	<s:url id="viewlabels" namespace="/admin" action="labels" includeParams="none" />
 	<s:a href="%{viewlabels}"><s:text name="labels" /></s:a>
-	<s:text name="colors" />
-	<s:text name="categories" />
-	<s:text name="products" />
-	<s:text name="customers" />
+	
+	<s:url id="viewcolors" namespace="/admin" action="colors" includeParams="none" />
+	<s:a href="%{viewcolors}"><s:text name="colors" /></s:a>
+	
+	<s:url id="viewcategories" namespace="/admin" action="categories" includeParams="none" />
+	<s:a href="%{viewcategories}"><s:text name="categories" /></s:a>
+	
+	<s:url id="viewproducts" namespace="/admin" action="products" includeParams="none" />
+	<s:a href="%{viewproducts}"><s:text name="products" /></s:a>
+	
+	<s:url id="viewcustomers" namespace="/admin" action="customers" includeParams="none" />
+	<s:a href="%{viewcustomers}"><s:text name="customers" /></s:a>	
+	
 	</div>
     </s:div>
 </body>

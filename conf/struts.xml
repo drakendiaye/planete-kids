@@ -234,6 +234,47 @@
             <result>/admin/labels_modify.jsp</result>
             <result name="error">/error.jsp</result>
         </action>
+	
+	<action name="colors" class="planetekids.actions.admin.IndexAction">
+            <result>/admin/colors.jsp</result>
+            <result name="error">/error.jsp</result>
+        </action>
+	
+	<action name="colors_modify" class="planetekids.actions.admin.IndexAction">
+            <result>/admin/colors_modify.jsp</result>
+            <result name="error">/error.jsp</result>
+	</action>
+	
+	<action name="categories" class="planetekids.actions.admin.IndexAction">
+            <result>/admin/categories.jsp</result>
+            <result name="error">/error.jsp</result>
+        </action>
+	
+	<action name="categories_modify" class="planetekids.actions.admin.IndexAction">
+            <result>/admin/categories_modify.jsp</result>
+            <result name="error">/error.jsp</result>
+	</action>
+
+	<action name="products" class="planetekids.actions.admin.IndexAction">
+            <result>/admin/products.jsp</result>
+            <result name="error">/error.jsp</result>
+        </action>
+	
+	<action name="products_modify" class="planetekids.actions.admin.IndexAction">
+            <result>/admin/products_modify.jsp</result>
+            <result name="error">/error.jsp</result>
+	</action>
+	
+	<action name="customers" class="planetekids.actions.admin.IndexAction">
+            <result>/admin/customers.jsp</result>
+            <result name="error">/error.jsp</result>
+        </action>
+	
+	<action name="customers_modify" class="planetekids.actions.admin.IndexAction">
+            <result>/admin/customers_modify.jsp</result>
+            <result name="error">/error.jsp</result>
+	</action>
+	
     </package>
     
 </struts>

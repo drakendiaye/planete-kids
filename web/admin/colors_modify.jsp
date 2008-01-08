@@ -14,7 +14,7 @@
 	<h1>Planete-Kids</h1>
 	<div style="text-align:center">
 	<h2><s:text name="admin"/></h2>
-
+	
 	<s:url id="viewlabels" namespace="/admin" action="labels" includeParams="none" />
 	<s:a href="%{viewlabels}"><s:text name="labels" /></s:a>
 	
@@ -29,25 +29,26 @@
 	
 	<s:url id="viewcustomers" namespace="/admin" action="customers" includeParams="none" />
 	<s:a href="%{viewcustomers}"><s:text name="customers" /></s:a>
+
 	<br />
 	<br />
 	<div align=left>
-	<form method="post" name="labelform">
+	<form method="post" name="colorform">
 	<table>
-	<tr><td align=right>Name
-        <td><input type="text" name="name" value="<s:property value="getLabel(getLabelId()).getName()" />" size="35"/>
+	<tr><td align=right>Name (en)
+        <td><input type="text" name="name" value="<s:property value="getColor(getColorId()).getName('en')" />" size="35"/>
+	<tr><td align=right>Name (fr)
+        <td><input type="text" name="name" value="<s:property value="getColor(getColorId()).getName('fr')" />" size="35"/>	
 	<tr><td align=right>Description (en)
-        <td><input type="text" name="description_fr" value="<s:property value="getLabel(getLabelId()).getDescription('en')" />" size="35"/>
+        <td><input type="text" name="description_fr" value="<s:property value="getColor(getColorId()).getDescription('en')" />" size="35"/>
 	<tr><td align=right>Description (fr)
-        <td><input type="text" name="description_en" value="<s:property value="getLabel(getLabelId()).getDescription('fr')" />" size="35"/>
-	<tr><td align=right>Site
-        <td><input type="text" name="site" value="<s:property value="getLabel(getLabelId()).getSite()" />" size="35"/>
+        <td><input type="text" name="description_en" value="<s:property value="getColor(getColorId()).getDescription('fr')" />" size="35"/>
 	<tr><td align=right>Image (large)
-        <td><input type="text" name="image_large" value="<s:property value="getLabel(getLabelId()).getImage_large()" />" size="35"/>
+        <td><input type="text" name="image_large" value="<s:property value="getColor(getColorId()).getImage_large()" />" size="35"/>
 	<tr><td align=right>Image (medium)
-        <td><input type="text" name="image_medium" value="<s:property value="getLabel(getLabelId()).getImage_medium()" />" size="35"/>
+        <td><input type="text" name="image_medium" value="<s:property value="getColor(getColorId()).getImage_medium()" />" size="35"/>
 	<tr><td align=right>Image (small)
-        <td><input type="text" name="image_small" value="<s:property value="getLabel(getLabelId()).getImage_small()" />" size="35"/>
+        <td><input type="text" name="image_small" value="<s:property value="getColor(getColorId()).getImage_small()" />" size="35"/>
 	</table><br />
 	<input type="submit" value="Submit" />
 	</form>
