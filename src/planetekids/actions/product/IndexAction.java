@@ -16,7 +16,7 @@ import planetekids.beans.stateful.CustomerRemote;
 public class IndexAction extends ActionSupport implements SessionAware, ParameterAware {
     
     static int PAGESIZE = 10;
-    static int PAGENB = 10;
+    static int PAGENB = 6;
     private Map session;
     private Map parameters;
     
@@ -82,6 +82,10 @@ public class IndexAction extends ActionSupport implements SessionAware, Paramete
     
     public int getPage() throws Exception {
         return page;
+    }
+    
+    public int getNbPage() throws Exception {
+        return nbpage;
     }
     
     public List<Integer> getPages() throws Exception {

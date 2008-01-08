@@ -1,26 +1,24 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
 <%@ taglib prefix="s" uri="/struts-tags" %>
 
-<s:div cssClass="contentHeader">
-    <h2><s:text name="color"/></h2>
-</s:div>
-<s:div cssClass="contentMain">
-    <s:iterator value="getColors()">
-        <script type="text/javascript">coldiv_load('color_<s:property value="getId()" />');</script>
-        <s:hidden id="color_%{getId()}" value="{ init : false, col_img : 'images/down_enable.png', uncol_img : 'images/up_enable.png'}"/>
-        <div class="color">
+<h2><s:text name="age"/></h2>
+<s:div cssClass="main">
+    <s:iterator value="getAges()">
+        <script type="text/javascript">coldiv_load('age_<s:property value="getId()" />');</script>
+        <s:hidden id="age_%{getId()}" value="{ init : false, col_img : 'images/down_enable.png', uncol_img : 'images/up_enable.png'}"/>
+        <div class="category">
             <table width="99%">
                 <tr>
                     <td align="left">
                         <h3>
-                            <img id="color_<s:property value="getId()" />_img" onclick="coldiv_click('color_<s:property value="getId()"/>')" />
+                            <img id="age_<s:property value="getId()" />_img" onclick="coldiv_click('age_<s:property value="getId()"/>')" />
                             <img src="<s:property value="getImage_small()" />" width="20px" height="20px"/>
                             <s:property value="getName(getLocale())" />
                         </h3>
                     </td>
                 </tr>
             </table>
-            <div id="color_<s:property value="getId()" />_div">
+            <div id="age_<s:property value="getId()" />_div">
                 <hr/>
                 <div style="float:left;">
                     <table width="99%">

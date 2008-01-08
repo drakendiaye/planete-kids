@@ -1,8 +1,10 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
 <%@ taglib prefix="s" uri="/struts-tags" %>
 
-<h2><s:text name="modify"/></h2>
-<s:div cssClass="main">
+<s:div cssClass="contentHeader">
+    <h2><s:text name="modify"/></h2>
+</s:div>
+<s:div cssClass="contentMain">
     <form id="modify" method="post" name="modify">
         <table class="account">
             <tr>
