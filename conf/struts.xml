@@ -219,6 +219,24 @@
         </action>
     </package>
     
+    <package name="product" namespace="/product" extends="struts-default">
+        <action name="index" class="planetekids.actions.product.IndexAction" method="redirect" >
+            <result type="redirect-action">
+                <param name="namespace">/</param>
+                <param name="actionName">index</param>
+            </result>
+            <result name="error">/error.jsp</result>
+        </action>
+        <action name="index_content" class="planetekids.actions.product.IndexAction">
+            <result>/product/index_content.jsp</result>
+            <result name="error">/error.jsp</result>
+        </action>
+        <action name="index_location" class="planetekids.actions.product.IndexAction" >
+            <result>/product/index_location.jsp</result>
+            <result name="error">/error.jsp</result>
+        </action>
+    </package>
+    
     <package name="admin" namespace="/admin" extends="struts-default">    
         <action name="index" class="planetekids.actions.admin.IndexAction">
             <result>/admin/index.jsp</result>
