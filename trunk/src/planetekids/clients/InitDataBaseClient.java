@@ -10,7 +10,6 @@ import java.util.Random;
 import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.transaction.UserTransaction;
-
 import planetekids.beans.entity.QuestionBean;
 import planetekids.beans.stateful.AdminBean;
 import planetekids.beans.stateful.AdminRemote;
@@ -49,8 +48,8 @@ public class InitDataBaseClient {
 	    admin.deleteLabels();
 	    admin.deleteCategories();
 	    admin.deleteColors();
-	    admin.deleteProducts();
 	    admin.deleteAges();
+            admin.deleteProducts();
 	    admin.deleteQuestionnaires();
 
 	    /*------------------------------*/
@@ -364,7 +363,7 @@ public class InitDataBaseClient {
 	    admin.createAnswer(questionId, "Internet Explorer", "Internet Explorer", false, 1);
 	    admin.createAnswer(questionId, "Firefox", "Firefox", false, 2);
 	    admin.createAnswer(questionId, "Opera", "Opera", false, 3);
-	    admin.createAnswer(questionId, "Safari", "Safari", false, 3);
+	    admin.createAnswer(questionId, "Safari", "Safari", false, 4);
 	    admin.createAnswer(questionId, "Autre, veuillez préciser :", "Other, please specify :", true, 5);
 
 	    questionId = admin.createQuestion(questionnaireId,

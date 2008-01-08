@@ -13,9 +13,6 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
-import javax.persistence.PostRemove;
-import javax.persistence.PreRemove;
-
 import org.hibernate.annotations.Sort;
 import org.hibernate.annotations.SortType;
 
@@ -122,7 +119,7 @@ public class QuestionBean implements Serializable, Comparable<QuestionBean> {
         return(0);
     }
     
-    @PreRemove
+    /*@PreRemove
     public void titi() {
 	System.out.println("removing question : " + this.getId());
     }
@@ -130,6 +127,6 @@ public class QuestionBean implements Serializable, Comparable<QuestionBean> {
     @PostRemove
     public void toto(){
 	System.out.println("question id : " + this.getId() + " removed");
-    }
+    }*/
     
 }

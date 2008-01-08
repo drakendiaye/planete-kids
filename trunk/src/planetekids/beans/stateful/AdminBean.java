@@ -90,7 +90,9 @@ public class AdminBean implements AdminRemote  {
     }
     
     public void deleteLabel(int id) throws Exception {
-        entityManager.remove(getLabel(id));
+        LabelBean label = getLabel(id);
+        entityManager.refresh(label);
+        entityManager.remove(label);
     }
     
     public void deleteLabels() throws Exception {
@@ -160,7 +162,9 @@ public class AdminBean implements AdminRemote  {
     }
     
     public void deleteColor(int id) throws Exception {
-        entityManager.remove(getColor(id));
+        ColorBean color = getColor(id);
+        entityManager.refresh(color);
+        entityManager.remove(color);
     }
     
     public void deleteColors() throws Exception {
@@ -229,7 +233,9 @@ public class AdminBean implements AdminRemote  {
     }
     
     public void deleteCategory(int id) throws Exception {
-        entityManager.remove(getCategory(id));
+        CategoryBean category = getCategory(id);
+        entityManager.refresh(category);
+        entityManager.remove(category);
     }
     
     public void deleteCategories() throws Exception {
@@ -282,7 +288,9 @@ public class AdminBean implements AdminRemote  {
     }
     
     public void deleteAge(int id) throws Exception {
-        entityManager.remove(getAge(id));
+        AgeBean age = getAge(id);
+        entityManager.refresh(age);
+        entityManager.remove(age);
     }
     
     public void deleteAges() throws Exception {
@@ -291,7 +299,7 @@ public class AdminBean implements AdminRemote  {
 	    Iterator iterator = ages.iterator();
 	    while (iterator.hasNext()) {
 		AgeBean age = (AgeBean) iterator.next();
-		deleteColor(age.getId());
+		deleteAge(age.getId());
 	    }
 	}
     }
@@ -452,7 +460,9 @@ public class AdminBean implements AdminRemote  {
     }
     
     public void deleteProduct (int id) throws Exception {
-        entityManager.remove(getProduct(id));
+        ProductBean product = getProduct(id);
+        entityManager.refresh(product);
+        entityManager.remove(product);
     }
     
     public void deleteProducts() throws Exception {
@@ -461,7 +471,7 @@ public class AdminBean implements AdminRemote  {
 	    Iterator iterator = products.iterator();
 	    while (iterator.hasNext()) {
 		ProductBean product = (ProductBean) iterator.next();
-		deleteCategory(product.getId());
+		deleteProduct(product.getId());
 	    }
 	}
     }
@@ -509,11 +519,12 @@ public class AdminBean implements AdminRemote  {
     }
     
     public void deleteQuestionnaire(int questionnaire_id) throws Exception {
-	entityManager.remove(getQuestionnaire(questionnaire_id));
+        QuestionnaireBean questionnaire = getQuestionnaire(questionnaire_id);
+        entityManager.refresh(questionnaire);
+	entityManager.remove(questionnaire);
     }
     
     public void deleteQuestionnaires() throws Exception {
-	System.out.println("coucou");
 	List<QuestionnaireBean> questionnaires = getQuestionnaires();
 	if (questionnaires != null) {
 	    Iterator iterator = questionnaires.iterator();
@@ -554,11 +565,12 @@ public class AdminBean implements AdminRemote  {
     }
     
     public void deleteAccount(String email) throws Exception {
-	entityManager.remove(getAccount(email));
+        AccountBean account = getAccount(email);
+        entityManager.refresh(account);
+        entityManager.remove(account);
     }
     
     public void deleteAccounts() throws Exception {
-	System.out.println("\n\ndelete accounts\n\n");
 	List<AccountBean> accounts = getAccounts();
 	if (accounts != null) {
 	    Iterator iterator = accounts.iterator();
