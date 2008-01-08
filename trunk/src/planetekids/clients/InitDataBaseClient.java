@@ -50,6 +50,7 @@ public class InitDataBaseClient {
 	    admin.deleteCategories();
 	    admin.deleteColors();
 	    admin.deleteProducts();
+	    admin.deleteAges();
 	    admin.deleteQuestionnaires();
 
 	    /*------------------------------*/

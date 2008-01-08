@@ -52,12 +52,12 @@ public class LocaleBean implements Serializable {
     
     @PreRemove
     public void titi(){
-	System.out.println("removing category id : " +this.getId());
+	System.out.println("removing Locale id : " +this.getId());
     }
     
     @PostRemove
     public void toto(){
-	System.out.println("category id : " + this.getId() + " removed");
+	System.out.println("Locale id : " + this.getId() + " removed");
     }
     
 }
