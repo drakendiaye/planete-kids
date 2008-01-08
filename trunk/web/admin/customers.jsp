@@ -14,7 +14,7 @@
 	<h1>Planete-Kids</h1>
 	<div style="text-align:center">
 	<h2><s:text name="admin"/></h2>
-
+	
 	<s:url id="viewlabels" namespace="/admin" action="labels" includeParams="none" />
 	<s:a href="%{viewlabels}"><s:text name="labels" /></s:a>
 	
@@ -29,33 +29,43 @@
 	
 	<s:url id="viewcustomers" namespace="/admin" action="customers" includeParams="none" />
 	<s:a href="%{viewcustomers}"><s:text name="customers" /></s:a>
+
 	<br /><br />
-	There are <s:property value="getLabels().size()" /> labels in the database.<br />
+	There are <s:property value="getCustomers().size()" /> customers in the database.<br />
 	<br />
 
 	<table border="2" align="center" cellpadding="2">
 	<tr>
-	<th>Name</th>
-	<th>Description (en)</th>
-	<th>Description (fr)</th>
-	<th>Site</th>
-	<th>Image (large)</th>
-	<th>Image (medium)</th>
-	<th>Image (small)</th>
+	<th>e-mail address</th>
+	<th>Password</th>
+	<th>First name</th>
+	<th>Last name</th>
+	<th>Address Line 1</th>
+	<th>Address Line 2</th>
+	<th>Address Line 3</th>
+	<th>ZipCode</th>
+	<th>City</th>
+	<th width=220>Phone number</th>
+	<th width=220>Fax number</th>
 	<th>Action</th>
 	</tr>
+	</tr>
 
-	<s:iterator value="getLabels()">
+	<s:iterator value="getCustomers()">
 	    <tr>
-	    <td align=center><s:property value="getName()" /></td>
-	    <td align=center><s:property value="getDescription('en')" /></td>
-	    <td align=center><s:property value="getDescription('fr')" /></td>
-	    <td align=center><s:property value="getSite()" /></td>
-	    <td align=center><img src="../<s:property value="getImage_large()" />"</td>
-	    <td align=center><img src="../<s:property value="getImage_medium()" />"</td>
-	    <td align=center><img src="../<s:property value="getImage_small()" />"</td>
-	    <s:url id="modify" namespace="/admin" action="labels_modify" includeParams="none">
-	    <s:param name="label_id" value="getId()"></s:param>
+	    <td align=center><s:property value="getEmailAddress()" /></td>
+	    <td align=center><s:property value="getPassword()" /></td>
+	    <td align=center><s:property value="getFirstName()" /></td>
+	    <td align=center><s:property value="getLastName()" /></td>
+	    <td align=center><s:property value="getAddressLine1()" /></td>
+	    <td align=center><s:property value="getAddressLine2()" /></td>
+	    <td align=center><s:property value="getAddressLine3()" /></td>
+	    <td align=center><s:property value="getZipCode()" /></td>
+	    <td align=center><s:property value="getCity()" /></td>
+	    <td align=center><s:property value="getPhoneNumber()" /></td>
+	    <td align=center><s:property value="getFaxNumber()" /></td>
+	    <s:url id="modify" namespace="/admin" action="customer_modify" includeParams="none">
+	    <s:param name="customer_id" value="getId()"></s:param>
 	    </s:url>
 	    <td align=center><s:a href="%{modify}">Modify</s:a><br />Delete</td>
 	    </tr>

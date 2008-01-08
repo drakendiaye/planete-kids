@@ -7,7 +7,11 @@ import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import org.apache.struts2.interceptor.ParameterAware;
 import org.apache.struts2.interceptor.SessionAware;
+import planetekids.beans.entity.AccountBean;
+import planetekids.beans.entity.CategoryBean;
+import planetekids.beans.entity.ColorBean;
 import planetekids.beans.entity.LabelBean;
+import planetekids.beans.entity.ProductBean;
 import planetekids.beans.stateful.AdminBean;
 import planetekids.beans.stateful.AdminRemote;
 
@@ -36,42 +40,102 @@ public class IndexAction extends ActionSupport implements SessionAware, Paramete
 	}
     }
 
-    public int getNumLabels() throws Exception {
-	int numLabels = getAdmin().getLabels().size();
-
-	return numLabels;
+    public void setParameters(Map arg0) {
+	this.parameters = arg0;
     }
 
     public List getLabels() throws Exception {
 	return getAdmin().getLabels();
     }
 
-    public void setParameters(Map arg0) {
-	this.parameters = arg0;
-    }
-
-    /* public String labels_modify () throws Exception {
-    String result = execute();
-    if (parameters.get("label_id") != null) {
-    int label_id = Integer.getInteger(((String[])parameters.get("label_id"))[0]).intValue();
-    System.out.println("\n\n" + label_id + "\n\n");
-    }
-    return result;
-    }
-     */
     public LabelBean getLabel(int id) throws Exception {
 	return getAdmin().getLabel(id);
     }
 
     public int getLabelId() throws Exception {
-	int label_id = -1;
+	int id = -1;
 
 	if (parameters.get("label_id") != null) {
-	    String label_id_s = ((String[]) parameters.get("label_id"))[0];
-	    label_id = Integer.valueOf(label_id_s).intValue();
+	    String id_s = ((String[]) parameters.get("label_id"))[0];
+	    id = Integer.valueOf(id_s).intValue();
 	}
 
-	return label_id;
+	return id;
+    }
+
+    public List getColors() throws Exception {
+	return getAdmin().getColors();
+    }
+
+    public ColorBean getColor(int id) throws Exception {
+	return getAdmin().getColor(id);
+    }
+
+    public int getColorId() throws Exception {
+	int id = -1;
+
+	if (parameters.get("color_id") != null) {
+	    String id_s = ((String[]) parameters.get("color_id"))[0];
+	    id = Integer.valueOf(id_s).intValue();
+	}
+
+	return id;
+    }
+
+    public List getCategories() throws Exception {
+	return getAdmin().getCategories();
+    }
+
+    public CategoryBean getCategory(int id) throws Exception {
+	return getAdmin().getCategory(id);
+    }
+
+    public int getCategoryId() throws Exception {
+	int id = -1;
+
+	if (parameters.get("category_id") != null) {
+	    String id_s = ((String[]) parameters.get("category_id"))[0];
+	    id = Integer.valueOf(id_s).intValue();
+	}
+
+	return id;
+    }
+
+    public List getProducts() throws Exception {
+	return getAdmin().getProducts();
+    }
+
+    public ProductBean getProduct(int id) throws Exception {
+	return getAdmin().getProduct(id);
+    }
+
+    public int getProductId() throws Exception {
+	int id = -1;
+
+	if (parameters.get("product_id") != null) {
+	    String id_s = ((String[]) parameters.get("product_id"))[0];
+	    id = Integer.valueOf(id_s).intValue();
+	}
+
+	return id;
+    }
+
+    public List getCustomers() throws Exception {
+	return getAdmin().getAccounts();
+    }
+
+    public AccountBean getCustomer(String email) throws Exception {
+	return getAdmin().getAccount(email);
+    }
+
+    public String getCustomerId() throws Exception {
+	String id = "";
+
+	if (parameters.get("customer_id") != null) {
+	    id = ((String[]) parameters.get("customer_id"))[0];
+	}
+
+	return id;
     }
 }
 
