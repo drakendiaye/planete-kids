@@ -179,10 +179,10 @@ img {
 #content {
 	width : 650px;
 	height : 448px;
-	overflow : auto;
+	overflow : hidden;
 	margin : 1px;
 	background-image : url('images/content-background.png');
-	background-repeat : repeat-x
+	background-repeat : repeat-x;
 }
 
 div.welcome {
@@ -311,4 +311,16 @@ table.account {
         border-style : solid;
         border-color : black;
         border-collapse: collapse;
+}
+
+
+div.contentMain {
+        overflow : auto;
+        height : 420px;
+}
+
+
+div.contentHeader {
+        overflow : hidden;
+        height : 28px;
 }

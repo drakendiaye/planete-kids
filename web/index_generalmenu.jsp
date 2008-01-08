@@ -1,8 +1,15 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
 <%@ taglib prefix="s" uri="/struts-tags" %>
-
-<h3><s:text name="generalmenu"/></h3>
-
+<table>
+    <tr>
+        <td>
+            <img src="images/Menu.png"/>
+        </td>
+        <td align="left" valign="top">
+            <h3><s:text name="generalmenu"/></h3>
+        </td>
+    </tr>
+</table>
 <s:url id="url_content" namespace="/" action="index_content" includeParams="none"/>
 <s:url id="url_location" namespace="/" action="index_location" includeParams="none"/>
 <s:a onclick="navGo([new navRequest('content', '%{url_content}'),

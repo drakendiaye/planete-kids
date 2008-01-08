@@ -28,7 +28,7 @@
                             </td>
                             <td>
                                 <s:property value="getDescription(getLocale())" /><br/>
-                                <s:a href="%{getSite()}"><s:property value="getSite()" /></s:a>
+                                <s:a href="http://%{getSite()}"><s:property value="getSite()" /></s:a>
                             </td>
                         </tr>
                     </table>

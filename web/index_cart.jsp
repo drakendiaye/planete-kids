@@ -1,7 +1,16 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
 <%@ taglib prefix="s" uri="/struts-tags" %>
 
-<h3><s:text name="cart"/></h3>
+<table>
+    <tr>
+        <td>
+            <img src="images/Panier.png"/>
+        </td>
+        <td align="left" valign="top">
+            <h3><s:text name="cart"/></h3>
+        </td>
+    </tr>
+</table>
 
 <s:div>
     <s:iterator value="getCartProducts()">
