@@ -10,36 +10,36 @@
             </form>
             <s:url id="url" namespace="/product" action="index_content" includeParams="none"/>
             <s:if test="1 == getPage()">
-                <input type="button" disabled class="disabledButton" value="|<" onclick="dojo.byId('page_number').value = 1;navExec(new navRequest('content', '<s:property value="url"/>', null, null, 'pageForm'));"/>
+                <input type="button" disabled class="disabledButton" value="|<" onclick="dojo.byId('page_number').value = 1;navGo(new navRequest('content', '<s:property value="url"/>', null, null, 'pageForm'));"/>
             </s:if>
             <s:else>
-                <input type="button" class="button" value="|<" onclick="dojo.byId('page_number').value = 1;navExec(new navRequest('content', '<s:property value="url"/>', null, null, 'pageForm'));"/>
+                <input type="button" class="button" value="|<" onclick="dojo.byId('page_number').value = 1;navGo(new navRequest('content', '<s:property value="url"/>', null, null, 'pageForm'));"/>
             </s:else>
             <s:if test="getPage() - 1 < 1">
-                <input type="button" disabled class="disabledButton" value="<" onclick="dojo.byId('page_number').value = <s:property value="getPage()"/> - 1;navExec(new navRequest('content', '<s:property value="url"/>', null, null, 'pageForm'));"/>
+                <input type="button" disabled class="disabledButton" value="<" onclick="dojo.byId('page_number').value = <s:property value="getPage()"/> - 1;navGo(new navRequest('content', '<s:property value="url"/>', null, null, 'pageForm'));"/>
             </s:if>
             <s:else>
-                <input type="button" class="button" value="<" onclick="dojo.byId('page_number').value = <s:property value="getPage()"/> - 1;navExec(new navRequest('content', '<s:property value="url"/>', null, null, 'pageForm'));"/>
+                <input type="button" class="button" value="<" onclick="dojo.byId('page_number').value = <s:property value="getPage()"/> - 1;navGo(new navRequest('content', '<s:property value="url"/>', null, null, 'pageForm'));"/>
             </s:else>
             <s:iterator value="getPages()">
                 <s:if test="intValue() == getPage()">
-                    <input type="button" disabled class="disabledButton" value="<s:property value="intValue()"/>" onclick="dojo.byId('page_number').value = <s:property value="intValue()"/>;navExec(new navRequest('content', '<s:property value="url"/>', null, null, 'pageForm'));"/>
+                    <input type="button" disabled class="disabledButton" value="<s:property value="intValue()"/>" onclick="dojo.byId('page_number').value = <s:property value="intValue()"/>;navGo(new navRequest('content', '<s:property value="url"/>', null, null, 'pageForm'));"/>
                 </s:if>
                 <s:else>
-                    <input type="button" class="button" value="<s:property value="intValue()"/>" onclick="dojo.byId('page_number').value = <s:property value="intValue()"/>;navExec(new navRequest('content', '<s:property value="url"/>', null, null, 'pageForm'));"/>
+                    <input type="button" class="button" value="<s:property value="intValue()"/>" onclick="dojo.byId('page_number').value = <s:property value="intValue()"/>;navGo(new navRequest('content', '<s:property value="url"/>', null, null, 'pageForm'));"/>
                 </s:else>
             </s:iterator>
             <s:if test="getPage() + 1 > getNbPage()">
-                <input type="button" disabled class="disabledButton" value=">" onclick="dojo.byId('page_number').value = <s:property value="getPage()"/> + 1;navExec(new navRequest('content', '<s:property value="url"/>', null, null, 'pageForm'));"/>
+                <input type="button" disabled class="disabledButton" value=">" onclick="dojo.byId('page_number').value = <s:property value="getPage()"/> + 1;navGo(new navRequest('content', '<s:property value="url"/>', null, null, 'pageForm'));"/>
             </s:if>
             <s:else>
-                <input type="button" class="button" value=">" onclick="dojo.byId('page_number').value = <s:property value="getPage()"/> + 1;navExec(new navRequest('content', '<s:property value="url"/>', null, null, 'pageForm'));"/>
+                <input type="button" class="button" value=">" onclick="dojo.byId('page_number').value = <s:property value="getPage()"/> + 1;navGo(new navRequest('content', '<s:property value="url"/>', null, null, 'pageForm'));"/>
             </s:else>
             <s:if test="getPage() == getNbPage()">
-                <input type="button" disabled class="disabledButton" value=">|" onclick="dojo.byId('page_number').value = <s:property value="getNbPage()"/>;navExec(new navRequest('content', '<s:property value="url"/>', null, null, 'pageForm'));"/>
+                <input type="button" disabled class="disabledButton" value=">|" onclick="dojo.byId('page_number').value = <s:property value="getNbPage()"/>;navGo(new navRequest('content', '<s:property value="url"/>', null, null, 'pageForm'));"/>
             </s:if>
             <s:else>
-                <input type="button" class="button" value=">|" onclick="dojo.byId('page_number').value = <s:property value="getNbPage()"/>;navExec(new navRequest('content', '<s:property value="url"/>', null, null, 'pageForm'));"/>
+                <input type="button" class="button" value=">|" onclick="dojo.byId('page_number').value = <s:property value="getNbPage()"/>;navGo(new navRequest('content', '<s:property value="url"/>', null, null, 'pageForm'));"/>
             </s:else>
         </s:if>
     </h2>
@@ -76,10 +76,10 @@
                             <td>
                                 <img src="<s:property value="getImage_medium()" />" onmouseover="show('<img src=<s:property value="getImage_large()"/> width=100px height=100px/>')" onmouseout="hide()" width="50px" height="50px"/>
                             </td>
-                            <td>
+                            <td width="60%">
                                 <s:property value="getDescription(getLocale())" />
                             </td>
-                            <td>
+                            <td width="30%">
                                 <table>
                                     <tr>
                                         <td align="right">
@@ -103,6 +103,14 @@
                                         </td>
                                         <td align="left">
                                             <img src="<s:property value="getLabel().getImage_small()" />" width="20px" height="20px" onmouseover="show('<s:property value="getLabel().getName()" />')" onmouseout="hide()"/>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td align="right">
+                                            <s:text name="age"/> : 
+                                        </td>
+                                        <td align="left">
+                                            <s:property value="getAge().getName(getLocale())" />
                                         </td>
                                     </tr>
                                 </table>
