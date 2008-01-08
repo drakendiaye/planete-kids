@@ -448,6 +448,7 @@ public class InitDataBaseClient {
 	} catch (Exception e) {
 	    System.err.println("InitDataBase program get an exception " + e);
 	    utx.rollback();
+	    e.printStackTrace();
 	    System.exit(2);
 	}
     }

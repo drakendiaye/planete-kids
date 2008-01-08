@@ -5,6 +5,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.PostRemove;
+import javax.persistence.PreRemove;
 
 @Entity
 public class LocaleBean implements Serializable {
@@ -46,6 +48,16 @@ public class LocaleBean implements Serializable {
 
     public void setEn(String en) {
         this.en = en;
+    }
+    
+    @PreRemove
+    public void titi(){
+	System.out.println("removing category id : " +this.getId());
+    }
+    
+    @PostRemove
+    public void toto(){
+	System.out.println("category id : " + this.getId() + " removed");
     }
     
 }

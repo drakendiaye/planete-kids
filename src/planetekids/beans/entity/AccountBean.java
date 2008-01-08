@@ -10,6 +10,8 @@ package planetekids.beans.entity;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.NamedQuery;
+import javax.persistence.PostRemove;
+import javax.persistence.PreRemove;
 
 @Entity
 @NamedQuery(name = "getAccounts", query = "select o FROM AccountBean o")
@@ -124,6 +126,16 @@ public class AccountBean implements java.io.Serializable {
 
     public void setFaxNumber(String faxNumber) {
 	this.faxNumber = faxNumber;
+    }
+    
+    @PreRemove
+    public void titi(){
+	System.out.println("removing account id : " +this.getEmailAddress());
+    }
+    
+    @PostRemove
+    public void toto(){
+	System.out.println("account id : " + this.getEmailAddress() + " removed");
     }
 
 }
