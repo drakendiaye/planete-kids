@@ -188,10 +188,12 @@ public class InitDataBaseClient {
 
 	    // id = 1
 	    admin.createProduct("Pantalon Naf-Naf", "Naf-Naf trousers", "Etanche pour bébé", "For baby, waterproof", CategoryId[0],
-		    ColorId[0], LabelId[0], AgeId[2], 23, 90, "", "", "");
+		    ColorId[0], LabelId[0], AgeId[2], 23, 90, "images/trousers_large.png", "images/trousers_medium.png",
+		    "images/trousers_small.png");
 	    // id = 2
 	    admin.createProduct("Veste", "Jacket", "Veste en coton, quand il ne fait pas froid",
-		    "A coton Jacket, to wear when it's war olny", CategoryId[0], ColorId[3], LabelId[1], AgeId[4], 123, 45, "", "", "");
+		    "A coton Jacket, to wear when it's war olny", CategoryId[0], ColorId[3], LabelId[1], AgeId[4], 123, 45,
+		    "images/jacket_large.png", "images/jacket_medium.png", "images/jacket_small.png");
 
 	    // creation de tous les produits :
 
