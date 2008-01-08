@@ -1,4 +1,4 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
 <%@ taglib prefix="s" uri="/struts-tags" %>
 
-<h1>Planete-Kids</h1>
+<img src="images/Planete-Kids.png"/>
