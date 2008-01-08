@@ -21,6 +21,13 @@ public class InitDataBaseClient {
 	Context initialContext = null;
 	UserTransaction utx = null;
 	AdminRemote admin = null;
+
+	int LabelId[] = new int[6];
+
+	int ColorId[] = new int[12];
+
+	int CategoryId[] = new int[9];
+
 	try {
 	    System.setProperty(Context.INITIAL_CONTEXT_FACTORY, "org.ow2.easybeans.component.smartclient.spi.SmartContextFactory");
 	    initialContext = new InitialContext();
@@ -36,10 +43,18 @@ public class InitDataBaseClient {
 	try {
 	    utx.begin();
 
+	    admin.deleteAccounts();
+	    admin.deleteLabels();
+	    admin.deleteCategories();
+	    admin.deleteColors();
+	    admin.deleteProducts();
+	    admin.deleteQuestionnaires();
+	    
 	    /*------------------------------*/
 	    /* Création des comptes clients */
 	    /*------------------------------*/
 
+	    
 	    admin.createAccount("clemplantier@gmail.com", "azerty", "Clément", "Plantier", "2 rue de la Poste", "", "", 38400,
 		    "ST Martin d'Hères", "06 00 00 00 00", "");
 	    admin.createAccount("guillaumerenault@yahoo.fr", "azerty", "Guillaume", "Renault", "11 rue Pasteur", "", "", 38400,
@@ -53,24 +68,24 @@ public class InitDataBaseClient {
 	    /* Création des marques */
 	    /*----------------------*/
 
-
+	    
 	    // id = 1
-	    admin.createLabel("Nike", "Nike", "Marque americaine", "American label", "www.nike.com", "images/nike_large.png",
+	    LabelId[0] = admin.createLabel("Nike", "Nike", "Marque americaine", "American label", "www.nike.com", "images/nike_large.png",
 		    "images/nike_medium.png", "images/nike_small.png");
 	    // id = 2
-	    admin.createLabel("Adidas", "Adidas", "Marque", "Label", "www.adidas.com", "images/adidas_large.png",
+	    LabelId[1] = admin.createLabel("Adidas", "Adidas", "Marque", "Label", "www.adidas.com", "images/adidas_large.png",
 		    "images/adidas_medium.png", "images/adidas_small.png");
 	    // id = 3
-	    admin.createLabel("Rebook", "Rebook", "Marque encore", "Label again", "www.rebook.com", "images/rebook_large.png",
+	    LabelId[2] = admin.createLabel("Rebook", "Rebook", "Marque encore", "Label again", "www.rebook.com", "images/rebook_large.png",
 		    "images/rebook_medium.png", "images/rebook_small.png");
 	    // id = 4
-	    admin.createLabel("QuikSilver", "QuikSilver", "Description en francais", "Description in english", "www.quiksilver.com",
-		    "images/quiksilver_large.png", "images/quiksilver_medium.png", "images/quiksilver_small.png");
+	    LabelId[3] = admin.createLabel("QuikSilver", "QuikSilver", "Description en francais", "Description in english",
+		    "www.quiksilver.com", "images/quiksilver_large.png", "images/quiksilver_medium.png", "images/quiksilver_small.png");
 	    // id = 5
-	    admin.createLabel("Chevignon", "Chevignon", "Description en francais", "Description in english", "www.chevignon.com",
-		    "images/chevignon_large.png", "images/chevignon_medium.png", "images/chevignon_small.png");
+	    LabelId[4] = admin.createLabel("Chevignon", "Chevignon", "Description en francais", "Description in english",
+		    "www.chevignon.com", "images/chevignon_large.png", "images/chevignon_medium.png", "images/chevignon_small.png");
 	    // id = 6
-	    admin.createLabel("Naf Naf", "Naf Naf", "Description en francais", "Description in english", "www.nafnaf.com",
+	    LabelId[5] = admin.createLabel("Naf Naf", "Naf Naf", "Description en francais", "Description in english", "www.nafnaf.com",
 		    "images/nafnaf_large.png", "images/nafnaf_medium.png", "images/nafnaf_small.png");
 
 	    /*-----------------------*/
@@ -78,40 +93,40 @@ public class InitDataBaseClient {
 	    /*-----------------------*/
 
 	    // id = 1
-	    admin.createColor("Blanc", "White", "Couleur blanche : 0xFFFFFF", "White Color : 0xFFFFFF", "images/white_large.png",
-		    "images/white_large.png", "images/white_large.png");
+	    ColorId[0] = admin.createColor("Blanc", "White", "Couleur blanche : 0xFFFFFF", "White Color : 0xFFFFFF",
+		    "images/white_large.png", "images/white_large.png", "images/white_large.png");
 	    // id = 2
-	    admin.createColor("Jaune", "Yellow", "Couleur jaune : 0xFFFF00", "Yellow Color : 0xFFFF00", "images/yellow_large.png",
-		    "images/yellow_medium.png", "images/yellow_small.png");
+	    ColorId[1] = admin.createColor("Jaune", "Yellow", "Couleur jaune : 0xFFFF00", "Yellow Color : 0xFFFF00",
+		    "images/yellow_large.png", "images/yellow_medium.png", "images/yellow_small.png");
 	    // id = 3
-	    admin.createColor("Orange", "Orange", "Couleur orange : 0xFF9900", "Orange Color : 0xFF9900", "images/orange_large.png",
-		    "images/orange_medium.png", "images/orange_small.png");
+	    ColorId[2] = admin.createColor("Orange", "Orange", "Couleur orange : 0xFF9900", "Orange Color : 0xFF9900",
+		    "images/orange_large.png", "images/orange_medium.png", "images/orange_small.png");
 	    // id = 4
-	    admin.createColor("Rose", "Pink", "Couleur rose : 0xFF90b7", "Pink Color : 0xFF90b7", "images/pink_large.png",
+	    ColorId[3] = admin.createColor("Rose", "Pink", "Couleur rose : 0xFF90b7", "Pink Color : 0xFF90b7", "images/pink_large.png",
 		    "images/pink_large.png", "images/pink_large.png");
 	    // id = 5
-	    admin.createColor("Rouge", "Red", "Couleur rouge : 0xFF0000", "Red Color : 0xFF0000", "images/red_large.png",
+	    ColorId[4] = admin.createColor("Rouge", "Red", "Couleur rouge : 0xFF0000", "Red Color : 0xFF0000", "images/red_large.png",
 		    "images/red_medium.png", "images/red_small.png");
 	    // id = 6
-	    admin.createColor("Violet", "Purple", "Couleur Violete : 0x9900FF", "Purple Color : 0x9900FF", "images/purple_large.png",
-		    "images/purple_large.png", "images/purple_large.png");
+	    ColorId[5] = admin.createColor("Violet", "Purple", "Couleur Violete : 0x9900FF", "Purple Color : 0x9900FF",
+		    "images/purple_large.png", "images/purple_large.png", "images/purple_large.png");
 	    // id = 7
-	    admin.createColor("Noir", "Black", "Couleur Noire : 0x000000", "Black Color : 0x000000", "images/black_large.png",
+	    ColorId[6] = admin.createColor("Noir", "Black", "Couleur Noire : 0x000000", "Black Color : 0x000000", "images/black_large.png",
 		    "images/black_large.png", "images/black_large.png");
 	    // id = 8
-	    admin.createColor("Bleu foncé", "Dark Blue", "Couleur bleue : 0x0033FF", "Blue Color : 0x0033FF", "images/darkblue_large.png",
-		    "images/darkblue_medium.png", "images/darkblue_small.png");
+	    ColorId[7] = admin.createColor("Bleu foncé", "Dark Blue", "Couleur bleue : 0x0033FF", "Blue Color : 0x0033FF",
+		    "images/darkblue_large.png", "images/darkblue_medium.png", "images/darkblue_small.png");
 	    // id = 9
-	    admin.createColor("Bleu clair", "Bright Blue", "Couleur Bleue claire : 0x00CCFF", "Bright Blue Color : 0x00CCFF",
+	    ColorId[8] = admin.createColor("Bleu clair", "Bright Blue", "Couleur Bleue claire : 0x00CCFF", "Bright Blue Color : 0x00CCFF",
 		    "images/brightblue_large.png", "images/brightblue_large.png", "images/brightblue_large.png");
 	    // id = 10
-	    admin.createColor("Vert foncé", "Dark Green", "Couleur verte : 0x76FF76", "Green Color : 0x76FF76",
+	    ColorId[9] = admin.createColor("Vert foncé", "Dark Green", "Couleur verte : 0x76FF76", "Green Color : 0x76FF76",
 		    "images/darkgreen_large.png", "images/darkgreen_medium.png", "images/darkgreen_small.png");
 	    // id = 11
-	    admin.createColor("Vert clair", "Bright Green", "Couleur Verte claire : 0x00FF55", "Bright Green Color : 0x00FF55",
+	    ColorId[10] = admin.createColor("Vert clair", "Bright Green", "Couleur Verte claire : 0x00FF55", "Bright Green Color : 0x00FF55",
 		    "images/brightgreen_large.png", "images/brightgreen_large.png", "images/brightgreen_large.png");
 	    // id = 12
-	    admin.createColor("Gris", "Grey", "Couleur Grise : 0xADADAD", "Grey Color : 0xADADAD", "images/grey_large.png",
+	    ColorId[11] = admin.createColor("Gris", "Grey", "Couleur Grise : 0xADADAD", "Grey Color : 0xADADAD", "images/grey_large.png",
 		    "images/grey_large.png", "images/grey_large.png");
 
 	    /*-------------------------*/
@@ -119,44 +134,44 @@ public class InitDataBaseClient {
 	    /*-------------------------*/
 
 	    // id = 1
-	    admin.createCategory("Veste", "Jacket", "Pratique par temps de pluie ou grand froid",
+	    CategoryId[0] = admin.createCategory("Veste", "Jacket", "Pratique par temps de pluie ou grand froid",
 		    "Useful when raining or when it's very cold", "images/jacket_large.png", "images/jacket_medium.png",
 		    "images/jacket_small.png");
 	    // id = 2
-	    admin.createCategory("T-Shirt", "T-Shirt", "Desciption en francais", "Description in english", "images/t-shirt_large.png",
-		    "images/t-shirt_medium.png", "images/t-shirt_small.png");
+	    CategoryId[1] = admin.createCategory("T-Shirt", "T-Shirt", "Desciption en francais", "Description in english",
+		    "images/t-shirt_large.png", "images/t-shirt_medium.png", "images/t-shirt_small.png");
 	    // id = 3
-	    admin.createCategory("Chemises", "Shirt", "Desciption en francais", "Description in english", "images/shirt_large.png",
-		    "images/shirt_medium.png", "images/shirt_small.png");
+	    CategoryId[2] = admin.createCategory("Chemises", "Shirt", "Desciption en francais", "Description in english",
+		    "images/shirt_large.png", "images/shirt_medium.png", "images/shirt_small.png");
 	    // id = 4
-	    admin.createCategory("Chemisiers", "Blouses", "Desciption en francais", "Description in english", "images/blouses_large.png",
-		    "images/blouses_medium.png", "images/blouses_small.png");
+	    CategoryId[3] = admin.createCategory("Chemisiers", "Blouses", "Desciption en francais", "Description in english",
+		    "images/blouses_large.png", "images/blouses_medium.png", "images/blouses_small.png");
 	    // id = 5
-	    admin.createCategory("Pull", "Sweaters", "Desciption en francais", "Description in english", "images/sweat_large.png",
-		    "images/sweat_medium.png", "images/sweat_small.png");
+	    CategoryId[4] = admin.createCategory("Pull", "Sweaters", "Desciption en francais", "Description in english",
+		    "images/sweat_large.png", "images/sweat_medium.png", "images/sweat_small.png");
 	    // id = 6
-	    admin.createCategory("Jupes", "Skirts", "Desciption en francais", "Description in english", "images/skirt_large.png",
-		    "images/skirt_medium.png", "images/skirt_small.png");
+	    CategoryId[5] = admin.createCategory("Jupes", "Skirts", "Desciption en francais", "Description in english",
+		    "images/skirt_large.png", "images/skirt_medium.png", "images/skirt_small.png");
 	    // id = 7
-	    admin.createCategory("Short", "Shorts", "Desciption en francais", "Description in english", "images/short_large.png",
-		    "images/short_medium.png", "images/short_small.png");
+	    CategoryId[6] = admin.createCategory("Short", "Shorts", "Desciption en francais", "Description in english",
+		    "images/short_large.png", "images/short_medium.png", "images/short_small.png");
 	    // id = 8
-	    admin.createCategory("Pantalon", "Trousers", "On le met de bas en haut", "From Paris to Berlin", "images/trousers_large.png",
-		    "images/trousers_medium.png", "images/trousers_small.png");
+	    CategoryId[7] = admin.createCategory("Pantalon", "Trousers", "On le met de bas en haut", "From Paris to Berlin",
+		    "images/trousers_large.png", "images/trousers_medium.png", "images/trousers_small.png");
 	    // id = 9
-	    admin.createCategory("Robe", "Dress", "Description en francais", "Description in english", "images/dress_large.png",
-		    "images/dress_medium.png", "images/dress_small.png");
+	    CategoryId[8] = admin.createCategory("Robe", "Dress", "Description en francais", "Description in english",
+		    "images/dress_large.png", "images/dress_medium.png", "images/dress_small.png");
 
 	    /*-----------------------*/
 	    /* Création des produits */
 	    /*-----------------------*/
 
 	    // id = 1
-	    admin.createProduct("Pantalon Naf-Naf", "Naf-Naf trousers", "Etanche pour bébé", "For baby, waterproof", 1, 1, 1, 23, 90, "",
-		    "", "");
+	    admin.createProduct("Pantalon Naf-Naf", "Naf-Naf trousers", "Etanche pour bébé", "For baby, waterproof", CategoryId[0], ColorId[0],
+		    LabelId[0], 23, 90, "", "", "");
 	    // id = 2
 	    admin.createProduct("Veste", "Jacket", "Veste en coton, quand il ne fait pas froid",
-		    "A coton Jacket, to wear when it's war olny", 1, 4, 2, 123, 45, "", "", "");
+		    "A coton Jacket, to wear when it's war olny", CategoryId[0], ColorId[3], LabelId[1], 123, 45, "", "", "");
 
 	    // creation de tous les produits :
 
@@ -170,7 +185,7 @@ public class InitDataBaseClient {
 		// Pour toutes les marques
 		for (int j = 1; j <= 6; j++) {
 		    admin.createProduct("Veste numero " + ((i - 1) * 6 + j), "Jacket number " + ((i - 1) * 6 + j),
-			    "Description en francais", "Description in english", 1, i, j, rand.nextFloat() * 34, rand.nextInt(20), "", "",
+			    "Description en francais", "Description in english", CategoryId[0], ColorId[i-1], LabelId[j-1], rand.nextFloat() * 34, rand.nextInt(20), "", "",
 			    "");
 		}
 	    }
@@ -183,7 +198,7 @@ public class InitDataBaseClient {
 		// Pour toutes les marques
 		for (int j = 1; j <= 6; j++) {
 		    admin.createProduct("T-shirt numero " + ((i - 1) * 6 + j), "T-shirt number " + ((i - 1) * 6 + j),
-			    "Description en francais", "Description in english", 2, i, j, rand.nextFloat() * 34, rand.nextInt(20), "", "",
+			    "Description en francais", "Description in english", CategoryId[1], ColorId[i-1], LabelId[j-1], rand.nextFloat() * 34, rand.nextInt(20), "", "",
 			    "");
 		}
 	    }
@@ -196,7 +211,7 @@ public class InitDataBaseClient {
 		// Pour toutes les marques
 		for (int j = 1; j <= 6; j++) {
 		    admin.createProduct("Chemise numero " + ((i - 1) * 6 + j), "Shirt number " + ((i - 1) * 6 + j),
-			    "Description en francais", "Description in english", 3, i, j, rand.nextFloat() * 34, rand.nextInt(20), "", "",
+			    "Description en francais", "Description in english", CategoryId[2], ColorId[i-1], LabelId[j-1], rand.nextFloat() * 34, rand.nextInt(20), "", "",
 			    "");
 		}
 	    }
@@ -209,7 +224,7 @@ public class InitDataBaseClient {
 		// Pour toutes les marques
 		for (int j = 1; j <= 6; j++) {
 		    admin.createProduct("Chemisier numero " + ((i - 1) * 6 + j), "Blouse number " + ((i - 1) * 6 + j),
-			    "Description en francais", "Description in english", 4, i, j, rand.nextFloat() * 34, rand.nextInt(20), "", "",
+			    "Description en francais", "Description in english", CategoryId[3], ColorId[i-1], LabelId[j-1], rand.nextFloat() * 34, rand.nextInt(20), "", "",
 			    "");
 		}
 	    }
@@ -222,7 +237,7 @@ public class InitDataBaseClient {
 		// Pour toutes les marques
 		for (int j = 1; j <= 6; j++) {
 		    admin.createProduct("Pull numero " + ((i - 1) * 6 + j), "Sweater number " + ((i - 1) * 6 + j),
-			    "Description en francais", "Description in english", 5, i, j, rand.nextFloat() * 34, rand.nextInt(20), "", "",
+			    "Description en francais", "Description in english", CategoryId[4], ColorId[i-1], LabelId[j-1], rand.nextFloat() * 34, rand.nextInt(20), "", "",
 			    "");
 		}
 	    }
@@ -235,7 +250,7 @@ public class InitDataBaseClient {
 		// Pour toutes les marques
 		for (int j = 1; j <= 6; j++) {
 		    admin.createProduct("Jupe numero " + ((i - 1) * 6 + j), "Skirt number " + ((i - 1) * 6 + j), "Description en francais",
-			    "Description in english", 6, i, j, rand.nextFloat() * 34, rand.nextInt(20), "", "", "");
+			    "Description in english", CategoryId[5], ColorId[i-1], LabelId[j-1], rand.nextFloat() * 34, rand.nextInt(20), "", "", "");
 		}
 	    }
 
@@ -247,7 +262,7 @@ public class InitDataBaseClient {
 		// Pour toutes les marques
 		for (int j = 1; j <= 6; j++) {
 		    admin.createProduct("Short numero " + ((i - 1) * 6 + j), "Short number " + ((i - 1) * 6 + j),
-			    "Description en francais", "Description in english", 7, i, j, rand.nextFloat() * 34, rand.nextInt(20), "", "",
+			    "Description en francais", "Description in english", CategoryId[6], ColorId[i-1], LabelId[j-1], rand.nextFloat() * 34, rand.nextInt(20), "", "",
 			    "");
 		}
 	    }
@@ -260,7 +275,7 @@ public class InitDataBaseClient {
 		// Pour toutes les marques
 		for (int j = 1; j <= 6; j++) {
 		    admin.createProduct("Pantalon numero " + ((i - 1) * 6 + j), "Pants number " + ((i - 1) * 6 + j),
-			    "Description en francais", "Description in english", 8, i, j, rand.nextFloat() * 34, rand.nextInt(20), "", "",
+			    "Description en francais", "Description in english", CategoryId[7], ColorId[i-1], LabelId[j-1], rand.nextFloat() * 34, rand.nextInt(20), "", "",
 			    "");
 		}
 	    }
@@ -273,7 +288,7 @@ public class InitDataBaseClient {
 		// Pour toutes les marques
 		for (int j = 1; j <= 6; j++) {
 		    admin.createProduct("Robe numero " + ((i - 1) * 6 + j), "Dress number " + ((i - 1) * 6 + j), "Description en francais",
-			    "Description in english", 9, i, j, rand.nextFloat() * 34, rand.nextInt(20), "", "", "");
+			    "Description in english", CategoryId[8], ColorId[i-1], LabelId[j-1], rand.nextFloat() * 34, rand.nextInt(20), "", "", "");
 		}
 	    }
 
