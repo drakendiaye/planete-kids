@@ -10,36 +10,36 @@
             </form>
             <s:url id="url" namespace="/product" action="index_content" includeParams="none"/>
             <s:if test="1 == getPage()">
-                <input type="button" disabled class="disabledButton" value="|<" onclick="dojo.byId('page_number').value = 1;navGo(new navRequest('content', '<s:property value="url"/>', null, null, 'pageForm'));"/>
+                <input type="button" disabled class="disabledButton" value="|<" onclick="dojo.byId('page_number').value = 1;navGo([new navRequest('content', '<s:property value="url"/>', null, null, 'pageForm')]);"/>
             </s:if>
             <s:else>
-                <input type="button" class="button" value="|<" onclick="dojo.byId('page_number').value = 1;navGo(new navRequest('content', '<s:property value="url"/>', null, null, 'pageForm'));"/>
+                <input type="button" class="button" value="|<" onclick="dojo.byId('page_number').value = 1;navGo([new navRequest('content', '<s:property value="url"/>', null, null, 'pageForm')]);"/>
             </s:else>
             <s:if test="getPage() - 1 < 1">
-                <input type="button" disabled class="disabledButton" value="<" onclick="dojo.byId('page_number').value = <s:property value="getPage()"/> - 1;navGo(new navRequest('content', '<s:property value="url"/>', null, null, 'pageForm'));"/>
+                <input type="button" disabled class="disabledButton" value="<" onclick="dojo.byId('page_number').value = <s:property value="getPage()"/> - 1;navGo([new navRequest('content', '<s:property value="url"/>', null, null, 'pageForm')]);"/>
             </s:if>
             <s:else>
-                <input type="button" class="button" value="<" onclick="dojo.byId('page_number').value = <s:property value="getPage()"/> - 1;navGo(new navRequest('content', '<s:property value="url"/>', null, null, 'pageForm'));"/>
+                <input type="button" class="button" value="<" onclick="dojo.byId('page_number').value = <s:property value="getPage()"/> - 1;navGo([new navRequest('content', '<s:property value="url"/>', null, null, 'pageForm')]);"/>
             </s:else>
             <s:iterator value="getPages()">
                 <s:if test="intValue() == getPage()">
-                    <input type="button" disabled class="disabledButton" value="<s:property value="intValue()"/>" onclick="dojo.byId('page_number').value = <s:property value="intValue()"/>;navGo(new navRequest('content', '<s:property value="url"/>', null, null, 'pageForm'));"/>
+                    <input type="button" disabled class="disabledButton" value="<s:property value="intValue()"/>" onclick="dojo.byId('page_number').value = <s:property value="intValue()"/>;navGo([new navRequest('content', '<s:property value="url"/>', null, null, 'pageForm')]);"/>
                 </s:if>
                 <s:else>
-                    <input type="button" class="button" value="<s:property value="intValue()"/>" onclick="dojo.byId('page_number').value = <s:property value="intValue()"/>;navGo(new navRequest('content', '<s:property value="url"/>', null, null, 'pageForm'));"/>
+                    <input type="button" class="button" value="<s:property value="intValue()"/>" onclick="dojo.byId('page_number').value = <s:property value="intValue()"/>;navGo([new navRequest('content', '<s:property value="url"/>', null, null, 'pageForm')]);"/>
                 </s:else>
             </s:iterator>
             <s:if test="getPage() + 1 > getNbPage()">
-                <input type="button" disabled class="disabledButton" value=">" onclick="dojo.byId('page_number').value = <s:property value="getPage()"/> + 1;navGo(new navRequest('content', '<s:property value="url"/>', null, null, 'pageForm'));"/>
+                <input type="button" disabled class="disabledButton" value=">" onclick="dojo.byId('page_number').value = <s:property value="getPage()"/> + 1;navGo([new navRequest('content', '<s:property value="url"/>', null, null, 'pageForm')]);"/>
             </s:if>
             <s:else>
-                <input type="button" class="button" value=">" onclick="dojo.byId('page_number').value = <s:property value="getPage()"/> + 1;navGo(new navRequest('content', '<s:property value="url"/>', null, null, 'pageForm'));"/>
+                <input type="button" class="button" value=">" onclick="dojo.byId('page_number').value = <s:property value="getPage()"/> + 1;navGo([new navRequest('content', '<s:property value="url"/>', null, null, 'pageForm')]);"/>
             </s:else>
             <s:if test="getPage() == getNbPage()">
-                <input type="button" disabled class="disabledButton" value=">|" onclick="dojo.byId('page_number').value = <s:property value="getNbPage()"/>;navGo(new navRequest('content', '<s:property value="url"/>', null, null, 'pageForm'));"/>
+                <input type="button" disabled class="disabledButton" value=">|" onclick="dojo.byId('page_number').value = <s:property value="getNbPage()"/>;navGo([new navRequest('content', '<s:property value="url"/>', null, null, 'pageForm')]);"/>
             </s:if>
             <s:else>
-                <input type="button" class="button" value=">|" onclick="dojo.byId('page_number').value = <s:property value="getNbPage()"/>;navGo(new navRequest('content', '<s:property value="url"/>', null, null, 'pageForm'));"/>
+                <input type="button" class="button" value=">|" onclick="dojo.byId('page_number').value = <s:property value="getNbPage()"/>;navGo([new navRequest('content', '<s:property value="url"/>', null, null, 'pageForm')]);"/>
             </s:else>
         </s:if>
     </h2>
