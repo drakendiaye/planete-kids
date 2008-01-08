@@ -18,6 +18,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import planetekids.beans.entity.AccountBean;
+import planetekids.beans.entity.AgeBean;
 import planetekids.beans.entity.AnswerBean;
 import planetekids.beans.entity.CategoryBean;
 import planetekids.beans.entity.ColorBean;
@@ -242,6 +243,58 @@ public class AdminBean implements AdminRemote  {
 	}
     }
     
+    /*------------------------------------------------------------------*/
+    /*					Creation des Ages							*/
+    /*------------------------------------------------------------------*/
+    
+    public List<AgeBean> getAges() throws Exception {
+        return entityManager.createNamedQuery("getAges").getResultList();
+    }
+    
+    public AgeBean getAge(int id) throws Exception {
+        return entityManager.find(AgeBean.class, id);
+    }
+    
+    public void setAgeNameFr(int id, String name) throws Exception {
+        AgeBean age = this.getAge(id);
+        age.getName().setFr(name);
+    }
+    
+    public void setAgeNameEn(int id, String name) throws Exception {
+        AgeBean age = this.getAge(id);
+        age.getName().setEn(name);
+    }
+    
+    public void setAgeDescriptionFr(int id, String description) throws Exception {
+        AgeBean age = this.getAge(id);
+        age.getDescription().setFr(description);
+    }
+    
+    public void setAgeDescriptionEn(int id, String description) throws Exception {
+        AgeBean age = getAge(id);
+        age.getDescription().setEn(description);
+    }
+    
+    public int createAge(String name_fr, String name_en, String description_fr, String description_en) throws Exception {
+        AgeBean age = new AgeBean(new LocaleBean(name_fr, name_en), new LocaleBean(description_fr, description_en));
+        entityManager.persist(age);
+        return age.getId();
+    }
+    
+    public void deleteAge(int id) throws Exception {
+        entityManager.remove(getAge(id));
+    }
+    
+    public void deleteAges() throws Exception {
+	List<AgeBean> ages = this.getAges();
+	if (ages != null) {
+	    Iterator iterator = ages.iterator();
+	    while (iterator.hasNext()) {
+		AgeBean age = (AgeBean) iterator.next();
+		deleteColor(age.getId());
+	    }
+	}
+    }
     
     /*------------------------------------------------------------------*/
     /*					Creation des produits							*/
@@ -269,6 +322,12 @@ public class AdminBean implements AdminRemote  {
         return query.getResultList();
     }
     
+    public List<ProductBean> getProductsByAge(int age_id) throws Exception {
+	Query query = entityManager.createNamedQuery("getProductsByAge");
+	query.setParameter("age", entityManager.find(AgeBean.class, age_id));
+	return query.getResultList();
+    }
+
     public List<ProductBean> getProductsByFilter(List<Integer> category_ids, List<Integer> color_ids, List<Integer> label_ids, boolean and) throws Exception {
         Iterator<Integer> iterator;
         Set<ProductBean> products = new HashSet<ProductBean>();
@@ -351,6 +410,12 @@ public class AdminBean implements AdminRemote  {
         product.setLabel(label);
     }
     
+    public void setProductAge(int id, int age_id) throws Exception {
+	ProductBean product = getProduct(id);
+	AgeBean age = this.getAge(age_id);
+	product.setAge(age);
+    }
+
     public void setProductPrice(int id, float price) throws Exception {
         ProductBean product = getProduct(id);
         product.setPrice(price);
@@ -376,11 +441,12 @@ public class AdminBean implements AdminRemote  {
         product.setImage_small(image);
     }
     
-    public int createProduct(String name_fr, String name_en, String description_fr, String description_en, int category_id, int color_id, int label_id, float price, int stock, String image_large, String image_medium, String image_small) throws Exception {
-        CategoryBean category = getCategory(category_id);
-        ColorBean color = getColor(color_id);
-        LabelBean label = getLabel(label_id);
-        ProductBean product = new ProductBean(new LocaleBean(name_fr, name_en), new LocaleBean(description_fr, description_en), category, color, label, price, stock, image_large, image_medium, image_small);
+    public int createProduct(String name_fr, String name_en, String description_fr, String description_en, int category_id, int color_id, int label_id, int age_id, float price, int stock, String image_large, String image_medium, String image_small) throws Exception {
+        CategoryBean category = this.getCategory(category_id);
+        ColorBean color = this.getColor(color_id);
+        LabelBean label = this.getLabel(label_id);
+        AgeBean age = this.getAge(age_id); 
+        ProductBean product = new ProductBean(new LocaleBean(name_fr, name_en), new LocaleBean(description_fr, description_en), category, color, label, age, price, stock, image_large, image_medium, image_small);
         entityManager.persist(product);
         return product.getId();
     }

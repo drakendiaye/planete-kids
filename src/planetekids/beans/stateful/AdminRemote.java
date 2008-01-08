@@ -7,11 +7,14 @@
 
 package planetekids.beans.stateful;
 
+import java.util.Iterator;
 import java.util.List;
 import planetekids.beans.entity.AccountBean;
+import planetekids.beans.entity.AgeBean;
 import planetekids.beans.entity.CategoryBean;
 import planetekids.beans.entity.ColorBean;
 import planetekids.beans.entity.LabelBean;
+import planetekids.beans.entity.LocaleBean;
 import planetekids.beans.entity.ProductBean;
 import planetekids.beans.entity.QuestionBean;
 import planetekids.beans.entity.QuestionnaireBean;
@@ -56,10 +59,21 @@ public interface AdminRemote {
     public void deleteCategory(int id) throws Exception;
     public void deleteCategories() throws Exception;
     
+    public List<AgeBean> getAges() throws Exception ;    
+    public AgeBean getAge(int id) throws Exception ;    
+    public void setAgeNameFr(int id, String name) throws Exception ;    
+    public void setAgeNameEn(int id, String name) throws Exception ;    
+    public void setAgeDescriptionFr(int id, String description) throws Exception ;    
+    public void setAgeDescriptionEn(int id, String description) throws Exception ;    
+    public int createAge(String name_fr, String name_en, String description_fr, String description_en) throws Exception ;    
+    public void deleteAge(int id) throws Exception ;    
+    public void deleteAges() throws Exception ;
+    
     public List<ProductBean> getProducts() throws Exception;
     public List<ProductBean> getProductsByCategory(int category_id) throws Exception;
     public List<ProductBean> getProductsByColor(int color_id) throws Exception;
     public List<ProductBean> getProductsByLabel(int label_id) throws Exception;
+    public List<ProductBean> getProductsByAge(int age_id) throws Exception;
     public List<ProductBean> getProductsByFilter(List<Integer> category_ids, List<Integer> color_ids, List<Integer> label_ids, boolean and) throws Exception;
     public ProductBean getProduct(int id) throws Exception;
     public void setProductNameFr(int id, String name) throws Exception;
@@ -69,12 +83,13 @@ public interface AdminRemote {
     public void setProductCategory(int id, int category_id) throws Exception;
     public void setProductColor(int id, int color_id) throws Exception;
     public void setProductLabel(int id, int label_id) throws Exception;
+    public void setProductAge(int id, int age_id) throws Exception;
     public void setProductPrice(int id, float price) throws Exception;
     public void setProductStock(int id, int stock) throws Exception;
     public void setProductImageLarge(int id, String image) throws Exception;
     public void setProductImageMedium(int id, String image) throws Exception;
     public void setProductImageSmall(int id, String image) throws Exception;
-    public int createProduct(String name_fr, String name_en, String description_fr, String description_en, int category_id, int color_id, int label_id, float price, int stock, String image_large, String image_medium, String image_small) throws Exception;
+    public int createProduct(String name_fr, String name_en, String description_fr, String description_en, int category_id, int color_id, int label_id, int age_id, float price, int stock, String image_large, String image_medium, String image_small) throws Exception;
     public void deleteProduct (int id) throws Exception;
     public void deleteProducts() throws Exception;
     

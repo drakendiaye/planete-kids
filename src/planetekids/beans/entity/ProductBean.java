@@ -16,7 +16,8 @@ import javax.persistence.PreRemove;
 @NamedQueries({@NamedQuery(name = "getProducts", query = "select o FROM ProductBean o"),
 @NamedQuery(name = "getProductsByCategory", query = "select o FROM ProductBean o WHERE o.category = :category"),
 @NamedQuery(name = "getProductsByColor", query = "select o FROM ProductBean o WHERE o.color = :color"),
-@NamedQuery(name = "getProductsByLabel", query = "select o FROM ProductBean o WHERE o.label = :label")
+@NamedQuery(name = "getProductsByLabel", query = "select o FROM ProductBean o WHERE o.label = :label"),
+@NamedQuery(name = "getProductsByAge", query = "select o FROM ProductBean o WHERE o.age= :age")
 })
 public class ProductBean implements java.io.Serializable {
 
@@ -39,6 +40,9 @@ public class ProductBean implements java.io.Serializable {
     @ManyToOne(optional = false)
     private LabelBean label;
     
+    @ManyToOne(optional = false)
+    private AgeBean age;
+    
     private float price;
     private int stock;
     private String image_large;
@@ -49,13 +53,14 @@ public class ProductBean implements java.io.Serializable {
 
     }
 
-    public ProductBean(LocaleBean name, LocaleBean description, CategoryBean category, ColorBean color, LabelBean label, float price, int stock, String image_large, String image_medium, String image_small) {
+    public ProductBean(LocaleBean name, LocaleBean description, CategoryBean category, ColorBean color, LabelBean label, AgeBean age, float price, int stock, String image_large, String image_medium, String image_small) {
         this();
         this.setName(name);
         this.setDescription(description);
         this.setCategory(category);
         this.setColor(color);
         this.setLabel(label);
+        this.setAge(age);
         this.setPrice(price);
         this.setStock(stock);
         this.setImage_large(image_large);
@@ -127,6 +132,14 @@ public class ProductBean implements java.io.Serializable {
         this.label = label;
     }
 
+    public AgeBean getAge() {
+        return age;
+    }
+
+    public void setAge(AgeBean age) {
+        this.age = age;
+    }
+
     public float getPrice() {
         return price;
     }
@@ -172,5 +185,6 @@ public class ProductBean implements java.io.Serializable {
         if (!category.removing) category.getProducts().remove(this);
         if (!color.removing) color.getProducts().remove(this);
         if (!label.removing) label.getProducts().remove(this);
+        if (!age.removing) age.getProducts().remove(this);
     }
 }
