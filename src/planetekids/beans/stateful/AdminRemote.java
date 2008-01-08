@@ -19,15 +19,14 @@ import planetekids.beans.entity.QuestionnaireBean;
 public interface AdminRemote {
     public List<LabelBean> getLabels() throws Exception;
     public LabelBean getLabel(int id) throws Exception;
-    public void setLabelNameFr(int id, String name) throws Exception;
-    public void setLabelNameEn(int id, String name) throws Exception;
+    public void setLabelName(int id, String name) throws Exception;
     public void setLabelDescriptionFr(int id, String description) throws Exception;
     public void setLabelDescriptionEn(int id, String description) throws Exception;
     public void setLabelSite(int id, String site) throws Exception;
     public void setLabelImageLarge(int id, String image) throws Exception;
     public void setLabelImageMedium(int id, String image) throws Exception;
     public void setLabelImageSmall(int id, String image) throws Exception;
-    public int createLabel(String name_fr, String name_en, String description_fr, String description_en, String site, String image_large, String image_medium, String image_small) throws Exception;
+    public int createLabel(String name, String description_fr, String description_en, String site, String image_large, String image_medium, String image_small) throws Exception;
     public void deleteLabel(int id) throws Exception;
     public void deleteLabels() throws Exception;
     

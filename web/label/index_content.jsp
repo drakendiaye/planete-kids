@@ -13,7 +13,7 @@
                         <h3>
                             <img id="label_<s:property value="getId()" />_img" onclick="coldiv_click('label_<s:property value="getId()"/>')" />
                             <img src="<s:property value="getImage_small()" />" width="20px" height="20px"/>
-                            <s:property value="getName(getLocale())" />
+                            <s:property value="getName()" />
                         </h3>
                     </td>
                 </tr>

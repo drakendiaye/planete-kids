@@ -25,16 +25,11 @@
 	<form method="post" name="labelform">
 	<table>
 	<tr>
-	<td>English name:</td>
-	<td><input type="text" value="<s:property value="getLabel(getLabelId()).getName('en')" />" /></td>
-	</tr>
-	<tr>
-	<td>French name:</td>
-	<td><input type="text" value="<s:property value="getLabel(getLabelId()).getName('fr')" />" /></td>
+	<td>Name:</td>
+	<td><input type="text" value="<s:property value="getLabel(getLabelId()).getName()" />" /></td>
 	</tr>
 	</table>
 	<input type="submit" value="Submit" />
-
 	</form>
 	</div>
 	</div>

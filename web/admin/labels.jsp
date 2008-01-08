@@ -25,8 +25,7 @@
 
 	<table border="2">
 	<tr>
-	<th>Name (en)</th>
-	<th>Name (fr)</th>
+	<th>Name</th>
 	<th>Description (en)</th>
 	<th>Description (fr)</th>
 	<th>Site</th>
@@ -38,8 +37,7 @@
 
 	<s:iterator value="getLabels()">
 	    <tr>
-	    <td align=center><s:property value="getName('en')" /></td>
-	    <td align=center><s:property value="getName('fr')" /></td>
+	    <td align=center><s:property value="getName()" /></td>
 	    <td align=center><s:property value="getDescription('en')" /></td>
 	    <td align=center><s:property value="getDescription('fr')" /></td>
 	    <td align=center><s:property value="getSite()" /></td>

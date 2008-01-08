@@ -24,14 +24,12 @@ public class LabelBean implements Serializable {
     private int id;
     
     @OneToOne(fetch=FetchType.EAGER, cascade=CascadeType.ALL, optional=false)
-    private LocaleBean name;
-    
-    @OneToOne(fetch=FetchType.EAGER, cascade=CascadeType.ALL, optional=false)
     private LocaleBean description;
     
     @OneToMany(mappedBy="label", fetch=FetchType.EAGER, cascade=CascadeType.ALL)
     private Set<ProductBean> products = new HashSet<ProductBean>();
     
+    private String name;
     private String site;
     private String image_large;
     private String image_medium;
@@ -41,7 +39,7 @@ public class LabelBean implements Serializable {
         
     }
     
-    public LabelBean(LocaleBean name, LocaleBean description, String site, String image_large, String image_medium, String image_small) {
+    public LabelBean(String name, LocaleBean description, String site, String image_large, String image_medium, String image_small) {
         this.setName(name);
         this.setDescription(description);
         this.setSite(site);
@@ -57,19 +55,11 @@ public class LabelBean implements Serializable {
     public void setId(int id) {
         this.id = id;
     }
-    
-    public String getName(String locale) {
-        if (locale.equals("fr"))
-            return name.getFr();
-        else
-            return name.getEn();
-    }
-
-    public LocaleBean getName() {
+    public String getName() {
         return name;
     }
 
-    public void setName(LocaleBean name) {
+    public void setName(String name) {
         this.name = name;
     }
     
