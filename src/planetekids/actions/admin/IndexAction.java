@@ -8,6 +8,7 @@ import javax.naming.NamingException;
 import org.apache.struts2.interceptor.ParameterAware;
 import org.apache.struts2.interceptor.SessionAware;
 import planetekids.beans.entity.AccountBean;
+import planetekids.beans.entity.AgeBean;
 import planetekids.beans.entity.CategoryBean;
 import planetekids.beans.entity.ColorBean;
 import planetekids.beans.entity.LabelBean;
@@ -133,6 +134,25 @@ public class IndexAction extends ActionSupport implements SessionAware, Paramete
 
 	if (parameters.get("customer_id") != null) {
 	    id = ((String[]) parameters.get("customer_id"))[0];
+	}
+
+	return id;
+    }
+    
+    public List getAges() throws Exception {
+	return getAdmin().getAges();
+    }
+    
+    public AgeBean getAge(int id) throws Exception {
+	return getAdmin().getAge(id);
+    }
+    
+    public int getAgeId() throws Exception {
+	int id = -1;
+
+	if (parameters.get("age_id") != null) {
+	    String id_s = ((String[]) parameters.get("age_id"))[0];
+	    id = Integer.valueOf(id_s).intValue();
 	}
 
 	return id;
