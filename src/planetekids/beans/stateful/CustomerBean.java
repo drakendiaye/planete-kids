@@ -11,6 +11,8 @@ import javax.ejb.PostActivate;
 import javax.ejb.PrePassivate;
 import javax.ejb.Remove;
 import javax.ejb.Stateful;
+import javax.naming.Context;
+import javax.naming.InitialContext;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
@@ -29,10 +31,11 @@ public class CustomerBean implements CustomerRemote {
 
     @PersistenceContext
     private EntityManager entityManager;
+    private CartRemote cart;
     private String account_id;
 
     public void init() {
-
+        
     }
 
     public boolean LogIn(String account_id, String password) throws Exception {
@@ -52,6 +55,26 @@ public class CustomerBean implements CustomerRemote {
     public AccountBean getAccount() throws Exception {
         if(this.account_id == null) return null;
         else return entityManager.find(AccountBean.class, this.account_id);
+    }
+    
+    public void flushCart() throws Exception {
+        cart.flushCart();
+    }
+
+    public int validateCart() throws Exception {
+        return cart.validateCart();
+    }
+    
+    public List<ProductBean> getCartProducts()  throws Exception {
+        return cart.getCartProducts();
+    }
+
+    public void setCartProductNumber(int product_id, int product_number) throws Exception {
+        cart.setCartProductNumber(product_id, product_number);
+    }
+
+    public int getCartProductNumber(int product_id) throws Exception {
+        return cart.getCartProductNumber(product_id);
     }
 
     public List<QuestionnaireBean> getQuestionnaires() throws Exception {
@@ -171,6 +194,12 @@ public class CustomerBean implements CustomerRemote {
 
     @PostConstruct
     private void postConstruct() {
+        try {
+            Context context = new InitialContext();
+            cart = (CartRemote) context.lookup(CartBean.class.getName() + "_" + CartRemote.class.getName() + "@Remote");
+        } catch(Exception ex) {
+
+        }
     }
 
     @PreDestroy

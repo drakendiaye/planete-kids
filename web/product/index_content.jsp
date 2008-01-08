@@ -18,7 +18,11 @@
                     </td>
                     <td align="right">
                         <s:property value="getPrice()" />&nbsp;€
-                        <input type="submit" value="Ajouter au panier" class="button">
+                        <form id="product_<s:property value="getId()"/>_form">
+                            <s:hidden name="add_%{getId()}"/>
+                            <s:url id="url" namespace="/" action="index_cart" includeParams="none"/>
+                            <input type="submit" value="Ajouter au panier" class="button"onclick="navExec(new navRequest('cart', '<s:property value="url"/>', null, null, 'product_<s:property value="getId()" />_form')); return(false);">
+                        </form>
                     </td>
                 </tr>
             </table>

@@ -17,7 +17,7 @@
             </result>
             <result name="error">/error.jsp</result>
         </action>
-        <action name="index_cart" class="planetekids.actions.IndexAction" >
+        <action name="index_cart" class="planetekids.actions.IndexAction" method="updateCart">
             <result>/index_cart.jsp</result>
             <result name="error">/error.jsp</result>
         </action>
@@ -78,7 +78,6 @@
     </package>
     
     <package name="account" namespace="/account" extends="struts-default">
-        
         <action name="index" class="planetekids.actions.account.IndexAction" method="redirect" >
             <result type="redirect-action">
                 <param name="namespace">/</param>
@@ -146,11 +145,9 @@
             <result>/account/identify_location.jsp</result>
             <result name="error">/error.jsp</result>
         </action>
-        
     </package>
     
     <package name="category" namespace="/category" extends="struts-default">
-        
         <action name="index" class="planetekids.actions.category.IndexAction" method="redirect" >
             <result type="redirect-action">
                 <param name="namespace">/</param>
@@ -166,11 +163,9 @@
             <result>/category/index_location.jsp</result>
             <result name="error">/error.jsp</result>
         </action>
-        
     </package>
     
     <package name="color" namespace="/color" extends="struts-default">
-        
         <action name="index" class="planetekids.actions.color.IndexAction" method="redirect" >
             <result type="redirect-action">
                 <param name="namespace">/</param>
@@ -186,11 +181,9 @@
             <result>/color/index_location.jsp</result>
             <result name="error">/error.jsp</result>
         </action>
-        
     </package>
     
     <package name="label" namespace="/label" extends="struts-default">
-        
         <action name="index" class="planetekids.actions.label.IndexAction" method="redirect" >
             <result type="redirect-action">
                 <param name="namespace">/</param>
@@ -206,11 +199,9 @@
             <result>/label/index_location.jsp</result>
             <result name="error">/error.jsp</result>
         </action>
-        
     </package>
     
     <package name="product" namespace="/product" extends="struts-default">
-        
         <action name="index" class="planetekids.actions.product.IndexAction" method="redirect" >
             <result type="redirect-action">
                 <param name="namespace">/</param>
@@ -226,7 +217,6 @@
             <result>/product/index_location.jsp</result>
             <result name="error">/error.jsp</result>
         </action>
-        
     </package>
     
     <package name="admin" namespace="/admin" extends="struts-default">    
@@ -244,8 +234,6 @@
             <result>/admin/labels_modify.jsp</result>
             <result name="error">/error.jsp</result>
         </action>
-	
-	
     </package>
     
 </struts>

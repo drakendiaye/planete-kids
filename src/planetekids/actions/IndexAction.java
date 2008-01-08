@@ -1,12 +1,13 @@
 package planetekids.actions;
 
 import com.opensymphony.xwork2.ActionSupport;
+import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 import javax.naming.InitialContext;
-import javax.naming.NamingException;
-
 import org.apache.struts2.interceptor.ParameterAware;
 import org.apache.struts2.interceptor.SessionAware;
+import planetekids.beans.entity.ProductBean;
 import planetekids.beans.stateful.CustomerBean;
 import planetekids.beans.stateful.CustomerRemote;
 
@@ -14,11 +15,11 @@ public class IndexAction extends ActionSupport implements SessionAware, Paramete
 
     private Map session;
     private Map parameters;
-    
+
     public void setSession(Map session) {
         this.session = session;
     }
-    
+
     public void setParameters(Map parameters) {
         this.parameters = parameters;
     }
@@ -26,29 +27,78 @@ public class IndexAction extends ActionSupport implements SessionAware, Paramete
     public CustomerRemote getCustomer() {
         return (CustomerRemote) session.get("customer");
     }
-    
+
     public String getCallback() {
-        return (String)session.remove("callback");
+        return (String) session.remove("callback");
     }
 
     @Override
     public String execute() throws Exception {
         try {
-            if (getCustomer() == null) session.put("customer", new InitialContext().lookup(CustomerBean.class.getName() + "_" + CustomerRemote.class.getName() + "@Remote"));
-            if(parameters.get("callback") != null) {
+            if (getCustomer() == null) {
+                session.put("customer", new InitialContext().lookup(CustomerBean.class.getName() + "_" + CustomerRemote.class.getName() + "@Remote"));
+            }
+            if (parameters.get("callback") != null) {
                 session.remove("callback");
-                session.put("callback", ((String[])parameters.get("callback"))[0]);
+                session.put("callback", ((String[]) parameters.get("callback"))[0]);
             }
             return ActionSupport.SUCCESS;
-        } catch (NamingException ex) {
+        } catch (Exception ex) {
             return ActionSupport.ERROR;
         }
     }
-    
+
     public String logout() throws Exception {
         String result = execute();
-        if(getCustomer() != null) getCustomer().LogOut();
+        if (getCustomer() != null) {
+            getCustomer().LogOut();
+        }
         return result;
+    }
+
+    public String updateCart() throws Exception {
+        String result = execute();
+        Iterator<String> iterator = parameters.keySet().iterator();
+        while (iterator.hasNext()) {
+            String key = iterator.next();
+            String[] command = key.split("_");
+            try {
+                if (command[0].equals("add")) {
+                    getCustomer().setCartProductNumber(new Integer(command[1]), 1);
+                } else if (command[0].equals("delete")) {
+                    getCustomer().setCartProductNumber(new Integer(command[1]), 0);
+                } else if (command[0].equals("update")) {
+                    getCustomer().setCartProductNumber(new Integer(command[1]), new Integer(command[2]));
+                } else if (command[0].equals("flush")) {
+                    getCustomer().flushCart();
+                }  else if (command[0].equals("validate")) {
+                    getCustomer().validateCart();
+                } 
+            } catch(Exception ex) {
+                
+            } 
+        }
+        return result;
+    }
+
+    public void flushCart() throws Exception {
+        getCustomer().flushCart();
+    }
+
+    public int validateCart() throws Exception {
+        return getCustomer().validateCart();
+    }
+
+    public List<ProductBean> getCartProducts() throws Exception {
+        return getCustomer().getCartProducts();
+    }
+
+    public void setCartProductNumber(int product_id, int product_number) throws Exception {
+        getCustomer().setCartProductNumber(product_id, product_number);
+    }
+
+    public int getCartProductNumber(int product_id) throws Exception {
+        return getCustomer().getCartProductNumber(product_id);
     }
 
     public String getCart_action() {
@@ -176,5 +226,4 @@ public class IndexAction extends ActionSupport implements SessionAware, Paramete
             return namespace;
         }
     }
-
 }

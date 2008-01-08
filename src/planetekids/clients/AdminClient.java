@@ -23,7 +23,7 @@ public class AdminClient {
 	AdminRemote admin = null;
 	try {
 	    System.setProperty(Context.INITIAL_CONTEXT_FACTORY, "org.ow2.easybeans.component.smartclient.spi.SmartContextFactory");
-	    initialContext = initialContext = new InitialContext();
+	    initialContext = new InitialContext();
 
 	    utx = (UserTransaction) initialContext.lookup("javax.transaction.UserTransaction");
 
