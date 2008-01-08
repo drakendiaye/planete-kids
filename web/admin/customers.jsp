@@ -52,7 +52,6 @@
 	<th width=220>Fax number</th>
 	<th>Action</th>
 	</tr>
-	</tr>
 
 	<s:iterator value="getCustomers()">
 	    <tr>
@@ -67,10 +66,20 @@
 	    <td align=center><s:property value="getCity()" /></td>
 	    <td align=center><s:property value="getPhoneNumber()" /></td>
 	    <td align=center><s:property value="getFaxNumber()" /></td>
-	    <s:url id="modify" namespace="/admin" action="customer_modify" includeParams="none">
-	    <s:param name="customer_id" value="getId()"></s:param>
+
+	    <td align=center>
+
+	    <s:url id="modify" namespace="/admin" action="customers_modify" includeParams="none">
+	    <s:param name="customer_id" value="getEmailAddress()" />
 	    </s:url>
-	    <td align=center><s:a href="%{modify}">Modify</s:a><br />Delete</td>
+	    <s:a href="%{modify}">Modify</s:a><br />
+	    <s:url id="delete" namespace="/admin" action="customer_delete" includeParams="none">
+	    <s:param name="customer_id" value="getEmailAddress()" />
+	    </s:url>
+	    <s:a href="%{delete}">Delete</s:a>
+
+	    </td>
+
 	    </tr>
 	</s:iterator>
 	</table>

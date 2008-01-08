@@ -35,8 +35,10 @@
 	<br />
 	<br />
 	<div align=left>
-	<form method="post" name="categoryform">
+
+	<s:form method="post" namespace="/admin" action="category_valid" name="labelform">
 	<table>
+	<input type="hidden" name="category_id" value="<s:property value="getCategoryId()" />" />
 	<tr><td align=right>Name (en)
         <td><input type="text" name="name_en" value="<s:property value="getCategory(getCategoryId()).getName('en')" />" size="35"/>
 	<tr><td align=right>Name (fr)
@@ -53,7 +55,7 @@
         <td><input type="text" name="image_small" value="<s:property value="getCategory(getCategoryId()).getImage_small()" />" size="35"/>
 	</table><br />
 	<input type="submit" value="Submit" />
-	</form>
+	</s:form>
 	</div>
 	</div>
     </s:div>

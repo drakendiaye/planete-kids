@@ -52,10 +52,20 @@
 	    <td align=center><s:property value="getName('fr')" /></td>
 	    <td align=center><s:property value="getDescription('en')" /></td>
 	    <td align=center><s:property value="getDescription('fr')" /></td>
+	   	    
+	    <td align=center>
+
 	    <s:url id="modify" namespace="/admin" action="ages_modify" includeParams="none">
-	    <s:param name="age_id" value="getId()"></s:param>
+	    <s:param name="age_id" value="getId()" />
 	    </s:url>
-	    <td align=center><s:a href="%{modify}">Modify</s:a><br />Delete</td>
+	    <s:a href="%{modify}">Modify</s:a><br />
+	    <s:url id="delete" namespace="/admin" action="age_delete" includeParams="none">
+	    <s:param name="age_id" value="getId()" />
+	    </s:url>
+	    <s:a href="%{delete}">Delete</s:a>
+
+	    </td>
+
 	    </tr>
 	</s:iterator>
 	</table>

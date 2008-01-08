@@ -167,7 +167,7 @@ public class AdminClient {
 			    System.out.println("image small : " + label.getImage_small());
 			    System.out.println("------------------------------------------------------");
 			    System.out.println("0 = return");
-			    System.out.println("1 = modify name french");
+			    System.out.println("1 = modify name");
 			    System.out.println("2 = modify description french");
 			    System.out.println("3 = modify description english");
 			    System.out.println("4 = modify site");

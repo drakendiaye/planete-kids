@@ -237,7 +237,8 @@
         </action>
     </package>
     
-    <package name="admin" namespace="/admin" extends="struts-default">    
+    <package name="admin" namespace="/admin" extends="struts-default">   
+	
         <action name="index" class="planetekids.actions.admin.IndexAction">
             <result>/admin/index.jsp</result>
             <result name="error">/error.jsp</result>
@@ -253,6 +254,16 @@
             <result name="error">/error.jsp</result>
         </action>
 	
+	<action name="label_valid" class="planetekids.actions.admin.IndexAction" method="labelValid">
+            <result>/admin/labels_modify.jsp</result>
+            <result name="error">/error.jsp</result>
+        </action>
+	
+	<action name="label_delete" class="planetekids.actions.admin.IndexAction" method="labelDelete">
+            <result>/admin/labels.jsp</result>
+            <result name="error">/error.jsp</result>
+        </action>
+	
 	<action name="colors" class="planetekids.actions.admin.IndexAction">
             <result>/admin/colors.jsp</result>
             <result name="error">/error.jsp</result>
@@ -263,6 +274,11 @@
             <result name="error">/error.jsp</result>
 	</action>
 	
+	<action name="color_delete" class="planetekids.actions.admin.IndexAction" method="colorDelete">
+            <result>/admin/colors.jsp</result>
+            <result name="error">/error.jsp</result>
+        </action>
+	
 	<action name="categories" class="planetekids.actions.admin.IndexAction">
             <result>/admin/categories.jsp</result>
             <result name="error">/error.jsp</result>
@@ -272,6 +288,16 @@
             <result>/admin/categories_modify.jsp</result>
             <result name="error">/error.jsp</result>
 	</action>
+	
+	<action name="category_valid" class="planetekids.actions.admin.IndexAction" method="categoryValid">
+            <result>/admin/categories_modify.jsp</result>
+            <result name="error">/error.jsp</result>
+        </action>
+		
+	<action name="category_delete" class="planetekids.actions.admin.IndexAction" method="categoryDelete">
+            <result>/admin/categories.jsp</result>
+            <result name="error">/error.jsp</result>
+        </action>
 
 	<action name="products" class="planetekids.actions.admin.IndexAction">
             <result>/admin/products.jsp</result>
@@ -282,6 +308,11 @@
             <result>/admin/products_modify.jsp</result>
             <result name="error">/error.jsp</result>
 	</action>
+		
+	<action name="product_delete" class="planetekids.actions.admin.IndexAction" method="productDelete">
+            <result>/admin/products.jsp</result>
+            <result name="error">/error.jsp</result>
+        </action>
 	
 	<action name="customers" class="planetekids.actions.admin.IndexAction">
             <result>/admin/customers.jsp</result>
@@ -292,6 +323,11 @@
             <result>/admin/customers_modify.jsp</result>
             <result name="error">/error.jsp</result>
 	</action>
+		
+	<action name="customer_delete" class="planetekids.actions.admin.IndexAction" method="customerDelete">
+            <result>/admin/customers.jsp</result>
+            <result name="error">/error.jsp</result>
+        </action>
 	
 	<action name="ages" class="planetekids.actions.admin.IndexAction">
             <result>/admin/ages.jsp</result>
@@ -300,6 +336,11 @@
 	
 	<action name="ages_modify" class="planetekids.actions.admin.IndexAction">
             <result>/admin/ages_modify.jsp</result>
+            <result name="error">/error.jsp</result>
+	</action>
+	
+	<action name="ages_delete" class="planetekids.actions.admin.IndexAction" method="ageDelete">
+            <result>/admin/ages.jsp</result>
             <result name="error">/error.jsp</result>
 	</action>
 	
