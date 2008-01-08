@@ -30,7 +30,7 @@ public class AgeBean implements Serializable{
     @OneToOne(fetch=FetchType.EAGER, cascade=CascadeType.ALL, optional=false)
     private LocaleBean description;
 
-    @OneToMany(mappedBy = "age", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "age", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private Set<ProductBean> products = new HashSet<ProductBean>();
 
     public AgeBean() {

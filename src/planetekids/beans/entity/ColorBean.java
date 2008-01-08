@@ -29,7 +29,7 @@ public class ColorBean implements Serializable {
     @OneToOne(fetch=FetchType.EAGER, cascade=CascadeType.ALL, optional=false)
     private LocaleBean description;
     
-    @OneToMany(mappedBy="color", fetch=FetchType.EAGER, cascade=CascadeType.ALL)
+    @OneToMany(mappedBy="color", fetch=FetchType.LAZY, cascade=CascadeType.ALL)
     private Set<ProductBean> products = new HashSet<ProductBean>();
     
     private String image_large;

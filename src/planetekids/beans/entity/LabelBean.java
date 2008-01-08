@@ -26,7 +26,7 @@ public class LabelBean implements Serializable {
     @OneToOne(fetch=FetchType.EAGER, cascade=CascadeType.ALL, optional=false)
     private LocaleBean description;
     
-    @OneToMany(mappedBy="label", fetch=FetchType.EAGER, cascade=CascadeType.ALL)
+    @OneToMany(mappedBy="label", fetch=FetchType.LAZY, cascade=CascadeType.ALL)
     private Set<ProductBean> products = new HashSet<ProductBean>();
     
     private String name;
