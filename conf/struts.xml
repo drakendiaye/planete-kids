@@ -274,6 +274,11 @@
             <result name="error">/error.jsp</result>
 	</action>
 	
+	<action name="color_valid" class="planetekids.actions.admin.IndexAction" method="colorValid">
+            <result>/admin/colors_modify.jsp</result>
+            <result name="error">/error.jsp</result>
+        </action>
+	
 	<action name="color_delete" class="planetekids.actions.admin.IndexAction" method="colorDelete">
             <result>/admin/colors.jsp</result>
             <result name="error">/error.jsp</result>
@@ -308,6 +313,11 @@
             <result>/admin/products_modify.jsp</result>
             <result name="error">/error.jsp</result>
 	</action>
+	
+	<action name="product_valid" class="planetekids.actions.admin.IndexAction" method="productValid">
+            <result>/admin/products_modify.jsp</result>
+            <result name="error">/error.jsp</result>
+        </action>
 		
 	<action name="product_delete" class="planetekids.actions.admin.IndexAction" method="productDelete">
             <result>/admin/products.jsp</result>
@@ -323,6 +333,11 @@
             <result>/admin/customers_modify.jsp</result>
             <result name="error">/error.jsp</result>
 	</action>
+	
+	<action name="customer_valid" class="planetekids.actions.admin.IndexAction" method="customerValid">
+            <result>/admin/customers_modify.jsp</result>
+            <result name="error">/error.jsp</result>
+        </action>
 		
 	<action name="customer_delete" class="planetekids.actions.admin.IndexAction" method="customerDelete">
             <result>/admin/customers.jsp</result>
@@ -338,6 +353,11 @@
             <result>/admin/ages_modify.jsp</result>
             <result name="error">/error.jsp</result>
 	</action>
+	
+	<action name="age_valid" class="planetekids.actions.admin.IndexAction" method="ageValid">
+            <result>/admin/ages_modify.jsp</result>
+            <result name="error">/error.jsp</result>
+        </action>
 	
 	<action name="ages_delete" class="planetekids.actions.admin.IndexAction" method="ageDelete">
             <result>/admin/ages.jsp</result>

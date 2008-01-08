@@ -32,20 +32,20 @@
 
 	<s:url id="viewages" namespace="/admin" action="ages" includeParams="none" />
 	<s:a href="%{viewages}"><s:text name="ages" /></s:a>
+	<br />
+	<br />
 
-	<br />
-	<br />
-	<div align=left>
-	<form method="post" name="colorform">
-	<table>
+	<s:form method="post" namespace="/admin" action="color_valid">
+	<table align="center">
+	<input type="hidden" name="color_id" value="<s:property value="getColorId()" />" />
 	<tr><td align=right>Name (en)
-        <td><input type="text" name="name" value="<s:property value="getColor(getColorId()).getName('en')" />" size="35"/>
+        <td><input type="text" name="name_en" value="<s:property value="getColor(getColorId()).getName('en')" />" size="35"/>
 	<tr><td align=right>Name (fr)
-        <td><input type="text" name="name" value="<s:property value="getColor(getColorId()).getName('fr')" />" size="35"/>	
+        <td><input type="text" name="name_fr" value="<s:property value="getColor(getColorId()).getName('fr')" />" size="35"/>	
 	<tr><td align=right>Description (en)
-        <td><input type="text" name="description_fr" value="<s:property value="getColor(getColorId()).getDescription('en')" />" size="35"/>
+        <td><input type="text" name="description_en" value="<s:property value="getColor(getColorId()).getDescription('en')" />" size="35"/>
 	<tr><td align=right>Description (fr)
-        <td><input type="text" name="description_en" value="<s:property value="getColor(getColorId()).getDescription('fr')" />" size="35"/>
+        <td><input type="text" name="description_fr" value="<s:property value="getColor(getColorId()).getDescription('fr')" />" size="35"/>
 	<tr><td align=right>Image (large)
         <td><input type="text" name="image_large" value="<s:property value="getColor(getColorId()).getImage_large()" />" size="35"/>
 	<tr><td align=right>Image (medium)
@@ -54,8 +54,8 @@
         <td><input type="text" name="image_small" value="<s:property value="getColor(getColorId()).getImage_small()" />" size="35"/>
 	</table><br />
 	<input type="submit" value="Submit" />
-	</form>
-	</div>
+	</s:form>
+
 	</div>
     </s:div>
 </body>

@@ -32,13 +32,11 @@
 
 	<s:url id="viewages" namespace="/admin" action="ages" includeParams="none" />
 	<s:a href="%{viewages}"><s:text name="ages" /></s:a>
-
 	<br />
 	<br />
-	<div align=left>
 
-	<s:form method="post" namespace="/admin" action="label_valid" name="labelform">
-	<table>
+	<s:form method="post" namespace="/admin" action="label_valid">
+	<table align="center" >
 	<input type="hidden" name="label_id" value="<s:property value="getLabelId()" />" />
 	<tr><td align=right>Name
         <td><input type="text" name="name" value="<s:property value="getLabel(getLabelId()).getName()" />" size="35"/>
@@ -58,7 +56,6 @@
 	<input type="submit" value="Submit" />
 	</s:form>
 
-	</div>
 	</div>
     </s:div>
 </body>

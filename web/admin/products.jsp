@@ -67,20 +67,20 @@
 	    <td align=center><s:property value="getAge().getName(getLocale())" /></td>
 	    <td align=center><s:property value="getPrice()" /></td>
 	    <td align=center><s:property value="getStock()" /></td>
-	    <td align=center><img src="../<s:property value="getImage_large()" />"</td>
-	    <td align=center><img src="../<s:property value="getImage_medium()" />"</td>
-	    <td align=center><img src="../<s:property value="getImage_small()" />"</td>
+	    <td align=center><img src="../<s:property value="getImage_large()" />"></td>
+	    <td align=center><img src="../<s:property value="getImage_medium()" />"></td>
+	    <td align=center><img src="../<s:property value="getImage_small()" />"></td>
 
 	    <td align=center>
 
 	    <s:url id="modify" namespace="/admin" action="products_modify" includeParams="none">
 	    <s:param name="product_id" value="getId()" />
 	    </s:url>
-	    <s:a href="%{modify}">Modify</s:a><br />
+	    <s:a href="%{modify}"><s:text name="modify" /></s:a><br />
 	    <s:url id="delete" namespace="/admin" action="product_delete" includeParams="none">
 	    <s:param name="product_id" value="getId()" />
 	    </s:url>
-	    <s:a href="%{delete}">Delete</s:a>
+	    <s:a href="%{delete}"><s:text name="delete" /></s:a>
 
 	    </td>
 	    </tr>

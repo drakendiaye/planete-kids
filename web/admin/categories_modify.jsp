@@ -34,10 +34,9 @@
 	<s:a href="%{viewages}"><s:text name="ages" /></s:a>
 	<br />
 	<br />
-	<div align=left>
 
-	<s:form method="post" namespace="/admin" action="category_valid" name="labelform">
-	<table>
+	<s:form method="post" namespace="/admin" action="category_valid">
+	<table align="center">
 	<input type="hidden" name="category_id" value="<s:property value="getCategoryId()" />" />
 	<tr><td align=right>Name (en)
         <td><input type="text" name="name_en" value="<s:property value="getCategory(getCategoryId()).getName('en')" />" size="35"/>
@@ -56,7 +55,6 @@
 	</table><br />
 	<input type="submit" value="Submit" />
 	</s:form>
-	</div>
 	</div>
     </s:div>
 </body>

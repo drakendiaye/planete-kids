@@ -32,20 +32,20 @@
 
 	<s:url id="viewages" namespace="/admin" action="ages" includeParams="none" />
 	<s:a href="%{viewages}"><s:text name="ages" /></s:a>
+	<br />
+	<br />
 
-	<br />
-	<br />
-	<div align=left>
-	<form method="post" name="productform">
-	<table>
+	<s:form method="post" namespace="/admin" action="product_valid">
+	<table align="center">
+	<input type="hidden" name="product_id" value="<s:property value="getProductId()" />" />
 	<tr><td align=right>Name (en)
-        <td><input type="text" name="name" value="<s:property value="getProduct(getProductId()).getName('en')" />" size="35"/>
+        <td><input type="text" name="name_en" value="<s:property value="getProduct(getProductId()).getName('en')" />" size="35"/>
 	<tr><td align=right>Name (fr)
-        <td><input type="text" name="name" value="<s:property value="getProduct(getProductId()).getName('fr')" />" size="35"/>
+        <td><input type="text" name="name_fr" value="<s:property value="getProduct(getProductId()).getName('fr')" />" size="35"/>
 	<tr><td align=right>Description (en)
-        <td><input type="text" name="description_fr" value="<s:property value="getProduct(getProductId()).getDescription('en')" />" size="35"/>
+        <td><input type="text" name="description_en" value="<s:property value="getProduct(getProductId()).getDescription('en')" />" size="35"/>
 	<tr><td align=right>Description (fr)
-        <td><input type="text" name="description_en" value="<s:property value="getProduct(getProductId()).getDescription('fr')" />" size="35"/>
+        <td><input type="text" name="description_fr" value="<s:property value="getProduct(getProductId()).getDescription('fr')" />" size="35"/>
 	<tr><td align=right>Category
         <td>
 	<select name="category_id">
@@ -75,9 +75,9 @@
 	    </s:iterator>
 	</select>
 	<tr><td align=right>Price
-        <td><input type="text" name="category_id" value="<s:property value="getProduct(getProductId()).getPrice()" />" size="35"/>
+        <td><input type="text" name="price" value="<s:property value="getProduct(getProductId()).getPrice()" />" size="35"/>
 	<tr><td align=right>Stock
-        <td><input type="text" name="category_id" value="<s:property value="getProduct(getProductId()).getStock()" />" size="35"/>
+        <td><input type="text" name="stock" value="<s:property value="getProduct(getProductId()).getStock()" />" size="35"/>
 	<tr><td align=right>Image (large)
         <td><input type="text" name="image_large" value="<s:property value="getProduct(getProductId()).getImage_large()" />" size="35"/>
 	<tr><td align=right>Image (medium)
@@ -86,8 +86,8 @@
         <td><input type="text" name="image_small" value="<s:property value="getProduct(getProductId()).getImage_small()" />" size="35"/>
 	</table><br />
 	<input type="submit" value="Submit" />
-	</form>
-	</div>
+	</s:form>
+
 	</div>
     </s:div>
 </body>
