@@ -9,9 +9,38 @@
                 <s:hidden id="page_number" name="page"/>
             </form>
             <s:url id="url" namespace="/product" action="index_content" includeParams="none"/>
+            <s:if test="1 == getPage()">
+                <input type="button" disabled class="disabledButton" value="|<" onclick="dojo.byId('page_number').value = 1;navExec(new navRequest('content', '<s:property value="url"/>', null, null, 'pageForm'));"/>
+            </s:if>
+            <s:else>
+                <input type="button" class="button" value="|<" onclick="dojo.byId('page_number').value = 1;navExec(new navRequest('content', '<s:property value="url"/>', null, null, 'pageForm'));"/>
+            </s:else>
+            <s:if test="getPage() - 1 < 1">
+                <input type="button" disabled class="disabledButton" value="<" onclick="dojo.byId('page_number').value = <s:property value="getPage()"/> - 1;navExec(new navRequest('content', '<s:property value="url"/>', null, null, 'pageForm'));"/>
+            </s:if>
+            <s:else>
+                <input type="button" class="button" value="<" onclick="dojo.byId('page_number').value = <s:property value="getPage()"/> - 1;navExec(new navRequest('content', '<s:property value="url"/>', null, null, 'pageForm'));"/>
+            </s:else>
             <s:iterator value="getPages()">
-                <input type="button" class="button" value="<s:property value="intValue()"/>" onclick="dojo.byId('page_number').value = <s:property value="intValue()"/>;navExec(new navRequest('content', '<s:property value="url"/>', null, null, 'pageForm'));"/>
+                <s:if test="intValue() == getPage()">
+                    <input type="button" disabled class="disabledButton" value="<s:property value="intValue()"/>" onclick="dojo.byId('page_number').value = <s:property value="intValue()"/>;navExec(new navRequest('content', '<s:property value="url"/>', null, null, 'pageForm'));"/>
+                </s:if>
+                <s:else>
+                    <input type="button" class="button" value="<s:property value="intValue()"/>" onclick="dojo.byId('page_number').value = <s:property value="intValue()"/>;navExec(new navRequest('content', '<s:property value="url"/>', null, null, 'pageForm'));"/>
+                </s:else>
             </s:iterator>
+            <s:if test="getPage() + 1 > getNbPage()">
+                <input type="button" disabled class="disabledButton" value=">" onclick="dojo.byId('page_number').value = <s:property value="getPage()"/> + 1;navExec(new navRequest('content', '<s:property value="url"/>', null, null, 'pageForm'));"/>
+            </s:if>
+            <s:else>
+                <input type="button" class="button" value=">" onclick="dojo.byId('page_number').value = <s:property value="getPage()"/> + 1;navExec(new navRequest('content', '<s:property value="url"/>', null, null, 'pageForm'));"/>
+            </s:else>
+            <s:if test="getPage() == getNbPage()">
+                <input type="button" disabled class="disabledButton" value=">|" onclick="dojo.byId('page_number').value = <s:property value="getNbPage()"/>;navExec(new navRequest('content', '<s:property value="url"/>', null, null, 'pageForm'));"/>
+            </s:if>
+            <s:else>
+                <input type="button" class="button" value=">|" onclick="dojo.byId('page_number').value = <s:property value="getNbPage()"/>;navExec(new navRequest('content', '<s:property value="url"/>', null, null, 'pageForm'));"/>
+            </s:else>
         </s:if>
     </h2>
 </s:div>
@@ -30,8 +59,8 @@
                         </h3>
                     </td>
                     <td align="right">
-                        <s:property value="getPrice()" />&nbsp;€
                         <form id="product_<s:property value="getId()"/>_form">
+                            <s:property value="getPrice()" />&nbsp;€
                             <s:hidden name="add_%{getId()}"/>
                             <s:url id="url" namespace="/" action="index_cart" includeParams="none"/>
                             <input type="submit" value="Ajouter au panier" class="button"onclick="navExec(new navRequest('cart', '<s:property value="url"/>', null, null, 'product_<s:property value="getId()" />_form')); return(false);">

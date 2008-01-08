@@ -296,7 +296,16 @@ div.product {
 	color: #75c45d;
         background-color: #ffffff;
 	font-weight: bold;
-	cursor: hand;
+	cursor: pointer;
+}
+
+
+.disabledButton {
+	border-style : solid;
+        border-color : black;
+        border-width : 1px;  
+	color: #000000;
+        background-color: #aaaaaa;
 }
 
 

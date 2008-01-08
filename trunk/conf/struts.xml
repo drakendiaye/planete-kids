@@ -201,20 +201,20 @@
         </action>
     </package>
     
-    <package name="product" namespace="/product" extends="struts-default">
-        <action name="index" class="planetekids.actions.product.IndexAction" method="redirect" >
+    <package name="age" namespace="/age" extends="struts-default">
+        <action name="index" class="planetekids.actions.age.IndexAction" method="redirect" >
             <result type="redirect-action">
                 <param name="namespace">/</param>
                 <param name="actionName">index</param>
             </result>
             <result name="error">/error.jsp</result>
         </action>
-        <action name="index_content" class="planetekids.actions.product.IndexAction">
-            <result>/product/index_content.jsp</result>
+        <action name="index_content" class="planetekids.actions.age.IndexAction">
+            <result>/age/index_content.jsp</result>
             <result name="error">/error.jsp</result>
         </action>
-        <action name="index_location" class="planetekids.actions.product.IndexAction" >
-            <result>/product/index_location.jsp</result>
+        <action name="index_location" class="planetekids.actions.age.IndexAction" >
+            <result>/age/index_location.jsp</result>
             <result name="error">/error.jsp</result>
         </action>
     </package>

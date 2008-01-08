@@ -15,8 +15,10 @@
     </script>
 </s:if>
 <s:else>
-    <h2><s:text name="account"/></h2>
-    <s:div cssClass="main">
+    <s:div cssClass="contentHeader">
+        <h2><s:text name="account"/></h2>
+    </s:div>
+    <s:div cssClass="contentMain">
         
     </s:div>
 </s:else>

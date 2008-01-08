@@ -52,6 +52,13 @@
     <s:text name="label"/>
 </s:a>
 <br/>
+<s:url id="url_content" namespace="/age" action="index_content" includeParams="none"/>
+<s:url id="url_location" namespace="/age" action="index_location" includeParams="none"/>
+<s:a onclick="navGo([new navRequest('content', '%{url_content}'),
+                     new navRequest('location', '%{url_location}')])">
+    <s:text name="label"/>
+</s:a>
+<br/>
 <s:url id="url_content" namespace="/product" action="index_content" includeParams="none"/>
 <s:url id="url_location" namespace="/product" action="index_location" includeParams="none"/>
 <s:a onclick="navGo([new navRequest('content', '%{url_content}'),

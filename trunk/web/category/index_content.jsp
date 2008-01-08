@@ -1,8 +1,10 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
 <%@ taglib prefix="s" uri="/struts-tags" %>
 
-<h2><s:text name="category"/></h2>
-<s:div cssClass="main">
+<s:div cssClass="contentHeader">
+    <h2><s:text name="category"/></h2>
+</s:div>
+<s:div cssClass="contentMain">
     <s:iterator value="getCategories()">
         <script type="text/javascript">coldiv_load('category_<s:property value="getId()" />');</script>
         <s:hidden id="category_%{getId()}" value="{ init : false, col_img : 'images/down_enable.png', uncol_img : 'images/up_enable.png'}"/>
