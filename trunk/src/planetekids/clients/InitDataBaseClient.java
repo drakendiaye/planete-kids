@@ -94,7 +94,7 @@ public class InitDataBaseClient {
 
 	    // id = 1
 	    ColorId[0] = admin.createColor("Blanc", "White", "Couleur blanche : 0xFFFFFF", "White Color : 0xFFFFFF",
-		    "images/white_large.png", "images/white_large.png", "images/white_large.png");
+		    "images/white_large.png", "images/white_medium.png", "images/white_small.png");
 	    // id = 2
 	    ColorId[1] = admin.createColor("Jaune", "Yellow", "Couleur jaune : 0xFFFF00", "Yellow Color : 0xFFFF00",
 		    "images/yellow_large.png", "images/yellow_medium.png", "images/yellow_small.png");
@@ -103,32 +103,32 @@ public class InitDataBaseClient {
 		    "images/orange_large.png", "images/orange_medium.png", "images/orange_small.png");
 	    // id = 4
 	    ColorId[3] = admin.createColor("Rose", "Pink", "Couleur rose : 0xFF90b7", "Pink Color : 0xFF90b7", "images/pink_large.png",
-		    "images/pink_large.png", "images/pink_large.png");
+		    "images/pink_medium.png", "images/pink_small.png");
 	    // id = 5
 	    ColorId[4] = admin.createColor("Rouge", "Red", "Couleur rouge : 0xFF0000", "Red Color : 0xFF0000", "images/red_large.png",
 		    "images/red_medium.png", "images/red_small.png");
 	    // id = 6
 	    ColorId[5] = admin.createColor("Violet", "Purple", "Couleur Violete : 0x9900FF", "Purple Color : 0x9900FF",
-		    "images/purple_large.png", "images/purple_large.png", "images/purple_large.png");
+		    "images/purple_large.png", "images/purple_medium.png", "images/purple_small.png");
 	    // id = 7
 	    ColorId[6] = admin.createColor("Noir", "Black", "Couleur Noire : 0x000000", "Black Color : 0x000000", "images/black_large.png",
-		    "images/black_large.png", "images/black_large.png");
+		    "images/black_medium.png", "images/black_small.png");
 	    // id = 8
 	    ColorId[7] = admin.createColor("Bleu foncé", "Dark Blue", "Couleur bleue : 0x0033FF", "Blue Color : 0x0033FF",
 		    "images/darkblue_large.png", "images/darkblue_medium.png", "images/darkblue_small.png");
 	    // id = 9
 	    ColorId[8] = admin.createColor("Bleu clair", "Bright Blue", "Couleur Bleue claire : 0x00CCFF", "Bright Blue Color : 0x00CCFF",
-		    "images/brightblue_large.png", "images/brightblue_large.png", "images/brightblue_large.png");
+		    "images/brightblue_large.png", "images/brightblue_medium.png", "images/brightblue_small.png");
 	    // id = 10
 	    ColorId[9] = admin.createColor("Vert foncé", "Dark Green", "Couleur verte : 0x76FF76", "Green Color : 0x76FF76",
 		    "images/darkgreen_large.png", "images/darkgreen_medium.png", "images/darkgreen_small.png");
 	    // id = 11
 	    ColorId[10] = admin.createColor("Vert clair", "Bright Green", "Couleur Verte claire : 0x00FF55",
-		    "Bright Green Color : 0x00FF55", "images/brightgreen_large.png", "images/brightgreen_large.png",
-		    "images/brightgreen_large.png");
+		    "Bright Green Color : 0x00FF55", "images/brightgreen_large.png", "images/brightgreen_medium.png",
+		    "images/brightgreen_small.png");
 	    // id = 12
 	    ColorId[11] = admin.createColor("Gris", "Grey", "Couleur Grise : 0xADADAD", "Grey Color : 0xADADAD", "images/grey_large.png",
-		    "images/grey_large.png", "images/grey_large.png");
+		    "images/grey_medium.png", "images/grey_small.png");
 
 	    /*-------------------------*/
 	    /* Création des catégories */
