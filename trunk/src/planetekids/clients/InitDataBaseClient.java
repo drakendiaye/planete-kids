@@ -79,11 +79,11 @@ public class InitDataBaseClient {
 	    LabelId[2] = admin.createLabel("Rebook", "Marque encore", "Label again", "www.rebook.com", "images/rebook_large.png",
 		    "images/rebook_medium.png", "images/rebook_small.png");
 	    // id = 4
-	    LabelId[3] = admin.createLabel("QuikSilver", "Description en francais", "Description in english",
-		    "www.quiksilver.com", "images/quiksilver_large.png", "images/quiksilver_medium.png", "images/quiksilver_small.png");
+	    LabelId[3] = admin.createLabel("QuikSilver", "Description en francais", "Description in english", "www.quiksilver.com",
+		    "images/quiksilver_large.png", "images/quiksilver_medium.png", "images/quiksilver_small.png");
 	    // id = 5
-	    LabelId[4] = admin.createLabel("Chevignon", "Description en francais", "Description in english",
-		    "www.chevignon.com", "images/chevignon_large.png", "images/chevignon_medium.png", "images/chevignon_small.png");
+	    LabelId[4] = admin.createLabel("Chevignon", "Description en francais", "Description in english", "www.chevignon.com",
+		    "images/chevignon_large.png", "images/chevignon_medium.png", "images/chevignon_small.png");
 	    // id = 6
 	    LabelId[5] = admin.createLabel("Naf Naf", "Description en francais", "Description in english", "www.nafnaf.com",
 		    "images/nafnaf_large.png", "images/nafnaf_medium.png", "images/nafnaf_small.png");
@@ -205,9 +205,10 @@ public class InitDataBaseClient {
 		// Pour toutes les marques
 		for (int j = 1; j <= 6; j++) {
 		    for (int k = 1; k <= 14; k++) {
-			admin.createProduct("Veste numero " + ((i - 1) * 6 + j), "Jacket number " + ((i - 1) * 6 + j),
-				"Description en francais", "Description in english", CategoryId[0], ColorId[i - 1], LabelId[j - 1],
-				AgeId[k - 1], rand.nextFloat() * 34, rand.nextInt(20), "", "", "");
+			admin.createProduct("Veste numero " + ((i - 1) * 6 * 14 + (j - 1) * 14 + k), "Jacket number "
+				+ ((i - 1) * 6 * 14 + (j - 1) * 14 + k), "Description en francais", "Description in english",
+				CategoryId[0], ColorId[i - 1], LabelId[j - 1], AgeId[k - 1], rand.nextFloat() * 34, rand.nextInt(20), "",
+				"", "");
 		    }
 		}
 	    }
@@ -220,9 +221,10 @@ public class InitDataBaseClient {
 		// Pour toutes les marques
 		for (int j = 1; j <= 6; j++) {
 		    for (int k = 1; k <= 14; k++) {
-			admin.createProduct("T-shirt numero " + ((i - 1) * 6 + j), "T-shirt number " + ((i - 1) * 6 + j),
-				"Description en francais", "Description in english", CategoryId[1], ColorId[i - 1], LabelId[j - 1],
-				AgeId[k - 1], rand.nextFloat() * 34, rand.nextInt(20), "", "", "");
+			admin.createProduct("T-shirt numero " + ((i - 1) * 6 * 14 + (j - 1) * 14 + k), "T-shirt number "
+				+ ((i - 1) * 6 * 14 + (j - 1) * 14 + k), "Description en francais", "Description in english",
+				CategoryId[1], ColorId[i - 1], LabelId[j - 1], AgeId[k - 1], rand.nextFloat() * 34, rand.nextInt(20), "",
+				"", "");
 		    }
 		}
 	    }
@@ -235,9 +237,10 @@ public class InitDataBaseClient {
 		// Pour toutes les marques
 		for (int j = 1; j <= 6; j++) {
 		    for (int k = 1; k <= 14; k++) {
-			admin.createProduct("Chemise numero " + ((i - 1) * 6 + j), "Shirt number " + ((i - 1) * 6 + j),
-				"Description en francais", "Description in english", CategoryId[2], ColorId[i - 1], LabelId[j - 1],
-				AgeId[k - 1], rand.nextFloat() * 34, rand.nextInt(20), "", "", "");
+			admin.createProduct("Chemise numero " + ((i - 1) * 6 * 14 + (j - 1) * 14 + k), "Shirt number "
+				+ ((i - 1) * 6 * 14 + (j - 1) * 14 + k), "Description en francais", "Description in english",
+				CategoryId[2], ColorId[i - 1], LabelId[j - 1], AgeId[k - 1], rand.nextFloat() * 34, rand.nextInt(20), "",
+				"", "");
 		    }
 		}
 	    }
@@ -250,9 +253,10 @@ public class InitDataBaseClient {
 		// Pour toutes les marques
 		for (int j = 1; j <= 6; j++) {
 		    for (int k = 1; k <= 14; k++) {
-			admin.createProduct("Chemisier numero " + ((i - 1) * 6 + j), "Blouse number " + ((i - 1) * 6 + j),
-				"Description en francais", "Description in english", CategoryId[3], ColorId[i - 1], LabelId[j - 1],
-				AgeId[k - 1], rand.nextFloat() * 34, rand.nextInt(20), "", "", "");
+			admin.createProduct("Chemisier numero " + ((i - 1) * 6 * 14 + (j - 1) * 14 + k), "Blouse number "
+				+ ((i - 1) * 6 * 14 + (j - 1) * 14 + k), "Description en francais", "Description in english",
+				CategoryId[3], ColorId[i - 1], LabelId[j - 1], AgeId[k - 1], rand.nextFloat() * 34, rand.nextInt(20), "",
+				"", "");
 		    }
 		}
 	    }
@@ -265,9 +269,10 @@ public class InitDataBaseClient {
 		// Pour toutes les marques
 		for (int j = 1; j <= 6; j++) {
 		    for (int k = 1; k <= 14; k++) {
-			admin.createProduct("Pull numero " + ((i - 1) * 6 + j), "Sweater number " + ((i - 1) * 6 + j),
-				"Description en francais", "Description in english", CategoryId[4], ColorId[i - 1], LabelId[j - 1],
-				AgeId[k - 1], rand.nextFloat() * 34, rand.nextInt(20), "", "", "");
+			admin.createProduct("Pull numero " + ((i - 1) * 6 * 14 + (j - 1) * 14 + k), "Sweater number "
+				+ ((i - 1) * 6 * 14 + (j - 1) * 14 + k), "Description en francais", "Description in english",
+				CategoryId[4], ColorId[i - 1], LabelId[j - 1], AgeId[k - 1], rand.nextFloat() * 34, rand.nextInt(20), "",
+				"", "");
 		    }
 		}
 	    }
@@ -280,9 +285,10 @@ public class InitDataBaseClient {
 		// Pour toutes les marques
 		for (int j = 1; j <= 6; j++) {
 		    for (int k = 1; k <= 14; k++) {
-			admin.createProduct("Jupe numero " + ((i - 1) * 6 + j), "Skirt number " + ((i - 1) * 6 + j),
-				"Description en francais", "Description in english", CategoryId[5], ColorId[i - 1], LabelId[j - 1],
-				AgeId[k - 1], rand.nextFloat() * 34, rand.nextInt(20), "", "", "");
+			admin.createProduct("Jupe numero " + ((i - 1) * 6 * 14 + (j - 1) * 14 + k), "Skirt number "
+				+ ((i - 1) * 6 * 14 + (j - 1) * 14 + k), "Description en francais", "Description in english",
+				CategoryId[5], ColorId[i - 1], LabelId[j - 1], AgeId[k - 1], rand.nextFloat() * 34, rand.nextInt(20), "",
+				"", "");
 		    }
 		}
 	    }
@@ -295,9 +301,10 @@ public class InitDataBaseClient {
 		// Pour toutes les marques
 		for (int j = 1; j <= 6; j++) {
 		    for (int k = 1; k <= 14; k++) {
-			admin.createProduct("Short numero " + ((i - 1) * 6 + j), "Short number " + ((i - 1) * 6 + j),
-				"Description en francais", "Description in english", CategoryId[6], ColorId[i - 1], LabelId[j - 1],
-				AgeId[k - 1], rand.nextFloat() * 34, rand.nextInt(20), "", "", "");
+			admin.createProduct("Short numero " + ((i - 1) * 6 * 14 + (j - 1) * 14 + k), "Short number "
+				+ ((i - 1) * 6 * 14 + (j - 1) * 14 + k), "Description en francais", "Description in english",
+				CategoryId[6], ColorId[i - 1], LabelId[j - 1], AgeId[k - 1], rand.nextFloat() * 34, rand.nextInt(20), "",
+				"", "");
 		    }
 		}
 	    }
@@ -310,9 +317,10 @@ public class InitDataBaseClient {
 		// Pour toutes les marques
 		for (int j = 1; j <= 6; j++) {
 		    for (int k = 1; k <= 14; k++) {
-			admin.createProduct("Pantalon numero " + ((i - 1) * 6 + j), "Pants number " + ((i - 1) * 6 + j),
-				"Description en francais", "Description in english", CategoryId[7], ColorId[i - 1], LabelId[j - 1],
-				AgeId[k - 1], rand.nextFloat() * 34, rand.nextInt(20), "", "", "");
+			admin.createProduct("Pantalon numero " + ((i - 1) * 6 * 14 + (j - 1) * 14 + k), "Pants number "
+				+ ((i - 1) * 6 * 14 + (j - 1) * 14 + k), "Description en francais", "Description in english",
+				CategoryId[7], ColorId[i - 1], LabelId[j - 1], AgeId[k - 1], rand.nextFloat() * 34, rand.nextInt(20), "",
+				"", "");
 		    }
 		}
 	    }
@@ -325,9 +333,10 @@ public class InitDataBaseClient {
 		// Pour toutes les marques
 		for (int j = 1; j <= 6; j++) {
 		    for (int k = 1; k <= 14; k++) {
-			admin.createProduct("Robe numero " + ((i - 1) * 6 + j), "Dress number " + ((i - 1) * 6 + j),
-				"Description en francais", "Description in english", CategoryId[8], ColorId[i - 1], LabelId[j - 1],
-				AgeId[k - 1], rand.nextFloat() * 34, rand.nextInt(20), "", "", "");
+			admin.createProduct("Robe numero " + ((i - 1) * 6 * 14 + (j - 1) * 14 + k), "Dress number "
+				+ ((i - 1) * 6 * 14 + (j - 1) * 14 + k), "Description en francais", "Description in english",
+				CategoryId[8], ColorId[i - 1], LabelId[j - 1], AgeId[k - 1], rand.nextFloat() * 34, rand.nextInt(20), "",
+				"", "");
 		    }
 		}
 	    }
