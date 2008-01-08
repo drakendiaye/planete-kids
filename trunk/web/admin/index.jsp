@@ -11,10 +11,11 @@
     <body>
 
     <s:div cssClass="main">
-	<div align=center>
+	<div style="text-align:center">
 	<h1>Planete-Kids</h1>
 	<h2><s:text name="admin"/></h2>
-	<a href=labels.action><s:text name="labels" /></a>
+	<s:url id="viewlabels" namespace="/admin" action="labels" includeParams="none"></s:url>
+	<s:a href="%{viewlabels}"><s:text name="labels" /></s:a>
 	<s:text name="colors" />
 	<s:text name="categories" />
 	<s:text name="products" />

@@ -12,9 +12,10 @@
 
     <s:div cssClass="main">
 	<h1>Planete-Kids</h1>
-	<div align=center>
+	<div style="text-align:center">
 	<h2><s:text name="admin"/></h2>
-	<a href=labels.action><s:text name="labels" /></a>
+	<s:url id="viewlabels" namespace="/admin" action="labels" includeParams="none"></s:url>
+	<s:a href="%{viewlabels}"><s:text name="labels" /></s:a>
 	<s:text name="colors" />
 	<s:text name="categories" />
 	<s:text name="products" />
@@ -23,7 +24,7 @@
 	There are <s:property value="getNumLabels()" /> labels in the database.<br />
 	<br />
 
-	<table border="2">
+	<table border="2" align="center">
 	<tr>
 	<th>Name</th>
 	<th>Description (en)</th>

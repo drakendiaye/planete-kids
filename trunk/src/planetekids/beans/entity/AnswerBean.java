@@ -23,7 +23,7 @@ public class AnswerBean implements Serializable, Comparable<AnswerBean> {
     @ManyToOne(optional=false)
     private QuestionBean question;
     
-    @OneToMany(mappedBy="answer", fetch = FetchType.EAGER, cascade=CascadeType.ALL)
+    @OneToMany(mappedBy="answer", fetch = FetchType.LAZY, cascade=CascadeType.ALL)
     private Set<ResultBean> results = new HashSet<ResultBean>();
     
     @OneToOne(fetch=FetchType.EAGER, cascade=CascadeType.ALL, optional=false)

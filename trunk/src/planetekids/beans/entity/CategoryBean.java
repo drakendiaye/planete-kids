@@ -29,7 +29,7 @@ public class CategoryBean implements Serializable {
     @OneToOne(fetch=FetchType.EAGER, cascade=CascadeType.ALL, optional=false)
     private LocaleBean description;
     
-    @OneToMany(mappedBy="category", fetch=FetchType.EAGER, cascade=CascadeType.ALL)
+    @OneToMany(mappedBy="category", fetch=FetchType.LAZY, cascade=CascadeType.ALL)
     private Set<ProductBean> products = new HashSet<ProductBean>();
     
     private String image_large;
