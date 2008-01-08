@@ -63,7 +63,7 @@
 	    <td align=center><s:property value="getDescription('fr')" /></td>
 	    <td align=center><s:property value="getCategory().getName(getLocale())" /></td>
 	    <td align=center><s:property value="getColor().getName(getLocale())" /></td>
-	    <td align=center><s:property value="getLabel().getName(getLocale())" /></td>
+	    <td align=center><s:property value="getLabel().getName()" /></td>
 	    <td align=center><s:property value="getAge().getName(getLocale())" /></td>
 	    <td align=center><s:property value="getPrice()" /></td>
 	    <td align=center><s:property value="getStock()" /></td>
