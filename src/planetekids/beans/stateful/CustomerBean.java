@@ -65,6 +65,10 @@ public class CustomerBean implements CustomerRemote {
         return cart.validateCart();
     }
     
+    public float getCartPrice() throws Exception {
+        return cart.getCartPrice();
+    }
+    
     public List<ProductBean> getCartProducts()  throws Exception {
         return cart.getCartProducts();
     }

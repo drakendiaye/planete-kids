@@ -32,23 +32,28 @@ public class CartBean implements CartRemote {
     public int validateCart() throws Exception {
         throw new UnsupportedOperationException("Not supported yet.");
     }
+    
+    public float getCartPrice() throws Exception {
+        float price = 0;
+        Enumeration<Integer> enumeration = cart.keys();
+        while(enumeration.hasMoreElements()) {
+            Integer key = enumeration.nextElement();
+            ProductBean product = entityManager.find(ProductBean.class, key.intValue());
+            if(product == null) cart.remove(key);
+            else price += product.getPrice() * cart.get(key);
+        }
+        return price;
+    }
 
     public List<ProductBean> getCartProducts()  throws Exception {
-        System.out.println("getCartProducts_begin");
         List<ProductBean> products = new ArrayList<ProductBean>();
         Enumeration<Integer> enumeration = cart.keys();
         while(enumeration.hasMoreElements()) {
-            System.out.println("getCartProducts_while_begin");
             Integer key = enumeration.nextElement();
             ProductBean product = entityManager.find(ProductBean.class, key.intValue());
-            if(product == null) {
-                System.out.println("getCartProducts_remove");
-                cart.remove(key);
-            }
+            if(product == null) cart.remove(key);
             else products.add(product);
-            System.out.println("getCartProduct_while_end");
         }
-        System.out.println("getCartProducts_end");
         return(products);
     }
     
