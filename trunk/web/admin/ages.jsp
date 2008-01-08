@@ -58,11 +58,11 @@
 	    <s:url id="modify" namespace="/admin" action="ages_modify" includeParams="none">
 	    <s:param name="age_id" value="getId()" />
 	    </s:url>
-	    <s:a href="%{modify}">Modify</s:a><br />
+	    <s:a href="%{modify}"><s:text name="modify" /></s:a><br />
 	    <s:url id="delete" namespace="/admin" action="age_delete" includeParams="none">
 	    <s:param name="age_id" value="getId()" />
 	    </s:url>
-	    <s:a href="%{delete}">Delete</s:a>
+	    <s:a href="%{delete}"><s:text name="delete" /></s:a>
 
 	    </td>
 

@@ -4,7 +4,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Planete-kids</title>
+        <title>Planete-kids - Administration</title>
         <s:head theme="ajax" debug="true" />
         <link href="<s:url value='/style.css'/>" rel="stylesheet" type="text/css"/>
     </head>
