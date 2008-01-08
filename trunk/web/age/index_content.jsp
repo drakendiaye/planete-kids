@@ -1,8 +1,10 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
 <%@ taglib prefix="s" uri="/struts-tags" %>
 
-<h2><s:text name="age"/></h2>
-<s:div cssClass="main">
+<s:div cssClass="contentHeader">
+    <h2><s:text name="age"/></h2>
+</s:div>
+<s:div cssClass="contentMain">
     <s:iterator value="getAges()">
         <script type="text/javascript">coldiv_load('age_<s:property value="getId()" />');</script>
         <s:hidden id="age_%{getId()}" value="{ init : false, col_img : 'images/down_enable.png', uncol_img : 'images/up_enable.png'}"/>
