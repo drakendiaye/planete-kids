@@ -38,7 +38,7 @@
                         dojo.byId('img_previous').src = 'images/previous_disable.png';
                      }
                  }
-                 "><img id="img_previous" src="images/previous_disable.png" /></s:a>
+                 "><img id="img_previous" src="images/previous_disable.png" onmouseover="show('Précédent')" onmouseout="hide()" /></s:a>
         </s:div>
         <s:div id="next">
             <s:a onclick="	
@@ -49,10 +49,10 @@
                         dojo.byId('img_next').src = 'images/next_disable.png';
                     }
                 }
-            "><img id="img_next" src="images/next_disable.png" /></s:a>
+            "><img id="img_next" src="images/next_disable.png" onmouseover="show('Suivant')" onmouseout="hide()" /></s:a>
         </s:div>
         <s:div id="refresh">
-            <s:a onclick="navRefresh(true)"><img id="refresh_img" src="images/refresh.png" /></s:a>
+            <s:a onclick="navRefresh(true)"><img id="refresh_img" src="images/refresh.png" onmouseover="show('Actualiser')" onmouseout="hide()" /></s:a>
         </s:div>
         <s:div id="loginout">
             <form id="logout_callback" method="post">
@@ -73,7 +73,7 @@
                 } else {
                     navGo([new navRequest('content', '%{url_logout}', null, null, 'logout_callback')]);
                 }
-            "><img id="loginout_img" src="images/login.png" /></s:a>
+            "><img id="loginout_img" src="images/login.png" onmouseover="if (dojo.byId('loginout_img').src == 'images/login.png') show('Se délogger') else show('Se logger');" onmouseout="hide()" /></s:a>
         </s:div>
         <s:div id="location" />
             <s:div id="frflag" >
