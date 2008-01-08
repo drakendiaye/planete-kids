@@ -99,8 +99,7 @@ public class AdminClient {
 			while (iterator.hasNext()) {
 			    LabelBean label = (LabelBean) iterator.next();
 			    System.out.println("id : " + label.getId());
-			    System.out.println("name french : " + label.getName().getFr());
-			    System.out.println("name english : " + label.getName().getEn());
+			    System.out.println("name : " + label.getName());
 			    System.out.println("description french : " + label.getDescription().getFr());
 			    System.out.println("description english : " + label.getDescription().getEn());
 			    System.out.println("site : " + label.getSite());
@@ -111,10 +110,8 @@ public class AdminClient {
 			}
 		    }
 		} else if (choice == 2) {
-		    System.out.print("name french: ");
-		    String name_fr = Tx.readString();
-		    System.out.print("name english: ");
-		    String name_en = Tx.readString();
+		    System.out.print("name: ");
+		    String name = Tx.readString();
 		    System.out.print("description french: ");
 		    String description_fr = Tx.readString();
 		    System.out.print("description english: ");
@@ -129,7 +126,7 @@ public class AdminClient {
 		    String image_small = Tx.readString();
 		    try {
 			utx.begin();
-			admin.createLabel(name_fr, name_en, description_fr, description_en, site, image_large, image_medium, image_small);
+			admin.createLabel(name, description_fr, description_en, site, image_large, image_medium, image_small);
 			utx.commit();
 		    } catch (Exception ex) {
 			utx.rollback();
@@ -157,8 +154,7 @@ public class AdminClient {
 			    System.out.println("------------------------------------------------------");
 			    System.out.println("Modify Label ");
 			    System.out.println("id : " + label.getId());
-			    System.out.println("name french : " + label.getName().getFr());
-			    System.out.println("name english : " + label.getName().getEn());
+			    System.out.println("name : " + label.getName());
 			    System.out.println("description french : " + label.getDescription().getFr());
 			    System.out.println("description english : " + label.getDescription().getEn());
 			    System.out.println("site : " + label.getSite());
@@ -168,13 +164,12 @@ public class AdminClient {
 			    System.out.println("------------------------------------------------------");
 			    System.out.println("0 = return");
 			    System.out.println("1 = modify name french");
-			    System.out.println("2 = modify name english");
-			    System.out.println("3 = modify description french");
-			    System.out.println("4 = modify description english");
-			    System.out.println("5 = modify site");
-			    System.out.println("6 = modify image_large");
-			    System.out.println("7 = modify image_medium");
-			    System.out.println("8 = modify image_small");
+			    System.out.println("2 = modify description french");
+			    System.out.println("3 = modify description english");
+			    System.out.println("4 = modify site");
+			    System.out.println("5 = modify image_large");
+			    System.out.println("6 = modify image_medium");
+			    System.out.println("7 = modify image_small");
 			    System.out.println("------------------------------------------------------");
 			    System.out.print(">");
 			    choice = Tx.readInt();
@@ -182,11 +177,11 @@ public class AdminClient {
 			    if (choice == 0) {
 				break;
 			    } else if (choice == 1) {
-				System.out.print("name french : ");
+				System.out.print("name : ");
 				String name = Tx.readString();
 				try {
 				    utx.begin();
-				    admin.setLabelNameFr(id, name);
+				    admin.setLabelName(id, name);
 				    utx.commit();
 				} catch (Exception ex) {
 				    utx.rollback();
@@ -194,18 +189,6 @@ public class AdminClient {
 				}
 				System.out.println("label successfully updated");
 			    } else if (choice == 2) {
-				System.out.print("name en : ");
-				String name = Tx.readString();
-				try {
-				    utx.begin();
-				    admin.setLabelNameEn(id, name);
-				    utx.commit();
-				} catch (Exception ex) {
-				    utx.rollback();
-				    throw ex;
-				}
-				System.out.println("label successfully updated");
-			    } else if (choice == 3) {
 				System.out.print("description french : ");
 				String description = Tx.readString();
 				try {
@@ -217,7 +200,7 @@ public class AdminClient {
 				    throw ex;
 				}
 				System.out.println("label successfully updated");
-			    } else if (choice == 4) {
+			    } else if (choice == 3) {
 				System.out.print("description en : ");
 				String description = Tx.readString();
 				try {
@@ -229,7 +212,7 @@ public class AdminClient {
 				    throw ex;
 				}
 				System.out.println("label successfully updated");
-			    } else if (choice == 5) {
+			    } else if (choice == 4) {
 				System.out.print("site : ");
 				String site = Tx.readString();
 				try {
@@ -241,7 +224,7 @@ public class AdminClient {
 				    throw ex;
 				}
 				System.out.println("label successfully updated");
-			    } else if (choice == 6) {
+			    } else if (choice == 5) {
 				System.out.print("image large : ");
 				String image = Tx.readString();
 				try {
@@ -253,7 +236,7 @@ public class AdminClient {
 				    throw ex;
 				}
 				System.out.println("label successfully updated");
-			    } else if (choice == 7) {
+			    } else if (choice == 6) {
 				System.out.print("image medium : ");
 				String image = Tx.readString();
 				try {
@@ -265,7 +248,7 @@ public class AdminClient {
 				    throw ex;
 				}
 				System.out.println("label successfully updated");
-			    } else if (choice == 8) {
+			    } else if (choice == 7) {
 				System.out.print("image small : ");
 				String image = Tx.readString();
 				try {

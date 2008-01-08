@@ -70,22 +70,22 @@ public class InitDataBaseClient {
 
 	    
 	    // id = 1
-	    LabelId[0] = admin.createLabel("Nike", "Nike", "Marque americaine", "American label", "www.nike.com", "images/nike_large.png",
+	    LabelId[0] = admin.createLabel("Nike", "Marque americaine", "American label", "www.nike.com", "images/nike_large.png",
 		    "images/nike_medium.png", "images/nike_small.png");
 	    // id = 2
-	    LabelId[1] = admin.createLabel("Adidas", "Adidas", "Marque", "Label", "www.adidas.com", "images/adidas_large.png",
+	    LabelId[1] = admin.createLabel("Adidas", "Marque", "Label", "www.adidas.com", "images/adidas_large.png",
 		    "images/adidas_medium.png", "images/adidas_small.png");
 	    // id = 3
-	    LabelId[2] = admin.createLabel("Rebook", "Rebook", "Marque encore", "Label again", "www.rebook.com", "images/rebook_large.png",
+	    LabelId[2] = admin.createLabel("Rebook", "Marque encore", "Label again", "www.rebook.com", "images/rebook_large.png",
 		    "images/rebook_medium.png", "images/rebook_small.png");
 	    // id = 4
-	    LabelId[3] = admin.createLabel("QuikSilver", "QuikSilver", "Description en francais", "Description in english",
+	    LabelId[3] = admin.createLabel("QuikSilver", "Description en francais", "Description in english",
 		    "www.quiksilver.com", "images/quiksilver_large.png", "images/quiksilver_medium.png", "images/quiksilver_small.png");
 	    // id = 5
-	    LabelId[4] = admin.createLabel("Chevignon", "Chevignon", "Description en francais", "Description in english",
+	    LabelId[4] = admin.createLabel("Chevignon", "Description en francais", "Description in english",
 		    "www.chevignon.com", "images/chevignon_large.png", "images/chevignon_medium.png", "images/chevignon_small.png");
 	    // id = 6
-	    LabelId[5] = admin.createLabel("Naf Naf", "Naf Naf", "Description en francais", "Description in english", "www.nafnaf.com",
+	    LabelId[5] = admin.createLabel("Naf Naf", "Description en francais", "Description in english", "www.nafnaf.com",
 		    "images/nafnaf_large.png", "images/nafnaf_medium.png", "images/nafnaf_small.png");
 
 	    /*-----------------------*/

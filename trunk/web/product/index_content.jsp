@@ -56,7 +56,7 @@
                                             <s:text name="label"/> : 
                                         </td>
                                         <td align="left">
-                                            <img src="<s:property value="getLabel().getImage_small()" />" width="20px" height="20px" onmouseover="show('<s:property value="getLabel().getName(getLocale())" />')" onmouseout="hide()"/>
+                                            <img src="<s:property value="getLabel().getImage_small()" />" width="20px" height="20px" onmouseover="show('<s:property value="getLabel().getName()" />')" onmouseout="hide()"/>
                                         </td>
                                     </tr>
                                 </table>

@@ -46,15 +46,11 @@ public class AdminBean implements AdminRemote  {
         return entityManager.find(LabelBean.class, id);
     }
     
-    public void setLabelNameFr(int id, String name) throws Exception {
+    public void setLabelName(int id, String name) throws Exception {
         LabelBean label = getLabel(id);
-        label.getName().setFr(name);
+        label.setName(name);
     }
-    
-    public void setLabelNameEn(int id, String name) throws Exception {
-        LabelBean label = getLabel(id);
-        label.getName().setEn(name);
-    }
+
     
     public void setLabelDescriptionFr(int id, String description) throws Exception {
         LabelBean label = getLabel(id);
@@ -86,8 +82,8 @@ public class AdminBean implements AdminRemote  {
         label.setImage_small(image);
     }
     
-    public int createLabel(String name_fr, String name_en, String description_fr, String description_en, String site, String image_large, String image_medium, String image_small) throws Exception {
-        LabelBean label = new LabelBean(new LocaleBean(name_fr, name_en), new LocaleBean(description_fr, description_en), site, image_large, image_medium, image_small);
+    public int createLabel(String name, String description_fr, String description_en, String site, String image_large, String image_medium, String image_small) throws Exception {
+        LabelBean label = new LabelBean(name, new LocaleBean(description_fr, description_en), site, image_large, image_medium, image_small);
         entityManager.persist(label);
         return label.getId();
     }
