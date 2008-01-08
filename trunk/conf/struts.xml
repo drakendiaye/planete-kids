@@ -275,6 +275,16 @@
             <result name="error">/error.jsp</result>
 	</action>
 	
+	<action name="ages" class="planetekids.actions.admin.IndexAction">
+            <result>/admin/ages.jsp</result>
+            <result name="error">/error.jsp</result>
+        </action>
+	
+	<action name="ages_modify" class="planetekids.actions.admin.IndexAction">
+            <result>/admin/ages_modify.jsp</result>
+            <result name="error">/error.jsp</result>
+	</action>
+	
     </package>
     
 </struts>

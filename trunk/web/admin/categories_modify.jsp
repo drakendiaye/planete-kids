@@ -29,6 +29,9 @@
 	
 	<s:url id="viewcustomers" namespace="/admin" action="customers" includeParams="none" />
 	<s:a href="%{viewcustomers}"><s:text name="customers" /></s:a>
+
+	<s:url id="viewages" namespace="/admin" action="ages" includeParams="none" />
+	<s:a href="%{viewages}"><s:text name="ages" /></s:a>
 	<br />
 	<br />
 	<div align=left>

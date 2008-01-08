@@ -30,6 +30,9 @@
 	<s:url id="viewcustomers" namespace="/admin" action="customers" includeParams="none" />
 	<s:a href="%{viewcustomers}"><s:text name="customers" /></s:a>
 
+	<s:url id="viewages" namespace="/admin" action="ages" includeParams="none" />
+	<s:a href="%{viewages}"><s:text name="ages" /></s:a>
+
 	<br /><br />
 	There are <s:property value="getProducts().size()" /> products in the database.<br />
 	<br />
@@ -58,10 +61,10 @@
 	    <td align=center><s:property value="getName('fr')" /></td>
 	    <td align=center><s:property value="getDescription('en')" /></td>
 	    <td align=center><s:property value="getDescription('fr')" /></td>
-	    <td align=center><s:property value="getCategory().getId()" /></td>
-	    <td align=center><s:property value="getColor().getId()" /></td>
-	    <td align=center><s:property value="getLabel().getId()" /></td>
-	    <td align=center><s:property value="getAge().getId()" /></td>
+	    <td align=center><s:property value="getCategory().getName(getLocale())" /></td>
+	    <td align=center><s:property value="getColor().getName(getLocale())" /></td>
+	    <td align=center><s:property value="getLabel().getName(getLocale())" /></td>
+	    <td align=center><s:property value="getAge().getName(getLocale())" /></td>
 	    <td align=center><s:property value="getPrice()" /></td>
 	    <td align=center><s:property value="getStock()" /></td>
 	    <td align=center><img src="../<s:property value="getImage_large()" />"</td>

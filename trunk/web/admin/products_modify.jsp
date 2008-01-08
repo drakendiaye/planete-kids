@@ -30,6 +30,9 @@
 	<s:url id="viewcustomers" namespace="/admin" action="customers" includeParams="none" />
 	<s:a href="%{viewcustomers}"><s:text name="customers" /></s:a>
 
+	<s:url id="viewages" namespace="/admin" action="ages" includeParams="none" />
+	<s:a href="%{viewages}"><s:text name="ages" /></s:a>
+
 	<br />
 	<br />
 	<div align=left>
@@ -44,13 +47,33 @@
 	<tr><td align=right>Description (fr)
         <td><input type="text" name="description_en" value="<s:property value="getProduct(getProductId()).getDescription('fr')" />" size="35"/>
 	<tr><td align=right>Category
-        <td><input type="text" name="category_id" value="<s:property value="getProduct(getProductId()).getCategory().getId()" />" size="35"/>
+        <td>
+	<select name="category_id">
+	    <s:iterator value="getCategories()">
+	    <option value="<s:property value="getId()" />" <s:if test="getId()==getProduct(getProductId()).getCategory().getId()">selected</s:if>><s:property value="getName(getLocale())" /></option>
+	    </s:iterator>
+	</select>
 	<tr><td align=right>Color
-        <td><input type="text" name="category_id" value="<s:property value="getProduct(getProductId()).getColor().getId()" />" size="35"/>
+        <td>
+        <select name="color_id">
+	    <s:iterator value="getColors()">
+	    <option value="<s:property value="getId()" />" <s:if test="getId()==getProduct(getProductId()).getColors().getId()">selected</s:if>><s:property value="getName(getLocale())" /></option>
+	    </s:iterator>
+	</select>
 	<tr><td align=right>Label
-        <td><input type="text" name="category_id" value="<s:property value="getProduct(getProductId()).getLabel().getId()" />" size="35"/>
+        <td>
+        <select name="label_id">
+	    <s:iterator value="getLabels()">
+	    <option value="<s:property value="getId()" />" <s:if test="getId()==getProduct(getProductId()).getLabel().getId()">selected</s:if>><s:property value="getName()" /></option>
+	    </s:iterator>
+	</select>
 	<tr><td align=right>Age
-        <td><input type="text" name="category_id" value="<s:property value="getProduct(getProductId()).getAge().getId()" />" size="35"/>
+        <td>
+       	<select name="age_id">
+	    <s:iterator value="getAges()">
+	    <option value="<s:property value="getId()" />" <s:if test="getId()==getProduct(getProductId()).getAge().getId()">selected</s:if>><s:property value="getName(getLocale())" /></option>
+	    </s:iterator>
+	</select>
 	<tr><td align=right>Price
         <td><input type="text" name="category_id" value="<s:property value="getProduct(getProductId()).getPrice()" />" size="35"/>
 	<tr><td align=right>Stock

@@ -14,7 +14,7 @@
 	<h1>Planete-Kids</h1>
 	<div style="text-align:center">
 	<h2><s:text name="admin"/></h2>
-
+	
 	<s:url id="viewlabels" namespace="/admin" action="labels" includeParams="none" />
 	<s:a href="%{viewlabels}"><s:text name="labels" /></s:a>
 	
@@ -33,39 +33,23 @@
 	<s:url id="viewages" namespace="/admin" action="ages" includeParams="none" />
 	<s:a href="%{viewages}"><s:text name="ages" /></s:a>
 
-	<br /><br />
-	There are <s:property value="getColors().size()" /> colors in the database.<br />
 	<br />
-
-	<table border="2" align="center" cellpadding="2" >
-	<tr>
-	<th>Name (en)</th>
-	<th>Name (fr)</th>
-	<th>Description (en)</th>
-	<th>Description (fr)</th>
-	<th>Image (large)</th>
-	<th>Image (medium)</th>
-	<th>Image (small)</th>
-	<th>Action</th>
-	</tr>
-
-	<s:iterator value="getColors()">
-	    <tr>
-	    <td align=center><s:property value="getName('en')" /></td>
-	    <td align=center><s:property value="getName('fr')" /></td>
-	    <td align=center><s:property value="getDescription('en')" /></td>
-	    <td align=center><s:property value="getDescription('fr')" /></td>
-	    <td align=center><img src="../<s:property value="getImage_large()" />"</td>
-	    <td align=center><img src="../<s:property value="getImage_medium()" />"</td>
-	    <td align=center><img src="../<s:property value="getImage_small()" />"</td>
-	    <s:url id="modify" namespace="/admin" action="colors_modify" includeParams="none">
-	    <s:param name="color_id" value="getId()"></s:param>
-	    </s:url>
-	    <td align=center><s:a href="%{modify}">Modify</s:a><br />Delete</td>
-	    </tr>
-	</s:iterator>
-	</table>
-
+	<br />
+	<div align=left>
+	<form method="post" name="agesform">
+	<table>
+	<tr><td align=right>Name (en)
+        <td><input type="text" name="name" value="<s:property value="getAge(getAgeId()).getName('en')" />" size="35"/>
+	<tr><td align=right>Name (fr)
+        <td><input type="text" name="name" value="<s:property value="getAge(getAgeId()).getName('fr')" />" size="35"/>	
+	<tr><td align=right>Description (en)
+        <td><input type="text" name="description_fr" value="<s:property value="getAge(getAgeId()).getDescription('en')" />" size="35"/>
+	<tr><td align=right>Description (fr)
+        <td><input type="text" name="description_en" value="<s:property value="getAge(getAgeId()).getDescription('fr')" />" size="35"/>
+	</table><br />
+	<input type="submit" value="Submit" />
+	</form>
+	</div>
 	</div>
     </s:div>
 </body>
