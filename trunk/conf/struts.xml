@@ -451,6 +451,22 @@
         </action>
 	
 	
+	<action name="commands" class="planetekids.actions.admin.IndexAction">
+            <result>/admin/commands.jsp</result>
+            <result name="error">/error.jsp</result>
+        </action>
+	
+	<action name="command_modify" class="planetekids.actions.admin.IndexAction">
+            <result>/admin/command_modify.jsp</result>
+            <result name="error">/error.jsp</result>
+        </action>
+
+	<action name="command_delete" class="planetekids.actions.admin.IndexAction" method="commandDelete">
+            <result>/admin/commands.jsp</result>
+            <result name="error">/error.jsp</result>
+        </action>
+	
+	
     </package>
     
 </struts>

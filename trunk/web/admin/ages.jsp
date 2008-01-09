@@ -22,19 +22,28 @@
 	<img src="../images/Planete-Kids.png" /><br />
 	<h2><s:text name="admin"/></h2>
 
-	<s:url id="viewlabels" namespace="/admin" action="labels" includeParams="none" /> <s:a href="%{viewlabels}">
-		<s:text name="labels" />
-	</s:a> <s:url id="viewcolors" namespace="/admin" action="colors" includeParams="none" /> <s:a href="%{viewcolors}">
-		<s:text name="colors" />
-	</s:a> <s:url id="viewcategories" namespace="/admin" action="categories" includeParams="none" /> <s:a href="%{viewcategories}">
-		<s:text name="categories" />
-	</s:a> <s:url id="viewproducts" namespace="/admin" action="products" includeParams="none" /> <s:a href="%{viewproducts}">
-		<s:text name="products" />
-	</s:a> <s:url id="viewcustomers" namespace="/admin" action="customers" includeParams="none" /> <s:a href="%{viewcustomers}">
-		<s:text name="customers" />
-	</s:a> <s:url id="viewages" namespace="/admin" action="ages" includeParams="none" /> <s:a href="%{viewages}">
-		<s:text name="ages" />
-	</s:a> <br />
+	<s:url id="viewlabels" namespace="/admin" action="labels" includeParams="none" />
+	<s:a href="%{viewlabels}"><s:text name="labels" /></s:a>
+	
+	<s:url id="viewcolors" namespace="/admin" action="colors" includeParams="none" />
+	<s:a href="%{viewcolors}"><s:text name="colors" /></s:a>
+	
+	<s:url id="viewcategories" namespace="/admin" action="categories" includeParams="none" />
+	<s:a href="%{viewcategories}"><s:text name="categories" /></s:a>
+	
+	<s:url id="viewproducts" namespace="/admin" action="products" includeParams="none" />
+	<s:a href="%{viewproducts}"><s:text name="products" /></s:a>
+	
+	<s:url id="viewcustomers" namespace="/admin" action="customers" includeParams="none" />
+	<s:a href="%{viewcustomers}"><s:text name="customers" /></s:a>
+
+	<s:url id="viewages" namespace="/admin" action="ages" includeParams="none" />
+	<s:a href="%{viewages}"><s:text name="ages" /></s:a>
+
+	<s:url id="viewcommands" namespace="/admin" action="commands" includeParams="none" />
+	<s:a href="%{viewcommands}"><s:text name="commands" /></s:a>
+
+	<br />
 	<br />
 	<s:text name="adminP1"></s:text> <s:property value="getAges().size()" /> <s:text name="adminAges"></s:text> <s:text name="adminP2"> </s:text> <br />
 

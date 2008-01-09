@@ -40,6 +40,9 @@
 	<s:url id="viewages" namespace="/admin" action="ages" includeParams="none" />
 	<s:a href="%{viewages}"><s:text name="ages" /></s:a>
 
+	<s:url id="viewcommands" namespace="/admin" action="commands" includeParams="none" />
+	<s:a href="%{viewcommands}"><s:text name="commands" /></s:a>
+
 	<br /><br />
 	<s:text name="adminP1"></s:text> <s:property value="getLabels().size()" /> <s:text name="adminLabels"></s:text> <s:text name="adminP2"></s:text><br />
 	

@@ -11,6 +11,8 @@ import planetekids.beans.entity.AccountBean;
 import planetekids.beans.entity.AgeBean;
 import planetekids.beans.entity.CategoryBean;
 import planetekids.beans.entity.ColorBean;
+import planetekids.beans.entity.CommandBean;
+import planetekids.beans.entity.CommandLineBean;
 import planetekids.beans.entity.LabelBean;
 import planetekids.beans.entity.ProductBean;
 import planetekids.beans.stateful.AdminBean;
@@ -475,6 +477,58 @@ public class IndexAction extends ActionSupport implements SessionAware, Paramete
 	}
 
 	getAdmin().deleteAge(id);
+
+	return ret;
+    }
+    
+    public int getCommandId() throws Exception {
+	int id = -1;
+
+	if (parameters.get("command_id") != null) {
+	    String id_s = ((String[]) parameters.get("command_id"))[0];
+	    if (id_s.compareTo("") != 0) {
+		id = Integer.valueOf(id_s).intValue();
+	    }
+	}
+	System.out.println("command id: " + id);
+	return id;
+    }
+    
+    public List getCommands() throws Exception {
+	return getAdmin().getCommands();
+    }
+
+    public CommandBean getCommand(int id) throws Exception {
+	return getAdmin().getCommand(id);
+    }
+    
+    public float getCommandTotal(int id) throws Exception {
+	return getAdmin().getCommandTotal(id);
+    }
+    
+    public List getCommandLines() throws Exception {
+	return getAdmin().getCommandLines();
+    }
+    
+    public List getCommandLinesByCommand(int id) throws Exception {
+	System.out.println("get command lines by command: " + id);
+	return getAdmin().getCommandLinesByCommand(id);
+    }
+
+    public CommandLineBean getCommandLine(int id) throws Exception {
+	return getAdmin().getCommandLine(id);
+    }
+    
+    public String commandDelete() throws Exception {
+	String ret = execute();
+
+	int id = getCommandId();
+
+	if (id < 0) {
+	    return ret;
+	}
+
+	getAdmin().deleteCommand(id);
 
 	return ret;
     }
