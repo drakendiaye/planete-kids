@@ -1,6 +1,7 @@
 package planetekids.beans.stateful;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
@@ -15,13 +16,15 @@ import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.persistence.Query;
 import planetekids.beans.entity.AccountBean;
 import planetekids.beans.entity.AgeBean;
 import planetekids.beans.entity.AnswerBean;
 import planetekids.beans.entity.CategoryBean;
 import planetekids.beans.entity.ColorBean;
+import planetekids.beans.entity.CommandBean;
+import planetekids.beans.entity.CommandLineBean;
 import planetekids.beans.entity.LabelBean;
+import planetekids.beans.entity.LocaleBean;
 import planetekids.beans.entity.ProductBean;
 import planetekids.beans.entity.QuestionnaireBean;
 import planetekids.beans.entity.ResultBean;
@@ -35,28 +38,23 @@ public class CustomerBean implements CustomerRemote {
     private String account_id;
 
     public void init() {
-        
+
     }
 
     public boolean LogIn(String account_id, String password) throws Exception {
         AccountBean account = entityManager.find(AccountBean.class, account_id);
-        if(account == null || !account.getPassword().equals(password)) {
+        if (account == null || !account.getPassword().equals(password)) {
             return false;
         } else {
             this.account_id = account_id;
-            return(true);
+            return (true);
         }
     }
-    
-    public void LogOut()  throws Exception {
+
+    public void LogOut() throws Exception {
         this.account_id = null;
     }
-    
-    public AccountBean getAccount() throws Exception {
-        if(this.account_id == null) return null;
-        else return entityManager.find(AccountBean.class, this.account_id);
-    }
-    
+
     public void flushCart() throws Exception {
         cart.flushCart();
     }
@@ -64,12 +62,12 @@ public class CustomerBean implements CustomerRemote {
     public int validateCart() throws Exception {
         return cart.validateCart();
     }
-    
+
     public float getCartPrice() throws Exception {
         return cart.getCartPrice();
     }
-    
-    public List<ProductBean> getCartProducts()  throws Exception {
+
+    public List<ProductBean> getCartProducts() throws Exception {
         return cart.getCartProducts();
     }
 
@@ -123,11 +121,11 @@ public class CustomerBean implements CustomerRemote {
     }
 
     public List<AgeBean> getAges() throws Exception {
-	return entityManager.createNamedQuery("getAges").getResultList();
+        return entityManager.createNamedQuery("getAges").getResultList();
     }
-    
+
     public AgeBean getAge(int id) throws Exception {
-	return entityManager.find(AgeBean.class, id);
+        return entityManager.find(AgeBean.class, id);
     }
 
     public List<ProductBean> getProducts() throws Exception {
@@ -135,21 +133,27 @@ public class CustomerBean implements CustomerRemote {
     }
 
     public List<ProductBean> getProductsByCategory(int category_id) throws Exception {
-        Query query = entityManager.createNamedQuery("getProductsByCategory");
-        query.setParameter("category", entityManager.find(CategoryBean.class, category_id));
-        return query.getResultList();
+        List<ProductBean> products = new ArrayList<ProductBean>();
+        products.addAll(getCategory(category_id).getProducts());
+        return products;
     }
 
     public List<ProductBean> getProductsByColor(int color_id) throws Exception {
-        Query query = entityManager.createNamedQuery("getProductsByColor");
-        query.setParameter("color", entityManager.find(ColorBean.class, color_id));
-        return query.getResultList();
+        List<ProductBean> products = new ArrayList<ProductBean>();
+        products.addAll(getColor(color_id).getProducts());
+        return products;
     }
 
     public List<ProductBean> getProductsByLabel(int label_id) throws Exception {
-        Query query = entityManager.createNamedQuery("getProductsByLabel");
-        query.setParameter("label", entityManager.find(LabelBean.class, label_id));
-        return query.getResultList();
+        List<ProductBean> products = new ArrayList<ProductBean>();
+        products.addAll(getLabel(label_id).getProducts());
+        return products;
+    }
+
+    public List<ProductBean> getProductsByAge(int age_id) throws Exception {
+        List<ProductBean> products = new ArrayList<ProductBean>();
+        products.addAll(getAge(age_id).getProducts());
+        return products;
     }
 
     public List<ProductBean> getProductsByFilter(List<Integer> category_ids, List<Integer> color_ids, List<Integer> label_ids, boolean and) throws Exception {
@@ -196,12 +200,140 @@ public class CustomerBean implements CustomerRemote {
         return entityManager.find(ProductBean.class, id);
     }
 
+    public String createAccount(String email, String password, String firstName, String lastName, String addressLine1, String addressLine2,
+            String addressLine3, int zipCode, String city, String phoneNumber, String faxNumber) throws Exception {
+        AccountBean account = new AccountBean(email);
+        account.setPassword(password);
+        account.setFirstName(firstName);
+        account.setLastName(lastName);
+        account.setAddressLine1(addressLine1);
+        account.setAddressLine2(addressLine2);
+        account.setAddressLine3(addressLine3);
+        account.setZipCode(zipCode);
+        account.setCity(city);
+        account.setPhoneNumber(phoneNumber);
+        account.setFaxNumber(faxNumber);
+
+        entityManager.persist(account);
+
+        LogOut();
+        this.account_id = account.getEmailAddress();
+
+        return this.account_id;
+    }
+
+    public AccountBean getAccount() throws Exception {
+        if (this.account_id == null) {
+            return null;
+        } else {
+            return entityManager.find(AccountBean.class, this.account_id);
+        }
+    }
+
+    public void deleteAccount() throws Exception {
+        AccountBean account = getAccount();
+        entityManager.refresh(account);
+        entityManager.remove(account);
+    }
+
+    public void setAccountPassword(String password) throws Exception {
+        AccountBean account = getAccount();
+        account.setPassword(password);
+    }
+
+    public void setAccountFirstName(String firstName) throws Exception {
+        AccountBean account = getAccount();
+        account.setFirstName(firstName);
+    }
+
+    public void setAccountLastName(String lastName) throws Exception {
+        AccountBean account = getAccount();
+        account.setLastName(lastName);
+    }
+
+    public void setAccountAddressLine1(String addressLine1) throws Exception {
+        AccountBean account = getAccount();
+        account.setAddressLine1(addressLine1);
+    }
+
+    public void setAccountAddressLine2(String addressLine2) throws Exception {
+        AccountBean account = getAccount();
+        account.setAddressLine2(addressLine2);
+    }
+
+    public void setAccountAddressLine3(String addressLine3) throws Exception {
+        AccountBean account = getAccount();
+        account.setAddressLine3(addressLine3);
+    }
+
+    public void setAccountZipCode(int zipCode) throws Exception {
+        AccountBean account = getAccount();
+        account.setZipCode(zipCode);
+    }
+
+    public void setAccountCity(String city) throws Exception {
+        AccountBean account = getAccount();
+        account.setCity(city);
+    }
+
+    public void setAccountPhoneNumber(String phoneNumber) throws Exception {
+        AccountBean account = getAccount();
+        account.setPhoneNumber(phoneNumber);
+    }
+
+    public void setAccountFaxNumber(String faxNumber) throws Exception {
+        AccountBean account = getAccount();
+        account.setFaxNumber(faxNumber);
+    }
+
+    public int createCommand(String email, Date date, float shipping) throws Exception {
+        AccountBean account = getAccount();
+        CommandBean command = new CommandBean(account, date, shipping);
+        entityManager.persist(command);
+        return command.getId();
+    }
+
+    public CommandBean getCommand(int id) throws Exception {
+        return entityManager.find(CommandBean.class, id);
+    }
+
+    public List<CommandBean> getCommands() throws Exception {
+        return entityManager.createNamedQuery("getCommands").getResultList();
+    }
+
+    public List<CommandBean> getCommandsByAccount(String email) throws Exception {
+        List<CommandBean> commands = new ArrayList<CommandBean>();
+        commands.addAll(getAccount().getCommands());
+        return commands;
+    }
+
+    public int createCommandLine(int command_id, String name_fr, String name_en, float price, int number) throws Exception {
+        CommandBean command = getCommand(command_id);
+        CommandLineBean command_line = new CommandLineBean(command, new LocaleBean(name_fr, name_en), price, number);
+        entityManager.persist(command_line);
+        return command_line.getId();
+    }
+
+    public CommandLineBean getCommandLine(int id) throws Exception {
+        return entityManager.find(CommandLineBean.class, id);
+    }
+
+    public List<CommandLineBean> getCommandLines() throws Exception {
+        return entityManager.createNamedQuery("getCommandLines").getResultList();
+    }
+
+    public List<CommandLineBean> getCommandLinesByCommand(int command_id) throws Exception {
+        List<CommandLineBean> command_lines = new ArrayList<CommandLineBean>();
+        command_lines.addAll(getCommand(command_id).getCommand_lines());
+        return command_lines;
+    }
+
     @PostConstruct
     private void postConstruct() {
         try {
             Context context = new InitialContext();
             cart = (CartRemote) context.lookup(CartBean.class.getName() + "_" + CartRemote.class.getName() + "@Remote");
-        } catch(Exception ex) {
+        } catch (Exception ex) {
 
         }
     }

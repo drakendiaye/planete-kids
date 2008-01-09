@@ -7,18 +7,12 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
-import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToOne;
 import javax.persistence.PreRemove;
 
 @Entity
-@NamedQueries({@NamedQuery(name = "getProducts", query = "select o FROM ProductBean o"),
-@NamedQuery(name = "getProductsByCategory", query = "select o FROM ProductBean o WHERE o.category = :category"),
-@NamedQuery(name = "getProductsByColor", query = "select o FROM ProductBean o WHERE o.color = :color"),
-@NamedQuery(name = "getProductsByLabel", query = "select o FROM ProductBean o WHERE o.label = :label"),
-@NamedQuery(name = "getProductsByAge", query = "select o FROM ProductBean o WHERE o.age= :age")
-})
+@NamedQuery(name = "getProducts", query = "select o FROM ProductBean o")
 public class ProductBean implements java.io.Serializable {
 
     @Id

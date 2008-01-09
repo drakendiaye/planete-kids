@@ -7,14 +7,15 @@
 
 package planetekids.beans.stateful;
 
-import java.util.Iterator;
+import java.util.Date;
 import java.util.List;
 import planetekids.beans.entity.AccountBean;
 import planetekids.beans.entity.AgeBean;
 import planetekids.beans.entity.CategoryBean;
 import planetekids.beans.entity.ColorBean;
+import planetekids.beans.entity.CommandBean;
+import planetekids.beans.entity.CommandLineBean;
 import planetekids.beans.entity.LabelBean;
-import planetekids.beans.entity.LocaleBean;
 import planetekids.beans.entity.ProductBean;
 import planetekids.beans.entity.QuestionBean;
 import planetekids.beans.entity.QuestionnaireBean;
@@ -93,17 +94,16 @@ public interface AdminRemote {
     public void deleteProduct (int id) throws Exception;
     public void deleteProducts() throws Exception;
     
+    public QuestionnaireBean getQuestionnaire(int questionnaire_id) throws Exception;
     public int createQuestionnaire(String nameFr, String nameEn, String descFr, String descEn) throws Exception;
     public int createQuestion(int questionnaireId, String questionNameFr, String questionNameEn, QuestionBean.Pattern pattern, int order) throws Exception;
     public int createAnswer(int questionId, String answerNameFr, String answerNameEn, Boolean commentable, int order) throws Exception;
+    public void deleteQuestionnaire(int questionnaire_id) throws Exception;
+    public void deleteQuestionnaires() throws Exception;
     
     public String createAccount(String email, String password, String firstName, String lastName, String addressLine1, String addressLine2, String addressLine3, int zipCode, String city, String phoneNumber, String faxNumber) throws Exception;
     public AccountBean getAccount(String email) throws Exception;
     public List<AccountBean> getAccounts() throws Exception;
-    public QuestionnaireBean getQuestionnaire(int questionnaire_id) throws Exception;
-    public void deleteQuestionnaire(int questionnaire_id) throws Exception;
-    public void deleteQuestionnaires() throws Exception;
-   
     public void deleteAccount(String email) throws Exception;
     public void deleteAccounts() throws Exception;
     public void setAccountPassword(String email, String password) throws Exception;
@@ -116,4 +116,24 @@ public interface AdminRemote {
     public void setAccountCity(String email, String city) throws Exception;
     public void setAccountPhoneNumber(String email, String phoneNumber) throws Exception;
     public void setAccountFaxNumber(String email, String faxNumber) throws Exception;
+    
+    public int createCommand(String email, Date date, float shipping) throws Exception;
+    public CommandBean getCommand(int id) throws Exception;
+    public List<CommandBean> getCommands() throws Exception;
+    public List<CommandBean> getCommandsByAccount(String email) throws Exception;
+    public void deleteCommand(int id) throws Exception;
+    public void deleteCommands() throws Exception;
+    public void setCommandDate(int id, Date date) throws Exception;
+    public void setCommandShipping(int id, float shipping) throws Exception;
+    
+    public int createCommandLine(int command_id, String name_fr, String name_en, float price, int number) throws Exception;
+    public CommandLineBean getCommandLine(int id) throws Exception;
+    public List<CommandLineBean> getCommandLines() throws Exception;
+    public List<CommandLineBean> getCommandLinesByCommand(int command_id) throws Exception;
+    public void deleteCommandLine(int id) throws Exception;
+    public void deleteCommandLines() throws Exception;
+    public void setCommandLineNameFr(int id, String name_fr) throws Exception;
+    public void setCommandLineNameEn(int id, String name_en) throws Exception;
+    public void setCommandLinePrice(int id, float price) throws Exception;
+    public void setCommandLineNumber(int id, int number) throws Exception;
 }
