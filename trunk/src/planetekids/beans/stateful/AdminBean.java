@@ -8,6 +8,7 @@
 package planetekids.beans.stateful;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
@@ -16,12 +17,13 @@ import javax.ejb.Remote;
 import javax.ejb.Stateful;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.persistence.Query;
 import planetekids.beans.entity.AccountBean;
 import planetekids.beans.entity.AgeBean;
 import planetekids.beans.entity.AnswerBean;
 import planetekids.beans.entity.CategoryBean;
 import planetekids.beans.entity.ColorBean;
+import planetekids.beans.entity.CommandBean;
+import planetekids.beans.entity.CommandLineBean;
 import planetekids.beans.entity.LabelBean;
 import planetekids.beans.entity.LocaleBean;
 import planetekids.beans.entity.ProductBean;
@@ -313,27 +315,27 @@ public class AdminBean implements AdminRemote  {
     }
     
     public List<ProductBean> getProductsByCategory(int category_id) throws Exception {
-        Query query = entityManager.createNamedQuery("getProductsByCategory");
-        query.setParameter("category", entityManager.find(CategoryBean.class, category_id));
-        return query.getResultList();
+        List<ProductBean> products = new ArrayList<ProductBean>();
+        products.addAll(getCategory(category_id).getProducts());
+        return products;
     }
     
     public List<ProductBean> getProductsByColor(int color_id) throws Exception {
-        Query query = entityManager.createNamedQuery("getProductsByColor");
-        query.setParameter("color", entityManager.find(ColorBean.class, color_id));
-        return query.getResultList();
+        List<ProductBean> products = new ArrayList<ProductBean>();
+        products.addAll(getColor(color_id).getProducts());
+        return products;
     }
     
     public List<ProductBean> getProductsByLabel(int label_id) throws Exception {
-        Query query = entityManager.createNamedQuery("getProductsByLabel");
-        query.setParameter("label", entityManager.find(LabelBean.class, label_id));
-        return query.getResultList();
+        List<ProductBean> products = new ArrayList<ProductBean>();
+        products.addAll(getLabel(label_id).getProducts());
+        return products;
     }
     
     public List<ProductBean> getProductsByAge(int age_id) throws Exception {
-	Query query = entityManager.createNamedQuery("getProductsByAge");
-	query.setParameter("age", entityManager.find(AgeBean.class, age_id));
-	return query.getResultList();
+        List<ProductBean> products = new ArrayList<ProductBean>();
+        products.addAll(getAge(age_id).getProducts());
+        return products;
     }
 
     public List<ProductBean> getProductsByFilter(List<Integer> category_ids, List<Integer> color_ids, List<Integer> label_ids, boolean and) throws Exception {
@@ -629,6 +631,106 @@ public class AdminBean implements AdminRemote  {
     public void setAccountFaxNumber(String email, String faxNumber) throws Exception {
         AccountBean account = getAccount(email);
         account.setFaxNumber(faxNumber);
+    }
+
+    public int createCommand(String email, Date date, float shipping) throws Exception {
+        AccountBean account = getAccount(email);
+        CommandBean command = new CommandBean(account, date, shipping);
+        entityManager.persist(command);
+        return command.getId();
+    }
+
+    public CommandBean getCommand(int id) throws Exception {
+        return entityManager.find(CommandBean.class, id);
+    }
+
+    public List<CommandBean> getCommands() throws Exception {
+        return entityManager.createNamedQuery("getCommands").getResultList();
+    }
+    
+    public List<CommandBean> getCommandsByAccount(String email) throws Exception {
+        List<CommandBean> commands = new ArrayList<CommandBean>();
+        commands.addAll(getAccount(email).getCommands());
+        return commands;
+    }
+
+    public void deleteCommand(int id) throws Exception {
+        CommandBean command = getCommand(id);
+        entityManager.refresh(command);
+        entityManager.remove(command);
+    }
+
+    public void deleteCommands() throws Exception {
+        List<CommandBean> commands = getCommands();
+	if (commands != null) {
+	    Iterator iterator = commands.iterator();
+	    while (iterator.hasNext()) {
+		CommandBean command = (CommandBean) iterator.next();
+		deleteCommand(command.getId());
+	    }
+	}
+    }
+
+    public void setCommandDate(int id, Date date) throws Exception {
+        getCommand(id).setDate(date);
+    }
+
+    public void setCommandShipping(int id, float shipping) throws Exception {
+        getCommand(id).setShipping(shipping);
+    }
+
+    public int createCommandLine(int command_id, String name_fr, String name_en, float price, int number) throws Exception {
+        CommandBean command = getCommand(command_id);
+        CommandLineBean command_line = new CommandLineBean(command, new LocaleBean(name_fr, name_en), price, number);
+        entityManager.persist(command_line);
+        return command_line.getId();
+    }
+
+    public CommandLineBean getCommandLine(int id) throws Exception {
+        return entityManager.find(CommandLineBean.class, id);
+    }
+
+    public List<CommandLineBean> getCommandLines() throws Exception {
+        return entityManager.createNamedQuery("getCommandLines").getResultList();
+    }
+    
+    public List<CommandLineBean> getCommandLinesByCommand(int command_id) throws Exception {
+        List<CommandLineBean> command_lines = new ArrayList<CommandLineBean>();
+        command_lines.addAll(getCommand(command_id).getCommand_lines());
+        return command_lines;
+    }
+
+    public void deleteCommandLine(int id) throws Exception {
+        CommandLineBean command_line = getCommandLine(id);
+        entityManager.refresh(command_line);
+        entityManager.remove(command_line);
+    }
+
+    public void deleteCommandLines() throws Exception {
+        List<CommandLineBean> command_lines = getCommandLines();
+	if (command_lines != null) {
+	    Iterator iterator = command_lines.iterator();
+	    while (iterator.hasNext()) {
+		CommandLineBean command_line = (CommandLineBean) iterator.next();
+		deleteCommand(command_line.getId());
+	    }
+	}
+    }
+
+    public void setCommandLineNameFr(int id, String name_fr) throws Exception {
+        getCommandLine(id).getName().setFr(name_fr);
+    }
+
+    public void setCommandLineNameEn(int id, String name_en) throws Exception {
+        getCommandLine(id).getName().setEn(name_en);
+    }
+
+    public void setCommandLinePrice(int id, float price) throws Exception {
+        getCommandLine(id).setPrice(price);
+    }
+
+    public void setCommandLineNumber(int id, int number) throws Exception {
+        getCommandLine(id).setNumber(number);
     }
     
 }

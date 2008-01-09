@@ -7,9 +7,14 @@
 
 package planetekids.beans.entity;
 
+import java.util.HashSet;
+import java.util.Set;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 
 @Entity
 @NamedQuery(name = "getAccounts", query = "select o FROM AccountBean o")
@@ -17,6 +22,9 @@ public class AccountBean implements java.io.Serializable {
 
     @Id
     private String emailAddress;
+    
+    @OneToMany(mappedBy="account", fetch=FetchType.LAZY, cascade=CascadeType.ALL)
+    private Set<CommandBean> commands = new HashSet<CommandBean>();
     
     private String password;
     private String firstName;
@@ -44,6 +52,14 @@ public class AccountBean implements java.io.Serializable {
 
     public void setEmailAddress(String emailAddress) {
 	this.emailAddress = emailAddress;
+    }
+    
+    public Set<CommandBean> getCommands() {
+        return commands;
+    }
+
+    public void setCommands(Set<CommandBean> commands) {
+        this.commands = commands;
     }
 
     public String getPassword() {
