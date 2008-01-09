@@ -49,7 +49,7 @@
                         </td>
                     </tr>
                 </table>
-                <div id="cart_<s:property value="getId()" />_div" align="center">
+                <div id="cart_<s:property value="getId()" />_div" align="center" style="display: none;">
                     <form id="product_<s:property value="getId()"/>_update_form">
                         <s:textfield name="update_%{getId()}_%{getCartProductNumber(getId())}" value="%{getCartProductNumber(getId())}" onkeyup="this.name = 'update_%{getId()}_' + this.value;" size="1"/>&nbsp;x&nbsp;<s:property value="getPrice()" />&nbsp;€
                         <s:url id="url" namespace="/" action="index_cart" includeParams="none"/>

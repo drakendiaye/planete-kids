@@ -5,8 +5,16 @@
     <h2><s:text name="create"/></h2>
 </s:div>
 <s:div cssClass="contentMain">
-    <form id="create" method="post" name="create">
-        <table class="account">
+    <form id="create_account_form" method="post" name="create_account_form">
+        <table class="account" width="99%">
+            <tr>
+                <td align="right">
+                    <s:text name="email"/>&nbsp;:
+                </td>
+                <td align="left">
+                    <input type="text" name="email"/>
+                </td>
+            </tr>
             <tr>
                 <td align="right">
                     <s:text name="password"/>&nbsp;:
@@ -90,7 +98,11 @@
             <tr>
                 <td colspan="2" align="center">
                     <s:url id="url_content" namespace="/account" action="create_submit" includeParams="none"/>
-                    <input type="submit" value="<s:text name="submit"/>" class="button" onclick="navExec(new navRequest('content', '<s:property value="url_content"/>', null, null, 'create'))"/>
+                    <s:url id="url_callback_content" namespace="/account" action="index_content" includeParams="none"/>
+                    <s:url id="url_callback_location" namespace="/account" action="index_location" includeParams="none"/>
+                    <s:hidden name="callback" value="navExec(new navRequest('content', '%{url_callback_content}'));
+                              navExec(new navRequest('location', '%{url_callback_location}'));"/>
+                    <input type="submit" value="<s:text name="submit"/>" class="button" onclick="navExec(new navRequest('content', '<s:property value="url_content"/>', null, null, 'create_account_form'))"/>
                 </td>
             </tr>
         </table>
