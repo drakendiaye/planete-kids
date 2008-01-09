@@ -312,8 +312,8 @@
             <result name="error">/error.jsp</result>
         </action>
 	
-	<action name="categoriy_modify" class="planetekids.actions.admin.IndexAction">
-            <result>/admin/categoriy_modify.jsp</result>
+	<action name="category_modify" class="planetekids.actions.admin.IndexAction">
+            <result>/admin/category_modify.jsp</result>
             <result name="error">/error.jsp</result>
 	</action>
 	
@@ -424,11 +424,12 @@
             <result>/admin/ages.jsp</result>
             <result name="error">/error.jsp</result>
         </action>
-	
-	<action name="ages_delete" class="planetekids.actions.admin.IndexAction" method="ageDelete">
-            <result>/admin/ages.jsp</result>
+
+	<action name="confirm_delete" class="planetekids.actions.admin.IndexAction">
+            <result>/admin/confirm_delete.jsp</result>
             <result name="error">/error.jsp</result>
-	</action>
+        </action>
+	
 	
     </package>
     

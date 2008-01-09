@@ -74,20 +74,19 @@ public class IndexAction extends ActionSupport implements SessionAware, Paramete
     }
 
     private float getFloatParameter(String name) {
-	System.out.println("Parameter : " + name);
 	float value = -1;
 
 	if (parameters.get(name) != null) {
 	    String value_s = ((String[]) parameters.get(name))[0];
 	    if (value_s.compareTo("") != 0) {
 		try {
-		    value = Float.valueOf(value_s).intValue();
+		    value = Float.valueOf(value_s).floatValue();
 		} catch (NumberFormatException e) {
 		    value = -1;
 		}
 	    }
 	}
-	System.out.println("Value : " + value);
+
 	return value;
     }
 

@@ -7,6 +7,13 @@
         <title>Planete-kids</title>
         <s:head theme="ajax" debug="true" />
         <link href="<s:url value='/style.css'/>" rel="stylesheet" type="text/css"/>
+
+	<script type="text/javascript">
+	  function confirmdelete(url) {
+	    if (confirm('Are you sure?'))
+		window.location.replace(url);
+	  }
+	</script>
     </head>
     <body>
 
@@ -66,7 +73,7 @@
 	    <s:url id="delete" namespace="/admin" action="age_delete" includeParams="none">
 	    <s:param name="age_id" value="getId()" />
 	    </s:url>
-	    <s:a href="%{delete}"><s:text name="delete" /></s:a>
+	    <s:a href="javascript:confirmdelete('%{delete}')"><s:text name="delete" /></s:a>
 
 	    </td>
 
