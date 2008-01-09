@@ -18,27 +18,25 @@
                         <tr>
                             <td align="right">
                                 <s:text name="email"/>&nbsp;:&nbsp;
-                                <script type="text/javascript">text_load('email');</script>
-                                <s:hidden id="email" value="{ init : false, value : ''}"/>
                             </td>
                             <td align="left">
+                                <script type="text/javascript">text_load('email');</script>
+                                <s:hidden id="email" value="{ init : false, value : ''}"/>
                                 <input type="text" id="email_field" name="email" onkeyup="text_press('email')"/>
                             </td>
                         </tr>
                         <tr>
                             <td align="right">
                                 <s:text name="password"/>&nbsp;:&nbsp;
-                                <script type="text/javascript">text_load('password');</script>
-                                <s:hidden id="password" value="{ init : false, value : ''}"/>
                             </td>
                             <td align="left">
-                                <input type="password" id="password_field" name="password" onkeyup="text_press('password')"/>
+                                <input type="password" name="password"/>
                             </td>
                         </tr>
                         <tr>
                             <td colspan="2" align="center">
                                 <s:url id="url_content" namespace="/account" action="identify_submit" includeParams="none"/>
-                                <input type="submit" value="<s:text name="submit"/>" class="button" onclick="navExec(new navRequest('content', '%{url_content}', null, null, 'identify'))"/>
+                                <input type="submit" value="<s:text name="submit"/>" class="button" onclick="navExec(new navRequest('content', '<s:property value="url_content"/>', null, null, 'identify'))"/>
                             </td>
                         </tr>
                     </table>
