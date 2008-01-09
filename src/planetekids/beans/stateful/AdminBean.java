@@ -733,4 +733,23 @@ public class AdminBean implements AdminRemote  {
         getCommandLine(id).setNumber(number);
     }
     
+        
+    public float getCommandTotal(int id) throws Exception {
+	CommandBean command = getCommand(id);
+
+	float total = command.getShipping();
+	
+	Set<CommandLineBean> command_lines = command.getCommand_lines();
+	
+	Iterator it = command_lines.iterator();
+
+	CommandLineBean curcmdline;
+	while (it.hasNext()) {
+	    curcmdline = (CommandLineBean)it.next();
+	    total += curcmdline.getNumber()*curcmdline.getPrice();
+	}
+
+	return total;
+    }
+    
 }

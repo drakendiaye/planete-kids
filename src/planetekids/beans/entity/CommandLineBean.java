@@ -1,12 +1,15 @@
 package planetekids.beans.entity;
 
 import java.io.Serializable;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToOne;
 
 @Entity
 @NamedQuery(name = "getCommandLines", query = "select o FROM CommandLineBean o")
@@ -19,7 +22,9 @@ public class CommandLineBean implements Serializable {
     @ManyToOne(optional=false)
     private CommandBean command;
     
+    @OneToOne(fetch=FetchType.EAGER, cascade=CascadeType.ALL, optional=false)
     private LocaleBean name;
+     
     private float price;
     private int number;
 

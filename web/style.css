@@ -303,7 +303,7 @@ div.product {
 .disabledButton {
 	border-style : solid;
         border-color : black;
-        border-width : 1px;  
+        border-width : 1px;
 	color: #000000;
         background-color: #6bbfff;
 }

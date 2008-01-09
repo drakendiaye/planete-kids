@@ -39,21 +39,31 @@
 	<br />
 	<br />
 
-	<s:form method="post" namespace="/admin" action="age_valid">
 	<table align="center">
-	<input type="hidden" name="age_id" value="<s:property value="getAgeId()" />" />
-	<tr><td align=right><s:text name="enName"></s:text>
-        <td><input type="text" name="name_en" value="<s:property value="getAge(getAgeId()).getName('en')" />" size="35"/>
-	<tr><td align=right><s:text name="frName"></s:text>
-        <td><input type="text" name="name_fr" value="<s:property value="getAge(getAgeId()).getName('fr')" />" size="35"/>	
-	<tr><td align=right>Description (en)
-        <td><input type="text" name="description_en" value="<s:property value="getAge(getAgeId()).getDescription('en')" />" size="35"/>
-	<tr><td align=right>Description (fr)
-        <td><input type="text" name="description_fr" value="<s:property value="getAge(getAgeId()).getDescription('fr')" />" size="35"/>
-	</table><br />
-	<input type="submit" value="Submit" />
-	</s:form>
+	<tr><td align=right>Customer ID: </td><td><s:property value="getCommand(getCommandId()).getAccount().getEmailAddress()" /></td></tr>
+	<tr><td align=right>Date: </td><td><s:property value="getCommand(getCommandId()).getDate()" /></td></tr>
+	</table>
+	<br />
+	<table border="2" align="center" cellpadding="2">
+	<tr>
+	<th>Name (en)</th>
+	<th>Name (fr)</th>
+	<th>Price</th>
+	<th>Number</th>
+	</tr>
 
+	<s:iterator value="getCommandLinesByCommand(getCommandId())">
+	    <tr>
+	    <td align=center><s:property value="getName().getEn()" /></td>
+	    <td align=center><s:property value="getName().getFr()" /></td>
+	    <td align=center><s:property value="getNumber()" />&nbsp;€</td>
+	    <td align=center><s:property value="getPrice()" />&nbsp;€</td>
+	    </tr>
+	</s:iterator>
+	    <tr><td colspan=3 align=right>Shipping costs</td><td><s:property value="getCommand(getCommandId()).getShipping()" /></td></tr>
+	    <tr><td colspan=3 align=right><b>Total</b></td><td><s:property value="getCommandTotal(getCommandId())" />&nbsp;€</td></tr>
+	</table>
+	
 	</div>
     </s:div>
 </body>

@@ -136,4 +136,6 @@ public interface AdminRemote {
     public void setCommandLineNameEn(int id, String name_en) throws Exception;
     public void setCommandLinePrice(int id, float price) throws Exception;
     public void setCommandLineNumber(int id, int number) throws Exception;
+    
+    public float getCommandTotal(int id) throws Exception;
 }
