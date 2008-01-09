@@ -12,7 +12,7 @@
 
     <s:div cssClass="main">
 	<div style="text-align:center">
-	<h1>Planete-Kids</h1>
+	<img src="../images/Planete-Kids.png" /><br />
 	<h2><s:text name="admin"/></h2>
 	
 	<s:url id="viewlabels" namespace="/admin" action="labels" includeParams="none" />
