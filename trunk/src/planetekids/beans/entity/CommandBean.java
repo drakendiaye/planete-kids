@@ -18,6 +18,8 @@ import javax.persistence.OneToMany;
 @NamedQuery(name = "getCommands", query = "select o FROM CommandBean o")
 public class CommandBean implements Serializable {
     
+    public enum State {CREATED, PROCESSING, DISPATCHED, FINISHED};
+    
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
     private int id;
@@ -30,6 +32,7 @@ public class CommandBean implements Serializable {
 
     private Date date;
     private float shipping;
+    private State state;
     
     public CommandBean() {
         
@@ -40,6 +43,7 @@ public class CommandBean implements Serializable {
         this.setAccount(account);
         this.setDate(date);
         this.setShipping(shipping);
+	this.setState(State.CREATED);
     }
 
     public int getId() {
@@ -80,6 +84,14 @@ public class CommandBean implements Serializable {
 
     public void setShipping(float shipping) {
         this.shipping = shipping;
+    }
+    
+    public State getState() {
+	return state;
+    }
+    
+    public void setState(State state) {
+	this.state = state;
     }
     
     /*@PreRemove

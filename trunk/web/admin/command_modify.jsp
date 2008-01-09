@@ -40,7 +40,7 @@
 	<br />
 
 	<table align="center">
-	<tr><td align=right><s:text name="emailID"></s:text> </td><td><s:property value="getCommand(getCommandId()).getAccount().getEmailAddress()" /></td></tr>
+	<tr><td align=right><s:text name="emailID"/>: </td><td><s:property value="getCommand(getCommandId()).getAccount().getEmailAddress()" /></td></tr>
 	<tr><td align=right>Date: </td><td><s:property value="getCommand(getCommandId()).getDate()" /></td></tr>
 	</table>
 	<br />
@@ -63,6 +63,20 @@
 	    <tr><td colspan=3 align=right><s:text name="shippingCosts"></s:text> </td><td><s:property value="getCommand(getCommandId()).getShipping()" /></td></tr>
 	    <tr><td colspan=3 align=right><b>Total</b></td><td><s:property value="getCommandTotal(getCommandId())" />&nbsp;€</td></tr>
 	</table>
+
+	<s:form method="post" namespace="/admin" action="command_valid">
+	<table align="center">
+	<tr><td align=right><s:text name="state"></s:text></td>
+	<td>
+	    <select name="state">
+		<option value="0" ><s:text name="CREATED" /></option>
+		<option value="1" ><s:text name="PROCESSING" /></option>
+		<option value="2" ><s:text name="DISPATCHED" /></option>
+		<option value="3" ><s:text name="FINISHED" /></option>
+	    </select>
+	</td></tr>
+	</table>
+	</s:form>
 	
 	</div>
     </s:div>
