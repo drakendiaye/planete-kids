@@ -7,6 +7,13 @@
         <title>Planete-kids</title>
         <s:head theme="ajax" debug="true" />
         <link href="<s:url value='/style.css'/>" rel="stylesheet" type="text/css"/>
+
+	<script type="text/javascript">
+	  function confirmdelete(url) {
+	    if (confirm('Are you sure?'))
+		window.location.replace(url);
+	  }
+	</script>
     </head>
     <body>
 
@@ -59,9 +66,9 @@
 	    <td align=center><s:property value="getName('fr')" /></td>
 	    <td align=center><s:property value="getDescription('en')" /></td>
 	    <td align=center><s:property value="getDescription('fr')" /></td>
-	    <td align=center><img src="../<s:property value="getImage_large()" />"></td>
-	    <td align=center><img src="../<s:property value="getImage_medium()" />"></td>
-	    <td align=center><img src="../<s:property value="getImage_small()" />"></td>
+	    <td align=center><s:if test="getImage_large() != ''"><img src="../<s:property value="getImage_large()" />"></s:if></td>
+	    <td align=center><s:if test="getImage_medium() != ''"><img src="../<s:property value="getImage_medium()" />"></s:if></td>
+	    <td align=center><s:if test="getImage_small() != ''"><img src="../<s:property value="getImage_small()" />"></s:if></td>
 
 	    <td align=center>
 
@@ -72,7 +79,7 @@
 	    <s:url id="delete" namespace="/admin" action="color_delete" includeParams="none">
 	    <s:param name="color_id" value="getId()" />
 	    </s:url>
-	    <s:a href="%{delete}"><s:text name="delete" /></s:a>
+	    <s:a href="javascript:confirmdelete('%{delete}')"><s:text name="delete" /></s:a>
 
 	    </td>
 
