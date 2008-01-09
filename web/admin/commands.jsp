@@ -55,6 +55,7 @@
 	<th>Date</th>
 	<th><s:text name="shippingCosts"></s:text> </th>
 	<th>Total</th>
+	<th>State</th>
 	<th>Action</th>
 	</tr>
 
@@ -64,7 +65,7 @@
 	    <td align=center><s:property value="getDate()" /></td>
 	    <td align=center><s:property value="getShipping()" /></td>
 	    <td align=center><s:property value="getCommandTotal(getId())" /></td>
-	    
+	    <td align=center><s:property value="getCommandState(getId()).toString()" /></td>
 	    <td align=center>
 
 	    <s:url id="modify" namespace="/admin" action="command_modify" includeParams="none">

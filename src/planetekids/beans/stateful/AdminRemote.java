@@ -14,6 +14,7 @@ import planetekids.beans.entity.AgeBean;
 import planetekids.beans.entity.CategoryBean;
 import planetekids.beans.entity.ColorBean;
 import planetekids.beans.entity.CommandBean;
+import planetekids.beans.entity.CommandBean.State;
 import planetekids.beans.entity.CommandLineBean;
 import planetekids.beans.entity.LabelBean;
 import planetekids.beans.entity.ProductBean;
@@ -138,4 +139,6 @@ public interface AdminRemote {
     public void setCommandLineNumber(int id, int number) throws Exception;
     
     public float getCommandTotal(int id) throws Exception;
+    public void setCommandState(int id, State state) throws Exception;
+    public State getCommandState(int id) throws Exception;
 }

@@ -23,6 +23,7 @@ import planetekids.beans.entity.AnswerBean;
 import planetekids.beans.entity.CategoryBean;
 import planetekids.beans.entity.ColorBean;
 import planetekids.beans.entity.CommandBean;
+import planetekids.beans.entity.CommandBean.State;
 import planetekids.beans.entity.CommandLineBean;
 import planetekids.beans.entity.LabelBean;
 import planetekids.beans.entity.LocaleBean;
@@ -750,6 +751,15 @@ public class AdminBean implements AdminRemote  {
 	}
 
 	return total;
+    }
+    
+    public State getCommandState(int id) throws Exception {
+	return getCommand(id).getState();
+    }
+    
+    public void setCommandState(int id, State state) throws Exception {
+	CommandBean command = getCommand(id);
+	command.setState(state);
     }
     
 }

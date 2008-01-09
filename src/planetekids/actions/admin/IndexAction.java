@@ -12,6 +12,7 @@ import planetekids.beans.entity.AgeBean;
 import planetekids.beans.entity.CategoryBean;
 import planetekids.beans.entity.ColorBean;
 import planetekids.beans.entity.CommandBean;
+import planetekids.beans.entity.CommandBean.State;
 import planetekids.beans.entity.CommandLineBean;
 import planetekids.beans.entity.LabelBean;
 import planetekids.beans.entity.ProductBean;
@@ -508,6 +509,14 @@ public class IndexAction extends ActionSupport implements SessionAware, Paramete
     
     public List getCommandLines() throws Exception {
 	return getAdmin().getCommandLines();
+    }
+    
+    public State getCommandState(int id) throws Exception {
+	return getAdmin().getCommandState(id);
+    }
+    
+    public void setCommandState(int id, State state) throws Exception {
+	getAdmin().setCommandState(id, state);
     }
     
     public List getCommandLinesByCommand(int id) throws Exception {
