@@ -7,6 +7,11 @@
         <s:if test="getPages().size() > 1">
             <form id="pageForm" method="post" style="display: none">
                 <s:hidden id="page_number" name="page"/>
+                <s:hidden name="ageFilter" value="%{getAgeFilter()}"/>
+                <s:hidden name="categoryFilter" value="%{getCategoryFilter()}"/>
+                <s:hidden name="colorFilter" value="%{getColorFilter()}"/>
+                <s:hidden name="labelFilter" value="%{getLabelFilter()}"/>
+                <s:hidden name="and" value="%{getAndFilter()}"/>
             </form>
             <s:url id="url" namespace="/product" action="index_content" includeParams="none"/>
             <s:if test="1 == getPage()">

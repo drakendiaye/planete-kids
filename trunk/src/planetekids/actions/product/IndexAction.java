@@ -21,6 +21,11 @@ public class IndexAction extends ActionSupport implements SessionAware, Paramete
     private Map parameters;
     
     private int page;
+    private List<Integer> ageFilter;
+    private List<Integer> categoryFilter;
+    private List<Integer> labelFilter;
+    private List<Integer> colorFilter;
+    private boolean and;
     private int nbpage;
     private List<ProductBean> products;
     
@@ -40,13 +45,73 @@ public class IndexAction extends ActionSupport implements SessionAware, Paramete
     public String execute() throws Exception {
         try {
             if(getCustomer() == null) session.put("customer", new InitialContext().lookup(CustomerBean.class.getName() + "_" + CustomerRemote.class.getName() + "@Remote"));
-            products = getCustomer().getProducts();
+            ageFilter = new ArrayList<Integer>();
+            categoryFilter = new ArrayList<Integer>();
+            labelFilter = new ArrayList<Integer>();
+            colorFilter = new ArrayList<Integer>();
+            and = false;
+            
+            if (parameters.get("ageFilter") != null) {
+                try {
+                    String[] ages = ((String[])parameters.get("ageFilter"))[0].split(",");
+                    for (int i = 0; i < ages.length; i++) {
+                        ageFilter.add(new Integer(ages[i]));
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+            if (parameters.get("categoryFilter") != null) {
+                try {
+                    String[] categories = ((String[])parameters.get("categoryFilter"))[0].split(",");
+                    for (int i = 0; i < categories.length; i++) {
+                        categoryFilter.add(new Integer(categories[i]));
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+            if (parameters.get("labelFilter") != null) {
+                try {
+                    String[] labels = ((String[])parameters.get("labelFilter"))[0].split(",");
+                    for (int i = 0; i < labels.length; i++) {
+                        labelFilter.add(new Integer(labels[i]));
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+            if (parameters.get("colorFilter") != null) {
+                try {
+                    String[] colors = ((String[])parameters.get("colorFilter"))[0].split(",");
+                    for (int i = 0; i < colors.length; i++) {
+                        colorFilter.add(new Integer(colors[i]));
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+            if (parameters.get("and") != null) {
+                try {
+                    and = new Boolean(((String[])parameters.get("and"))[0]);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+            
+            
+            if (ageFilter.size() == 0 && labelFilter.size() == 0 && categoryFilter.size() == 0 && colorFilter.size() == 0) {
+                products = getCustomer().getProducts();
+            } else {
+                products = getCustomer().getProductsByFilter(categoryFilter, colorFilter, labelFilter, ageFilter, and);
+            }
+            
+            
             page = 1;
             nbpage = products.size() / PAGESIZE + 1;
             if (parameters.get("page") != null) {
                 try {
                     page = new Integer(((String[])parameters.get("page"))[0]).intValue();
-                    System.out.println("\n\n\n\n\n\n\nPage fin : " + page + "\n\n\n\n\n\n\n\n");
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -54,18 +119,43 @@ public class IndexAction extends ActionSupport implements SessionAware, Paramete
             if (page < 1) page = 1;
             if (page > nbpage) page = nbpage;
             
-            
             return ActionSupport.SUCCESS;
         } catch (NamingException ex) {
             return ActionSupport.ERROR;
         }
     }
     
+    public String getAgeFilter() {
+        return ((String[])parameters.get("ageFilter"))[0];
+    }
+    
+    public String getCategoryFilter() {
+        return ((String[])parameters.get("categoryFilter"))[0];
+    }
+    
+    public String getColorFilter() {
+        return ((String[])parameters.get("colorFilter"))[0];
+    }
+    
+    public String getLabelFilter() {
+        return ((String[])parameters.get("labelFilter"))[0];
+    }
+    
+    public String getAndFilter() {
+        return ((String[])parameters.get("and"))[0];
+    }
+    
     public String redirect() throws Exception {
         session.put("content_action", "index_content");
-        session.put("content_namespace", "/color");
+        session.put("content_namespace", "/product");
         session.put("location_action", "index_location");
-        session.put("location_namespace", "/color");
+        session.put("location_namespace", "/product");
+        session.put("parameters", parameters);
+        return execute();
+    }
+    
+    public String content() throws Exception {
+        if (session.get("parameters") != null) parameters = (Map)session.remove("parameters");
         return execute();
     }
     

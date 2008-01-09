@@ -76,7 +76,7 @@ public interface AdminRemote {
     public List<ProductBean> getProductsByColor(int color_id) throws Exception;
     public List<ProductBean> getProductsByLabel(int label_id) throws Exception;
     public List<ProductBean> getProductsByAge(int age_id) throws Exception;
-    public List<ProductBean> getProductsByFilter(List<Integer> category_ids, List<Integer> color_ids, List<Integer> label_ids, boolean and) throws Exception;
+    public List<ProductBean> getProductsByFilter(List<Integer> category_ids, List<Integer> color_ids, List<Integer> label_ids, List<Integer> age_ids, boolean and) throws Exception;
     public ProductBean getProduct(int id) throws Exception;
     public void setProductNameFr(int id, String name) throws Exception;
     public void setProductNameEn(int id, String name) throws Exception;

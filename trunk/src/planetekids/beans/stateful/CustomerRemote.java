@@ -47,7 +47,7 @@ public interface CustomerRemote {
     public List<ProductBean> getProductsByCategory(int category_id) throws Exception;
     public List<ProductBean> getProductsByColor(int color_id) throws Exception;
     public List<ProductBean> getProductsByLabel(int label_id) throws Exception;
-    public List<ProductBean> getProductsByFilter(List<Integer> category_ids, List<Integer> color_ids, List<Integer> label_ids, boolean and) throws Exception;
+    public List<ProductBean> getProductsByFilter(List<Integer> category_ids, List<Integer> color_ids, List<Integer> label_ids, List<Integer> age_ids, boolean and) throws Exception;
     public ProductBean getProduct(int id) throws Exception;
     
     public String createAccount(String email, String password, String firstName, String lastName, String addressLine1, String addressLine2, String addressLine3, int zipCode, String city, String phoneNumber, String faxNumber) throws Exception;

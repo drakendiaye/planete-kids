@@ -1177,7 +1177,7 @@ public class AdminClient {
 			    label_ids.add(Integer.valueOf(ids[i]));
 			}
 		    }
-		    System.out.print("Age (coma separated) : ");
+		    System.out.print("Ages (coma separated) : ");
 		    String ages = Tx.readString();
 		    List<Integer> age_ids = new ArrayList<Integer>();
 		    if (!ages.equals("")) {
@@ -1199,7 +1199,7 @@ public class AdminClient {
 		    List<ProductBean> products = null;
 		    try {
 			utx.begin();
-			products = admin.getProductsByFilter(category_ids, color_ids, label_ids, and);
+			products = admin.getProductsByFilter(category_ids, color_ids, label_ids, age_ids, and);
 			utx.commit();
 		    } catch (Exception ex) {
 			utx.rollback();
