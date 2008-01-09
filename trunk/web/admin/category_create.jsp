@@ -14,7 +14,7 @@
 	<h1>Planete-Kids</h1>
 	<div style="text-align:center">
 	<h2><s:text name="admin"/></h2>
-	
+
 	<s:url id="viewlabels" namespace="/admin" action="labels" includeParams="none" />
 	<s:a href="%{viewlabels}"><s:text name="labels" /></s:a>
 	
@@ -35,21 +35,25 @@
 	<br />
 	<br />
 
-	<s:form method="post" namespace="/admin" action="age_valid">
+	<s:form method="post" namespace="/admin" action="category_valid_create">
 	<table align="center">
-	<input type="hidden" name="age_id" value="<s:property value="getAgeId()" />" />
 	<tr><td align=right>Name (en)
-        <td><input type="text" name="name_en" value="<s:property value="getAge(getAgeId()).getName('en')" />" size="35"/>
+        <td><input type="text" name="name_en" size="35"/>
 	<tr><td align=right>Name (fr)
-        <td><input type="text" name="name_fr" value="<s:property value="getAge(getAgeId()).getName('fr')" />" size="35"/>	
+        <td><input type="text" name="name_fr" size="35"/>	
 	<tr><td align=right>Description (en)
-        <td><input type="text" name="description_fr" value="<s:property value="getAge(getAgeId()).getDescription('en')" />" size="35"/>
+        <td><input type="text" name="description_en" size="35"/>
 	<tr><td align=right>Description (fr)
-        <td><input type="text" name="description_en" value="<s:property value="getAge(getAgeId()).getDescription('fr')" />" size="35"/>
+        <td><input type="text" name="description_fr" size="35"/>
+	<tr><td align=right>Image (large)
+        <td><input type="text" name="image_large" size="35"/>
+	<tr><td align=right>Image (medium)
+        <td><input type="text" name="image_medium" size="35"/>
+	<tr><td align=right>Image (small)
+        <td><input type="text" name="image_small" size="35"/>
 	</table><br />
 	<input type="submit" value="Submit" />
 	</s:form>
-
 	</div>
     </s:div>
 </body>

@@ -35,7 +35,11 @@
 
 	<br /><br />
 	There are <s:property value="getColors().size()" /> colors in the database.<br />
-	<br />
+	
+	<s:url id="createcolor" namespace="/admin" action="color_create" includeParams="none" />
+	<s:a href="%{createcolor}">Create a new color</s:a>
+
+	<br /><br />
 
 	<table border="2" align="center" cellpadding="2" >
 	<tr>
@@ -61,7 +65,7 @@
 
 	    <td align=center>
 
-	    <s:url id="modify" namespace="/admin" action="colors_modify" includeParams="none">
+	    <s:url id="modify" namespace="/admin" action="color_modify" includeParams="none">
 	    <s:param name="color_id" value="getId()" />
 	    </s:url>
 	    <s:a href="%{modify}"><s:text name="modify" /></s:a><br />

@@ -34,8 +34,13 @@
 	<s:a href="%{viewages}"><s:text name="ages" /></s:a>
 
 	<br /><br />
+
 	There are <s:property value="getCategories().size()" /> categories in the database.<br />
-	<br />
+	
+	<s:url id="createcategory" namespace="/admin" action="category_create" includeParams="none" />
+	<s:a href="%{createcategory}">Create a new category</s:a>
+
+	<br /><br />
 
 	<table border="2" align="center" cellpadding="2">
 	<tr>
@@ -60,7 +65,7 @@
 	    <td align=center><img src="../<s:property value="getImage_small()" />"></td>
 	    <td align=center>
 
-	    <s:url id="modify" namespace="/admin" action="categories_modify" includeParams="none">
+	    <s:url id="modify" namespace="/admin" action="category_modify" includeParams="none">
 	    <s:param name="category_id" value="getId()" />
 	    </s:url>
 	    <s:a href="%{modify}"><s:text name="modify" /></s:a><br />

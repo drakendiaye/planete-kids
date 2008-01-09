@@ -74,7 +74,7 @@
 	    <option value="<s:property value="getId()" />" <s:if test="getId()==getProduct(getProductId()).getAge().getId()">selected</s:if>><s:property value="getName(getLocale())" /></option>
 	    </s:iterator>
 	</select>
-	<tr><td align=right>Price
+	<tr><td align=right>Price (€)
         <td><input type="text" name="price" value="<s:property value="getProduct(getProductId()).getPrice()" />" size="35"/>
 	<tr><td align=right>Stock
         <td><input type="text" name="stock" value="<s:property value="getProduct(getProductId()).getStock()" />" size="35"/>

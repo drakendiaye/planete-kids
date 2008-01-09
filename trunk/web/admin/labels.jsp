@@ -35,7 +35,11 @@
 
 	<br /><br />
 	There are <s:property value="getLabels().size()" /> labels in the database.<br />
-	<br />
+	
+	<s:url id="createlabel" namespace="/admin" action="label_create" includeParams="none" />
+	<s:a href="%{createlabel}">Create a new label</s:a>
+
+	<br /><br />
 
 	<table border="2" align="center" cellpadding="2">
 	<tr>
@@ -61,7 +65,7 @@
 	    
 	    <td align=center>
 
-	    <s:url id="modify" namespace="/admin" action="labels_modify" includeParams="none">
+	    <s:url id="modify" namespace="/admin" action="label_modify" includeParams="none">
 	    <s:param name="label_id" value="getId()" />
 	    </s:url>
 	    <s:a href="%{modify}"><s:text name="modify" /></s:a><br />
