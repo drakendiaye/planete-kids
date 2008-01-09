@@ -247,7 +247,7 @@
             </result>
             <result name="error">/error.jsp</result>
         </action>
-        <action name="index_content" class="planetekids.actions.product.IndexAction">
+        <action name="index_content" class="planetekids.actions.product.IndexAction" method="content">
             <result>/product/index_content.jsp</result>
             <result name="error">/error.jsp</result>
         </action>
