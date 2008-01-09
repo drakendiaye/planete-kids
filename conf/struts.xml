@@ -424,11 +424,6 @@
             <result>/admin/ages.jsp</result>
             <result name="error">/error.jsp</result>
         </action>
-
-	<action name="confirm_delete" class="planetekids.actions.admin.IndexAction">
-            <result>/admin/confirm_delete.jsp</result>
-            <result name="error">/error.jsp</result>
-        </action>
 	
 	
     </package>
