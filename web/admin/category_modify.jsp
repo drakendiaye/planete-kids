@@ -38,19 +38,19 @@
 	<s:form method="post" namespace="/admin" action="category_valid">
 	<table align="center">
 	<input type="hidden" name="category_id" value="<s:property value="getCategoryId()" />" />
-	<tr><td align=right>Name (en)
+	<tr><td align=right><s:text name="enName"></s:text>
         <td><input type="text" name="name_en" value="<s:property value="getCategory(getCategoryId()).getName('en')" />" size="35"/>
-	<tr><td align=right>Name (fr)
+	<tr><td align=right><s:text name="frName"></s:text>
         <td><input type="text" name="name_fr" value="<s:property value="getCategory(getCategoryId()).getName('fr')" />" size="35"/>	
 	<tr><td align=right>Description (en)
         <td><input type="text" name="description_en" value="<s:property value="getCategory(getCategoryId()).getDescription('en')" />" size="35"/>
 	<tr><td align=right>Description (fr)
         <td><input type="text" name="description_fr" value="<s:property value="getCategory(getCategoryId()).getDescription('fr')" />" size="35"/>
-	<tr><td align=right>Image (large)
+	<tr><td align=right><s:text name="imageLarge"></s:text>
         <td><input type="text" name="image_large" value="<s:property value="getCategory(getCategoryId()).getImage_large()" />" size="35"/>
-	<tr><td align=right>Image (medium)
+	<tr><td align=right><s:text name="imageMedium"></s:text>
         <td><input type="text" name="image_medium" value="<s:property value="getCategory(getCategoryId()).getImage_medium()" />" size="35"/>
-	<tr><td align=right>Image (small)
+	<tr><td align=right><s:text name="imageSmall"></s:text>
         <td><input type="text" name="image_small" value="<s:property value="getCategory(getCategoryId()).getImage_small()" />" size="35"/>
 	</table><br />
 	<input type="submit" value="Submit" />

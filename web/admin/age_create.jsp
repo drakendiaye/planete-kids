@@ -37,9 +37,9 @@
 
 	<s:form method="post" namespace="/admin" action="age_valid_create">
 	<table align="center">
-	<tr><td align=right>Name (en)
+	<tr><td align=right><s:text name="enName"></s:text>
         <td><input type="text" name="name_en" size="35"/>
-	<tr><td align=right>Name (fr)
+	<tr><td align=right><s:text name="frName"></s:text>
         <td><input type="text" name="name_fr" size="35"/>	
 	<tr><td align=right>Description (en)
         <td><input type="text" name="description_en" size="35"/>

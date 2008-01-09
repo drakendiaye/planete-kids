@@ -42,23 +42,23 @@
 
 	<br /><br />
 
-	There are <s:property value="getCategories().size()" /> categories in the database.<br />
+	<s:text name="adminP1"></s:text> <s:property value="getCategories().size()" /> <s:text name="adminCategories"></s:text> <s:text name="adminP2"></s:text> <br />
 	
 	<s:url id="createcategory" namespace="/admin" action="category_create" includeParams="none" />
-	<s:a href="%{createcategory}">Create a new category</s:a>
+	<s:a href="%{createcategory}"> <s:text name="createCategory"></s:text> </s:a>
 
 	<br /><br />
 
 	<table border="2" align="center" cellpadding="2">
 	<tr>
-	<th>Name (en)</th>
-	<th>Name (fr)</th>
-	<th>Description (en)</th>
-	<th>Description (fr)</th>
-	<th>Image (large)</th>
-	<th>Image (medium)</th>
-	<th>Image (small)</th>
-	<th>Action</th>
+			<th><s:text name="enName"></s:text></th>
+			<th><s:text name="frName"></s:text> </th>
+			<th>Description (en)</th>
+			<th>Description (fr)</th>
+			<th><s:text name="imageLarge"></s:text> </th>
+			<th><s:text name="imageMedium"></s:text></th>
+			<th><s:text name="imageSmall"></s:text></th>
+			<th>Action</th>
 	</tr>
 
 	<s:iterator value="getCategories()">

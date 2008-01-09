@@ -41,22 +41,22 @@
 	<s:a href="%{viewages}"><s:text name="ages" /></s:a>
 
 	<br /><br />
-	There are <s:property value="getLabels().size()" /> labels in the database.<br />
+	<s:text name="adminP1"></s:text> <s:property value="getLabels().size()" /> <s:text name="adminLabels"></s:text> <s:text name="adminP2"></s:text><br />
 	
 	<s:url id="createlabel" namespace="/admin" action="label_create" includeParams="none" />
-	<s:a href="%{createlabel}">Create a new label</s:a>
+	<s:a href="%{createlabel}"></s:a>
 
 	<br /><br />
 
 	<table border="2" align="center" cellpadding="2">
 	<tr>
-	<th>Name</th>
+	<th><s:text name="name"></s:text> </th>
 	<th>Description (en)</th>
 	<th>Description (fr)</th>
 	<th>Site</th>
-	<th>Image (large)</th>
-	<th>Image (medium)</th>
-	<th>Image (small)</th>
+	<th><s:text name="imageLarge"></s:text></th>
+	<th><s:text name="imageMedium"></s:text></th>
+	<th><s:text name="imageSmall"></s:text></th>
 	<th>Action</th>
 	</tr>
 

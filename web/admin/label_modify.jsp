@@ -38,7 +38,7 @@
 	<s:form method="post" namespace="/admin" action="label_valid">
 	<table align="center" >
 	<input type="hidden" name="label_id" value="<s:property value="getLabelId()" />" />
-	<tr><td align=right>Name
+	<tr><td align=right><s:text name="name"></s:text>
         <td><input type="text" name="name" value="<s:property value="getLabel(getLabelId()).getName()" />" size="35"/>
 	<tr><td align=right>Description (en)
         <td><input type="text" name="description_en" value="<s:property value="getLabel(getLabelId()).getDescription('en')" />" size="35"/>
@@ -46,11 +46,11 @@
         <td><input type="text" name="description_fr" value="<s:property value="getLabel(getLabelId()).getDescription('fr')" />" size="35"/>
 	<tr><td align=right>Site
         <td><input type="text" name="site" value="<s:property value="getLabel(getLabelId()).getSite()" />" size="35"/>
-	<tr><td align=right>Image (large)
+	<tr><td align=right><s:text name="imageLarge"></s:text>
         <td><input type="text" name="image_large" value="<s:property value="getLabel(getLabelId()).getImage_large()" />" size="35"/>
-	<tr><td align=right>Image (medium)
+	<tr><td align=right><s:text name="imageMedium"></s:text>
         <td><input type="text" name="image_medium" value="<s:property value="getLabel(getLabelId()).getImage_medium()" />" size="35"/>
-	<tr><td align=right>Image (small)
+	<tr><td align=right><s:text name="imageSmall"></s:text>
         <td><input type="text" name="image_small" value="<s:property value="getLabel(getLabelId()).getImage_small()" />" size="35"/>
 	</table><br />
 	<input type="submit" value="Submit" />

@@ -38,9 +38,9 @@
 	<s:form method="post" namespace="/admin" action="age_valid">
 	<table align="center">
 	<input type="hidden" name="age_id" value="<s:property value="getAgeId()" />" />
-	<tr><td align=right>Name (en)
+	<tr><td align=right><s:text name="enName"></s:text>
         <td><input type="text" name="name_en" value="<s:property value="getAge(getAgeId()).getName('en')" />" size="35"/>
-	<tr><td align=right>Name (fr)
+	<tr><td align=right><s:text name="frName"></s:text>
         <td><input type="text" name="name_fr" value="<s:property value="getAge(getAgeId()).getName('fr')" />" size="35"/>	
 	<tr><td align=right>Description (en)
         <td><input type="text" name="description_en" value="<s:property value="getAge(getAgeId()).getDescription('en')" />" size="35"/>
