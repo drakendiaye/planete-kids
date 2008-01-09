@@ -333,3 +333,9 @@ div.contentHeader {
         overflow : hidden;
         height : 28px;
 }
+
+
+div.cartProduct {
+  color :#000000;
+  background-color :#94f477;
+}

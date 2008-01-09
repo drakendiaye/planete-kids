@@ -53,7 +53,7 @@
                 <tr>
                     <td align="left">
                         <h3>
-                            <img id="product_<s:property value="getId()" />_img" onclick="coldiv_click('product_<s:property value="getId()"/>')" style="cursor: hand;" />
+                            <img id="product_<s:property value="getId()" />_img" onclick="coldiv_click('product_<s:property value="getId()"/>')" style="cursor: pointer;" />
                             <img src="<s:property value="getImage_small()" />" width="20px" height="20px"/>
                             <s:property value="getName(getLocale())" />
                         </h3>
@@ -63,7 +63,7 @@
                             <s:property value="getPrice()" />&nbsp;€
                             <s:hidden name="add_%{getId()}"/>
                             <s:url id="url" namespace="/" action="index_cart" includeParams="none"/>
-                            <input type="submit" value="Ajouter au panier" class="button"onclick="navExec(new navRequest('cart', '<s:property value="url"/>', null, null, 'product_<s:property value="getId()" />_form')); return(false);">
+                            <input type="submit" value="<s:text name="addCart"/>" class="button"onclick="navExec(new navRequest('cart', '<s:property value="url"/>', null, null, 'product_<s:property value="getId()" />_form')); return(false);">
                         </form>
                     </td>
                 </tr>

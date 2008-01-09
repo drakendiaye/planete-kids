@@ -13,39 +13,57 @@
 </table>
 
 <s:div>
-    <s:property value="getCartPrice()"/>
-    <form id="product_<s:property value="getId()"/>_flush_form">
-        <s:hidden name="flush"/>
-        <s:url id="url" namespace="/" action="index_cart" includeParams="none"/>
-        <input type="submit" value="Vider le panier" class="button"onclick="navExec(new navRequest('cart', '<s:property value="url"/>', null, null, 'product_<s:property value="getId()" />_flush_form')); return(false);">
-    </form>
-    <form id="product_<s:property value="getId()"/>_validate_form">
-        <s:hidden name="validate"/>
-        <s:url id="url" namespace="/" action="index_cart" includeParams="none"/>
-        <input type="submit" value="Valider le panier" class="button"onclick="navExec(new navRequest('cart', '<s:property value="url"/>', null, null, 'product_<s:property value="getId()" />_validate_form')); return(false);">
-    </form>
-    <s:iterator value="getCartProducts()">
-        <script type="text/javascript">coldiv_load('cart_<s:property value="getId()" />');</script>
-        <s:hidden id="cart_%{getId()}" value="{ init : false, col_img : 'images/down_enable.png', uncol_img : 'images/up_enable.png'}"/>
-        <div>
-            <img id="cart_<s:property value="getId()" />_img" onclick="coldiv_click('cart_<s:property value="getId()"/>')" style="cursor: hand;" />
-            <img src="<s:property value="getImage_small()" />" width="20px" height="20px"/>
-            <s:property value="getName(getLocale())" />
-            <div id="cart_<s:property value="getId()" />_div">
-                <s:property value="getPrice()" />
-                <br/>
-                <form id="product_<s:property value="getId()"/>_update_form">
-                    <s:textfield name="update_%{getId()}_%{getCartProductNumber(getId())}" value="%{getCartProductNumber(getId())}" onkeyup="this.name = 'update_%{getId()}_' + this.value;"/>
-                    <s:url id="url" namespace="/" action="index_cart" includeParams="none"/>
-                    <input type="submit" value="Mettre à jour la quantitée" class="button"onclick="navExec(new navRequest('cart', '<s:property value="url"/>', null, null, 'product_<s:property value="getId()" />_update_form')); return(false);">
-                </form>
-                <br/>
-                <form id="product_<s:property value="getId()"/>_delete_form">
-                    <s:hidden name="delete_%{getId()}"/>
-                    <s:url id="url" namespace="/" action="index_cart" includeParams="none"/>
-                    <input type="submit" value="Retirer du panier" class="button"onclick="navExec(new navRequest('cart', '<s:property value="url"/>', null, null, 'product_<s:property value="getId()" />_delete_form')); return(false);">
-                </form>
+    <div align="center">
+        <b><s:property value="getCartPrice()"/>&nbsp;€</b>
+    </div>
+    <hr>
+    <div align="center">
+        <form id="product_<s:property value="getId()"/>_flush_form">
+            <s:hidden name="flush"/>
+            <s:url id="url" namespace="/" action="index_cart" includeParams="none"/>
+            <input type="submit" value="<s:text name="emptyCart"/>" class="button" onclick="navExec(new navRequest('cart', '<s:property value="url"/>', null, null, 'product_<s:property value="getId()" />_flush_form')); return(false);">
+        </form>
+    </div>
+    <hr>
+    <div align="center">
+        <form id="product_<s:property value="getId()"/>_validate_form">
+            <s:hidden name="validate"/>
+            <s:url id="url" namespace="/" action="index_cart" includeParams="none"/>
+            <input type="submit" value="<s:text name="validateCart"/>" class="button" onclick="navExec(new navRequest('cart', '<s:property value="url"/>', null, null, 'product_<s:property value="getId()" />_validate_form')); return(false);">
+        </form>
+    </div>
+    <hr>
+    <div style="overflow: auto; height: 300px;">
+        <s:iterator value="getCartProducts()">
+            <div class="cartProduct">
+                <script type="text/javascript">coldiv_load('cart_<s:property value="getId()" />');</script>
+                <s:hidden id="cart_%{getId()}" value="{ init : false, col_img : 'images/down_enable.png', uncol_img : 'images/up_enable.png'}"/>
+                <table>
+                    <tr>
+                        <td align="left" valign="middle">
+                            <img id="cart_<s:property value="getId()" />_img" onclick="coldiv_click('cart_<s:property value="getId()"/>')" style="cursor: pointer;" />
+                        </td>
+                        <td align="left" valign="top">
+                            <img src="<s:property value="getImage_small()" />" width="20px" height="20px"/>
+                            <s:property value="getName(getLocale())" />
+                        </td>
+                    </tr>
+                </table>
+                <div id="cart_<s:property value="getId()" />_div" align="center">
+                    <form id="product_<s:property value="getId()"/>_update_form">
+                        <s:textfield name="update_%{getId()}_%{getCartProductNumber(getId())}" value="%{getCartProductNumber(getId())}" onkeyup="this.name = 'update_%{getId()}_' + this.value;" size="1"/>&nbsp;x&nbsp;<s:property value="getPrice()" />&nbsp;€
+                        <s:url id="url" namespace="/" action="index_cart" includeParams="none"/>
+                        <br/>
+                        <input type="submit" value="<s:text name="updateQuantity"/>" class="button" onclick="navExec(new navRequest('cart', '<s:property value="url"/>', null, null, 'product_<s:property value="getId()" />_update_form')); return(false);"/>
+                    </form>
+                    <form id="product_<s:property value="getId()"/>_delete_form">
+                        <s:hidden name="delete_%{getId()}"/>
+                        <s:url id="url" namespace="/" action="index_cart" includeParams="none"/>
+                        <input type="submit" value="<s:text name="removeCart"/>" class="button" onclick="navExec(new navRequest('cart', '<s:property value="url"/>', null, null, 'product_<s:property value="getId()" />_delete_form')); return(false);"/>
+                    </form>
+                </div>
             </div>
-        </div>
-    </s:iterator>
+            <br/>
+        </s:iterator>
+    </div>
 </s:div>

@@ -19,7 +19,7 @@
           new navRequest('generalmenu', '<s:url namespace="%{getGeneralmenu_namespace()}" action="%{getGeneralmenu_action()}" includeParams="none"/>'),
           new navRequest('header', '<s:url namespace="%{getHeader_namespace()}" action="%{getHeader_action()}" includeParams="none"/>'),
           new navRequest('location', '<s:url namespace="%{getLocation_namespace()}" action="%{getLocation_action()}" includeParams="none"/>')]);">
-        <div id="infobulle" class="infobulle"></div>                             
+        <div id="infobulle" class="infobulle"></div>
         <s:div id="container">
         <s:div id="header" />
         <s:div id="page">
@@ -38,7 +38,7 @@
                         dojo.byId('img_previous').src = 'images/previous_disable.png';
                      }
                  }
-                 "><img id="img_previous" src="images/previous_disable.png" onmouseover="show('Pr�c�dent')" onmouseout="hide()" /></s:a>
+                 "><img id="img_previous" src="images/previous_disable.png" onmouseover="show('<s:text name="previous"/>')" onmouseout="hide()" /></s:a>
         </s:div>
         <s:div id="next">
             <s:a onclick="	
@@ -49,10 +49,10 @@
                         dojo.byId('img_next').src = 'images/next_disable.png';
                     }
                 }
-            "><img id="img_next" src="images/next_disable.png" onmouseover="show('Suivant')" onmouseout="hide()" /></s:a>
+            "><img id="img_next" src="images/next_disable.png" onmouseover="show('<s:text name="next"/>')" onmouseout="hide()" /></s:a>
         </s:div>
         <s:div id="refresh">
-            <s:a onclick="navRefresh(true)"><img id="refresh_img" src="images/refresh.png" onmouseover="show('Actualiser')" onmouseout="hide()" /></s:a>
+            <s:a onclick="navRefresh(true)"><img id="refresh_img" src="images/refresh.png" onmouseover="show('<s:text name="refresh"/>')" onmouseout="hide()" /></s:a>
         </s:div>
         <s:div id="loginout">
             <form id="logout_callback" method="post">
@@ -73,7 +73,7 @@
                 } else {
                     navGo([new navRequest('content', '%{url_logout}', null, null, 'logout_callback')]);
                 }
-            "><img id="loginout_img" src="images/login.png" onmouseover="if (dojo.byId('loginout_img').src == 'images/login.png') show('Se d&Eacute;logger'); else show('Se logger');" onmouseout="hide()" /></s:a>
+            "><img id="loginout_img" src="images/login.png" onmouseover="if (this.src = 'images/login.png') show('<s:text name="login"/>'); else show('<s:text name="logout"/>');" onmouseout="hide()" /></s:a>
         </s:div>
         <s:div id="location" />
             <s:div id="frflag" >
