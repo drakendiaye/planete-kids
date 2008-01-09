@@ -11,9 +11,9 @@
     <body>
 
     <s:div cssClass="main">
-	<h1>Planete-Kids</h1>
 	<div style="text-align:center">
-	<h2><s:text name="admin"/></h2>
+	<img src="../images/Planete-Kids.png" /><br />
+	<h2><s:text name="admin"/></h2>>
 	
 	<s:url id="viewlabels" namespace="/admin" action="labels" includeParams="none" />
 	<s:a href="%{viewlabels}"><s:text name="labels" /></s:a>
