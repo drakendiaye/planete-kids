@@ -45,15 +45,15 @@
 
 	<br /><br />
 
-	There are <s:property value="getCommands().size()" /> commands in the database.<br />
+	<s:text name="adminP1"></s:text> <s:property value="getCommands().size()" /> <s:text name="adminCommands"></s:text> <s:text name="adminP2"></s:text><br />
 
 	<br /><br />
 
 	<table border="2" align="center" cellpadding="2">
 	<tr>
-	<th>Customer ID</th>
+	<th><s:text name="emailID"></s:text> </th>
 	<th>Date</th>
-	<th>Shipping costs</th>
+	<th><s:text name="shippingCosts"></s:text> </th>
 	<th>Total</th>
 	<th>Action</th>
 	</tr>

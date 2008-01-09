@@ -40,16 +40,16 @@
 	<br />
 
 	<table align="center">
-	<tr><td align=right>Customer ID: </td><td><s:property value="getCommand(getCommandId()).getAccount().getEmailAddress()" /></td></tr>
+	<tr><td align=right><s:text name="emailID"></s:text> </td><td><s:property value="getCommand(getCommandId()).getAccount().getEmailAddress()" /></td></tr>
 	<tr><td align=right>Date: </td><td><s:property value="getCommand(getCommandId()).getDate()" /></td></tr>
 	</table>
 	<br />
 	<table border="2" align="center" cellpadding="2">
 	<tr>
-	<th>Name (en)</th>
-	<th>Name (fr)</th>
-	<th>Price</th>
-	<th>Number</th>
+	<th><s:text name="enName"></s:text> </th>
+	<th><s:text name="frName"></s:text> </th>
+	<th><s:text name="price"></s:text> </th>
+	<th><s:text name="quantity"></s:text> </th>
 	</tr>
 
 	<s:iterator value="getCommandLinesByCommand(getCommandId())">
@@ -60,7 +60,7 @@
 	    <td align=center><s:property value="getPrice()" />&nbsp;€</td>
 	    </tr>
 	</s:iterator>
-	    <tr><td colspan=3 align=right>Shipping costs</td><td><s:property value="getCommand(getCommandId()).getShipping()" /></td></tr>
+	    <tr><td colspan=3 align=right><s:text name="shippingCosts"></s:text> </td><td><s:property value="getCommand(getCommandId()).getShipping()" /></td></tr>
 	    <tr><td colspan=3 align=right><b>Total</b></td><td><s:property value="getCommandTotal(getCommandId())" />&nbsp;€</td></tr>
 	</table>
 	
