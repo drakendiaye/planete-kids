@@ -78,7 +78,7 @@ public class InitDataBaseClient {
 	    LabelId[1] = admin.createLabel("Adidas", "Marque", "Label", "www.adidas.com", "images/adidas_large.png",
 		    "images/adidas_medium.png", "images/adidas_small.png");
 	    // id = 3
-	    LabelId[2] = admin.createLabel("Rebook", "Marque encore", "Label again", "www.rebook.com", "images/rebook_large.png",
+	    LabelId[2] = admin.createLabel("Rebook", "Marque encore", "Label again", "www.rbk.com", "images/rebook_large.png",
 		    "images/rebook_medium.png", "images/rebook_small.png");
 	    // id = 4
 	    LabelId[3] = admin.createLabel("QuikSilver", "Description en francais", "Description in english", "www.quiksilver.com",
