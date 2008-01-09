@@ -69,73 +69,93 @@ function navLocale(locale) {
     nav_locale = locale;
     var temp = new Array();
     
+    if (locale == 'fr') {
+        dojo.byId('img_previous').onmouseover = function() { show('Pr&#233;c&#233;dent'); };
+        dojo.byId('img_next').onmouseover = function() { show('Suivant'); };
+        dojo.byId('refresh_img').onmouseover = function() { show('Recharger'); };
+        if (dojo.byId('loginout_img').src = 'images/login.png') {
+            dojo.byId('loginout_img').onmouseover = function() { show('Se logger'); };
+        } else {
+            dojo.byId('loginout_img').onmouseover = function() { show('Se d&#233;logger'); };
+        }
+    } else {
+        dojo.byId('img_previous').onmouseover = function() { show('Previous'); };
+        dojo.byId('img_next').onmouseover = function() { show('Next'); };
+        dojo.byId('refresh_img').onmouseover = function() { show('Refresh'); };
+        if (dojo.byId('loginout_img').src = 'images/login.png') {
+            dojo.byId('loginout_img').onmouseover = function() { show('Log in'); };
+        } else {
+            dojo.byId('loginout_img').onmouseover = function() { show('Log out'); };
+        }
+    }
+
+    for (requests in nav_previous)
+    for (request in nav_previous[requests])
+        temp[nav_previous[requests][request].target] = new navRequest(nav_previous[requests][request].target, nav_previous[requests][request].url, nav_previous[requests][request].loading, nav_previous[requests][request].error, nav_previous[requests][request].form);
+
+    for (var request in nav_current)
+        temp[nav_current[request].target] = new navRequest(nav_current[request].target, nav_current[request].url, nav_current[request].loading, nav_current[request].error, nav_current[request].form);
+
+    navGo(temp);
+}
+
+function navRefresh() {
+    var temp = new Array();
+
     for (requests in nav_previous)
         for (request in nav_previous[requests])
             temp[nav_previous[requests][request].target] = new navRequest(nav_previous[requests][request].target, nav_previous[requests][request].url, nav_previous[requests][request].loading, nav_previous[requests][request].error, nav_previous[requests][request].form);
-        
+
         for (var request in nav_current)
             temp[nav_current[request].target] = new navRequest(nav_current[request].target, nav_current[request].url, nav_current[request].loading, nav_current[request].error, nav_current[request].form);
-        
-        navGo(temp);
+
+        for (key in temp)
+            navExec(temp[key]);
     }
-    
-    function navRefresh() {
-        var temp = new Array();
-        
-        for (requests in nav_previous)
-            for (request in nav_previous[requests])
-                temp[nav_previous[requests][request].target] = new navRequest(nav_previous[requests][request].target, nav_previous[requests][request].url, nav_previous[requests][request].loading, nav_previous[requests][request].error, nav_previous[requests][request].form);
-            
-            for (var request in nav_current)
-                temp[nav_current[request].target] = new navRequest(nav_current[request].target, nav_current[request].url, nav_current[request].loading, nav_current[request].error, nav_current[request].form);
-            
-            for (key in temp)
-                navExec(temp[key]);
-        }
-        
-        function navPrevious() {
-            if(nav_previous.length > 0) {
-                for (request in nav_current) {
-                    nav_current[request].inner_next = dojo.byId(nav_current[request].target).innerHTML;
-                    dojo.byId(nav_current[request].target).innerHTML = nav_current[request].inner_previous;
-                    var scripts = dojo.byId(nav_current[request].target).getElementsByTagName("script");
-                    for (script in scripts) {
-                        if(scripts[script] != null) window.eval(scripts[script].text);
-                    }
+
+    function navPrevious() {
+        if(nav_previous.length > 0) {
+            for (request in nav_current) {
+                nav_current[request].inner_next = dojo.byId(nav_current[request].target).innerHTML;
+                dojo.byId(nav_current[request].target).innerHTML = nav_current[request].inner_previous;
+                var scripts = dojo.byId(nav_current[request].target).getElementsByTagName("script");
+                for (script in scripts) {
+                    if(scripts[script] != null) window.eval(scripts[script].text);
                 }
-                
-                nav_next.push(nav_current);
-                nav_current = nav_previous.pop();
-                
-                //dojo.byId("img_next").src = "images/next_enable.png";
-                //if(nav_previous.length == 0) dojo.byId("img_previous").src = "images/previous_disable.png";
             }
+
+            nav_next.push(nav_current);
+            nav_current = nav_previous.pop();
+
+            //dojo.byId("img_next").src = "images/next_enable.png";
+            //if(nav_previous.length == 0) dojo.byId("img_previous").src = "images/previous_disable.png";
         }
-        
-        function navNext() {
-            if(nav_next.length > 0) {
-                nav_previous.push(nav_current);
-                nav_current = nav_next.pop();
-                
-                for (request in nav_current) {
-                    nav_current[request].inner_previous = dojo.byId(nav_current[request].target).innerHTML;
-                    dojo.byId(nav_current[request].target).innerHTML = nav_current[request].inner_next;
-                    var scripts = dojo.byId(nav_current[request].target).getElementsByTagName("script");
-                    for (script in scripts) {
-                        if(scripts[script] != null) window.eval(scripts[script].text);
-                    }
+    }
+
+    function navNext() {
+        if(nav_next.length > 0) {
+            nav_previous.push(nav_current);
+            nav_current = nav_next.pop();
+
+            for (request in nav_current) {
+                nav_current[request].inner_previous = dojo.byId(nav_current[request].target).innerHTML;
+                dojo.byId(nav_current[request].target).innerHTML = nav_current[request].inner_next;
+                var scripts = dojo.byId(nav_current[request].target).getElementsByTagName("script");
+                for (script in scripts) {
+                    if(scripts[script] != null) window.eval(scripts[script].text);
                 }
-                
-                //dojo.byId("img_previous").src = "images/previous_enable.png";
-                //if(nav_next.length == 0) dojo.byId("img_next").src = "images/next_disable.png";
             }
+
+            //dojo.byId("img_previous").src = "images/previous_enable.png";
+            //if(nav_next.length == 0) dojo.byId("img_next").src = "images/next_disable.png";
         }
-        
-        
-        function navHasPrevious() {
-            return (nav_previous.length != 0);
-        } 
-        
-        function navHasNext() {
-            return (nav_next.length != 0);
-        }
+    }
+
+
+    function navHasPrevious() {
+        return (nav_previous.length != 0);
+    } 
+
+    function navHasNext() {
+        return (nav_next.length != 0);
+    }
