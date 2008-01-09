@@ -35,7 +35,11 @@
 
 	<br /><br />
 	There are <s:property value="getCustomers().size()" /> customers in the database.<br />
-	<br />
+		
+	<s:url id="createcustomer" namespace="/admin" action="customer_create" includeParams="none" />
+	<s:a href="%{createcustomer}">Create a new customer</s:a>
+
+	<br /><br />
 
 	<table border="2" align="center" cellpadding="2">
 	<tr>
@@ -69,7 +73,7 @@
 
 	    <td align=center>
 
-	    <s:url id="modify" namespace="/admin" action="customers_modify" includeParams="none">
+	    <s:url id="modify" namespace="/admin" action="customer_modify" includeParams="none">
 	    <s:param name="customer_id" value="getEmailAddress()" />
 	    </s:url>
 	    <s:a href="%{modify}"><s:text name="modify" /></s:a><br />

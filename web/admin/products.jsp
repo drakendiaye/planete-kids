@@ -35,7 +35,11 @@
 
 	<br /><br />
 	There are <s:property value="getProducts().size()" /> products in the database.<br />
-	<br />
+
+	<s:url id="createproduct" namespace="/admin" action="product_create" includeParams="none" />
+	<s:a href="%{createproduct}">Create a new product</s:a>
+
+	<br /><br />
 
 	<table border="2" align="center" cellpadding="2">
 	<tr>
@@ -65,7 +69,7 @@
 	    <td align=center><s:property value="getColor().getName(getLocale())" /></td>
 	    <td align=center><s:property value="getLabel().getName()" /></td>
 	    <td align=center><s:property value="getAge().getName(getLocale())" /></td>
-	    <td align=center><s:property value="getPrice()" /></td>
+	    <td align=center><s:property value="getPrice()" />&nbsp;€</td>
 	    <td align=center><s:property value="getStock()" /></td>
 	    <td align=center><img src="../<s:property value="getImage_large()" />"></td>
 	    <td align=center><img src="../<s:property value="getImage_medium()" />"></td>
@@ -73,7 +77,7 @@
 
 	    <td align=center>
 
-	    <s:url id="modify" namespace="/admin" action="products_modify" includeParams="none">
+	    <s:url id="modify" namespace="/admin" action="product_modify" includeParams="none">
 	    <s:param name="product_id" value="getId()" />
 	    </s:url>
 	    <s:a href="%{modify}"><s:text name="modify" /></s:a><br />

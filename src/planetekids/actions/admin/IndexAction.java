@@ -45,6 +45,52 @@ public class IndexAction extends ActionSupport implements SessionAware, Paramete
 	this.parameters = arg0;
     }
 
+    private String getStringParameter(String name) {
+	String value = null;
+
+	if (parameters.get(name) != null) {
+	    value = ((String[]) parameters.get(name))[0];
+	}
+
+	return value;
+    }
+
+    private int getIntParameter(String name) {
+	System.out.println("Parameter : " + name);
+	int value = -1;
+
+	if (parameters.get(name) != null) {
+	    String value_s = ((String[]) parameters.get(name))[0];
+	    if (value_s.compareTo("") != 0) {
+		try {
+		    value = Integer.valueOf(value_s).intValue();
+		} catch (NumberFormatException e) {
+		    value = -1;
+		}
+	    }
+	}
+	System.out.println("Value : " + value);
+	return value;
+    }
+
+    private float getFloatParameter(String name) {
+	System.out.println("Parameter : " + name);
+	float value = -1;
+
+	if (parameters.get(name) != null) {
+	    String value_s = ((String[]) parameters.get(name))[0];
+	    if (value_s.compareTo("") != 0) {
+		try {
+		    value = Float.valueOf(value_s).intValue();
+		} catch (NumberFormatException e) {
+		    value = -1;
+		}
+	    }
+	}
+	System.out.println("Value : " + value);
+	return value;
+    }
+
     public List getLabels() throws Exception {
 	return getAdmin().getLabels();
     }
@@ -58,10 +104,55 @@ public class IndexAction extends ActionSupport implements SessionAware, Paramete
 
 	if (parameters.get("label_id") != null) {
 	    String id_s = ((String[]) parameters.get("label_id"))[0];
-	    id = Integer.valueOf(id_s).intValue();
+	    if (id_s.compareTo("") != 0) {
+		id = Integer.valueOf(id_s).intValue();
+	    }
 	}
 
 	return id;
+    }
+
+    public String labelValid() throws Exception {
+
+	String ret = execute();
+
+	int id = getLabelId();
+
+	String name = getStringParameter("name");
+	String description_fr = getStringParameter("description_fr");
+	String description_en = getStringParameter("description_en");
+	String site = getStringParameter("site");
+	String image_large = getStringParameter("image_large");
+	String image_medium = getStringParameter("image_medium");
+	String image_small = getStringParameter("image_small");
+
+	if (id < 0) {
+	    getAdmin().createLabel(name, description_fr, description_en, site, image_large, image_medium, image_small);
+	} else {
+	    getAdmin().setLabelName(id, name);
+	    getAdmin().setLabelDescriptionFr(id, description_fr);
+	    getAdmin().setLabelDescriptionEn(id, description_en);
+	    getAdmin().setLabelSite(id, site);
+	    getAdmin().setLabelImageLarge(id, image_large);
+	    getAdmin().setLabelImageMedium(id, image_medium);
+	    getAdmin().setLabelImageSmall(id, image_small);
+	}
+
+	return ret;
+    }
+
+    public String labelDelete() throws Exception {
+	String ret = execute();
+
+	int id = getLabelId();
+
+	if (id < 0) {
+	    return ret;
+	}
+
+	getAdmin().deleteLabel(id);
+
+	return ret;
     }
 
     public List getColors() throws Exception {
@@ -77,10 +168,55 @@ public class IndexAction extends ActionSupport implements SessionAware, Paramete
 
 	if (parameters.get("color_id") != null) {
 	    String id_s = ((String[]) parameters.get("color_id"))[0];
-	    id = Integer.valueOf(id_s).intValue();
+	    if (id_s.compareTo("") != 0) {
+		id = Integer.valueOf(id_s).intValue();
+	    }
 	}
 
 	return id;
+    }
+
+    public String colorValid() throws Exception {
+
+	String ret = execute();
+
+	int id = getColorId();
+
+	String name_fr = getStringParameter("name_fr");
+	String name_en = getStringParameter("name_en");
+	String description_fr = getStringParameter("description_fr");
+	String description_en = getStringParameter("description_en");
+	String image_large = getStringParameter("image_large");
+	String image_medium = getStringParameter("image_medium");
+	String image_small = getStringParameter("image_small");
+
+	if (id < 0) {
+	    getAdmin().createColor(name_fr, name_en, description_fr, description_en, image_large, image_medium, image_small);
+	} else {
+	    getAdmin().setColorNameFr(id, name_fr);
+	    getAdmin().setColorNameEn(id, name_en);
+	    getAdmin().setColorDescriptionFr(id, description_fr);
+	    getAdmin().setColorDescriptionEn(id, description_en);
+	    getAdmin().setColorImageLarge(id, image_large);
+	    getAdmin().setColorImageMedium(id, image_medium);
+	    getAdmin().setColorImageSmall(id, image_small);
+	}
+
+	return ret;
+    }
+
+    public String colorDelete() throws Exception {
+	String ret = execute();
+
+	int id = getColorId();
+
+	if (id < 0) {
+	    return ret;
+	}
+
+	getAdmin().deleteColor(id);
+
+	return ret;
     }
 
     public List getCategories() throws Exception {
@@ -96,10 +232,55 @@ public class IndexAction extends ActionSupport implements SessionAware, Paramete
 
 	if (parameters.get("category_id") != null) {
 	    String id_s = ((String[]) parameters.get("category_id"))[0];
-	    id = Integer.valueOf(id_s).intValue();
+	    if (id_s.compareTo("") != 0) {
+		id = Integer.valueOf(id_s).intValue();
+	    }
 	}
 
 	return id;
+    }
+
+    public String categoryValid() throws Exception {
+
+	String ret = execute();
+
+	int id = getCategoryId();
+
+	String name_fr = getStringParameter("name_fr");
+	String name_en = getStringParameter("name_en");
+	String description_fr = getStringParameter("description_fr");
+	String description_en = getStringParameter("description_en");
+	String image_large = getStringParameter("image_large");
+	String image_medium = getStringParameter("image_medium");
+	String image_small = getStringParameter("image_small");
+
+	if (id < 0) {
+	    getAdmin().createCategory(name_fr, name_en, description_fr, description_en, image_large, image_medium, image_small);
+	} else {
+	    getAdmin().setCategoryNameFr(id, name_fr);
+	    getAdmin().setCategoryNameEn(id, name_en);
+	    getAdmin().setCategoryDescriptionFr(id, description_fr);
+	    getAdmin().setCategoryDescriptionEn(id, description_en);
+	    getAdmin().setCategoryImageLarge(id, image_large);
+	    getAdmin().setCategoryImageMedium(id, image_medium);
+	    getAdmin().setCategoryImageSmall(id, image_small);
+	}
+
+	return ret;
+    }
+
+    public String categoryDelete() throws Exception {
+	String ret = execute();
+
+	int id = getCategoryId();
+
+	if (id < 0) {
+	    return ret;
+	}
+
+	getAdmin().deleteCategory(id);
+
+	return ret;
     }
 
     public List getProducts() throws Exception {
@@ -115,10 +296,65 @@ public class IndexAction extends ActionSupport implements SessionAware, Paramete
 
 	if (parameters.get("product_id") != null) {
 	    String id_s = ((String[]) parameters.get("product_id"))[0];
-	    id = Integer.valueOf(id_s).intValue();
+	    if (id_s.compareTo("") != 0) {
+		id = Integer.valueOf(id_s).intValue();
+	    }
 	}
 
 	return id;
+    }
+
+    public String productValid() throws Exception {
+	String ret = execute();
+
+	int id = getProductId();
+
+	String name_fr = getStringParameter("name_fr");
+	String name_en = getStringParameter("name_en");
+	String description_fr = getStringParameter("description_fr");
+	String description_en = getStringParameter("description_en");
+	int category_id = getIntParameter("category_id");
+	int color_id = getIntParameter("color_id");
+	int label_id = getIntParameter("label_id");
+	int age_id = getIntParameter("age_id");
+	float price = getFloatParameter("price");
+	int stock = getIntParameter("stock");
+	String image_large = getStringParameter("image_large");
+	String image_medium = getStringParameter("image_medium");
+	String image_small = getStringParameter("image_small");
+
+	if (id < 0) {
+	    getAdmin().createProduct(name_fr, name_en, description_fr, description_en, category_id, color_id, label_id, age_id, price, stock, image_large, image_medium, image_small);
+	} else {
+	    getAdmin().setProductNameFr(id, name_fr);
+	    getAdmin().setProductNameEn(id, name_en);
+	    getAdmin().setProductDescriptionFr(id, description_fr);
+	    getAdmin().setProductDescriptionEn(id, description_en);
+	    getAdmin().setProductCategory(id, category_id);
+	    getAdmin().setProductColor(id, color_id);
+	    getAdmin().setProductLabel(id, label_id);
+	    getAdmin().setProductAge(id, age_id);
+	    getAdmin().setProductPrice(id, price);
+	    getAdmin().setProductStock(id, stock);
+	    getAdmin().setProductImageLarge(id, image_large);
+	    getAdmin().setProductImageMedium(id, image_medium);
+	    getAdmin().setProductImageSmall(id, image_small);
+	}
+
+	return ret;
+    }
+
+    public String productDelete() throws Exception {
+	String ret = execute();
+
+	int id = getProductId();
+	if (id < 0) {
+	    return ret;
+	}
+
+	getAdmin().deleteProduct(id);
+
+	return ret;
     }
 
     public List getCustomers() throws Exception {
@@ -139,353 +375,34 @@ public class IndexAction extends ActionSupport implements SessionAware, Paramete
 	return id;
     }
 
-    public List getAges() throws Exception {
-	return getAdmin().getAges();
-    }
-
-    public AgeBean getAge(int id) throws Exception {
-	return getAdmin().getAge(id);
-    }
-
-    public int getAgeId() throws Exception {
-	int id = -1;
-
-	if (parameters.get("age_id") != null) {
-	    String id_s = ((String[]) parameters.get("age_id"))[0];
-	    id = Integer.valueOf(id_s).intValue();
-	}
-
-	return id;
-    }
-
-    public String labelValid() throws Exception {
-	String ret = execute();
-
-	int id = getLabelId();
-
-	if (id < 0) {
-	    return ret;
-	}
-
-	if (parameters.get("name") != null) {
-	    String value = ((String[]) parameters.get("name"))[0];
-	    getAdmin().setLabelName(id, value);
-	}
-
-	if (parameters.get("description_en") != null) {
-	    String value = ((String[]) parameters.get("description_en"))[0];
-	    getAdmin().setLabelDescriptionEn(id, value);
-	}
-
-	if (parameters.get("description_fr") != null) {
-	    String value = ((String[]) parameters.get("description_fr"))[0];
-	    getAdmin().setLabelDescriptionFr(id, value);
-	}
-
-	if (parameters.get("site") != null) {
-	    String value = ((String[]) parameters.get("site"))[0];
-	    getAdmin().setLabelSite(id, value);
-	}
-
-	if (parameters.get("image_large") != null) {
-	    String value = ((String[]) parameters.get("image_large"))[0];
-	    getAdmin().setLabelImageLarge(id, value);
-	}
-
-	if (parameters.get("image_medium") != null) {
-	    String value = ((String[]) parameters.get("image_medium"))[0];
-	    getAdmin().setLabelImageMedium(id, value);
-	}
-
-	if (parameters.get("image_small") != null) {
-	    String value = ((String[]) parameters.get("image_small"))[0];
-	    getAdmin().setLabelImageSmall(id, value);
-	}
-
-	return ret;
-    }
-
-    public String labelDelete() throws Exception {
-	String ret = execute();
-
-	int id = getLabelId();
-
-	if (id < 0) {
-	    return ret;
-	}
-
-	getAdmin().deleteLabel(id);
-
-	return ret;
-    }
-
-    public String categoryValid() throws Exception {
-	String ret = execute();
-
-	int id = getCategoryId();
-
-	if (id < 0) {
-	    return ret;
-	}
-
-	if (parameters.get("name_fr") != null) {
-	    String value = ((String[]) parameters.get("name_fr"))[0];
-	    getAdmin().setCategoryNameFr(id, value);
-	}
-
-	if (parameters.get("name_en") != null) {
-	    String value = ((String[]) parameters.get("name_en"))[0];
-	    getAdmin().setCategoryNameEn(id, value);
-	}
-
-	if (parameters.get("description_fr") != null) {
-	    String value = ((String[]) parameters.get("description_fr"))[0];
-	    getAdmin().setCategoryDescriptionFr(id, value);
-	}
-
-	if (parameters.get("description_en") != null) {
-	    String value = ((String[]) parameters.get("description_en"))[0];
-	    getAdmin().setCategoryDescriptionEn(id, value);
-	}
-
-	if (parameters.get("image_large") != null) {
-	    String value = ((String[]) parameters.get("image_large"))[0];
-	    getAdmin().setCategoryImageLarge(id, value);
-	}
-
-	if (parameters.get("image_medium") != null) {
-	    String value = ((String[]) parameters.get("image_medium"))[0];
-	    getAdmin().setCategoryImageMedium(id, value);
-	}
-
-	if (parameters.get("image_small") != null) {
-	    String value = ((String[]) parameters.get("image_small"))[0];
-	    getAdmin().setCategoryImageSmall(id, value);
-	}
-
-	return ret;
-    }
-
-    public String categoryDelete() throws Exception {
-	String ret = execute();
-
-	int id = getCategoryId();
-
-	if (id < 0) {
-	    return ret;
-	}
-
-	getAdmin().deleteCategory(id);
-
-	return ret;
-    }
-
-    public String colorValid() throws Exception {
-	String ret = execute();
-
-	int id = getColorId();
-
-	if (id < 0) {
-	    return ret;
-	}
-
-	if (parameters.get("name_fr") != null) {
-	    String value = ((String[]) parameters.get("name_fr"))[0];
-	    getAdmin().setColorNameFr(id, value);
-	}
-
-	if (parameters.get("name_en") != null) {
-	    String value = ((String[]) parameters.get("name_en"))[0];
-	    getAdmin().setColorNameEn(id, value);
-	}
-
-	if (parameters.get("description_fr") != null) {
-	    String value = ((String[]) parameters.get("description_fr"))[0];
-	    getAdmin().setColorDescriptionFr(id, value);
-	}
-
-	if (parameters.get("description_en") != null) {
-	    String value = ((String[]) parameters.get("description_en"))[0];
-	    getAdmin().setColorDescriptionEn(id, value);
-	}
-
-	if (parameters.get("image_large") != null) {
-	    String value = ((String[]) parameters.get("image_large"))[0];
-	    getAdmin().setColorImageLarge(id, value);
-	}
-
-	if (parameters.get("image_medium") != null) {
-	    String value = ((String[]) parameters.get("image_medium"))[0];
-	    getAdmin().setColorImageMedium(id, value);
-	}
-
-	if (parameters.get("image_small") != null) {
-	    String value = ((String[]) parameters.get("image_small"))[0];
-	    getAdmin().setColorImageSmall(id, value);
-	}
-
-	return ret;
-    }
-
-    public String colorDelete() throws Exception {
-	String ret = execute();
-
-	int id = getColorId();
-
-	if (id < 0) {
-	    return ret;
-	}
-
-	getAdmin().deleteColor(id);
-
-	return ret;
-    }
-
-    public String productValid() throws Exception {
-	String ret = execute();
-
-	int id = getProductId();
-
-	if (id < 0) {
-	    return ret;
-	}
-
-	if (parameters.get("name_fr") != null) {
-	    String value = ((String[]) parameters.get("name_fr"))[0];
-	    getAdmin().setProductNameFr(id, value);
-	}
-
-	if (parameters.get("name_en") != null) {
-	    String value = ((String[]) parameters.get("name_en"))[0];
-	    getAdmin().setProductNameEn(id, value);
-	}
-
-	if (parameters.get("description_fr") != null) {
-	    String value = ((String[]) parameters.get("description_fr"))[0];
-	    getAdmin().setProductDescriptionFr(id, value);
-	}
-
-	if (parameters.get("description_en") != null) {
-	    String value = ((String[]) parameters.get("description_en"))[0];
-	    getAdmin().setProductDescriptionEn(id, value);
-	}
-
-	if (parameters.get("category_id") != null) {
-	    String value = ((String[]) parameters.get("category_id"))[0];
-	    int intvalue = Integer.valueOf(value).intValue();
-	    System.out.println("cat_id = " + intvalue);
-	    getAdmin().setProductCategory(id, intvalue);
-	}
-
-	if (parameters.get("color_id") != null) {
-	    String value = ((String[]) parameters.get("color_id"))[0];
-	    getAdmin().setProductColor(id, Integer.valueOf(value).intValue());
-	}
-
-	if (parameters.get("label_id") != null) {
-	    String value = ((String[]) parameters.get("label_id"))[0];
-	    getAdmin().setProductLabel(id, Integer.valueOf(value).intValue());
-	}
-
-	if (parameters.get("price") != null) {
-	    String value = ((String[]) parameters.get("price"))[0];
-	    getAdmin().setProductPrice(id, Float.valueOf(value));
-	}
-
-	if (parameters.get("stock") != null) {
-	    String value = ((String[]) parameters.get("stock"))[0];
-	    getAdmin().setProductStock(id, Integer.valueOf(value).intValue());
-	}
-
-	if (parameters.get("image_large") != null) {
-	    String value = ((String[]) parameters.get("image_large"))[0];
-	    getAdmin().setProductImageLarge(id, value);
-	}
-
-	if (parameters.get("image_medium") != null) {
-	    String value = ((String[]) parameters.get("image_medium"))[0];
-	    getAdmin().setProductImageMedium(id, value);
-	}
-
-	if (parameters.get("image_small") != null) {
-	    String value = ((String[]) parameters.get("image_small"))[0];
-	    getAdmin().setProductImageSmall(id, value);
-	}
-
-	return ret;
-    }
-
-    public String productDelete() throws Exception {
-	String ret = execute();
-
-	int id = getProductId();
-
-	if (id < 0) {
-	    return ret;
-	}
-
-	getAdmin().deleteProduct(id);
-
-	return ret;
-    }
-
     public String customerValid() throws Exception {
 	String ret = execute();
 
 	String email = getCustomerId();
+	String password = getStringParameter("password");
+	String firstname = getStringParameter("firstname");
+	String lastname = getStringParameter("lastname");
+	String addr1 = getStringParameter("addr1");
+	String addr2 = getStringParameter("addr2");
+	String addr3 = getStringParameter("addr3");
+	int zipcode = getIntParameter("zipcode");
+	String city = getStringParameter("city");
+	String phone = getStringParameter("phone");
+	String fax = getStringParameter("fax");
 
 	if (email.compareTo("") == 0) {
-	    return ret;
-	}
-
-	if (parameters.get("password") != null) {
-	    String value = ((String[]) parameters.get("password"))[0];
-	    getAdmin().setAccountPassword(email, value);
-	}
-
-	if (parameters.get("firstname") != null) {
-	    String value = ((String[]) parameters.get("firstname"))[0];
-	    getAdmin().setAccountFirstName(email, value);
-	}
-
-	if (parameters.get("lastname") != null) {
-	    String value = ((String[]) parameters.get("lastname"))[0];
-	    getAdmin().setAccountLastName(email, value);
-	}
-
-	if (parameters.get("addr1") != null) {
-	    String value = ((String[]) parameters.get("addr1"))[0];
-	    getAdmin().setAccountAddressLine1(email, value);
-	}
-
-	if (parameters.get("addr2") != null) {
-	    String value = ((String[]) parameters.get("addr2"))[0];
-	    getAdmin().setAccountAddressLine2(email, value);
-	}
-
-	if (parameters.get("addr3") != null) {
-	    String value = ((String[]) parameters.get("addr3"))[0];
-	    getAdmin().setAccountAddressLine3(email, value);
-	}
-
-	if (parameters.get("zipcode") != null) {
-	    String value = ((String[]) parameters.get("zipcode"))[0];
-	    int value_i = Integer.valueOf(value).intValue();
-	    getAdmin().setAccountZipCode(email, value_i);
-	}
-
-	if (parameters.get("city") != null) {
-	    String value = ((String[]) parameters.get("city"))[0];
-	    getAdmin().setAccountCity(email, value);
-	}
-
-	if (parameters.get("phone") != null) {
-	    String value = ((String[]) parameters.get("phone"))[0];
-	    getAdmin().setAccountPhoneNumber(email, value);
-	}
-	if (parameters.get("fax") != null) {
-	    String value = ((String[]) parameters.get("fax"))[0];
-	    getAdmin().setAccountFaxNumber(email, value);
+	    getAdmin().createAccount(email, password, firstname, lastname, addr1, addr2, addr3, zipcode, city, phone, fax);
+	} else {
+	    getAdmin().setAccountPassword(email, password);
+	    getAdmin().setAccountFirstName(email, firstname);
+	    getAdmin().setAccountLastName(email, lastname);
+	    getAdmin().setAccountAddressLine1(email, addr1);
+	    getAdmin().setAccountAddressLine2(email, addr2);
+	    getAdmin().setAccountAddressLine3(email, addr3);
+	    getAdmin().setAccountZipCode(email, zipcode);
+	    getAdmin().setAccountCity(email, city);
+	    getAdmin().setAccountPhoneNumber(email, phone);
+	    getAdmin().setAccountFaxNumber(email, fax);
 	}
 
 	return ret;
@@ -505,33 +422,45 @@ public class IndexAction extends ActionSupport implements SessionAware, Paramete
 	return ret;
     }
 
+    public List getAges() throws Exception {
+	return getAdmin().getAges();
+    }
+
+    public AgeBean getAge(int id) throws Exception {
+	return getAdmin().getAge(id);
+    }
+
+    public int getAgeId() throws Exception {
+	int id = -1;
+
+	if (parameters.get("age_id") != null) {
+	    String id_s = ((String[]) parameters.get("age_id"))[0];
+	    if (id_s.compareTo("") != 0) {
+		id = Integer.valueOf(id_s).intValue();
+	    }
+	}
+
+	return id;
+    }
+
     public String ageValid() throws Exception {
+
 	String ret = execute();
 
 	int id = getAgeId();
 
+	String name_fr = getStringParameter("name_fr");
+	String name_en = getStringParameter("name_en");
+	String description_fr = getStringParameter("description_fr");
+	String description_en = getStringParameter("description_en");
+
 	if (id < 0) {
-	    return ret;
-	}
-
-	if (parameters.get("name_fr") != null) {
-	    String value = ((String[]) parameters.get("name_fr"))[0];
-	    getAdmin().setColorNameFr(id, value);
-	}
-
-	if (parameters.get("name_en") != null) {
-	    String value = ((String[]) parameters.get("name_en"))[0];
-	    getAdmin().setColorNameEn(id, value);
-	}
-
-	if (parameters.get("description_fr") != null) {
-	    String value = ((String[]) parameters.get("description_fr"))[0];
-	    getAdmin().setColorDescriptionFr(id, value);
-	}
-
-	if (parameters.get("description_en") != null) {
-	    String value = ((String[]) parameters.get("description_en"))[0];
-	    getAdmin().setColorDescriptionEn(id, value);
+	    getAdmin().createAge(name_fr, name_en, description_fr, description_en);
+	} else {
+	    getAdmin().setAgeNameFr(id, name_fr);
+	    getAdmin().setAgeNameEn(id, name_en);
+	    getAdmin().setAgeDescriptionFr(id, description_fr);
+	    getAdmin().setAgeDescriptionEn(id, description_en);
 	}
 
 	return ret;
