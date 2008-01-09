@@ -73,19 +73,21 @@ function navLocale(locale) {
         dojo.byId('img_previous').onmouseover = function() { show('Pr&#233;c&#233;dent'); };
         dojo.byId('img_next').onmouseover = function() { show('Suivant'); };
         dojo.byId('refresh_img').onmouseover = function() { show('Recharger'); };
-        if (dojo.byId('loginout_img').src = 'images/login.png') {
-            dojo.byId('loginout_img').onmouseover = function() { show('Se logger'); };
-        } else {
-            dojo.byId('loginout_img').onmouseover = function() { show('Se d&#233;logger'); };
+        dojo.byId('loginout_img').onmouseover = function() {
+            if (dojo.byId('loginout_img').src.indexOf('images/login.png') == -1) 
+                show('Se d&#233;logger');
+            else
+                show('Se logger');
         }
     } else {
         dojo.byId('img_previous').onmouseover = function() { show('Previous'); };
         dojo.byId('img_next').onmouseover = function() { show('Next'); };
         dojo.byId('refresh_img').onmouseover = function() { show('Refresh'); };
-        if (dojo.byId('loginout_img').src = 'images/login.png') {
-            dojo.byId('loginout_img').onmouseover = function() { show('Log in'); };
-        } else {
-            dojo.byId('loginout_img').onmouseover = function() { show('Log out'); };
+        dojo.byId('loginout_img').onmouseover = function() {
+            if (dojo.byId('loginout_img').src.indexOf('images/login.png') == -1) 
+                show('Log out');
+            else
+                show('Log in');
         }
     }
 

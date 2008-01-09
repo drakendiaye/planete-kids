@@ -85,10 +85,6 @@
             </result>
             <result name="error">/error.jsp</result>
         </action>
-        <action name="index_submit" class="planetekids.actions.account.IndexAction" method="submit" >
-            <result>/account/index_content.jsp</result>
-            <result name="error">/error.jsp</result>
-        </action>
         <action name="index_content" class="planetekids.actions.account.IndexAction">
             <result>/account/index_content.jsp</result>
             <result name="error">/error.jsp</result>
@@ -143,6 +139,30 @@
         </action>
         <action name="identify_location" class="planetekids.actions.account.IndexAction" >
             <result>/account/identify_location.jsp</result>
+            <result name="error">/error.jsp</result>
+        </action>
+        
+        <action name="modify" class="planetekids.actions.account.IndexAction" method="redirect_modify" >
+            <result type="redirect-action">
+                <param name="namespace">/</param>
+                <param name="actionName">index</param>
+            </result>
+            <result name="error">/error.jsp</result>
+        </action>
+        <action name="modify_submit" class="planetekids.actions.account.IndexAction" method="submit_modify" >
+            <result type="redirect-action">
+                <param name="namespace">/</param>
+                <param name="actionName">index_callback</param>
+            </result>
+            <result name="badinput">/account/modify_content.jsp</result>
+            <result name="error">/error.jsp</result>
+        </action>
+        <action name="modify_content" class="planetekids.actions.account.IndexAction">
+            <result>/account/modify_content.jsp</result>
+            <result name="error">/error.jsp</result>
+        </action>
+        <action name="modify_location" class="planetekids.actions.account.IndexAction" >
+            <result>/account/modify_location.jsp</result>
             <result name="error">/error.jsp</result>
         </action>
     </package>
