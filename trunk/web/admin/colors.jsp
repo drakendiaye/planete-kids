@@ -41,22 +41,22 @@
 	<s:a href="%{viewages}"><s:text name="ages" /></s:a>
 
 	<br /><br />
-	There are <s:property value="getColors().size()" /> colors in the database.<br />
+	<s:text name="adminP1"></s:text> <s:property value="getColors().size()" /> <s:text name="adminColors"></s:text> <s:text name="adminP2"></s:text> <br />
 	
 	<s:url id="createcolor" namespace="/admin" action="color_create" includeParams="none" />
-	<s:a href="%{createcolor}">Create a new color</s:a>
+	<s:a href="%{createcolor}"><s:text name="createColor"></s:text> </s:a>
 
 	<br /><br />
 
 	<table border="2" align="center" cellpadding="2" >
 	<tr>
-	<th>Name (en)</th>
-	<th>Name (fr)</th>
+	<th><s:text name="enName"></s:text> </th>
+	<th><s:text name="frName"></s:text> </th>
 	<th>Description (en)</th>
 	<th>Description (fr)</th>
-	<th>Image (large)</th>
-	<th>Image (medium)</th>
-	<th>Image (small)</th>
+	<th><s:text name="imageLarge"></s:text> </th>
+	<th><s:text name="imageMedium"></s:text> </th>
+	<th><s:text name="imageSmall"></s:text> </th>
 	<th>Action</th>
 	</tr>
 

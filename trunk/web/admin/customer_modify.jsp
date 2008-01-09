@@ -38,25 +38,25 @@
 	<s:form method="post" namespace="/admin" action="customer_valid">
 	<table align="center">
 	<input type="hidden" name="customer_id" value="<s:property value="getCustomerId()" />" />
-	<tr><td align=right>Password
+	<tr><td align=right><s:text name="password"></s:text>
         <td><input type="text" name="password" value="<s:property value="getCustomer(getCustomerId()).getPassword()" />" size="35"/>
-	<tr><td align=right>First Name
+	<tr><td align=right><s:text name="firstName"></s:text>
         <td><input type="text" name="firstname" value="<s:property value="getCustomer(getCustomerId()).getFirstName()" />" size="35"/>
-	<tr><td align=right>Last Name
+	<tr><td align=right><s:text name="lastName"></s:text>
         <td><input type="text" name="lastname" value="<s:property value="getCustomer(getCustomerId()).getLastName()" />" size="35"/>
-	<tr><td align=right>Address Line 1
+	<tr><td align=right><s:text name="addressLine1"></s:text>
         <td><input type="text" name="addr1" value="<s:property value="getCustomer(getCustomerId()).getAddressLine1()" />" size="35"/>
-	<tr><td align=right>Address Line 2
+	<tr><td align=right><s:text name="addressLine2"></s:text>
         <td><input type="text" name="addr2" value="<s:property value="getCustomer(getCustomerId()).getAddressLine2()" />" size="35"/>
-	<tr><td align=right>Address Line 3
+	<tr><td align=right><s:text name="addressLine3"></s:text>
         <td><input type="text" name="addr3" value="<s:property value="getCustomer(getCustomerId()).getAddressLine3()" />" size="35"/>
-	<tr><td align=right>ZipCode
+	<tr><td align=right><s:text name="zipCode"></s:text>
         <td><input type="text" name="zipcode" value="<s:property value="getCustomer(getCustomerId()).getZipCode()" />" size="35"/>
-	<tr><td align=right>City
+	<tr><td align=right><s:text name="code"></s:text>
         <td><input type="text" name="city" value="<s:property value="getCustomer(getCustomerId()).getCity()" />" size="35"/>
-	<tr><td align=right>Phone Number
+	<tr><td align=right><s:text name="phoneNumber"></s:text>
         <td><input type="text" name="phone" value="<s:property value="getCustomer(getCustomerId()).getPhoneNumber()" />" size="35"/>
-	<tr><td align=right>Fax Number
+	<tr><td align=right><s:text name="faxNumber"></s:text>
         <td><input type="text" name="fax" value="<s:property value="getCustomer(getCustomerId()).getFaxNumber()" />" size="35"/>	
 	</table><br />
 	<input type="submit" value="Submit" />

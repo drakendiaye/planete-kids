@@ -41,26 +41,26 @@
 	<s:a href="%{viewages}"><s:text name="ages" /></s:a>
 
 	<br /><br />
-	There are <s:property value="getCustomers().size()" /> customers in the database.<br />
+	<s:text name="adminP1"></s:text> <s:property value="getCustomers().size()" /> <s:text name="adminCustomers"></s:text> <s:text name="adminP2"></s:text><br />
 		
 	<s:url id="createcustomer" namespace="/admin" action="customer_create" includeParams="none" />
-	<s:a href="%{createcustomer}">Create a new customer</s:a>
+	<s:a href="%{createcustomer}"><s:text name="createCustomer"></s:text></s:a>
 
 	<br /><br />
 
 	<table border="2" align="center" cellpadding="2">
 	<tr>
-	<th>e-mail address</th>
-	<th>Password</th>
-	<th>First name</th>
-	<th>Last name</th>
-	<th>Address Line 1</th>
-	<th>Address Line 2</th>
-	<th>Address Line 3</th>
-	<th>ZipCode</th>
-	<th>City</th>
-	<th width=220>Phone number</th>
-	<th width=220>Fax number</th>
+	<th><s:text name="email"></s:text></th>
+	<th><s:text name="password"></s:text></th>
+	<th><s:text name="firstName"></s:text></th>
+	<th><s:text name="lastName"></s:text></th>
+	<th><s:text name="addressLine1"></s:text></th>
+	<th><s:text name="addressLine2"></s:text></th>
+	<th><s:text name="addressLine3"></s:text></th>
+	<th><s:text name="zipCode"></s:text></th>
+	<th><s:text name="city"></s:text></th>
+	<th width=220><s:text name="phoneNumber"></s:text></th>
+	<th width=220><s:text name="faxNumber"></s:text></th>
 	<th>Action</th>
 	</tr>
 

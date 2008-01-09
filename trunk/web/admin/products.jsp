@@ -41,28 +41,28 @@
 	<s:a href="%{viewages}"><s:text name="ages" /></s:a>
 
 	<br /><br />
-	There are <s:property value="getProducts().size()" /> products in the database.<br />
+	<s:text name="adminP1"></s:text> <s:property value="getProducts().size()" /> <s:text name="products"></s:text> <s:text name="adminP2"></s:text><br />
 
 	<s:url id="createproduct" namespace="/admin" action="product_create" includeParams="none" />
-	<s:a href="%{createproduct}">Create a new product</s:a>
+	<s:a href="%{createproduct}"><s:text name="createProduct"></s:text></s:a>
 
 	<br /><br />
 
 	<table border="2" align="center" cellpadding="2">
 	<tr>
-	<th>Name (en)</th>
-	<th>Name (fr)</th>
+	<th><s:text name="enName"></s:text></th>
+	<th><s:text name="frName"></s:text></th>
 	<th>Description (en)</th>
 	<th>Description (fr)</th>
-	<th>Category</th>
-	<th>Color</th>
-	<th>Label</th>
-	<th>Age</th>
-	<th>Price</th>
+	<th><s:text name="category"></s:text></th>
+	<th><s:text name="color"></s:text></th>
+	<th><s:text name="label"></s:text></th>
+	<th><s:text name="age"></s:text></th>
+	<th><s:text name="price"></s:text></th>
 	<th>Stock</th>
-	<th>Image (large)</th>
-	<th>Image (medium)</th>
-	<th>Image (small)</th>
+	<th><s:text name="imageLarge"></s:text></th>
+	<th><s:text name="imageMedium"></s:text></th>
+	<th><s:text name="imageSmall"></s:text></th>
 	<th>Action</th>
 	</tr>
 

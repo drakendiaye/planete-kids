@@ -37,51 +37,51 @@
 
 	<s:form method="post" namespace="/admin" action="product_valid_create">
 	<table align="center">
-	<tr><td align=right>Name (en)
+	<tr><td align=right><s:text name="enName"></s:text>
         <td><input type="text" name="name_en" size="35"/>
-	<tr><td align=right>Name (fr)
+	<tr><td align=right><s:text name="frName"></s:text>
         <td><input type="text" name="name_fr" size="35"/>
 	<tr><td align=right>Description (en)
         <td><input type="text" name="description_en" size="35"/>
 	<tr><td align=right>Description (fr)
         <td><input type="text" name="description_fr" size="35"/>
-	<tr><td align=right>Category
+	<tr><td align=right><s:text name="category"></s:text>
         <td>
 	<select name="category_id">
 	    <s:iterator value="getCategories()">
 	    <option value="<s:property value="getId()" />" ><s:property value="getName(getLocale())" /></option>
 	    </s:iterator>
 	</select>
-	<tr><td align=right>Color
+	<tr><td align=right><s:text name="color"></s:text>
         <td>
         <select name="color_id">
 	    <s:iterator value="getColors()">
 	    <option value="<s:property value="getId()" />" ><s:property value="getName(getLocale())" /></option>
 	    </s:iterator>
 	</select>
-	<tr><td align=right>Label
+	<tr><td align=right><s:text name="label"></s:text>
         <td>
         <select name="label_id">
 	    <s:iterator value="getLabels()">
 	    <option value="<s:property value="getId()" />" ><s:property value="getName()" /></option>
 	    </s:iterator>
 	</select>
-	<tr><td align=right>Age
+	<tr><td align=right><s:text name="age"></s:text>
         <td>
        	<select name="age_id">
 	    <s:iterator value="getAges()">
 	    <option value="<s:property value="getId()" />" ><s:property value="getName(getLocale())" /></option>
 	    </s:iterator>
 	</select>
-	<tr><td align=right>Price (€)
+	<tr><td align=right><s:text name="price"></s:text> (€)
         <td><input type="text" name="price" size="35"/>
 	<tr><td align=right>Stock
         <td><input type="text" name="stock" size="35"/>
-	<tr><td align=right>Image (large)
+	<tr><td align=right><s:text name="imageLarge"></s:text>
         <td><input type="text" name="image_large" size="35"/>
-	<tr><td align=right>Image (medium)
+	<tr><td align=right><s:text name="imageMedium"></s:text>
         <td><input type="text" name="image_medium" size="35"/>
-	<tr><td align=right>Image (small)
+	<tr><td align=right><s:text name="imageSmall"></s:text>
         <td><input type="text" name="image_small" size="35"/>
 	</table><br />
 	<input type="submit" value="Submit" />
