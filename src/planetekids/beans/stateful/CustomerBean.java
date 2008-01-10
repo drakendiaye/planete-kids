@@ -3,7 +3,9 @@ package planetekids.beans.stateful;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
+import java.util.Enumeration;
 import java.util.HashSet;
+import java.util.Hashtable;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
@@ -61,7 +63,7 @@ public class CustomerBean implements CustomerRemote {
 		cart.flushCart();
 	}
 
-    public int validateCart() throws Exception {
+    public void validateCart() throws Exception {
         //return cart.validateCart();
         int command = createCommand(new Date(System.currentTimeMillis()), (float)5.0);
         Hashtable<Integer, Integer> cartTable = cart.getHashtable();

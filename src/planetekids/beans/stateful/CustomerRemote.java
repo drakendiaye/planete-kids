@@ -22,7 +22,7 @@ public interface CustomerRemote {
     public void LogOut() throws Exception;
     
     public void flushCart() throws Exception;
-    public int validateCart() throws Exception;
+    public void validateCart() throws Exception;
 
     public float getCartPrice() throws Exception;
     public List<ProductBean> getCartProducts()  throws Exception;
@@ -67,7 +67,7 @@ public interface CustomerRemote {
     public void setAccountPhoneNumber(String phoneNumber) throws Exception;
     public void setAccountFaxNumber(String faxNumber) throws Exception;
     
-    public int createCommand(String email, Date date, float shipping) throws Exception;
+    public int createCommand(Date date, float shipping) throws Exception;
     public CommandBean getCommand(int id) throws Exception;
     public List<CommandBean> getCommands() throws Exception;
     public List<CommandBean> getCommandsByAccount(String email) throws Exception;
