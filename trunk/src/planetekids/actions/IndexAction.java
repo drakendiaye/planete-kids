@@ -60,7 +60,7 @@ public class IndexAction extends ActionSupport implements SessionAware, Paramete
                 } else if (command[0].equals("flush")) {
                     getCustomer().flushCart();
                 } else if (command[0].equals("validate")) {
-                    getCustomer().validateCart();
+                    //getCustomer().validateCart();
                 }
             } catch (Exception ex) {
 
@@ -85,9 +85,10 @@ public class IndexAction extends ActionSupport implements SessionAware, Paramete
         return (String) session.remove("callback");
     }
 
-    public int validateCart() throws Exception {
+    // corriger la fonction getCustomer().validateCart()
+    /*public int validateCart() throws Exception {
         return getCustomer().validateCart();
-    }
+    }*/
 
     public float getCartPrice() throws Exception {
         return getCustomer().getCartPrice();

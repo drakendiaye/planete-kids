@@ -3,7 +3,6 @@ package planetekids.beans.stateful;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashSet;
-import java.util.Hashtable;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
@@ -61,30 +60,14 @@ public class CustomerBean implements CustomerRemote {
         cart.flushCart();
     }
 
+   /* A corriger, createCommand() a besoin de 3 paramètres
     public int validateCart() throws Exception {
         //return cart.validateCart();
         int command = createCommand(new Date(System.currentTimeMillis()), (float)5.0);
         Hashtable<Integer, Integer> cartTable = cart.getHashtable();
         //createCommandLine(command, cartTable.get());
     }
-
-    public int createCommand(Date date, float shipping) throws Exception {
-	AccountBean account = getAccount();
-	CommandBean command = new CommandBean(account, date, shipping);
-	entityManager.persist(command);
-	return command.getId();
-    }
-
-    public CommandBean getCommand(int id) throws Exception {
-	return entityManager.find(CommandBean.class, id);
-    }
-
-    public int createCommandLine(int command_id, String name_fr, String name_en, float price, int number) throws Exception {
-	CommandBean command = getCommand(command_id);
-	CommandLineBean command_line = new CommandLineBean(command, new LocaleBean(name_fr, name_en), price, number);
-	entityManager.persist(command_line);
-	return command_line.getId();
-    }
+    * */
 
     public float getCartPrice() throws Exception {
         return cart.getCartPrice();
