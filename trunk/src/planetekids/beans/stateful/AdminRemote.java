@@ -67,7 +67,10 @@ public interface AdminRemote {
     public void setAgeNameEn(int id, String name) throws Exception ;    
     public void setAgeDescriptionFr(int id, String description) throws Exception ;    
     public void setAgeDescriptionEn(int id, String description) throws Exception ;    
-    public int createAge(String name_fr, String name_en, String description_fr, String description_en) throws Exception ;    
+    public void setAgeImageLarge(int id, String image) throws Exception ;
+    public void setAgeImageMedium(int id, String image) throws Exception ;
+    public void setAgeImageSmall(int id, String image) throws Exception ;
+    public int createAge(String name_fr, String name_en, String description_fr, String description_en,String image_large, String image_medium, String image_small) throws Exception ;    
     public void deleteAge(int id) throws Exception ;    
     public void deleteAges() throws Exception ;
     

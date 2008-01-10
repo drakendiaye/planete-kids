@@ -813,6 +813,9 @@ public class AdminClient {
 			    System.out.println("name english : " + age.getName().getEn());
 			    System.out.println("description french : " + age.getDescription().getFr());
 			    System.out.println("description english : " + age.getDescription().getEn());
+			    System.out.println("image_large : " + age.getImage_large());
+			    System.out.println("image_medium : " + age.getImage_medium());
+			    System.out.println("image_small : " + age.getImage_small());
 			    System.out.println("");
 			}
 		    }
@@ -825,9 +828,15 @@ public class AdminClient {
 		    String description_fr = Tx.readString();
 		    System.out.print("description english: ");
 		    String description_en = Tx.readString();
+		    System.out.print("image large : ");
+		    String image_large = Tx.readString();
+		    System.out.print("image medium : ");
+		    String image_medium = Tx.readString();
+		    System.out.print("image small : ");
+		    String image_small = Tx.readString();
 		    try {
 			utx.begin();
-			admin.createAge(name_fr, name_en, description_fr, description_en);
+			admin.createAge(name_fr, name_en, description_fr, description_en, image_large, image_medium, image_small);
 			utx.commit();
 		    } catch (Exception ex) {
 			utx.rollback();
@@ -859,12 +868,18 @@ public class AdminClient {
 			    System.out.println("name english : " + age.getName().getEn());
 			    System.out.println("description french : " + age.getDescription().getFr());
 			    System.out.println("description english : " + age.getDescription().getEn());
+			    System.out.println("image_large : " + age.getImage_large());
+			    System.out.println("image_medium : " + age.getImage_medium());
+			    System.out.println("image_small : " + age.getImage_small());
 			    System.out.println("------------------------------------------------------");
 			    System.out.println("0 = return");
 			    System.out.println("1 = modify name french");
 			    System.out.println("2 = modify name english");
 			    System.out.println("3 = modify description french");
 			    System.out.println("4 = modify description english");
+			    System.out.println("5 = modify image_large");
+			    System.out.println("6 = modify image_medium");
+			    System.out.println("7 = modify image_small");
 			    System.out.println("------------------------------------------------------");
 			    System.out.print(">");
 			    choice = Tx.readInt();
@@ -919,6 +934,42 @@ public class AdminClient {
 				    throw ex;
 				}
 				System.out.println("age successfully updated");
+			    }else if (choice == 5) {
+				System.out.print("image large : ");
+				String image = Tx.readString();
+				try {
+				    utx.begin();
+				    admin.setAgeImageLarge(id, image);
+				    utx.commit();
+				} catch (Exception ex) {
+				    utx.rollback();
+				    throw ex;
+				}
+				System.out.println("age successfully updated");
+			    } else if (choice == 6) {
+				System.out.print("image medium : ");
+				String image = Tx.readString();
+				try {
+				    utx.begin();
+				    admin.setAgeImageMedium(id, image);
+				    utx.commit();
+				} catch (Exception ex) {
+				    utx.rollback();
+				    throw ex;
+				}
+				System.out.println("age successfully updated");
+			    } else if (choice == 7) {
+				System.out.print("image small : ");
+				String image = Tx.readString();
+				try {
+				    utx.begin();
+				    admin.setAgeImageSmall(id, image);
+				    utx.commit();
+				} catch (Exception ex) {
+				    utx.rollback();
+				    throw ex;
+				}
+				System.out.println("age successfully updated");
 			    } else {
 				System.out.println("Bad choice");
 			    }
@@ -962,7 +1013,7 @@ public class AdminClient {
 	    }
 	}
     }
-    
+
     static void manageProducts(UserTransaction utx, AdminRemote admin) throws Exception {
 	while (true) {
 	    try {
