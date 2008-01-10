@@ -50,17 +50,23 @@
                     </tr>
                 </table>
                 <div id="cart_<s:property value="getId()" />_div" align="center" style="display: none;">
-                    <form id="product_<s:property value="getId()"/>_update_form">
+                    <form id="product_<s:property value="getId()"/>_update_form" onsubmit="checkValue_<s:property value="getId()"/>()">
                         <s:textfield id="product_%{getId()}_update_textfield" name="update_%{getId()}_%{getCartProductNumber(getId())}" value="%{getCartProductNumber(getId())}" onkeyup="this.name = 'update_%{getId()}_' + this.value;" size="1"/>&nbsp;x&nbsp;<s:property value="getPrice()" />&nbsp;€
                         <s:url id="url" namespace="/" action="index_cart" includeParams="none"/>
                         <br/>
                         <script type="text/javascript">
-                            if (dojo.byId('product_<s:property value="getId()"/>_update_textfield').value > <s:property value="getStock()"/>) {
-                                dojo.byId('product_<s:property value="getId()"/>_update_textfield').value = "<s:property value="getStock()"/>";
-                                alert('<s:property value="getStock()"/> <s:text name="maxStock"/>');
+                            function checkValue_<s:property value="getId()"/>() {
+                                if (dojo.byId('product_<s:property value="getId()"/>_update_textfield').value > <s:property value="getStock()"/>) {
+                                    dojo.byId('product_<s:property value="getId()"/>_update_textfield').value = "<s:property value="getCartProductNumber(getId())"/>";
+                                    alert('<s:property value="getStock()"/> <s:text name="maxStock"/>');
+                                    navExec(new navRequest('cart', '<s:property value="url"/>', null, null, null)); return(false);
+                                }
+                                else {
+                                    navExec(new navRequest('cart', '<s:property value="url"/>', null, null, 'product_<s:property value="getId()" />_update_form')); return(false);
+                                }
                             }
                         </script>
-                        <input type="submit" value="<s:text name="updateQuantity"/>" class="button" onclick="navExec(new navRequest('cart', '<s:property value="url"/>', null, null, 'product_<s:property value="getId()" />_update_form')); return(false);"/>
+                        <input type="button" value="<s:text name="updateQuantity"/>" class="button" onclick="checkValue_<s:property value="getId()"/>()"/>
                     </form>
                     <form id="product_<s:property value="getId()"/>_delete_form">
                         <s:hidden name="delete_%{getId()}"/>
