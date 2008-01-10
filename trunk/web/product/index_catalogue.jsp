@@ -11,9 +11,19 @@
         </td>
     </tr>
 </table>
-<s:property value="%{getFiltersString()}"/><br/>
-<s:property value="%{getAgeFilterString()}"/><br/>
-<s:property value="%{getCategoryFilterString()}"/><br/>
-<s:property value="%{getColorFilterString()}"/><br/>
-<s:property value="%{getLabelFilterString()}"/><br/>
-<s:property value="%{getAndFilterString()}"/>
+
+<s:iterator value="getAgeFilter()">
+    <img src="<s:property value="getAge(intValue()).getImage_small()" />" width="20px" height="20px"/>
+</s:iterator>
+<br/>
+<s:iterator value="getCategoryFilter()">
+    <img src="<s:property value="getCategory(intValue()).getImage_small()" />" width="20px" height="20px"/>
+</s:iterator>
+<br/>
+<s:iterator value="getClorFilter()">
+    <img src="<s:property value="getColor(intValue()).getImage_small()" />" width="20px" height="20px"/>
+</s:iterator>
+<br/>
+<s:iterator value="getLabelFilter()">
+    <img src="<s:property value="getLabel(intValue()).getImage_small()" />" width="20px" height="20px"/>
+</s:iterator>

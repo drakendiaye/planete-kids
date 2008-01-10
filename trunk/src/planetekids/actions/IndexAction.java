@@ -123,8 +123,9 @@ public class IndexAction extends ActionSupport implements SessionAware, Paramete
         }
     }
 
-    public String getCart_parameters() {
-        return (String) session.remove("cart_parameters");
+    public String getCart_parameters(boolean remove) {
+        if(remove) return (String) session.remove("cart_parameters");
+        else return (String) session.get("cart_parameters");
     }
 
     public String getCatalogue_action() {
@@ -145,8 +146,9 @@ public class IndexAction extends ActionSupport implements SessionAware, Paramete
         }
     }
     
-    public String getCatalogue_parameters() {
-        return (String) session.remove("catalogue_parameters");
+    public String getCatalogue_parameters(boolean remove) {
+        if(remove) return (String) session.remove("catalogue_parameters");
+        else return (String) session.get("catalogue_parameters");
     }
 
     public String getContent_action() {
@@ -167,8 +169,9 @@ public class IndexAction extends ActionSupport implements SessionAware, Paramete
         }
     }
     
-    public String getContent_parameters() {
-        return (String) session.remove("content_parameters");
+    public String getContent_parameters(boolean remove) {
+        if(remove) return (String) session.remove("content_parameters");
+        else return (String) session.get("content_parameters");
     }
 
     public String getFooter_action() {
@@ -189,8 +192,9 @@ public class IndexAction extends ActionSupport implements SessionAware, Paramete
         }
     }
     
-    public String getFooter_parameters() {
-        return (String) session.remove("footer_parameters");
+    public String getFooter_parameters(boolean remove) {
+        if(remove) return (String) session.remove("footer_parameters");
+        else return (String) session.get("footer_parameters");
     }
 
     public String getGeneralmenu_action() {
@@ -211,8 +215,9 @@ public class IndexAction extends ActionSupport implements SessionAware, Paramete
         }
     }
     
-    public String getGeneralmenu_parameters() {
-        return (String) session.remove("generalmenu_parameters");
+    public String getGeneralmenu_parameters(boolean remove) {
+        if(remove) return (String) session.remove("generalmenu_parameters");
+        else return (String) session.get("generalmenu_parameters");
     }
 
     public String getHeader_action() {
@@ -233,8 +238,9 @@ public class IndexAction extends ActionSupport implements SessionAware, Paramete
         }
     }
     
-    public String getHeader_parameters() {
-        return (String) session.remove("header_parameters");
+    public String getHeader_parameters(boolean remove) {
+        if(remove) return (String) session.remove("header_parameters");
+        else return (String) session.get("header_parameters");
     }
 
     public String getLocation_action() {
@@ -255,7 +261,8 @@ public class IndexAction extends ActionSupport implements SessionAware, Paramete
         }
     }
     
-    public String getLocation_parameters() {
-        return (String) session.remove("location_parameters");
+    public String getLocation_parameters(boolean remove) {
+        if(remove) return (String) session.remove("location_parameters");
+        else return (String) session.get("location_parameters");
     }
 }

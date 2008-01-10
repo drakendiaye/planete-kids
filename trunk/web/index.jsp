@@ -12,13 +12,13 @@
         <script type="text/javascript" src="includes/navigation.js"></script>
         <script type="text/javascript" src="includes/infobulle.js"></script>
     </head>
-    <body onload="navGo([new navRequest('cart', '<s:url namespace="%{getCart_namespace()}" action="%{getCart_action()}" includeParams="none"/>?<s:property value="getCart_parameters()"/>'),
-          new navRequest('catalogue', '<s:url namespace="%{getCatalogue_namespace()}" action="%{getCatalogue_action()}" includeParams="none"/>?<s:property value="getCatalogue_parameters()"/>'),
-          new navRequest('content', '<s:url namespace="%{getContent_namespace()}" action="%{getContent_action()}" includeParams="none"/>?<s:property value="getContent_parameters()"/>'),
-          new navRequest('footer', '<s:url namespace="%{getFooter_namespace()}" action="%{getFooter_action()}" includeParams="none"/>?<s:property value="getFooter_parameters()"/>'),
-          new navRequest('generalmenu', '<s:url namespace="%{getGeneralmenu_namespace()}" action="%{getGeneralmenu_action()}" includeParams="none"/>?<s:property value="getGeneralmenu_parameters()"/>'),
-          new navRequest('header', '<s:url namespace="%{getHeader_namespace()}" action="%{getHeader_action()}" includeParams="none"/>?<s:property value="getHeader_parameters()"/>'),
-          new navRequest('location', '<s:url namespace="%{getLocation_namespace()}" action="%{getLocation_action()}" includeParams="none"/>?<s:property value="getLocation_parameters()"/>')]);">
+    <body onload="navGo([new navRequest('cart', '<s:url namespace="%{getCart_namespace()}" action="%{getCart_action()}" includeParams="none"/><s:if test="getCart_parameters(false) != null">?<s:property value="getCart_parameters(true)"/></s:if>'),
+          new navRequest('catalogue', '<s:url namespace="%{getCatalogue_namespace()}" action="%{getCatalogue_action()}" includeParams="none"/><s:if test="getCatalogue_parameters(false) != null">?<s:property value="getCatalogue_parameters(true)"/></s:if>'),
+          new navRequest('content', '<s:url namespace="%{getContent_namespace()}" action="%{getContent_action()}" includeParams="none"/><s:if test="getContent_parameters(false) != null">?<s:property value="getContent_parameters(true)"/></s:if>'),
+          new navRequest('footer', '<s:url namespace="%{getFooter_namespace()}" action="%{getFooter_action()}" includeParams="none"/><s:if test="getFooter_parameters(false) != null">?<s:property value="getFooter_parameters(true)"/></s:if>'),
+          new navRequest('generalmenu', '<s:url namespace="%{getGeneralmenu_namespace()}" action="%{getGeneralmenu_action()}" includeParams="none"/><s:if test="getGeneralmenu_parameters(false) != null">?<s:property value="getGeneralmenu_parameters(true)"/></s:if>'),
+          new navRequest('header', '<s:url namespace="%{getHeader_namespace()}" action="%{getHeader_action()}" includeParams="none"/><s:if test="getHeader_parameters(false) != null">?<s:property value="getHeader_parameters(true)"/></s:if>'),
+          new navRequest('location', '<s:url namespace="%{getLocation_namespace()}" action="%{getLocation_action()}" includeParams="none"/><s:if test="getLocation_parameters(false) != null">?<s:property value="getLocation_parameters(true)"/></s:if>')]);">
         <div id="infobulle" class="infobulle"></div>
         <s:div id="container">
         <s:div id="header" />
