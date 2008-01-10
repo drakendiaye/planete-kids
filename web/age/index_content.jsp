@@ -18,6 +18,18 @@
                             <s:property value="getName(getLocale())" />
                         </h3>
                     </td>
+				<td align="right">
+				<form id="age_<s:property value="getId()"/>_form">
+					<s:hidden name="ageFilter" value="%{getId()}"/>
+					<s:url id="url_content" namespace="/product" action="index_content" includeParams="none"/>
+					<s:url id="url_location" namespace="/product" action="index_location" includeParams="none"/>
+					<s:url id="url_catalogue" namespace="/product" action="index_catalogue" includeParams="none"/>
+					<input type="button" value="<s:text name="viewProducts"/>" class="button" 
+					onclick="navGo([new navRequest('location','<s:property value="url_location"/>'),
+					new navRequest('catalogue','<s:property value="url_catalogue"/>',null,null,'age_<s:property value="getId()"/>_form'),
+					new navRequest('content','<s:property value="url_content"/>',null,null,'age_<s:property value="getId()"/>_form')])"/>
+				</form>
+				</td>
                 </tr>
             </table>
             <div id="age_<s:property value="getId()" />_div">

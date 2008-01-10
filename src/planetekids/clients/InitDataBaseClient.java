@@ -173,10 +173,10 @@ public class InitDataBaseClient {
 	    /*-------------------*/
 
 	    AgeId[0] = admin.createAge("1 mois", "1 month", "description en francais", "description in english","images/1month_large.png", "images/1month_medium.png", "images/1month_small.png");
-	    AgeId[1] = admin.createAge("3 mois", "3 month", "description en francais", "description in english","images/3months_large.png", "images/3months_medium.png", "images/3months_small.png");
-	    AgeId[2] = admin.createAge("6 mois", "6 month", "description en francais", "description in english","images/6months_large.png", "images/6months_medium.png", "images/6months_small.png");
-	    AgeId[3] = admin.createAge("12 mois", "12 month", "description en francais", "description in english","images/12months_large.png", "images/12months_medium.png", "images/12months_small.png");
-	    AgeId[4] = admin.createAge("18 mois", "18 month", "description en francais", "description in english","images/18months_large.png", "images/18months_medium.png", "images/18months_small.png");
+	    AgeId[1] = admin.createAge("3 mois", "3 months", "description en francais", "description in english","images/3months_large.png", "images/3months_medium.png", "images/3months_small.png");
+	    AgeId[2] = admin.createAge("6 mois", "6 months", "description en francais", "description in english","images/6months_large.png", "images/6months_medium.png", "images/6months_small.png");
+	    AgeId[3] = admin.createAge("12 mois", "12 months", "description en francais", "description in english","images/12months_large.png", "images/12months_medium.png", "images/12months_small.png");
+	    AgeId[4] = admin.createAge("18 mois", "18 months", "description en francais", "description in english","images/18months_large.png", "images/18months_medium.png", "images/18months_small.png");
 	    AgeId[5] = admin.createAge("2 ans", "2 years old", "description en francais", "description in english","images/2years_large.png", "images/2years_medium.png", "images/2years_small.png");
 	    AgeId[6] = admin.createAge("3 ans", "3 years old", "description en francais", "description in english","images/3years_large.png", "images/3years_medium.png", "images/3years_small.png");
 	    AgeId[7] = admin.createAge("4 ans", "4 years old", "description en francais", "description in english","images/4years_large.png", "images/4years_medium.png", "images/4years_small.png");
