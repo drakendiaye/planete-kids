@@ -121,16 +121,32 @@ public class IndexAction extends ActionSupport implements SessionAware, Paramete
         return getCustomer().getAges();
     }
     
+    public AgeBean getAge(int id) throws Exception {
+        return getCustomer().getAge(id);
+    }
+    
     public List<CategoryBean> getCategories() throws Exception {
         return getCustomer().getCategories();
+    }
+    
+    public CategoryBean getCategory(int id) throws Exception {
+        return getCustomer().getCategory(id);
     }
     
     public List<ColorBean> getColors() throws Exception {
         return getCustomer().getColors();
     }
     
+    public ColorBean getColor(int id) throws Exception {
+        return getCustomer().getColor(id);
+    }
+    
     public List<LabelBean> getLabels() throws Exception {
         return getCustomer().getLabels();
+    }
+    
+    public LabelBean getLabel(int id) throws Exception {
+        return getCustomer().getLabel(id);
     }
     
     public List<Integer> getAgeFilter() throws Exception {
