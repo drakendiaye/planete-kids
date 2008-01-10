@@ -12,5 +12,5 @@
 <s:url id="url_location" namespace="/color" action="index_location" includeParams="none"/>
 <s:a onclick="navGo([new navRequest('content', '%{url_content}'),
      new navRequest('location', '%{url_location}')])">
-    <s:text name="color"/>
+    <s:text name="colors"/>
 </s:a>
