@@ -32,13 +32,20 @@ public class AgeBean implements Serializable{
     @OneToMany(mappedBy = "age", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private Set<ProductBean> products = new HashSet<ProductBean>();
 
+    private String image_large;
+    private String image_medium;
+    private String image_small;
+    
     public AgeBean() {
 
     }
 
-    public AgeBean(LocaleBean name, LocaleBean description) {
+    public AgeBean(LocaleBean name, LocaleBean description, String image_large, String image_medium, String image_small) {
 	this.setName(name);
 	this.setDescription(description);
+	this.setImage_large(image_large);
+	this.setImage_medium(image_medium);
+	this.setImage_small(image_small);
     }
 
     public int getId() {
@@ -87,6 +94,31 @@ public class AgeBean implements Serializable{
 	this.products = products;
     }
 
+
+    public String getImage_large() {
+        return image_large;
+    }
+
+    public void setImage_large(String image_large) {
+        this.image_large = image_large;
+    }
+
+    public String getImage_medium() {
+        return image_medium;
+    }
+
+    public void setImage_medium(String image_medium) {
+        this.image_medium = image_medium;
+    }
+
+    public String getImage_small() {
+        return image_small;
+    }
+
+    public void setImage_small(String image_small) {
+        this.image_small = image_small;
+    }
+    
     @Transient
     public boolean removing = false;
 
