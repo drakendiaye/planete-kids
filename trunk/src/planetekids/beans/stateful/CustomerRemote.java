@@ -8,6 +8,7 @@ import planetekids.beans.entity.AgeBean;
 import planetekids.beans.entity.CategoryBean;
 import planetekids.beans.entity.ColorBean;
 import planetekids.beans.entity.CommandBean;
+import planetekids.beans.entity.CommandBean.State;
 import planetekids.beans.entity.CommandLineBean;
 import planetekids.beans.entity.LabelBean;
 import planetekids.beans.entity.ProductBean;
@@ -73,4 +74,7 @@ public interface CustomerRemote {
     public CommandLineBean getCommandLine(int id) throws Exception;
     public List<CommandLineBean> getCommandLines() throws Exception;
     public List<CommandLineBean> getCommandLinesByCommand(int command_id) throws Exception;
+    
+    public float getCommandTotal(int id) throws Exception;
+    public State getCommandState(int id) throws Exception;
 }
