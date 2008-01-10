@@ -35,26 +35,26 @@
 <s:url id="url_location" namespace="/category" action="index_location" includeParams="none"/>
 <s:a onclick="navGo([new navRequest('content', '%{url_content}'),
                      new navRequest('location', '%{url_location}')])">
-    <s:text name="category"/>
+    <s:text name="categories"/>
 </s:a>
 <br/>
 <s:url id="url_content" namespace="/color" action="index_content" includeParams="none"/>
 <s:url id="url_location" namespace="/color" action="index_location" includeParams="none"/>
 <s:a onclick="navGo([new navRequest('content', '%{url_content}'),
                      new navRequest('location', '%{url_location}')])">
-    <s:text name="color"/>
+    <s:text name="colors"/>
 </s:a>
 <br/>
 <s:url id="url_content" namespace="/label" action="index_content" includeParams="none"/>
 <s:url id="url_location" namespace="/label" action="index_location" includeParams="none"/>
 <s:a onclick="navGo([new navRequest('content', '%{url_content}'),
                      new navRequest('location', '%{url_location}')])">
-    <s:text name="label"/>
+    <s:text name="labels"/>
 </s:a>
 <br/>
 <s:url id="url_content" namespace="/age" action="index_content" includeParams="none"/>
 <s:url id="url_location" namespace="/age" action="index_location" includeParams="none"/>
 <s:a onclick="navGo([new navRequest('location', '%{url_location}'),
                      new navRequest('content', '%{url_content}')])">
-    <s:text name="age"/>
+    <s:text name="ages"/>
 </s:a>

@@ -2,7 +2,7 @@
 <%@ taglib prefix="s" uri="/struts-tags" %>
 
 <s:div cssClass="contentHeader">
-    <h2><s:text name="label"/></h2>
+    <h2><s:text name="labels"/></h2>
 </s:div>
 <s:div cssClass="contentMain">
     <s:iterator value="getLabels()">
