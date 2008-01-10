@@ -27,8 +27,7 @@
 <s:url id="url_content" namespace="/account" action="index_content" includeParams="none"/>
 <s:url id="url_location" namespace="/account" action="index_location" includeParams="none"/>
 <s:a onclick="navGo([new navRequest('content', '%{url_content}'),
-                     new navRequest('location', '%{url_location}'),
-                     new navRequest('catalogue', '%{url_catalogue}')])">
+                     new navRequest('location', '%{url_location}')])">
     <s:text name="account"/>
 </s:a>
 <br/>
