@@ -27,7 +27,8 @@
 <s:url id="url_content" namespace="/account" action="index_content" includeParams="none"/>
 <s:url id="url_location" namespace="/account" action="index_location" includeParams="none"/>
 <s:a onclick="navGo([new navRequest('content', '%{url_content}'),
-                     new navRequest('location', '%{url_location}')])">
+                     new navRequest('location', '%{url_location}'),
+                     new navRequest('catalogue', '%{url_catalogue}')])">
     <s:text name="account"/>
 </s:a>
 <br/>
@@ -61,7 +62,9 @@
 <br/>
 <s:url id="url_content" namespace="/product" action="index_content" includeParams="none"/>
 <s:url id="url_location" namespace="/product" action="index_location" includeParams="none"/>
+<s:url id="url_catalogue" namespace="/product" action="index_catalogue" includeParams="none"/>
 <s:a onclick="navGo([new navRequest('content', '%{url_content}'),
-                     new navRequest('location', '%{url_location}')])">
+                     new navRequest('location', '%{url_location}'),
+                     new navRequest('catalogue', '%{url_catalogue}')])">
     <s:text name="product"/>
 </s:a>
