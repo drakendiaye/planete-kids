@@ -43,6 +43,17 @@
 	<s:url id="viewcommands" namespace="/admin" action="commands" includeParams="none" />
 	<s:a href="%{viewcommands}"><s:text name="commands" /></s:a>
 
+	<s:url id="indexadminfr" namespace="/admin" action="index" includeParams="none">
+	<s:param name="request_locale" >fr</s:param>
+	</s:url>
+
+	<s:url id="indexadminen" namespace="/admin" action="index" includeParams="none">
+	<s:param name="request_locale" >en</s:param>
+	</s:url>
+
+        <s:a href="%{indexadminfr}"><img src="../images/fr.png" /></s:a>
+        <s:a href="%{indexadminen}"><img src="../images/en.png" /></s:a>
+
 	<br /><br />
 	<s:text name="adminP1"></s:text> <s:property value="getLabels().size()" /> <s:text name="adminLabels"></s:text> <s:text name="adminP2"></s:text><br />
 	
