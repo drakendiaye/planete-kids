@@ -305,6 +305,7 @@ div.product {
         border-color : black;
         border-width : 1px;
 	color: #000000;
+	font-weight: bold;
         background-color: #6bbfff;
 }
 

@@ -68,7 +68,7 @@
                             <s:property value="getPrice()" />&nbsp;€
                             <s:hidden name="add_%{getId()}"/>
                             <s:url id="url" namespace="/" action="index_cart" includeParams="none"/>
-                            <input type="submit" value="<s:text name="addCart"/>" class="button"onclick="navExec(new navRequest('cart', '<s:property value="url"/>', null, null, 'product_<s:property value="getId()" />_form')); return(false);">
+                            <input type="button" value="<s:text name="addCart"/>" onmouseout="hide()" class="button" id="product_<s:property value="getId()"/>_validateButton" onclick="navExec(new navRequest('cart', '<s:property value="url"/>', null, null, 'product_<s:property value="getId()" />_form')); return(false);">
                         </form>
                     </td>
                 </tr>
@@ -83,6 +83,18 @@
                             </td>
                             <td width="60%">
                                 <s:property value="getDescription(getLocale())" />
+                                <br/><br/>
+                                <s:if test="getStock() > 0">
+                                    <i><s:text name="inStock"/>.</i>
+                                </s:if>
+                                <s:else>
+                                    <i><s:text name="outStock"/>.</i>
+                                    <script type="text/javascript">
+                                        dojo.byId('product_<s:property value="getId()"/>_validateButton').className = "disabledButton";
+                                        dojo.byId('product_<s:property value="getId()"/>_validateButton').onclick = function() {};
+                                        dojo.byId('product_<s:property value="getId()"/>_validateButton').onmouseover = function() { show('<s:text name="noStock"/>'); };
+                                    </script>
+                                </s:else>
                             </td>
                             <td width="30%">
                                 <table>
