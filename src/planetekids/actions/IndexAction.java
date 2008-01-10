@@ -28,10 +28,6 @@ public class IndexAction extends ActionSupport implements SessionAware, Paramete
         return (CustomerRemote) session.get("customer");
     }
 
-    public String getCallback() {
-        return (String) session.remove("callback");
-    }
-
     @Override
     public String execute() throws Exception {
         try {
@@ -46,14 +42,6 @@ public class IndexAction extends ActionSupport implements SessionAware, Paramete
         } catch (Exception ex) {
             return ActionSupport.ERROR;
         }
-    }
-
-    public String logout() throws Exception {
-        String result = execute();
-        if (getCustomer() != null) {
-            getCustomer().LogOut();
-        }
-        return result;
     }
 
     public String updateCart() throws Exception {
@@ -71,12 +59,12 @@ public class IndexAction extends ActionSupport implements SessionAware, Paramete
                     getCustomer().setCartProductNumber(new Integer(command[1]), new Integer(command[2]));
                 } else if (command[0].equals("flush")) {
                     getCustomer().flushCart();
-                }  else if (command[0].equals("validate")) {
+                } else if (command[0].equals("validate")) {
                     getCustomer().validateCart();
-                } 
-            } catch(Exception ex) {
-                
-            } 
+                }
+            } catch (Exception ex) {
+
+            }
         }
         return result;
     }
@@ -85,10 +73,22 @@ public class IndexAction extends ActionSupport implements SessionAware, Paramete
         getCustomer().flushCart();
     }
 
+    public String logout() throws Exception {
+        String result = execute();
+        if (getCustomer() != null) {
+            getCustomer().LogOut();
+        }
+        return result;
+    }
+
+    public String getCallback() {
+        return (String) session.remove("callback");
+    }
+
     public int validateCart() throws Exception {
         return getCustomer().validateCart();
     }
-    
+
     public float getCartPrice() throws Exception {
         return getCustomer().getCartPrice();
     }
@@ -123,6 +123,10 @@ public class IndexAction extends ActionSupport implements SessionAware, Paramete
         }
     }
 
+    public String getCart_parameters() {
+        return (String) session.remove("cart_parameters");
+    }
+
     public String getCatalogue_action() {
         String action = (String) session.remove("catalogue_action");
         if (action == null) {
@@ -135,10 +139,14 @@ public class IndexAction extends ActionSupport implements SessionAware, Paramete
     public String getCatalogue_namespace() {
         String namespace = (String) session.remove("catalogue_namespace");
         if (namespace == null) {
-            return "/";
+            return "/product";
         } else {
             return namespace;
         }
+    }
+    
+    public String getCatalogue_parameters() {
+        return (String) session.remove("catalogue_parameters");
     }
 
     public String getContent_action() {
@@ -158,6 +166,10 @@ public class IndexAction extends ActionSupport implements SessionAware, Paramete
             return namespace;
         }
     }
+    
+    public String getContent_parameters() {
+        return (String) session.remove("content_parameters");
+    }
 
     public String getFooter_action() {
         String action = (String) session.remove("footer_action");
@@ -175,6 +187,10 @@ public class IndexAction extends ActionSupport implements SessionAware, Paramete
         } else {
             return namespace;
         }
+    }
+    
+    public String getFooter_parameters() {
+        return (String) session.remove("footer_parameters");
     }
 
     public String getGeneralmenu_action() {
@@ -194,6 +210,10 @@ public class IndexAction extends ActionSupport implements SessionAware, Paramete
             return namespace;
         }
     }
+    
+    public String getGeneralmenu_parameters() {
+        return (String) session.remove("generalmenu_parameters");
+    }
 
     public String getHeader_action() {
         String action = (String) session.remove("header_action");
@@ -212,6 +232,10 @@ public class IndexAction extends ActionSupport implements SessionAware, Paramete
             return namespace;
         }
     }
+    
+    public String getHeader_parameters() {
+        return (String) session.remove("header_parameters");
+    }
 
     public String getLocation_action() {
         String action = (String) session.remove("location_action");
@@ -229,5 +253,9 @@ public class IndexAction extends ActionSupport implements SessionAware, Paramete
         } else {
             return namespace;
         }
+    }
+    
+    public String getLocation_parameters() {
+        return (String) session.remove("location_parameters");
     }
 }
