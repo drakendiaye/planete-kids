@@ -22,7 +22,7 @@ public interface CustomerRemote {
     public void LogOut() throws Exception;
     
     public void flushCart() throws Exception;
-    //public int validateCart() throws Exception;
+    public int validateCart() throws Exception;
 
     public float getCartPrice() throws Exception;
     public List<ProductBean> getCartProducts()  throws Exception;
@@ -46,6 +46,7 @@ public interface CustomerRemote {
     public AgeBean getAge(int id) throws Exception;
     
     public List<ProductBean> getProducts() throws Exception;
+    public List<ProductBean> getProductsByAge(int age_id) throws Exception;
     public List<ProductBean> getProductsByCategory(int category_id) throws Exception;
     public List<ProductBean> getProductsByColor(int color_id) throws Exception;
     public List<ProductBean> getProductsByLabel(int label_id) throws Exception;
