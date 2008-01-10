@@ -52,7 +52,7 @@
 
 	<s:form method="post" namespace="/admin" action="label_valid_create">
 	<table align="center" >
-	<tr><td align=right><s:text name="name"></s:text>
+	<tr><td align=right><s:text name="name"/>
         <td><input type="text" name="name" size="35"/>
 	<tr><td align=right>Description (en)
         <td><input type="text" name="description_en" size="35"/>
@@ -60,11 +60,11 @@
         <td><input type="text" name="description_fr" size="35"/>
 	<tr><td align=right>Site
         <td><input type="text" name="site" size="35"/>
-	<tr><td align=right><s:text name="imageLarge"></s:text>
+	<tr><td align=right><s:text name="imageLarge"/>
         <td><input type="text" name="image_large" size="35"/>
-	<tr><td align=right><s:text name="imageMedium"></s:text>
+	<tr><td align=right><s:text name="imageMedium"/>
         <td><input type="text" name="image_medium" size="35"/>
-	<tr><td align=right><s:text name="imageSmall"></s:text>
+	<tr><td align=right><s:text name="imageSmall"/>
         <td><input type="text" name="image_small" size="35"/>
 	</table><br />
 	<input type="submit" value="<s:text name="valid" />" />

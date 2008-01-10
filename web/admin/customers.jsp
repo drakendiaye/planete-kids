@@ -10,7 +10,7 @@
 
 	<script type="text/javascript">
 	  function confirmdelete(url) {
-	    if (confirm('Are you sure?'))
+	    if (confirm('Êtes-vous sûr ?'))
 		window.location.replace(url);
 	  }
 	</script>
@@ -55,26 +55,26 @@
         <s:a href="%{indexadminen}"><img src="../images/en.png" /></s:a>
 
 	<br /><br />
-	<s:text name="adminP1"></s:text> <s:property value="getCustomers().size()" /> <s:text name="adminCustomers"></s:text> <s:text name="adminP2"></s:text><br />
+	<s:text name="adminP1"/> <s:property value="getCustomers().size()" /> <s:text name="adminCustomers"/> <s:text name="adminP2"/><br />
 		
 	<s:url id="createcustomer" namespace="/admin" action="customer_create" includeParams="none" />
-	<s:a href="%{createcustomer}"><s:text name="createCustomer"></s:text></s:a>
+	<s:a href="%{createcustomer}"><s:text name="createCustomer"/></s:a>
 
 	<br /><br />
 
-	<table border="2" align="center" cellpadding="2">
+	<table border="1" align="center" cellpadding="2">
 	<tr>
-	<th><s:text name="email"></s:text></th>
-	<th><s:text name="password"></s:text></th>
-	<th><s:text name="firstName"></s:text></th>
-	<th><s:text name="lastName"></s:text></th>
-	<th><s:text name="addressLine1"></s:text></th>
-	<th><s:text name="addressLine2"></s:text></th>
-	<th><s:text name="addressLine3"></s:text></th>
-	<th><s:text name="zipCode"></s:text></th>
-	<th><s:text name="city"></s:text></th>
-	<th width=220><s:text name="phoneNumber"></s:text></th>
-	<th width=220><s:text name="faxNumber"></s:text></th>
+	<th><s:text name="email"/></th>
+	<th><s:text name="password"/></th>
+	<th><s:text name="firstName"/></th>
+	<th><s:text name="lastName"/></th>
+	<th><s:text name="addressLine1"/></th>
+	<th><s:text name="addressLine2"/></th>
+	<th><s:text name="addressLine3"/></th>
+	<th><s:text name="zipCode"/></th>
+	<th><s:text name="city"/></th>
+	<th width=220><s:text name="phoneNumber"/></th>
+	<th width=220><s:text name="faxNumber"/></th>
 	<th>Action</th>
 	</tr>
 

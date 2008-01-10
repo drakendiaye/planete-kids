@@ -54,12 +54,12 @@
 	<tr><td align=right>Date: </td><td><s:property value="getCommand(getCommandId()).getDate()" /></td></tr>
 	</table>
 	<br />
-	<table border="2" align="center" cellpadding="2">
+	<table border="1" align="center" cellpadding="2">
 	<tr>
-	<th><s:text name="enName"></s:text> </th>
-	<th><s:text name="frName"></s:text> </th>
-	<th><s:text name="quantity"></s:text> </th>
-	<th><s:text name="price"></s:text> </th>
+	<th><s:text name="enName"/> </th>
+	<th><s:text name="frName"/> </th>
+	<th><s:text name="quantity"/> </th>
+	<th><s:text name="price"/> </th>
 	</tr>
 
 	<s:iterator value="getCommandLinesByCommand(getCommandId())">
@@ -70,7 +70,7 @@
 	    <td align=center><s:property value="getPrice()" />&nbsp;€</td>
 	    </tr>
 	</s:iterator>
-	    <tr><td colspan=3 align=right><s:text name="shippingCosts"></s:text> </td><td><s:property value="getCommand(getCommandId()).getShipping()" /></td></tr>
+	    <tr><td colspan=3 align=right><s:text name="shippingCosts"/> </td><td><s:property value="getCommand(getCommandId()).getShipping()" /></td></tr>
 	    <tr><td colspan=3 align=right><b>Total</b></td><td><s:property value="getCommandTotal(getCommandId())" />&nbsp;€</td></tr>
 	</table>
 
@@ -78,7 +78,7 @@
 	<input type="hidden" name="command_id" value="<s:property value="getCommandId()" />" />	
 	<br />
 	<table align="center">
-	<tr><td align=right><s:text name="changestate"></s:text>: </td>
+	<tr><td align=right><s:text name="changestate"/>: </td>
 	<td>
 	    <select name="state">
 		<option value="CREATED" <s:if test="getCommandState(getCommandId()).toString()=='CREATED'">selected</s:if>><s:text name="CREATED" /></option>

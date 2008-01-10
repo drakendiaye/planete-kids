@@ -52,25 +52,25 @@
 
 	<s:form method="post" namespace="/admin" action="customer_valid_create">
 	<table align="center">
-	<tr><td align=right><s:text name="password"></s:text>
+	<tr><td align=right><s:text name="password"/>
         <td><input type="text" name="password" size="35"/>
-	<tr><td align=right><s:text name="firstName"></s:text>
+	<tr><td align=right><s:text name="firstName"/>
         <td><input type="text" name="firstname" size="35"/>
-	<tr><td align=right><s:text name="lastName"></s:text>
+	<tr><td align=right><s:text name="lastName"/>
         <td><input type="text" name="lastname" size="35"/>
-	<tr><td align=right><s:text name="addressLine1"></s:text>
+	<tr><td align=right><s:text name="addressLine1"/>
         <td><input type="text" name="addr1" size="35"/>
-	<tr><td align=right><s:text name="addressLine2"></s:text>
+	<tr><td align=right><s:text name="addressLine2"/>
         <td><input type="text" name="addr2" size="35"/>
-	<tr><td align=right><s:text name="addressLine3"></s:text>
+	<tr><td align=right><s:text name="addressLine3"/>
         <td><input type="text" name="addr3" size="35"/>
-	<tr><td align=right><s:text name="zipCode"></s:text>
+	<tr><td align=right><s:text name="zipCode"/>
         <td><input type="text" name="zipcode" size="35"/>
-	<tr><td align=right><s:text name="city"></s:text>
+	<tr><td align=right><s:text name="city"/>
         <td><input type="text" name="city" size="35"/>
-	<tr><td align=right><s:text name="phoneNumber"></s:text>
+	<tr><td align=right><s:text name="phoneNumber"/>
         <td><input type="text" name="phone" size="35"/>
-	<tr><td align=right><s:text name="faxNumber"></s:text>
+	<tr><td align=right><s:text name="faxNumber"/>
         <td><input type="text" name="fax" size="35"/>	
 	</table><br />
 	<input type="submit" value="<s:text name="valid" />" />

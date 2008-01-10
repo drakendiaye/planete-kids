@@ -19,9 +19,9 @@
         <h2><s:text name="account"/></h2>
     </s:div>
     <s:div cssClass="contentMain">
-        <s:text name="hello"></s:text>, <s:property value="getCustomer().getAccount().getFirstName()"/> !
+        <s:text name="hello"/>, <s:property value="getCustomer().getAccount().getFirstName()"/> !
         <br/>
-        <s:text name="accountInformation"></s:text> :<br/>
+        <s:text name="accountInformation"/> :<br/>
         <table width="99%" class="account">
             <tr>
                 <td align="right">

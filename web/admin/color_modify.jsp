@@ -54,19 +54,19 @@
 	<table align="center">
 	<input type="hidden" name="pagenum" value="getProductPagenum()" />
 	<input type="hidden" name="color_id" value="<s:property value="getColorId()" />" />
-	<tr><td align=right><s:text name="enName"></s:text>
+	<tr><td align=right><s:text name="enName"/>
         <td><input type="text" name="name_en" value="<s:property value="getColor(getColorId()).getName('en')" />" size="35"/>
-	<tr><td align=right><s:text name="frName"></s:text>
+	<tr><td align=right><s:text name="frName"/>
         <td><input type="text" name="name_fr" value="<s:property value="getColor(getColorId()).getName('fr')" />" size="35"/>	
 	<tr><td align=right>Description (en)
         <td><input type="text" name="description_en" value="<s:property value="getColor(getColorId()).getDescription('en')" />" size="35"/>
 	<tr><td align=right>Description (fr)
         <td><input type="text" name="description_fr" value="<s:property value="getColor(getColorId()).getDescription('fr')" />" size="35"/>
-	<tr><td align=right><s:text name="imageLarge"></s:text>
+	<tr><td align=right><s:text name="imageLarge"/>
         <td><input type="text" name="image_large" value="<s:property value="getColor(getColorId()).getImage_large()" />" size="35"/>
-	<tr><td align=right><s:text name="imageMedium"></s:text>
+	<tr><td align=right><s:text name="imageMedium"/>
         <td><input type="text" name="image_medium" value="<s:property value="getColor(getColorId()).getImage_medium()" />" size="35"/>
-	<tr><td align=right><s:text name="imageSmall"></s:text>
+	<tr><td align=right><s:text name="imageSmall"/>
         <td><input type="text" name="image_small" value="<s:property value="getColor(getColorId()).getImage_small()" />" size="35"/>
 	</table><br />
 	<input type="submit" value="<s:text name="valid" />" />

@@ -17,6 +17,6 @@
                 <p><s:property value="getDescription(getLocale())" /></p>
             </s:div>
 
-        </s:a>
+       </s:a>
     </s:iterator>
 </s:div>

@@ -10,7 +10,7 @@
 
 	<script type="text/javascript">
 	  function confirmdelete(url) {
-	    if (confirm('Are you sure?'))
+	    if (confirm('Êtes-vous sûr ?'))
 		window.location.replace(url);
 	  }
 	</script>
@@ -55,22 +55,22 @@
         <s:a href="%{indexadminen}"><img src="../images/en.png" /></s:a>
 
 	<br /><br />
-	<s:text name="adminP1"></s:text> <s:property value="getColors().size()" /> <s:text name="adminColors"></s:text> <s:text name="adminP2"></s:text> <br />
+	<s:text name="adminP1"/> <s:property value="getColors().size()" /> <s:text name="adminColors"/> <s:text name="adminP2"/> <br />
 	
 	<s:url id="createcolor" namespace="/admin" action="color_create" includeParams="none" />
-	<s:a href="%{createcolor}"><s:text name="createColor"></s:text> </s:a>
+	<s:a href="%{createcolor}"><s:text name="createColor"/></s:a>
 
 	<br /><br />
 
-	<table border="2" align="center" cellpadding="2" >
+	<table border="1" align="center" cellpadding="2" >
 	<tr>
-	<th><s:text name="enName"></s:text> </th>
-	<th><s:text name="frName"></s:text> </th>
+	<th><s:text name="enName"/> </th>
+	<th><s:text name="frName"/> </th>
 	<th>Description (en)</th>
 	<th>Description (fr)</th>
-	<th><s:text name="imageLarge"></s:text> </th>
-	<th><s:text name="imageMedium"></s:text> </th>
-	<th><s:text name="imageSmall"></s:text> </th>
+	<th><s:text name="imageLarge"/> </th>
+	<th><s:text name="imageMedium"/> </th>
+	<th><s:text name="imageSmall"/> </th>
 	<th>Action</th>
 	</tr>
 
