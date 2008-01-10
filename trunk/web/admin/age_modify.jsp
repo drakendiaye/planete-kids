@@ -50,8 +50,14 @@
         <td><input type="text" name="description_en" value="<s:property value="getAge(getAgeId()).getDescription('en')" />" size="35"/>
 	<tr><td align=right>Description (fr)
         <td><input type="text" name="description_fr" value="<s:property value="getAge(getAgeId()).getDescription('fr')" />" size="35"/>
+	<tr><td align=right><s:text name="imageLarge"></s:text>	
+	<td><input type="text" name="image_large" value="<s:property value="getAge(getAgeId()).getImage_large()" />" size="35"/>
+	<tr><td align=right><s:text name="imageMedium"></s:text>
+        <td><input type="text" name="image_medium" value="<s:property value="getAge(getAgeId()).getImage_medium()" />" size="35"/>
+	<tr><td align=right><s:text name="imageSmall"></s:text>
+        <td><input type="text" name="image_small" value="<s:property value="getAge(getAgeId()).getImage_small()" />" size="35"/>	
 	</table><br />
-	<input type="submit" value="Submit" />
+	<input type="submit" value="<s:text name="valid" />" />
 	</s:form>
 
 	</div>

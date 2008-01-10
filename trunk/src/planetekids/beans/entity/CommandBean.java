@@ -19,7 +19,7 @@ import javax.persistence.OneToMany;
 public class CommandBean implements Serializable {
     
     public enum State {CREATED, PROCESSING, DISPATCHED, FINISHED};
-    
+   
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
     private int id;

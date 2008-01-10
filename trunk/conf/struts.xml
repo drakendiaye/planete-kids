@@ -460,6 +460,11 @@
             <result>/admin/command_modify.jsp</result>
             <result name="error">/error.jsp</result>
         </action>
+	
+	<action name="command_valid" class="planetekids.actions.admin.IndexAction" method="commandValid">
+            <result>/admin/command_modify.jsp</result>
+            <result name="error">/error.jsp</result>
+        </action>
 
 	<action name="command_delete" class="planetekids.actions.admin.IndexAction" method="commandDelete">
             <result>/admin/commands.jsp</result>

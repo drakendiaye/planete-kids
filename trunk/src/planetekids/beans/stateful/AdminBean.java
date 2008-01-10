@@ -300,10 +300,8 @@ public class AdminBean implements AdminRemote {
 	age.setImage_small(image);
     }
 
-    public int createAge(String name_fr, String name_en, String description_fr, String description_en, String image_large,
-	    String image_medium, String image_small) throws Exception {
-	AgeBean age = new AgeBean(new LocaleBean(name_fr, name_en), new LocaleBean(description_fr, description_en), image_large,
-		image_medium, image_small);
+    public int createAge(String name_fr, String name_en, String description_fr, String description_en, String image_large, String image_medium, String image_small) throws Exception {
+	AgeBean age = new AgeBean(new LocaleBean(name_fr, name_en), new LocaleBean(description_fr, description_en), image_large, image_medium, image_small);
 	entityManager.persist(age);
 	return age.getId();
     }

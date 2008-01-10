@@ -56,17 +56,23 @@
 			<th><s:text name="frName"></s:text></th>
 			<th>Description (en)</th>
 			<th>Description (fr)</th>
+			<th><s:text name="imageLarge"></s:text> </th>
+			<th><s:text name="imageMedium"></s:text> </th>
+			<th><s:text name="imageSmall"></s:text> </th>
 			<th>Action</th>
 		</tr>
 
 		<s:iterator value="getAges()">
 			<tr>
-				<td align=center><s:property value="getName('en')" /></td>
-				<td align=center><s:property value="getName('fr')" /></td>
-				<td align=center><s:property value="getDescription('en')" /></td>
-				<td align=center><s:property value="getDescription('fr')" /></td>
+			<td align=center><s:property value="getName('en')" /></td>
+			<td align=center><s:property value="getName('fr')" /></td>
+			<td align=center><s:property value="getDescription('en')" /></td>
+			<td align=center><s:property value="getDescription('fr')" /></td>
+			<td align=center><s:if test="getImage_large() != ''"><img src="../<s:property value="getImage_large()" />"></s:if></td>
+			<td align=center><s:if test="getImage_medium() != ''"><img src="../<s:property value="getImage_medium()" />"></s:if></td>
+			<td align=center><s:if test="getImage_small() != ''"><img src="../<s:property value="getImage_small()" />"></s:if></td>
 
-				<td align=center><s:url id="modify" namespace="/admin" action="age_modify" includeParams="none">
+			<td align=center><s:url id="modify" namespace="/admin" action="age_modify" includeParams="none">
 					<s:param name="age_id" value="getId()" />
 				</s:url> <s:a href="%{modify}">
 					<s:text name="modify" />
@@ -75,7 +81,7 @@
 					<s:param name="age_id" value="getId()" />
 				</s:url> <s:a href="javascript:confirmdelete('%{delete}')">
 					<s:text name="delete" />
-				</s:a></td>
+			</s:a></td>
 
 			</tr>
 		</s:iterator>
