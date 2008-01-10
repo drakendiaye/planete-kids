@@ -41,6 +41,7 @@
 
 	<s:form method="post" namespace="/admin" action="color_valid">
 	<table align="center">
+	<input type="hidden" name="pagenum" value="getProductPagenum()" />
 	<input type="hidden" name="color_id" value="<s:property value="getColorId()" />" />
 	<tr><td align=right><s:text name="enName"></s:text>
         <td><input type="text" name="name_en" value="<s:property value="getColor(getColorId()).getName('en')" />" size="35"/>

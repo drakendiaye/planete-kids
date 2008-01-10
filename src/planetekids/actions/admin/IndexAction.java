@@ -23,6 +23,10 @@ public class IndexAction extends ActionSupport implements SessionAware, Paramete
 
     private Map session;
     private Map parameters;
+    
+    private int nb = -1;
+    
+    private static int prodsbypagemax = 100;
 
     public void setSession(Map session) {
 	this.session = session;
@@ -59,9 +63,8 @@ public class IndexAction extends ActionSupport implements SessionAware, Paramete
     }
 
     private int getIntParameter(String name) {
-	System.out.println("Parameter : " + name);
 	int value = -1;
-
+	System.out.println("get int parameter: " + name);
 	if (parameters.get(name) != null) {
 	    String value_s = ((String[]) parameters.get(name))[0];
 	    if (value_s.compareTo("") != 0) {
@@ -72,7 +75,7 @@ public class IndexAction extends ActionSupport implements SessionAware, Paramete
 		}
 	    }
 	}
-	System.out.println("Value : " + value);
+	System.out.println("value: " + value);
 	return value;
     }
 
@@ -289,8 +292,56 @@ public class IndexAction extends ActionSupport implements SessionAware, Paramete
 	return getAdmin().getProducts();
     }
 
+    public int getNbProducts() throws Exception {
+	if (nb < 0)
+	    nb = getAdmin().getProducts().size();
+	
+	return nb;
+    }
+
+    public List getPagedProducts() throws Exception {
+	List<ProductBean> products = getProducts();
+
+	int prodsbypage = prodsbypagemax;
+	int pagenum = getProductPagenum();
+	int nbprods = getNbProducts();
+	
+	int from = (pagenum - 1)*prodsbypage;
+	int to = from + prodsbypage;
+	
+	if (to > nbprods)
+	    to = nbprods;
+	
+	return products.subList(from, to);
+    }
+
+    public int getNbProductPage() throws Exception {
+	int prodsbypage = prodsbypagemax;
+	int nbprods = getNbProducts();
+	
+	int n = (nbprods - 1)/prodsbypage + 1;
+	System.out.println("nb " + n);
+	System.out.println("prodsbypage " + prodsbypage);
+	System.out.println("nbprods " + nbprods);
+	return n;
+    }
+    
     public ProductBean getProduct(int id) throws Exception {
 	return getAdmin().getProduct(id);
+    }
+
+    public int getProductPagenum() throws Exception {
+	int pagenum = getIntParameter("pagenum");
+	int nbprods = getNbProducts();
+	int prodsbypage = prodsbypagemax;
+	
+	if (pagenum < 1)
+	    pagenum = 1;
+	
+	if (pagenum > ((nbprods - 1)/prodsbypage + 1))
+		pagenum = ((nbprods - 1)/prodsbypage + 1);
+
+	return pagenum;
     }
 
     public int getProductId() throws Exception {
@@ -497,7 +548,7 @@ public class IndexAction extends ActionSupport implements SessionAware, Paramete
 		id = Integer.valueOf(id_s).intValue();
 	    }
 	}
-	System.out.println("command id: " + id);
+
 	return id;
     }
     
@@ -526,7 +577,6 @@ public class IndexAction extends ActionSupport implements SessionAware, Paramete
     }
     
     public List getCommandLinesByCommand(int id) throws Exception {
-	System.out.println("get command lines by command: " + id);
 	return getAdmin().getCommandLinesByCommand(id);
     }
 

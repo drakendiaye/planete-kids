@@ -44,12 +44,39 @@
 	<s:a href="%{viewcommands}"><s:text name="commands" /></s:a>
 
 	<br /><br />
-	<s:text name="adminP1"></s:text> <s:property value="getProducts().size()" /> <s:text name="products"></s:text> <s:text name="adminP2"></s:text><br />
+	<s:text name="adminP1"></s:text> <s:property value="getNbProducts()" /> <s:text name="products"></s:text> <s:text name="adminP2"></s:text><br />
 
 	<s:url id="createproduct" namespace="/admin" action="product_create" includeParams="none" />
 	<s:a href="%{createproduct}"><s:text name="createProduct"></s:text></s:a>
 
 	<br /><br />
+
+	<s:text name="nbpages" />: <s:property value="getNbProductPage()" />
+
+	<s:form method="post" namespace="/admin" action="products">
+	    Page: <input size="4" type="text" name="pagenum" value="<s:property value="getProductPagenum()" />" />
+        </s:form>
+
+	<s:url id="viewproductsprev" namespace="/admin" action="products" includeParams="none">
+	<s:param name="pagenum" value="getProductPagenum() - 1" />
+	</s:url>
+
+	<s:url id="viewproductsnext" namespace="/admin" action="products" includeParams="none">
+	<s:param name="pagenum" value="getProductPagenum() + 1" />
+	</s:url>
+
+	<table align="center"><tr><td align="right" style="width:160px">
+	<s:if test="(getProductPagenum() - 1) > 0">
+	    <s:a href="%{viewproductsprev}"><s:text name="prevpage" /></s:a>
+	</s:if>
+	</td><td align="left" style="width:160px">
+	<s:if test="getProductPagenum() < getNbProductPage()">
+	    <s:a href="%{viewproductsnext}"><s:text name="nextpage" /></s:a>
+	</s:if>
+	</td></tr>
+	</table>
+
+	<br />
 
 	<table border="2" align="center" cellpadding="2">
 	<tr>
@@ -69,7 +96,7 @@
 	<th>Action</th>
 	</tr>
 
-	<s:iterator value="getProducts()">
+	<s:iterator value="getPagedProducts()">
 	    <tr>
 	    <td align=center><s:property value="getName('en')" /></td>
 	    <td align=center><s:property value="getName('fr')" /></td>
@@ -89,10 +116,12 @@
 
 	    <s:url id="modify" namespace="/admin" action="product_modify" includeParams="none">
 	    <s:param name="product_id" value="getId()" />
+	    <s:param name="pagenum" value="getProductPagenum()" />
 	    </s:url>
 	    <s:a href="%{modify}"><s:text name="modify" /></s:a><br />
 	    <s:url id="delete" namespace="/admin" action="product_delete" includeParams="none">
 	    <s:param name="product_id" value="getId()" />
+	    <s:param name="pagenum" value="getProductPagenum()" />
 	    </s:url>
 	    <s:a href="javascript:confirmdelete('%{delete}')"><s:text name="delete" /></s:a>
 
