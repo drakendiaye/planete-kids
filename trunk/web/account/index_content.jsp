@@ -19,9 +19,9 @@
         <h2><s:text name="account"/></h2>
     </s:div>
     <s:div cssClass="contentMain">
-        Bonjour, <s:property value="getCustomer().getAccount().getFirstName()"/> !
+        <s:text name="hello"></s:text>, <s:property value="getCustomer().getAccount().getFirstName()"/> !
         <br/>
-        Voici les informations relatives à votre compte :<br/>
+        <s:text name="accountInformation"></s:text> :<br/>
         <table width="99%" class="account">
             <tr>
                 <td align="right">
