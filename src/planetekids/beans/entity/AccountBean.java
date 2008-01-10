@@ -141,15 +141,4 @@ public class AccountBean implements java.io.Serializable {
     public void setFaxNumber(String faxNumber) {
 	this.faxNumber = faxNumber;
     }
-    
-    /*@PreRemove
-    public void titi(){
-	System.out.println("removing account id : " +this.getEmailAddress());
-    }
-    
-    @PostRemove
-    public void toto(){
-	System.out.println("account id : " + this.getEmailAddress() + " removed");
-    }*/
-
 }

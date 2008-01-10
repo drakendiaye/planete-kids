@@ -21,6 +21,10 @@
             <result>/index_cart.jsp</result>
             <result name="error">/error.jsp</result>
         </action>
+	<action name="valid_cart" class="planetekids.actions.IndexAction" method="validateCart">
+            <result>/index_cart.jsp</result>
+            <result name="error">/error.jsp</result>
+        </action>
         <action name="index_content" class="planetekids.actions.IndexAction" >
             <result>/index_content.jsp</result>
             <result name="error">/error.jsp</result>

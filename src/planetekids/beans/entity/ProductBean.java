@@ -7,19 +7,12 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
-import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToOne;
 import javax.persistence.PreRemove;
 
 @Entity
-@NamedQueries( { @NamedQuery(name = "getProducts", query = "select o FROM ProductBean o ORDER BY id")
-/*@NamedQuery(name="getProductsByAges", query = "select o FROM ProductBean o WHERE age_id= :age_id ORDER BY id"),
- @NamedQuery(name="getProductsByColors", query = "select o FROM ProductBean o WHERE color_id= :color_id ORDER BY id"),
- @NamedQuery(name="getProductsByCategories", query = "select o FROM ProductBean o WHERE category_id= :category_id ORDER BY id"),
- @NamedQuery(name="getProductsByLabels", query = "select o FROM ProductBean o WHERE label_id= :label_id ORDER BY id")
- */
-})
+@NamedQuery(name = "getProducts", query = "select o FROM ProductBean o ORDER BY id")
 public class ProductBean implements java.io.Serializable, java.lang.Comparable {
 
     @Id
