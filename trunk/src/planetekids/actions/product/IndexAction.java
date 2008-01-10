@@ -75,9 +75,11 @@ public class IndexAction extends ActionSupport implements SessionAware, Paramete
         session.put("catalogue_parameters", filtersString);
         return result;
     }
-    
+
     public String content() throws Exception {
         String result = execute();
+
+        System.out.println("\n\n\n\n\n\n\n\n\n\n" + getFiltersString() + "\n\n\n\n\n\n\n\n\n\n");
 
         if (ageFilter.size() == 0 && labelFilter.size() == 0 && categoryFilter.size() == 0 && colorFilter.size() == 0) {
             products = getCustomer().getProducts();
@@ -101,10 +103,10 @@ public class IndexAction extends ActionSupport implements SessionAware, Paramete
         if (page > nbpage) {
             page = nbpage;
         }
-        
+
         return result;
     }
-    
+
     public List<ProductBean> getProducts() throws Exception {
         int lastElement = page * PAGESIZE;
         if (lastElement > products.size()) {
@@ -116,63 +118,79 @@ public class IndexAction extends ActionSupport implements SessionAware, Paramete
     public ProductBean getProduct(int id) throws Exception {
         return getCustomer().getProduct(id);
     }
-    
+
     public List<AgeBean> getAges() throws Exception {
         return getCustomer().getAges();
     }
-    
+
     public AgeBean getAge(int id) throws Exception {
         return getCustomer().getAge(id);
     }
-    
+
     public List<CategoryBean> getCategories() throws Exception {
         return getCustomer().getCategories();
     }
-    
+
     public CategoryBean getCategory(int id) throws Exception {
         return getCustomer().getCategory(id);
     }
-    
+
     public List<ColorBean> getColors() throws Exception {
         return getCustomer().getColors();
     }
-    
+
     public ColorBean getColor(int id) throws Exception {
         return getCustomer().getColor(id);
     }
-    
+
     public List<LabelBean> getLabels() throws Exception {
         return getCustomer().getLabels();
     }
-    
+
     public LabelBean getLabel(int id) throws Exception {
         return getCustomer().getLabel(id);
     }
-    
+
+    public boolean isAgeFiltered(int id) throws Exception {
+        return getAgeFilter().contains(new Integer(getAge(id).getId()));
+    }
+
+    public boolean isCategoryFiltered(int id) throws Exception {
+        return getCategoryFilter().contains(new Integer(getCategory(id).getId()));
+    }
+
+    public boolean isColorFiltered(int id) throws Exception {
+        return getColorFilter().contains(new Integer(getColor(id).getId()));
+    }
+
+    public boolean isLabelFiltered(int id) throws Exception {
+        return getLabelFilter().contains(new Integer(getLabel(id).getId()));
+    }
+
     public List<Integer> getAgeFilter() throws Exception {
         return ageFilter;
     }
-    
+
     public List<Integer> getCategoryFilter() throws Exception {
         return categoryFilter;
     }
-    
+
     public List<Integer> getColorFilter() throws Exception {
         return colorFilter;
     }
-    
+
     public List<Integer> getLabelFilter() throws Exception {
         return labelFilter;
     }
-    
-    public boolean getAndFilter()  throws Exception {
+
+    public boolean getAndFilter() throws Exception {
         return andFilter;
     }
-    
+
     public String getFiltersString() {
         return filtersString;
     }
-    
+
     public String getAgeFilterString() {
         return ageFilterString;
     }
@@ -192,7 +210,7 @@ public class IndexAction extends ActionSupport implements SessionAware, Paramete
     public String getAndFilterString() {
         return andFilterString;
     }
-    
+
     public int getPage() throws Exception {
         return page;
     }
@@ -222,28 +240,32 @@ public class IndexAction extends ActionSupport implements SessionAware, Paramete
         }
         return pages;
     }
-    
+
     private void buildFilters() {
         filtersString = "";
         ageFilterString = "";
         categoryFilterString = "";
         labelFilterString = "";
         colorFilterString = "";
-        andFilterString = "";
+        andFilterString = "true";
         ageFilter = new ArrayList<Integer>();
         categoryFilter = new ArrayList<Integer>();
         labelFilter = new ArrayList<Integer>();
         colorFilter = new ArrayList<Integer>();
-        andFilter = false;
+        andFilter = true;
 
         if (parameters.get("ageFilter") != null) {
             try {
                 ageFilterString = ((String[]) parameters.get("ageFilter"))[0];
-                if(!filtersString.equals("")) filtersString += "&";
-                filtersString += "ageFilter=" + ageFilterString;
-                String[] ages = ageFilterString.split(",");
-                for (int i = 0; i < ages.length; i++) {
-                    ageFilter.add(new Integer(ages[i]));
+                if (!ageFilterString.equals("")) {
+                    if (!filtersString.equals("")) {
+                        filtersString += "&";
+                    }
+                    filtersString += "ageFilter=" + ageFilterString;
+                    String[] ages = ageFilterString.split(",");
+                    for (int i = 0; i < ages.length; i++) {
+                        ageFilter.add(new Integer(ages[i]));
+                    }
                 }
             } catch (Exception e) {
                 e.printStackTrace();
@@ -252,11 +274,15 @@ public class IndexAction extends ActionSupport implements SessionAware, Paramete
         if (parameters.get("categoryFilter") != null) {
             try {
                 categoryFilterString = ((String[]) parameters.get("categoryFilter"))[0];
-                if(!filtersString.equals("")) filtersString += "&";
-                filtersString += "categoryFilter=" + categoryFilterString;
-                String[] categories = categoryFilterString.split(",");
-                for (int i = 0; i < categories.length; i++) {
-                    categoryFilter.add(new Integer(categories[i]));
+                if (!categoryFilterString.equals("")) {
+                    if (!filtersString.equals("")) {
+                        filtersString += "&";
+                    }
+                    filtersString += "categoryFilter=" + categoryFilterString;
+                    String[] categories = categoryFilterString.split(",");
+                    for (int i = 0; i < categories.length; i++) {
+                        categoryFilter.add(new Integer(categories[i]));
+                    }
                 }
             } catch (Exception e) {
                 e.printStackTrace();
@@ -265,11 +291,15 @@ public class IndexAction extends ActionSupport implements SessionAware, Paramete
         if (parameters.get("labelFilter") != null) {
             try {
                 labelFilterString = ((String[]) parameters.get("labelFilter"))[0];
-                if(!filtersString.equals("")) filtersString += "&";
-                filtersString += "labelFilter=" + labelFilterString;
-                String[] labels = labelFilterString.split(",");
-                for (int i = 0; i < labels.length; i++) {
-                    labelFilter.add(new Integer(labels[i]));
+                if (!labelFilterString.equals("")) {
+                    if (!filtersString.equals("")) {
+                        filtersString += "&";
+                    }
+                    filtersString += "labelFilter=" + labelFilterString;
+                    String[] labels = labelFilterString.split(",");
+                    for (int i = 0; i < labels.length; i++) {
+                        labelFilter.add(new Integer(labels[i]));
+                    }
                 }
             } catch (Exception e) {
                 e.printStackTrace();
@@ -278,11 +308,15 @@ public class IndexAction extends ActionSupport implements SessionAware, Paramete
         if (parameters.get("colorFilter") != null) {
             try {
                 colorFilterString = ((String[]) parameters.get("colorFilter"))[0];
-                if(!filtersString.equals("")) filtersString += "&";
-                filtersString += "colorFilter=" + colorFilterString;
-                String[] colors = colorFilterString.split(",");
-                for (int i = 0; i < colors.length; i++) {
-                    colorFilter.add(new Integer(colors[i]));
+                if (!colorFilterString.equals("")) {
+                    if (!filtersString.equals("")) {
+                        filtersString += "&";
+                    }
+                    filtersString += "colorFilter=" + colorFilterString;
+                    String[] colors = colorFilterString.split(",");
+                    for (int i = 0; i < colors.length; i++) {
+                        colorFilter.add(new Integer(colors[i]));
+                    }
                 }
             } catch (Exception e) {
                 e.printStackTrace();
@@ -291,13 +325,16 @@ public class IndexAction extends ActionSupport implements SessionAware, Paramete
         if (parameters.get("andFilter") != null) {
             try {
                 andFilterString = ((String[]) parameters.get("andFilter"))[0];
-                if(!filtersString.equals("")) filtersString += "&";
-                filtersString += "andFilter=" + andFilterString;
-                andFilter = new Boolean(andFilterString);
+                if (!andFilterString.equals("")) {
+                    if (!filtersString.equals("")) {
+                        filtersString += "&";
+                    }
+                    filtersString += "andFilter=" + andFilterString;
+                    andFilter = new Boolean(andFilterString);
+                }
             } catch (Exception e) {
                 e.printStackTrace();
             }
         }
-        
     }
 }
