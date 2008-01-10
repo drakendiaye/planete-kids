@@ -22,6 +22,7 @@ import planetekids.beans.entity.AnswerBean;
 import planetekids.beans.entity.CategoryBean;
 import planetekids.beans.entity.ColorBean;
 import planetekids.beans.entity.CommandBean;
+import planetekids.beans.entity.CommandBean.State;
 import planetekids.beans.entity.CommandLineBean;
 import planetekids.beans.entity.LabelBean;
 import planetekids.beans.entity.LocaleBean;
@@ -343,6 +344,28 @@ public class CustomerBean implements CustomerRemote {
         } catch (Exception ex) {
 
         }
+    }
+    
+    public float getCommandTotal(int id) throws Exception {
+	CommandBean command = getCommand(id);
+
+	float total = command.getShipping();
+
+	Set<CommandLineBean> command_lines = command.getCommand_lines();
+
+	Iterator it = command_lines.iterator();
+
+	CommandLineBean curcmdline;
+	while (it.hasNext()) {
+	    curcmdline = (CommandLineBean) it.next();
+	    total += curcmdline.getNumber() * curcmdline.getPrice();
+	}
+
+	return total;
+    }
+
+    public State getCommandState(int id) throws Exception {
+	return getCommand(id).getState();
     }
 
     @PreDestroy
