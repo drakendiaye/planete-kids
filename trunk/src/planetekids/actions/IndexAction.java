@@ -85,10 +85,14 @@ public class IndexAction extends ActionSupport implements SessionAware, Paramete
         return (String) session.remove("callback");
     }
 
-    // corriger la fonction getCustomer().validateCart()
-    /*public int validateCart() throws Exception {
-        return getCustomer().validateCart();
-    }*/
+    public String validateCart() throws Exception {
+	String result = execute();
+	
+        getCustomer().validateCart();
+	getCustomer().flushCart();
+	
+	return result;
+    }
 
     public float getCartPrice() throws Exception {
         return getCustomer().getCartPrice();
