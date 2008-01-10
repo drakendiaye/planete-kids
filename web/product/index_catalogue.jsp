@@ -14,7 +14,7 @@
 
 <div style="width:95%;margin:auto;margin-bottom:5px;max-height:50px;overflow:auto;">
     <s:iterator value="getAges()">
-        <img src="images/white_small.png"
+        <img src="<s:property value="getImage_small()" />"
              onmouseover="show('<s:property value="getName(getLocale())"/>');"
              onmouseout="hide();"
              onclick="var temp = ',' + dojo.byId('ageFilterCat').value + ',';if(temp == ',,') {dojo.byId('ageFilterCat').value = <s:property value="getId()"/>; this.style.borderColor='blue';} else if(temp.search(/,<s:property value="getId()"/>,/) == -1) {dojo.byId('ageFilterCat').value += ',' + <s:property value="getId()"/>; this.style.borderColor='blue';} else {temp = temp.replace(/,<s:property value="getId()"/>,/, ','); if(temp.length == 1) dojo.byId('ageFilterCat').value = ''; else dojo.byId('ageFilterCat').value = temp.substring(1,temp.length-1); this.style.borderColor='white';}"
