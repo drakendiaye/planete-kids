@@ -36,7 +36,7 @@
                         <tr>
                             <td colspan="2" align="center">
                                 <s:url id="url_content" namespace="/account" action="identify_submit" includeParams="none"/>
-                                <input type="submit" value="<s:text name="submit"/>" class="button" onclick="navExec(new navRequest('content', '<s:property value="url_content"/>', null, null, 'identify'))"/>
+                                <input type="submit" value="<s:text name="valid"/>" class="button" onclick="navExec(new navRequest('content', '<s:property value="url_content"/>', null, null, 'identify'))"/>
                             </td>
                         </tr>
                     </table>
