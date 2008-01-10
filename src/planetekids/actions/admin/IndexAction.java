@@ -455,14 +455,20 @@ public class IndexAction extends ActionSupport implements SessionAware, Paramete
 	String name_en = getStringParameter("name_en");
 	String description_fr = getStringParameter("description_fr");
 	String description_en = getStringParameter("description_en");
+	String image_large = getStringParameter("image_large");
+	String image_medium = getStringParameter("image_medium");
+	String image_small = getStringParameter("image_small");
 
 	if (id < 0) {
-	    getAdmin().createAge(name_fr, name_en, description_fr, description_en);
+	    getAdmin().createAge(name_fr, name_en, description_fr, description_en, image_large, image_medium, image_small);
 	} else {
 	    getAdmin().setAgeNameFr(id, name_fr);
 	    getAdmin().setAgeNameEn(id, name_en);
 	    getAdmin().setAgeDescriptionFr(id, description_fr);
 	    getAdmin().setAgeDescriptionEn(id, description_en);
+	    getAdmin().setAgeImageLarge(id, image_large);
+	    getAdmin().setAgeImageMedium(id, image_medium);
+	    getAdmin().setAgeImageSmall(id, image_small);
 	}
 
 	return ret;
@@ -538,6 +544,23 @@ public class IndexAction extends ActionSupport implements SessionAware, Paramete
 	}
 
 	getAdmin().deleteCommand(id);
+
+	return ret;
+    }
+    
+    public String commandValid() throws Exception {
+
+	String ret = execute();
+
+	int id = getCommandId();
+
+	String state = getStringParameter("state");
+
+	if (id < 0) {
+	    return ret;
+	} else {
+	    getAdmin().setCommandState(id, State.valueOf(state));
+	}
 
 	return ret;
     }

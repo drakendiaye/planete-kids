@@ -57,7 +57,7 @@
 	<tr><td align=right><s:text name="imageSmall"></s:text>
         <td><input type="text" name="image_small" value="<s:property value="getCategory(getCategoryId()).getImage_small()" />" size="35"/>
 	</table><br />
-	<input type="submit" value="Submit" />
+	<input type="submit" value="<s:text name="valid" />" />
 	</s:form>
 	</div>
     </s:div>

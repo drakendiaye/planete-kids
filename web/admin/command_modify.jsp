@@ -48,8 +48,8 @@
 	<tr>
 	<th><s:text name="enName"></s:text> </th>
 	<th><s:text name="frName"></s:text> </th>
-	<th><s:text name="price"></s:text> </th>
 	<th><s:text name="quantity"></s:text> </th>
+	<th><s:text name="price"></s:text> </th>
 	</tr>
 
 	<s:iterator value="getCommandLinesByCommand(getCommandId())">
@@ -65,17 +65,20 @@
 	</table>
 
 	<s:form method="post" namespace="/admin" action="command_valid">
+	<input type="hidden" name="command_id" value="<s:property value="getCommandId()" />" />	
+	<br />
 	<table align="center">
-	<tr><td align=right><s:text name="state"></s:text></td>
+	<tr><td align=right><s:text name="changestate"></s:text>: </td>
 	<td>
 	    <select name="state">
-		<option value="0" ><s:text name="CREATED" /></option>
-		<option value="1" ><s:text name="PROCESSING" /></option>
-		<option value="2" ><s:text name="DISPATCHED" /></option>
-		<option value="3" ><s:text name="FINISHED" /></option>
+		<option value="CREATED" <s:if test="getCommandState(getCommandId()).toString()=='CREATED'">selected</s:if>><s:text name="CREATED" /></option>
+		<option value="PROCESSING" <s:if test="getCommandState(getCommandId()).toString()=='PROCESSING'">selected</s:if>><s:text name="PROCESSING" /></option>
+		<option value="DISPATCHED" <s:if test="getCommandState(getCommandId()).toString()=='DISPATCHED'">selected</s:if>><s:text name="DISPATCHED" /></option>
+		<option value="FINISHED" <s:if test="getCommandState(getCommandId()).toString()=='FINISHED'">selected</s:if>><s:text name="FINISHED" /></option>
 	    </select>
 	</td></tr>
-	</table>
+	</table><br />
+	<input type="submit" value="<s:text name="valid" />" />
 	</s:form>
 	
 	</div>
