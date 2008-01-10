@@ -1,5 +1,6 @@
 package planetekids.beans.stateful;
 
+import java.util.Hashtable;
 import java.util.List;
 import javax.ejb.Remote;
 import planetekids.beans.entity.ProductBean;
@@ -11,6 +12,7 @@ public interface CartRemote {
     public void flushCart() throws Exception;
     public int validateCart() throws Exception;
     public float getCartPrice() throws Exception;
+    public Hashtable getHashtable() throws Exception;
     public List<ProductBean> getCartProducts()  throws Exception;
     public void setCartProductNumber(int product_id, int product_number) throws Exception;
     public int getCartProductNumber(int product_id) throws Exception;

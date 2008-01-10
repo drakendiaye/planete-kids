@@ -1,5 +1,6 @@
 package planetekids.beans.stateful;
 
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.Hashtable;
@@ -12,6 +13,10 @@ import javax.ejb.Remove;
 import javax.ejb.Stateful;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import planetekids.beans.entity.AccountBean;
+import planetekids.beans.entity.CommandBean;
+import planetekids.beans.entity.CommandLineBean;
+import planetekids.beans.entity.LocaleBean;
 import planetekids.beans.entity.ProductBean;
 
 @Stateful
@@ -31,6 +36,10 @@ public class CartBean implements CartRemote {
 
     public int validateCart() throws Exception {
         throw new UnsupportedOperationException("Not supported yet.");
+    }
+    
+    public Hashtable getHashtable() throws Exception {
+        return cart;
     }
     
     public float getCartPrice() throws Exception {
