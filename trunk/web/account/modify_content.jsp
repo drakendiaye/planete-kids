@@ -100,7 +100,7 @@
                         <s:url id="url_callback_location" namespace="/account" action="index_location" includeParams="none"/>
                         <s:hidden name="callback" value="navExec(new navRequest('content', '%{url_callback_content}'));
                                   navExec(new navRequest('location', '%{url_callback_location}'));"/>
-                        <input type="submit" value="<s:text name="submit"/>" class="button" onclick="navExec(new navRequest('content', '<s:property value="url_content"/>', null, null, 'modify_account_form'))"/>
+                        <input type="submit" value="<s:text name="valid"/>" class="button" onclick="navExec(new navRequest('content', '<s:property value="url_content"/>', null, null, 'modify_account_form'))"/>
                     </td>
                 </tr>
             </table>
