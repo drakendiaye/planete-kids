@@ -14,7 +14,7 @@
 	<div style="text-align:center">
 	<img src="../images/Planete-Kids.png" /><br />
 	<h2><s:text name="admin"/></h2>
-	
+
 	<s:url id="viewlabels" namespace="/admin" action="labels" includeParams="none" />
 	<s:a href="%{viewlabels}"><s:text name="labels" /></s:a>
 	
@@ -35,18 +35,17 @@
 
 	<s:url id="viewcommands" namespace="/admin" action="commands" includeParams="none" />
 	<s:a href="%{viewcommands}"><s:text name="commands" /></s:a>	
-	
+
 	<s:url id="indexadminfr" namespace="/admin" action="index" includeParams="none">
-	<s:param name="truc" value="getId()" />
+	<s:param name="request_locale" >fr</s:param>
 	</s:url>
 
 	<s:url id="indexadminen" namespace="/admin" action="index" includeParams="none">
-	<s:param name="request_locale" value="en" />
+	<s:param name="request_locale" >en</s:param>
 	</s:url>
 
         <s:a href="%{indexadminfr}"><img src="../images/fr.png" /></s:a>
         <s:a href="%{indexadminen}"><img src="../images/en.png" /></s:a>
-
 
 	</div>
     </s:div>
