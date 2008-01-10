@@ -1,6 +1,7 @@
 package planetekids.beans.stateful;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -190,7 +191,7 @@ public class CustomerBean implements CustomerRemote {
             products.addAll(this.getProductsByAge(age_id));
         }
         
-        ArrayList<ProductBean> result = new ArrayList<ProductBean>();
+        List<ProductBean> result = new ArrayList<ProductBean>();
         if(!and) {
             result.addAll(products);
         } else {
@@ -205,6 +206,8 @@ public class CustomerBean implements CustomerRemote {
                 }
             }
         }
+        
+        Collections.sort(result);
         
         return result;
     }
