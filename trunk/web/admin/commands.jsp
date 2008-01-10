@@ -10,7 +10,7 @@
 
 	<script type="text/javascript">
 	  function confirmdelete(url) {
-	    if (confirm('Are you sure?'))
+	    if (confirm('Êtes-vous sûr ?'))
 		window.location.replace(url);
 	  }
 	</script>
@@ -55,17 +55,17 @@
 
 	<br /><br />
 
-	<s:text name="adminP1"></s:text> <s:property value="getCommands().size()" /> <s:text name="adminCommands"></s:text> <s:text name="adminP2"></s:text><br />
+	<s:text name="adminP1"/> <s:property value="getCommands().size()" /> <s:text name="adminCommands"/> <s:text name="adminP2"/><br />
 
 	<br /><br />
 
-	<table border="2" align="center" cellpadding="2">
+	<table border="1" align="center" cellpadding="2">
 	<tr>
-	<th><s:text name="emailID"></s:text> </th>
+	<th><s:text name="emailID" /></th>
 	<th>Date</th>
-	<th><s:text name="shippingCosts"></s:text> </th>
+	<th><s:text name="shippingCosts" /></th>
 	<th>Total</th>
-	<th>State</th>
+	<th><s:text name="cmdstate" /></th>
 	<th>Action</th>
 	</tr>
 
