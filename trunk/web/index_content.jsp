@@ -6,4 +6,7 @@
 </s:div>
 <s:div cssClass="contentMain">
     <s:text name="construct" />
+    <div align="center">
+	<img src="images/filles.png"/>
+    </div>
 </s:div>
