@@ -3,49 +3,62 @@ package planetekids.actions.account;
 import com.opensymphony.xwork2.ActionSupport;
 import java.util.Map;
 import javax.naming.InitialContext;
-import javax.naming.NamingException;
 import org.apache.struts2.interceptor.ParameterAware;
 import org.apache.struts2.interceptor.SessionAware;
 import planetekids.beans.stateful.CustomerBean;
 import planetekids.beans.stateful.CustomerRemote;
 
 public class IndexAction extends ActionSupport implements SessionAware, ParameterAware {
-    
+
     private Map session;
     private Map parameters;
-    
+
     public String getParameter(String parameter) throws Exception {
-        if (parameters.get(parameter) == null)
+        if (parameters.get(parameter) == null) {
             return null;
-        return ((String[])parameters.get(parameter))[0];
+        }
+        return ((String[]) parameters.get(parameter))[0];
     }
-    
+
     public void setSession(Map session) {
         this.session = session;
     }
-    
+
     public void setParameters(Map parameters) {
         this.parameters = parameters;
     }
-    
+
     public CustomerRemote getCustomer() {
         return (CustomerRemote) session.get("customer");
     }
-    
+
     @Override
     public String execute() throws Exception {
         try {
-            if(getCustomer() == null) session.put("customer", new InitialContext().lookup(CustomerBean.class.getName() + "_" + CustomerRemote.class.getName() + "@Remote"));
-            if(parameters.get("callback") != null) {
-                session.remove("callback");
-                session.put("callback", ((String[])parameters.get("callback"))[0]);
+            int ok = 5;
+            while (ok > 0) {
+                try {
+                    if (getCustomer().test()) break;
+                } catch (Exception ex) {
+                    session.put("customer", new InitialContext().lookup(CustomerBean.class.getName() + "_" + CustomerRemote.class.getName() + "@Remote"));
+                }
+                ok--;
             }
+            if (ok == 0) {
+                throw new Exception();
+            }
+
+            if (parameters.get("callback") != null) {
+                session.remove("callback");
+                session.put("callback", ((String[]) parameters.get("callback"))[0]);
+            }
+
             return ActionSupport.SUCCESS;
-        } catch (NamingException ex) {
+        } catch (Exception ex) {
             return ActionSupport.ERROR;
         }
     }
-    
+
     public String redirect() throws Exception {
         session.put("content_action", "index_content");
         session.put("content_namespace", "/account");
@@ -53,7 +66,7 @@ public class IndexAction extends ActionSupport implements SessionAware, Paramete
         session.put("location_namespace", "/account");
         return execute();
     }
-    
+
     public String redirect_modify() throws Exception {
         session.put("content_action", "modify_content");
         session.put("content_namespace", "/account");
@@ -61,7 +74,7 @@ public class IndexAction extends ActionSupport implements SessionAware, Paramete
         session.put("location_namespace", "/account");
         return execute();
     }
-    
+
     public String submit_modify() throws Exception {
         String result = execute();
         String firstName = getParameter("firstName");
@@ -71,7 +84,7 @@ public class IndexAction extends ActionSupport implements SessionAware, Paramete
         String addressLine3 = getParameter("addressLine3");
         int zipCode = 0;
         try {
-            zipCode= Integer.parseInt(getParameter("zipCode"));
+            zipCode = Integer.parseInt(getParameter("zipCode"));
         } catch (Exception e) {
         }
         String city = getParameter("city");
@@ -90,7 +103,7 @@ public class IndexAction extends ActionSupport implements SessionAware, Paramete
         }
         return result;
     }
-    
+
     public String redirect_create() throws Exception {
         session.put("content_action", "create_content");
         session.put("content_namespace", "/account");
@@ -98,7 +111,7 @@ public class IndexAction extends ActionSupport implements SessionAware, Paramete
         session.put("location_namespace", "/account");
         return execute();
     }
-    
+
     public String submit_create() throws Exception {
         String result = execute();
         String email = getParameter("email");
@@ -110,7 +123,7 @@ public class IndexAction extends ActionSupport implements SessionAware, Paramete
         String addressLine3 = getParameter("addressLine3");
         int zipCode = 0;
         try {
-            zipCode= Integer.parseInt(getParameter("zipCode"));
+            zipCode = Integer.parseInt(getParameter("zipCode"));
         } catch (Exception e) {
         }
         String city = getParameter("city");
@@ -118,13 +131,13 @@ public class IndexAction extends ActionSupport implements SessionAware, Paramete
         String faxNumber = getParameter("faxNumber");
         if (result.compareTo(ActionSupport.ERROR) != 0) {
             if (email == null || password == null) {
-                return("badinput");
+                return ("badinput");
             }
             getCustomer().createAccount(email, password, firstName, lastName, addressLine1, addressLine2, addressLine3, zipCode, city, phoneNumber, faxNumber);
         }
         return result;
     }
-    
+
     public String redirect_identify() throws Exception {
         session.put("content_action", "identify_content");
         session.put("content_namespace", "/account");
@@ -132,15 +145,15 @@ public class IndexAction extends ActionSupport implements SessionAware, Paramete
         session.put("location_namespace", "/account");
         return execute();
     }
-    
+
     public String submit_identify() throws Exception {
         String result = execute();
         if (result.compareTo(ActionSupport.ERROR) != 0) {
-            if(((String[])parameters.get("email"))[0] == null || ((String[])parameters.get("password"))[0] == null) {
-                return("badinput");
+            if (((String[]) parameters.get("email"))[0] == null || ((String[]) parameters.get("password"))[0] == null) {
+                return ("badinput");
             }
-            if(!getCustomer().LogIn(((String[])parameters.get("email"))[0], ((String[])parameters.get("password"))[0])) {
-                return("badinput");
+            if (!getCustomer().LogIn(((String[]) parameters.get("email"))[0], ((String[]) parameters.get("password"))[0])) {
+                return ("badinput");
             }
         }
         return result;

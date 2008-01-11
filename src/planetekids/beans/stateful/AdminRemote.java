@@ -22,6 +22,8 @@ import planetekids.beans.entity.QuestionBean;
 import planetekids.beans.entity.QuestionnaireBean;
 
 public interface AdminRemote {
+    public boolean test() throws Exception;
+    
     public List<LabelBean> getLabels() throws Exception;
     public LabelBean getLabel(int id) throws Exception;
     public void setLabelName(int id, String name) throws Exception;

@@ -4,7 +4,6 @@ import com.opensymphony.xwork2.ActionSupport;
 import java.util.List;
 import java.util.Map;
 import javax.naming.InitialContext;
-import javax.naming.NamingException;
 import org.apache.struts2.interceptor.SessionAware;
 import planetekids.beans.entity.ColorBean;
 import planetekids.beans.stateful.CustomerBean;
@@ -25,9 +24,21 @@ public class IndexAction extends ActionSupport implements SessionAware {
     @Override
     public String execute() throws Exception {
         try {
-            if(getCustomer() == null) session.put("customer", new InitialContext().lookup(CustomerBean.class.getName() + "_" + CustomerRemote.class.getName() + "@Remote"));
+            int ok = 5;
+            while (ok > 0) {
+                try {
+                    if (getCustomer().test()) break;
+                } catch (Exception ex) {
+                    session.put("customer", new InitialContext().lookup(CustomerBean.class.getName() + "_" + CustomerRemote.class.getName() + "@Remote"));
+                }
+                ok--;
+            }
+            if (ok == 0) {
+                throw new Exception();
+            }
+
             return ActionSupport.SUCCESS;
-        } catch (NamingException ex) {
+        } catch (Exception ex) {
             return ActionSupport.ERROR;
         }
     }
