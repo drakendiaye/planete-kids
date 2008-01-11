@@ -15,6 +15,7 @@ import planetekids.beans.entity.CommandBean.State;
 import planetekids.beans.entity.CommandLineBean;
 import planetekids.beans.entity.LabelBean;
 import planetekids.beans.entity.ProductBean;
+import planetekids.beans.stateful.AdminBean;
 import planetekids.beans.stateful.AdminRemote;
 import planetekids.beans.stateful.CustomerBean;
 import planetekids.beans.stateful.CustomerRemote;
@@ -46,7 +47,7 @@ public class IndexAction extends ActionSupport implements SessionAware, Paramete
                 try {
                     if (getAdmin().test()) break;
                 } catch (Exception ex) {
-                    session.put("admin", new InitialContext().lookup(CustomerBean.class.getName() + "_" + CustomerRemote.class.getName() + "@Remote"));
+                    session.put("admin", new InitialContext().lookup(AdminBean.class.getName() + "_" + AdminRemote.class.getName() + "@Remote"));
                 }
                 ok--;
             }
