@@ -79,15 +79,11 @@ public class CommandLineBean implements Serializable {
     public void setNumber(int number) {
         this.number = number;
     }
-
-    /*@PreRemove
-    public void titi() {
-
-        System.out.println("removing command id : " +this.getId());
+   
+    public String getName(String locale) {
+        if (locale.equals("fr"))
+            return name.getFr();
+        else
+            return name.getEn();
     }
-    
-    @PostRemove
-    public void toto(){
-	System.out.println("Command id : " + this.getId() + " removed");
-    }*/
 }

@@ -23,7 +23,10 @@ public class IndexAction extends ActionSupport implements SessionAware, Paramete
 
     private Map session;
     private Map parameters;
+    
+    
     private int nb = -1;
+    
     private static int prodsbypagemax = 100;
 
     public void setSession(Map session) {
@@ -71,20 +74,20 @@ public class IndexAction extends ActionSupport implements SessionAware, Paramete
     }
 
     private int getIntParameter(String name) {
-        int value = -1;
-        System.out.println("get int parameter: " + name);
-        if (parameters.get(name) != null) {
-            String value_s = ((String[]) parameters.get(name))[0];
-            if (value_s.compareTo("") != 0) {
-                try {
-                    value = Integer.valueOf(value_s).intValue();
-                } catch (NumberFormatException e) {
-                    value = -1;
-                }
-            }
-        }
-        System.out.println("value: " + value);
-        return value;
+	int value = -1;
+
+	if (parameters.get(name) != null) {
+	    String value_s = ((String[]) parameters.get(name))[0];
+	    if (value_s.compareTo("") != 0) {
+		try {
+		    value = Integer.valueOf(value_s).intValue();
+		} catch (NumberFormatException e) {
+		    value = -1;
+		}
+	    }
+	}
+
+	return value;
     }
 
     private float getFloatParameter(String name) {
@@ -326,14 +329,12 @@ public class IndexAction extends ActionSupport implements SessionAware, Paramete
     }
 
     public int getNbProductPage() throws Exception {
-        int prodsbypage = prodsbypagemax;
-        int nbprods = getNbProducts();
+	int prodsbypage = prodsbypagemax;
+	int nbprods = getNbProducts();
+	
+	int n = (nbprods - 1)/prodsbypage + 1;
 
-        int n = (nbprods - 1) / prodsbypage + 1;
-        System.out.println("nb " + n);
-        System.out.println("prodsbypage " + prodsbypage);
-        System.out.println("nbprods " + nbprods);
-        return n;
+	return n;
     }
 
     public ProductBean getProduct(int id) throws Exception {

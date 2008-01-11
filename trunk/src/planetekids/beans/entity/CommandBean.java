@@ -93,15 +93,4 @@ public class CommandBean implements Serializable {
     public void setState(State state) {
 	this.state = state;
     }
-    
-    /*@PreRemove
-    public void titi() {
-
-        System.out.println("removing command id : " +this.getId());
-    }
-    
-    @PostRemove
-    public void toto(){
-	System.out.println("Command id : " + this.getId() + " removed");
-    }*/
 }

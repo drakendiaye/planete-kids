@@ -185,7 +185,6 @@ public class ProductBean implements java.io.Serializable, java.lang.Comparable {
 	    label.getProducts().remove(this);
 	if (!age.removing)
 	    age.getProducts().remove(this);
-	// System.out.println("removing product id : " +this.getId());
     }
 
     public int compareTo(Object o) {
@@ -198,9 +197,4 @@ public class ProductBean implements java.io.Serializable, java.lang.Comparable {
 	else
 	    return 1;
     }
-
-    /*
-     * @PostRemove public void toto(){ System.out.println("Product id : " +
-     * this.getId() + " removed"); }
-     */
 }

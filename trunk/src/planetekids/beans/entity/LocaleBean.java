@@ -47,15 +47,4 @@ public class LocaleBean implements Serializable {
     public void setEn(String en) {
         this.en = en;
     }
-    
-    /*@PreRemove
-    public void titi(){
-	System.out.println("removing Locale id : " +this.getId());
-    }
-    
-    @PostRemove
-    public void toto(){
-	System.out.println("Locale id : " + this.getId() + " removed");
-    }*/
-    
 }

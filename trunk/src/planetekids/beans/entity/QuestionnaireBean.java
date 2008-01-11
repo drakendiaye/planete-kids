@@ -82,16 +82,5 @@ public class QuestionnaireBean implements Serializable {
 
     public void setDescription(LocaleBean description) {
         this.description = description;
-    }
-
-    /*@PreRemove
-    public void titi() {
-	System.out.println("removing questionnaire : " + this.getId());
-    }
-    
-    @PostRemove
-    public void toto() {
-	System.out.println("questionnaire id " + this.getId() + " removed");
-    }*/
-    
+    }  
 }
