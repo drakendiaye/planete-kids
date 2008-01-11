@@ -18,6 +18,8 @@ import planetekids.beans.entity.QuestionnaireBean;
 public interface CustomerRemote {
     public void init();
     
+    public boolean test() throws Exception;
+    
     public boolean LogIn(String email, String password) throws Exception;
     public void LogOut() throws Exception;
     

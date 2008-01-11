@@ -4,7 +4,6 @@ import com.opensymphony.xwork2.ActionSupport;
 import java.util.Iterator;
 import java.util.Map;
 import javax.naming.InitialContext;
-import javax.naming.NamingException;
 import org.apache.struts2.interceptor.ParameterAware;
 import org.apache.struts2.interceptor.SessionAware;
 import planetekids.beans.entity.QuestionnaireBean;
@@ -32,11 +31,21 @@ public class QuestionnaireAction extends ActionSupport implements SessionAware, 
     @Override
     public String execute() throws Exception {
         try {
-            if (getCustomer() == null) {
-                session.put("customer", new InitialContext().lookup(CustomerBean.class.getName() + "_" + CustomerRemote.class.getName() + "@Remote"));
+            int ok = 5;
+            while (ok > 0) {
+                try {
+                    if (getCustomer().test()) break;
+                } catch (Exception ex) {
+                    session.put("customer", new InitialContext().lookup(CustomerBean.class.getName() + "_" + CustomerRemote.class.getName() + "@Remote"));
+                }
+                ok--;
             }
+            if (ok == 0) {
+                throw new Exception();
+            }
+
             return ActionSupport.SUCCESS;
-        } catch (NamingException ex) {
+        } catch (Exception ex) {
             return ActionSupport.ERROR;
         }
     }
@@ -57,18 +66,18 @@ public class QuestionnaireAction extends ActionSupport implements SessionAware, 
         String result = execute();
         if (result.compareTo(ActionSupport.ERROR) != 0) {
             Iterator<String> iter = parameters.keySet().iterator();
-            while(iter.hasNext()) {
+            while (iter.hasNext()) {
                 String key = iter.next();
-                if(key.startsWith("answer_") && !key.endsWith("_comment")) {
+                if (key.startsWith("answer_") && !key.endsWith("_comment")) {
                     try {
                         int answer_id = Integer.decode(key.split("_")[1]);
-                        String value = ((String[])parameters.get(key))[0];
+                        String value = ((String[]) parameters.get(key))[0];
                         String comment = "";
-                        if(parameters.get(key+"_comment") != null) {
-                            comment = ((String[])parameters.get(key+"_comment"))[0];
+                        if (parameters.get(key + "_comment") != null) {
+                            comment = ((String[]) parameters.get(key + "_comment"))[0];
                         }
                         getCustomer().createResult(answer_id, value, comment);
-                    } catch(Exception ex) {
+                    } catch (Exception ex) {
                         ex.printStackTrace(System.err);
                         result = ActionSupport.ERROR;
                     }

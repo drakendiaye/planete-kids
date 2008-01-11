@@ -44,6 +44,10 @@ public class CustomerBean implements CustomerRemote {
 	public void init() {
 
 	}
+        
+        public boolean test() throws Exception {
+            return true;
+        }
 
 	public boolean LogIn(String account_id, String password) throws Exception {
 		AccountBean account = entityManager.find(AccountBean.class, account_id);
