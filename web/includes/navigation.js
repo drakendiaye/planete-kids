@@ -75,9 +75,9 @@ function navLocale(locale) {
         dojo.byId('refresh_img').onmouseover = function() { show('Recharger'); };
         dojo.byId('loginout_img').onmouseover = function() {
             if (dojo.byId('loginout_img').src.indexOf('images/login.png') == -1) 
-                show('Se d&#233;logger');
+                show('Se d&#233;connecter');
             else
-                show('Se logger');
+                show('S\'identifier');
         }
     } else {
         dojo.byId('img_previous').onmouseover = function() { show('Previous'); };

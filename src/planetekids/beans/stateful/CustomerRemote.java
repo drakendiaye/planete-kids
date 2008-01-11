@@ -24,7 +24,7 @@ public interface CustomerRemote {
     public void LogOut() throws Exception;
     
     public void flushCart() throws Exception;
-    public void validateCart() throws Exception;
+    public void validateCart(float price) throws Exception;
 
     public float getCartPrice() throws Exception;
     public List<ProductBean> getCartProducts()  throws Exception;

@@ -67,9 +67,8 @@ public class CustomerBean implements CustomerRemote {
 		cart.flushCart();
 	}
 
-    public void validateCart() throws Exception {
-        //return cart.validateCart();
-        int command = createCommand(new Date(System.currentTimeMillis()), (float)5.0);
+    public void validateCart(float price) throws Exception {
+        int command = createCommand(new Date(System.currentTimeMillis()), price);
         Hashtable<Integer, Integer> cartTable = cart.getHashtable();
         
         Enumeration<Integer> enumeration = cartTable.keys();
@@ -77,6 +76,7 @@ public class CustomerBean implements CustomerRemote {
             Integer key = enumeration.nextElement();
             ProductBean product = entityManager.find(ProductBean.class, key.intValue());
             createCommandLine(command, product.getName("fr"), product.getName("en"), product.getPrice(), cartTable.get(key));
+            product.setStock(product.getStock()-cartTable.get(key));
         }
 
     }

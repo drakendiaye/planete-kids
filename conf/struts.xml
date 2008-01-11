@@ -45,6 +45,22 @@
             <result>/index_location.jsp</result>
             <result name="error">/error.jsp</result>
         </action>
+        <action name="ship_content" class="planetekids.actions.IndexAction" >
+            <result>/indexship_content.jsp</result>
+            <result name="error">/error.jsp</result>
+        </action>
+        <action name="ship_location" class="planetekids.actions.IndexAction" >
+            <result>/indexship_location.jsp</result>
+            <result name="error">/error.jsp</result>
+        </action>
+		<action name="paiement_content" class="planetekids.actions.IndexAction" >
+            <result>/indexpaiement_content.jsp</result>
+            <result name="error">/error.jsp</result>
+        </action>
+        <action name="paiement_location" class="planetekids.actions.IndexAction" >
+            <result>/indexpaiement_location.jsp</result>
+            <result name="error">/error.jsp</result>
+        </action>
     </package>
     
     <package name="questionnaire" namespace="/questionnaire" extends="struts-default">

@@ -74,7 +74,7 @@
                  } else {
                  navGo([new navRequest('content', '%{url_logout}', null, null, 'logout_callback')]);
                  }
-                 "><img id="loginout_img" src="images/login.png" onmouseover="if (this.src.indexOf('images/login.png') == -1 ) show('Se d&#233;logger'); else show('Se logger');" onmouseout="hide()" /></s:a>
+                 "><img id="loginout_img" src="images/login.png" onmouseover="if (this.src.indexOf('images/login.png') == -1 ) show('Se d&#233;connecter'); else show('S\'identifier');" onmouseout="hide()" /></s:a>
         </s:div>
         <s:div id="location" />
             <s:div id="frflag" >
