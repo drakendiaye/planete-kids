@@ -100,7 +100,9 @@ public class IndexAction extends ActionSupport implements SessionAware, Paramete
     public String validateCart() throws Exception {
         String result = execute();
 
-        getCustomer().validateCart();
+	float price = Float.valueOf(((String[]) parameters.get("ship"))[0]);
+	
+        getCustomer().validateCart(price);
         getCustomer().flushCart();
 
         return result;
