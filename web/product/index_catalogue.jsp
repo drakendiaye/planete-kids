@@ -39,7 +39,7 @@
              style="border-style: solid; border-width: 2px; border-color: <s:if test="isColorFiltered(getId())">blue</s:if><s:else>white</s:else>;width:15px;height:15px;min-width:15px;min-height:15px;"/>
     </s:iterator>
 </div>
-<div style="width:95%;margin:auto;margin-bottom:5px;max-height:22px;overflow:auto;">
+<div style="width:95%;margin:auto;margin-bottom:5px;max-height:25px;overflow:auto;">
     <s:iterator value="getLabels()">
         <img src="<s:property value="getImage_small()" />"
              onmouseover="show('<s:property value="getName()"/>');"

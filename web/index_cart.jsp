@@ -64,7 +64,6 @@
                     <form id="product_<s:property value="getId()"/>_update_form" onsubmit="checkValue_<s:property value="getId()"/>()">
                         <s:textfield id="product_%{getId()}_update_textfield" name="update_%{getId()}_%{getCartProductNumber(getId())}" value="%{getCartProductNumber(getId())}" onkeyup="this.name = 'update_%{getId()}_' + this.value;" size="1"/>&nbsp;x&nbsp;<s:property value="getPrice()" />&nbsp;€
                         <s:url id="url" namespace="/" action="index_cart" includeParams="none"/>
-                        <br/>
                         <script type="text/javascript">
                             function checkValue_<s:property value="getId()"/>() {
                                 if (dojo.byId('product_<s:property value="getId()"/>_update_textfield').value > <s:property value="getStock()"/>) {
