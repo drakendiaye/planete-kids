@@ -24,9 +24,10 @@ public class IndexAction extends ActionSupport implements SessionAware, Paramete
     private Map session;
     private Map parameters;
     
+    // On garde en cache le nombre de produits
+    private int nbProds = -1;
     
-    private int nb = -1;
-    
+    // Nombre de produits affichés par page par défaut
     private static int prodsbypagemax = 100;
 
     public void setSession(Map session) {
@@ -107,14 +108,17 @@ public class IndexAction extends ActionSupport implements SessionAware, Paramete
         return value;
     }
 
+    // Renvoie la liste des marques
     public List getLabels() throws Exception {
         return getAdmin().getLabels();
     }
 
+    // Renvoie une marque correspondante à l'ID id
     public LabelBean getLabel(int id) throws Exception {
         return getAdmin().getLabel(id);
     }
 
+    // Renvoie l'ID de la marque passé en paramètre
     public int getLabelId() throws Exception {
         int id = -1;
 
@@ -128,6 +132,7 @@ public class IndexAction extends ActionSupport implements SessionAware, Paramete
         return id;
     }
 
+    // Valide les modifications effectuées sur une marque (modif et création)
     public String labelValid() throws Exception {
 
         String ret = execute();
@@ -157,6 +162,7 @@ public class IndexAction extends ActionSupport implements SessionAware, Paramete
         return ret;
     }
 
+    // Supprime une marque
     public String labelDelete() throws Exception {
         String ret = execute();
 
@@ -171,6 +177,7 @@ public class IndexAction extends ActionSupport implements SessionAware, Paramete
         return ret;
     }
 
+    // même chose que pour les marques...
     public List getColors() throws Exception {
         return getAdmin().getColors();
     }
@@ -303,14 +310,16 @@ public class IndexAction extends ActionSupport implements SessionAware, Paramete
         return getAdmin().getProducts();
     }
 
+    // Récupère le nombre de produits et met la valeur en cache
     public int getNbProducts() throws Exception {
-        if (nb < 0) {
-            nb = getAdmin().getProducts().size();
+        if (nbProds < 0) {
+            nbProds = getAdmin().getProducts().size();
         }
 
-        return nb;
+        return nbProds;
     }
 
+    // Retourne une sous-liste de produits correspondante à la page courante
     public List getPagedProducts() throws Exception {
         List<ProductBean> products = getProducts();
 
@@ -328,6 +337,7 @@ public class IndexAction extends ActionSupport implements SessionAware, Paramete
         return products.subList(from, to);
     }
 
+    // Retourne le nombre de pages de produits
     public int getNbProductPage() throws Exception {
 	int prodsbypage = prodsbypagemax;
 	int nbprods = getNbProducts();
@@ -341,6 +351,7 @@ public class IndexAction extends ActionSupport implements SessionAware, Paramete
         return getAdmin().getProduct(id);
     }
 
+    // Renvoie le numéro de page courante
     public int getProductPagenum() throws Exception {
         int pagenum = getIntParameter("pagenum");
         int nbprods = getNbProducts();
