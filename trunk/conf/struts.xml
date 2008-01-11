@@ -271,7 +271,7 @@
             <result>/product/index_location.jsp</result>
             <result name="error">/error.jsp</result>
         </action>
-        <action name="index_catalogue" class="planetekids.actions.product.IndexAction">
+        <action name="index_catalogue" class="planetekids.actions.product.IndexAction" method="catalogue">
             <result>/product/index_catalogue.jsp</result>
             <result name="error">/error.jsp</result>
         </action>

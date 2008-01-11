@@ -65,7 +65,7 @@ public class IndexAction extends ActionSupport implements SessionAware, Paramete
             }
 
             buildFilters();
-
+            
             return ActionSupport.SUCCESS;
         } catch (Exception ex) {
             return ActionSupport.ERROR;
@@ -86,11 +86,15 @@ public class IndexAction extends ActionSupport implements SessionAware, Paramete
         return result;
     }
 
+    public String catalogue() throws Exception {
+        String result = execute();
+        System.out.println("Catalogue : " + parameters.hashCode() + " : " + getFiltersString() + " : " + getPage() + "\n\n\n\n\n\n\n\n\n\n");
+        return result;
+    }
+    
     public String content() throws Exception {
         String result = execute();
-
-        System.out.println("\n\n\n\n\n\n\n\n\n\n" + getFiltersString() + "\n\n\n\n\n\n\n\n\n\n");
-
+        System.out.println("Content : " + parameters.hashCode() + " : " + getFiltersString() + " : " + getPage() + "\n\n\n\n\n\n\n\n\n\n");
         if (ageFilter.size() == 0 && labelFilter.size() == 0 && categoryFilter.size() == 0 && colorFilter.size() == 0) {
             products = getCustomer().getProducts();
         } else {
@@ -252,6 +256,7 @@ public class IndexAction extends ActionSupport implements SessionAware, Paramete
     }
 
     private void buildFilters() {
+        System.out.println("coucou1 : "+this);
         filtersString = "";
         ageFilterString = "";
         categoryFilterString = "";
@@ -346,5 +351,6 @@ public class IndexAction extends ActionSupport implements SessionAware, Paramete
                 e.printStackTrace();
             }
         }
+        System.out.println("coucou2 : "+this);
     }
 }
