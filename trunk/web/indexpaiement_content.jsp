@@ -2,7 +2,7 @@
 <%@ taglib prefix="s" uri="/struts-tags"%>
 
 <s:div cssClass="contentHeader">
-	<h2><s:text name="ship" /></h2>
+	<h2><s:text name="paiement" /></h2>
 </s:div>
 <s:div cssClass="contentMain">
 	

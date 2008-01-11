@@ -41,11 +41,7 @@ function navExec(request) {
     else bind_arg.url = bind_arg.url.replace(/request_locale=../i,"request_locale=" + nav_locale);
     
     if(request.form) {
-    	var clone = document.createElement("form");
-    	var myform = dojo.byId(request.form);
-    	clone.method="post";
-    	clone.innerHTML=myform.innerHTML;
-        bind_arg.formNode = clone;
+        bind_arg.formNode = dojo.byId(request.form);
         request.form = null;
     }
     

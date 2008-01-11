@@ -27,13 +27,15 @@
     <hr>
     <div align="center">
         <form id="product_<s:property value="getId()"/>_validate_form">
+        
+        
             <s:hidden name="validate"/>
             <s:url id="url" namespace="/" action="valid_cart" includeParams="none" />
             <s:url id="url_account_content" namespace="/account" action="index_content" includeParams="none"/>
             <s:url id="url_account_location" namespace="/account" action="index_location" includeParams="none"/>
             <s:url id="url_ship_content" namespace="/" action="ship_content" includeParams="none"/>
             <s:url id="url_ship_location" namespace="/" action="ship_location" includeParams="none"/>
-            <input type="button" value="<s:text name="validateCart"/>" class="button" onclick="
+            <input <s:if test="getCartProducts().size() == 0">disabled</s:if> type="button" value="<s:text name="validateCart"/>" class="<s:if test="getCartProducts().size() == 0">disabledB</s:if><s:else>b</s:else>utton" onclick="
             if(dojo.byId('loginout_img').src.indexOf('images/login.png') != -1) {
                  navGo([new navRequest('content', '<s:property value="url_account_content"/>'),
                  new navRequest('location', '<s:property value="url_account_location"/>')]);
