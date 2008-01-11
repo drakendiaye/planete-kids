@@ -112,11 +112,22 @@
                 </td>
             </tr>
             <tr>
-                <td colspan="2" align="center">
+                <td align="center">
                     <s:url id="url_modify_location" namespace="/account" action="modify_location" includeParams="none"/>
                     <s:url id="url_modify_content" namespace="/account" action="modify_content" includeParams="none"/>
                     <input type="button" class="button" value="<s:text name="modify account"/>" onclick="navExec(new navRequest('location', '<s:property value="url_modify_location"/>'));
                        navExec(new navRequest('content', '<s:property value="url_modify_content"/>'));" />
+                </td>
+                <td align="center">
+                	<s:url id="url_index_location" namespace="/account" action="index_location" includeParams="none"/>
+                    <s:url id="url_index_content" namespace="/account" action="index_content" includeParams="none"/>
+                    <s:url id="url_logout" namespace="/" action="index_logout" includeParams="none"/>
+                    <input type="button" class="button" value="<s:text name="logout"/>" onclick="if(dojo.byId('loginout_img').src.indexOf('images/login.png') != -1) {
+                 navGo([new navRequest('content', '<s:property value="url_index_content"/>'),
+                 new navRequest('location', '<s:property value="url_index_location"/>')]);
+                 } else {
+                 navGo([new navRequest('content', '<s:property value="url_logout"/>', null, null, 'logout_callback')]);
+                 }" />
                 </td>
             </tr>
         </table>
