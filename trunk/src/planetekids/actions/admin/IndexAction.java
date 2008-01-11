@@ -46,7 +46,7 @@ public class IndexAction extends ActionSupport implements SessionAware, Paramete
                 try {
                     if (getAdmin().test()) break;
                 } catch (Exception ex) {
-                    session.put("customer", new InitialContext().lookup(CustomerBean.class.getName() + "_" + CustomerRemote.class.getName() + "@Remote"));
+                    session.put("admin", new InitialContext().lookup(CustomerBean.class.getName() + "_" + CustomerRemote.class.getName() + "@Remote"));
                 }
                 ok--;
             }
