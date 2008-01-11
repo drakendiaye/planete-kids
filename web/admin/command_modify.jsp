@@ -56,22 +56,20 @@
 	<br />
 	<table border="1" align="center" cellpadding="2">
 	<tr>
-	<th><s:text name="enName"/> </th>
-	<th><s:text name="frName"/> </th>
+	<th><s:text name="name"/> </th>
 	<th><s:text name="quantity"/> </th>
 	<th><s:text name="price"/> </th>
 	</tr>
 
 	<s:iterator value="getCommandLinesByCommand(getCommandId())">
 	    <tr>
-	    <td align=center><s:property value="getName().getEn()" /></td>
-	    <td align=center><s:property value="getName().getFr()" /></td>
-	    <td align=center><s:property value="getNumber()" />&nbsp;€</td>
+	    <td align=center><s:property value="getName(getLocale())" /></td>
+	    <td align=center><s:property value="getNumber()" /></td>
 	    <td align=center><s:property value="getPrice()" />&nbsp;€</td>
 	    </tr>
 	</s:iterator>
-	    <tr><td colspan=3 align=right><s:text name="shippingCosts"/> </td><td><s:property value="getCommand(getCommandId()).getShipping()" /></td></tr>
-	    <tr><td colspan=3 align=right><b>Total</b></td><td><s:property value="getCommandTotal(getCommandId())" />&nbsp;€</td></tr>
+	    <tr><td colspan=2 align=right><s:text name="shippingCosts"/> </td><td><s:property value="getCommand(getCommandId()).getShipping()" />&nbsp;€</td></tr>
+	    <tr><td colspan=2 align=right><b>Total</b></td><td><s:property value="getCommandTotal(getCommandId())" />&nbsp;€</td></tr>
 	</table>
 
 	<s:form method="post" namespace="/admin" action="command_valid">

@@ -124,12 +124,6 @@ public class AgeBean implements Serializable{
 
     @PreRemove
     public void cleanAssociations() {
-	//System.out.println("removing Age id : " +this.getId());
 	removing = true;
     }
-    
-    /*@PostRemove
-    public void toto(){
-	System.out.println("Age id : " + this.getId() + " removed");
-    }*/
 }

@@ -101,14 +101,4 @@ public class AnswerBean implements Serializable, Comparable<AnswerBean> {
         if(this.getNumber() > o.getNumber()) return(1);
         return(0);
     }
-    
-    /*@PreRemove
-    public void titi() {
-	System.out.println("removing answer : " + this.getId());
-    }
-    
-    @PostRemove
-    public void toto(){
-	System.out.println("answer id : " + this.getId() + " removed");
-    }*/
 }

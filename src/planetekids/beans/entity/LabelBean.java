@@ -122,13 +122,7 @@ public class LabelBean implements Serializable {
     public boolean removing = false;
 
     @PreRemove
-    public void titi(){
-	//System.out.println("removing label id : " +this.getId());
+    public void cleanAssociations(){
 	removing = true;
     }
-    
-    /*@PostRemove
-    public void toto(){
-	System.out.println("label id : " + this.getId() + " removed");
-    }*/
 }

@@ -122,13 +122,7 @@ public class CategoryBean implements Serializable {
     public boolean removing = false;
 
     @PreRemove
-    public void titi(){
-	//System.out.println("removing category id : " +this.getId());
+    public void cleanAssociations(){
 	removing = true;
     }
-    
-    /*@PostRemove
-    public void toto(){
-	System.out.println("category id : " + this.getId() + " removed");
-    }*/
 }

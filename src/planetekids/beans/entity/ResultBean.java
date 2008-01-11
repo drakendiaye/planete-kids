@@ -62,14 +62,4 @@ public class ResultBean implements Serializable {
     public void setComment(String comment) {
         this.comment = comment;
     }
-    
-    /*@PreRemove
-    public void titi() {
-	System.out.println("\n\n\nremoving result : " + this.getId() + "\n\n\n");
-    }
-    
-    @PostRemove
-    public void toto(){
-	System.out.println("result id : " + this.getId() + " removed");
-    }*/
 }

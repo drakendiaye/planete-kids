@@ -117,16 +117,5 @@ public class QuestionBean implements Serializable, Comparable<QuestionBean> {
         if(this.getNumber() < o.getNumber()) return(-1);
         if(this.getNumber() > o.getNumber()) return(1);
         return(0);
-    }
-    
-    /*@PreRemove
-    public void titi() {
-	System.out.println("removing question : " + this.getId());
-    }
-
-    @PostRemove
-    public void toto(){
-	System.out.println("question id : " + this.getId() + " removed");
-    }*/
-    
+    } 
 }

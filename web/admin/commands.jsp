@@ -73,8 +73,8 @@
 	    <tr>
 	    <td align=center><s:property value="getAccount().getEmailAddress()" /></td>
 	    <td align=center><s:property value="getDate()" /></td>
-	    <td align=center><s:property value="getShipping()" /></td>
-	    <td align=center><s:property value="getCommandTotal(getId())" /></td>
+	    <td align=center><s:property value="getShipping()" />&nbsp;€</td>
+	    <td align=center><s:property value="getCommandTotal(getId())" />&nbsp;€</td>
 	    <td align=center><s:property value="getCommandState(getId()).toString()" /></td>
 	    <td align=center>
 

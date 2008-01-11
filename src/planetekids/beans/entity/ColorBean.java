@@ -122,13 +122,7 @@ public class ColorBean implements Serializable {
     public boolean removing = false;
 
     @PreRemove
-    public void titi(){
-	//System.out.println("removing color id : " +this.getId());
+    public void cleanAssociations(){
 	removing = true;
     }
-    
-    /*@PostRemove
-    public void toto(){
-	System.out.println("color id : " + this.getId() + " removed");
-    }*/
 }
