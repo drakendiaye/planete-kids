@@ -59,7 +59,7 @@ public class CartBean implements CartRemote {
 
     public int validateCart() throws Exception {
 
-	FundTransfert fundTManager = new FundTransfert("LaPoste","Lyon","laposte_lyon:123","321","LaPoste","Lyon","laposte_lyon:456","654",3600);
+	FundTransfert fundTManager = new FundTransfert("LaPoste","Lyon","laposte_lyon:123","321","CreditMutuel","Le Mans","creditmutuel_lemans:012","210",3600);
 	
 	fundTManager.Transfert();
 	
