@@ -1,0 +1,177 @@
+/**
+*
+* This CORBA IDL module contains all exceptions, typedefs and interfaces concerning the banking application
+*
+* @author Fabienne Boyer, 1999-2001
+* @author Didier Donsez, 2002
+* @author <a href="mailto:Sara.Bouchenak@inria.fr">Sara Bouchenak</a> 2006
+*
+* @version 1.4, 06/01/2006
+*
+*/
+
+#include "transaction.idl"
+
+module gicom {
+module generated {
+
+module bankServices {
+	
+	interface Customer;
+	interface Branch;
+	interface Account;
+	interface Bank;
+
+  	/**
+	* This typedef represents a type for currency
+	**/
+	//typedef fixed<6,2> Currency;
+	typedef float Currency;
+	
+  	/**
+	* This exception is raised when a problem occurs in the banking business methods
+	**/
+	exception ProblemException {
+		string matter ;
+		string reason ;
+	};
+
+	exception ConcurrencyControlException {};
+
+	/**
+	* This interface represents accounts in the bank application.
+	**/
+	interface Account  {
+		readonly attribute string 	number ;
+		readonly attribute Currency 	balance ;
+		readonly attribute Customer 	refCustomer ;
+
+		attribute long readStamp;
+		attribute long writeStamp;
+
+		void prepare() raises (ConcurrencyControlException);
+		void free() raises (ConcurrencyControlException);
+		void saveTmp(in string location); 
+
+		/**
+		* This operation debits the  balance of the account
+		* @param amount the amount to debit
+		* @exception Raised in case of insuffisient balance.
+		*/
+		void debit(in Currency amount)
+			raises (ProblemException);
+		/**
+		* This operation debits the  balance of the account
+		* @param amount the amount to debit
+		* @exception Raised under certain circumstances.
+		*/
+		void credit(in Currency amount)
+			raises (ProblemException);
+			
+		/**
+		* This operation debits the  balance of the account
+		* @param amount the amount to debit
+		* @exception Raised in case of insuffisient balance.
+		*/
+		//void debit(in::transaction::TxId id, in Currency amount)
+		//	raises (ProblemException);
+		/**
+		* This operation debits the  balance of the account
+		* @param amount the amount to debit
+		* @exception Raised under certain circumstances.
+		*/
+		//void credit(in::transaction::TxId id, in Currency amount)
+		//	raises (ProblemException);
+			
+	};
+
+	/**
+	* This typedef represents a sequence of Account
+	**/
+	typedef sequence<Account> Accounts;
+
+	/**
+	* This struct represents customer addresses
+	**/
+	struct Address {
+		string street ;
+		string city ;
+		string telephone ;
+  	};
+
+	/**
+	* This enum represents the gender of the customer
+	**/
+	enum Gender {male, female} ;
+	
+	/**
+	* This interface represents customers in the bank application.
+	**/
+  	interface Customer {
+		readonly attribute string 	number;
+		readonly attribute string 	name ;
+		readonly attribute Gender 	gend;
+		attribute Address 		addr ;
+		readonly attribute Branch 	refBranch ;
+ 
+    		Account createAccount(in string number, in Currency balance)
+			raises (ProblemException);
+		void removeAccount(in string accountnumber)
+			raises (ProblemException);
+		Account findAccountByPrimaryKey(in string accountnumber)
+			raises (ProblemException);
+		Accounts findAllAccounts()
+			raises (ProblemException);
+  	};
+
+  	/**
+	* This typedef represents a sequence of Customer
+	**/
+	typedef sequence<Customer> Customers;
+	
+	/**
+	* This interface represents branches in the bank application.
+	**/
+	interface Branch {
+		readonly attribute string number;
+		readonly attribute string name;
+		readonly attribute Address addr;
+		readonly attribute Bank refBank;
+		readonly attribute gicom::generated::transaction::LocalTransactionManager localTM;
+
+		Customer createCustomer(in string number, in string name, in Gender gend, in Address addr)
+			raises (ProblemException);
+		void removeCustomer(in string number)
+			raises (ProblemException);
+		Customer findCustomer(in string number)
+			raises (ProblemException);
+		Customers findAllCustomers();
+		void desactivate() raises (ProblemException);
+  	};
+
+  	struct BranchStruct {
+		string number;
+		Branch refBranch;
+  	};
+ 
+  	typedef sequence<BranchStruct> Branches;
+
+	/**
+	* This interface represents banks in the bank application.
+	* Banks are registered by the CosNaming server
+	* Bank registers several branches.
+	**/
+  	interface Bank {
+		readonly attribute string number;
+		readonly attribute string name;
+		readonly attribute Address addr;
+
+		void registerBranch(in string number, in Branch b) raises (ProblemException);
+		void unregisterBranch(in string number) raises (ProblemException);
+		Branch findBranch(in string number) raises (ProblemException);
+		Branches findAllBranches() raises (ProblemException);
+		void desactivate() raises (ProblemException);
+  	};
+};
+};
+};

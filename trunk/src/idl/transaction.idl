@@ -1,0 +1,89 @@
+module gicom {
+	module generated {
+		module transaction {
+			
+			interface GlobalTransactionManager;
+			interface LocalTransactionManager;
+			
+			// Raised if the transactionId doesn't exist
+			exception InvalidStampException{
+			string where;
+			string message;
+			};
+			exception InvalidStateException{};
+			
+			// different states of the transaction
+			enum State {INITIAL,PREPARE,READY,COMMITED,ABORT,ROLLBACKED};
+			// vote states
+			enum Vote {VOTECOMMIT,VOTEROLLBACK};
+			
+			typedef long Stamp;
+			
+			// one single GlobalTransactionManager on a single server, mostly dedicated to this.
+			interface GlobalTransactionManager {
+			
+				
+				/**
+     			 * Start a transaction and return the stamp of the transaction 
+     			 */
+				Stamp begin();
+				
+				/**
+				 * Validate the transaction 
+			     * 
+			     * @param id stamp of the transaction
+			     * 
+			     * @return true if the transaction has been committed, false if the transaction has been rollbacked
+			     */
+				boolean commit(in Stamp id) raises (InvalidStampException,InvalidStateException);
+				
+				/**
+     			 * Cancel a transaction. Must be done during a PREPARE state.
+     			 *
+     			 * @param id the id of the transaction to rollback
+     			 */
+				void rollback(in Stamp id) raises (InvalidStampException,InvalidStateException);
+				
+				
+				/**
+     			 * Enroll a LTM into the transaction. Must be done during an INITIAL state.
+     			 *
+     			 * @param id the id of the transaction to add the LTM
+     			 * @param ltm the ltm to enroll in the transaction
+     			 */
+				void enroll(in Stamp id, in LocalTransactionManager ltm) raises (InvalidStampException,InvalidStateException);
+				
+
+				/**
+     			 * Ask for the current state of a transaction
+     			 *
+     			 *@return the current state of the transaction 
+     			 */
+				State getCurrentState(in Stamp id) raises (InvalidStampException);
+				
+				// TODO : last function to inform that the transaction has been rollbacked to early
+			};
+			
+			
+			// one LocalTransactionManager per server
+			interface LocalTransactionManager {
+				readonly attribute GlobalTransactionManager globalTM;
+			
+				void desactivate();
+			
+				// Save the current state of the object while waiting for the final state, initialized during the second phase 
+				Vote prepare(in Stamp id) raises (InvalidStampException,InvalidStateException);
+				
+				// This is the second phase : Save the final state of the object
+				void commit(in Stamp id) raises (InvalidStampException,InvalidStateException);
+				
+				// This is the second phase : Undo all changes made during the first phase, and restore the last commited state 
+				void rollback(in Stamp id) raises (InvalidStampException,InvalidStateException);
+				
+				void debit(in long id, in float d,in string client,in string accountNumber);
+				void credit(in long id, in float c,in string client,in string accountNumber);
+				
+			};
+		};
+	};
+};

@@ -1,0 +1,76 @@
+/*
+ * CORBA Generic Server
+ * Part of the GICOM project
+ * 2003-2008
+ *
+ * @author    Didier.Donsez@imag.fr
+ */
+
+module gicom {
+module generated {
+
+module adminServices {
+
+  //----------------
+  // exceptions
+  //----------------
+  exception DeploymentException  {
+  	string msg;
+  };
+
+  exception UnDeploymentException  {
+  	string msg;
+  };
+
+  exception UnExistingServiceException  {
+  	string msg;
+  };
+
+  exception MBeanServerException  {
+  	string msg;
+  };
+
+  //----------------
+  // Interfaces 
+  //----------------
+	
+  interface Shutdown {
+    oneway void shutdown(in long delayInSec);
+  };
+
+  typedef sequence<string> SeqOfParameters;
+  
+  struct Service {
+	  string			classname;
+	  SeqOfParameters	parameters;
+	  string			codebase;
+	  string			nsbind;
+	  string			poaid;
+	  string			ioroutputstream;
+	  boolean			persistentflag;
+  };
+
+  typedef sequence<Service> SeqOfService;
+
+  
+  interface Deployment {
+		any				deploy( in Service service)     raises (DeploymentException);
+		void			undeploy(in any serviceior)     raises (UnDeploymentException);
+		SeqOfService    listAll();
+		Service			get(in any serviceior)       raises (UnExistingServiceException);
+  };
+
+  typedef sequence<string> SeqOfObjectNames;  
+
+  interface MBeanServer {
+		SeqOfObjectNames    queryNames(in string objectName, in string queryExp) raises (MBeanServerException);
+		void				setAttribute(in string objectName, in string attributeName, in string attributeValue)     raises (MBeanServerException);
+		any			    	getAttribute(in string objectName, in string attributeName)     raises (MBeanServerException);
+		any					invokeOperation(in string objectName, in string operationName, in SeqOfParameters params)     raises (MBeanServerException);
+  };
+
+
+};
+
+};
+};
