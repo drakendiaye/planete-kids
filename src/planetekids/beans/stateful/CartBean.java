@@ -1,5 +1,8 @@
 package planetekids.beans.stateful;
 
+import fournisseur.client.FournisseurServiceStub;
+import fournisseur.client.FournisseurServiceStub.CustomerOrder;
+import fournisseur.client.FournisseurServiceStub.SetOrder;
 import gicom.generated.bankServices.Bank;
 import gicom.generated.bankServices.BankHelper;
 import gicom.generated.bankServices.BankOperations;
@@ -10,6 +13,7 @@ import java.sql.Date;
 import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.Hashtable;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Properties;
 
@@ -62,10 +66,37 @@ public class CartBean implements CartRemote {
 	FundTransfert fundTManager = new FundTransfert("LaPoste","Lyon","laposte_lyon:123","321","CreditMutuel","Le Mans","creditmutuel_lemans:012","210",3600);
 	
 	fundTManager.Transfert();
+
+	orderFromFournisseur();
 	
-	// TODO : fundTransfert !!!!!!!!!!!
 	return 0;
-	// throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    public int orderFromFournisseur() {
+	int res = 0;
+	String fournisseurURL = "http://localhost:8080/axis2/services/FournisseurService";
+	String raisonSociale = "planete kids";
+	String articles = new String();
+	try {
+	   /* List<ProductBean> prods = getCartProducts();
+	    Iterator<ProductBean> ite = prods.iterator();
+	    while (ite.hasNext()) {
+		articles.concat(Integer.toString(ite.next().getId()));
+	    }*/
+	    articles = "3";
+	    FournisseurServiceStub stub = new FournisseurServiceStub(fournisseurURL);
+	    SetOrder so = new SetOrder();
+		so.setOrder(new CustomerOrder());
+		so.getOrder().setRsClient(raisonSociale);
+		so.getOrder().setArticles(articles);
+		stub.setOrder(so);
+	} catch (Exception e) {
+	    System.err.println("Commande auprès du fournisseur annulée. Cause : ");
+	    e.printStackTrace();
+	    return -1;
+	}
+
+	return res;
     }
 
     public Hashtable getHashtable() throws Exception {
