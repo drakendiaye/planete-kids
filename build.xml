@@ -1,85 +1,164 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project name="planete-kids" default="build" basedir=".">
-    <property environment="myenv" />
-    <property name="jonas.root" value="${myenv.JONAS_ROOT}" />
-    <!--<property name="jonas.root" value="C:\Users\guillaume\Desktop\jonas" />-->
-    
-    <target name="build">
-        <mkdir dir="build" />
-        
-        <javac srcdir="src" destdir="build" debug="on" deprecation="off" optimize="off" verbose="off" compiler="modern" nowarn="off">
-            <classpath>
-                <fileset dir="lib" includes="**/*.jar" />
-            </classpath>
-        </javac>
-        
-        <jar jarfile="build/planete-kids.jar">
-            <metainf dir="conf" includes="persistence.xml"/>
-            <zipfileset dir="build" includes="planetekids/beans/**/*.class" />
-        </jar>
-        
-        <jar jarfile="build/admin-client.jar">
-            <manifest>
-                <attribute name="Main-Class" value="planetekids.clients.AdminClient" />
-            </manifest>
-           <metainf dir="conf" includes="application-client.xml" />
-            <fileset dir="build" includes="planetekids/clients/AdminClient.class" />
-            <fileset dir="build" includes="planetekids/clients/Tx.class" />
-            <fileset dir="build" includes="planetekids/beans/**/*.class" />
-        </jar>
+	<property environment="myenv" />
+	<property name="jonas.root" value="${myenv.JONAS_ROOT}" />
+	<!--<property name="jonas.root" value="C:\Users\guillaume\Desktop\jonas" />-->
 
-        <jar jarfile="build/customer-client.jar">
-            <manifest>
-                <attribute name="Main-Class" value="planetekids.clients.CustomerClient" />
-            </manifest>
-            <metainf dir="conf" includes="application-client.xml" />
-            <fileset dir="build" includes="planetekids/clients/CustomerClient.class" />
-            <fileset dir="build" includes="planetekids/clients/Tx.class" />
-            <fileset dir="build" includes="planetekids/beans/**/*.class" />
-        </jar>
+	<!-- Modifiable global properties. -->
+	<property name="debug.flag" value="on" />
 
-        <jar jarfile="build/init-data-client.jar">
-            <manifest>
-                <attribute name="Main-Class" value="planetekids.clients.InitDataBaseClient" />
-            </manifest>
-            <metainf dir="conf" includes="application-client.xml" />
-            <fileset dir="build" includes="planetekids/clients/InitDataBaseClient.class" />
-            <fileset dir="build" includes="planetekids/clients/Tx.class" />
-            <fileset dir="build" includes="planetekids/beans/**/*.class" />
-        </jar>
-        
-        <war warfile="build/planete-kids.war" webxml="conf/web.xml">
-           <zipfileset dir="web" includes="**"/>
-           <classes dir="conf" includes="struts.xml" />
-           <classes dir="src" includes="planetekids/actions/**/*.properties" />
-           <classes dir="build" includes="planetekids/beans/**/*.class" />
-           <classes dir="build" includes="planetekids/actions/**/*.class" />
-           <classes dir="build" includes="planetekids/servlets/**/*.class" />
-        </war>
-        
-        <ear earfile="build/planete-kids.ear" appxml="conf/application.xml">
-            <zipfileset dir="build" includes="planete-kids.jar" />
-            <zipfileset dir="build" includes="planete-kids.war" />
-            <zipfileset dir="build" includes="admin-client.jar" />
-            <zipfileset dir="build" includes="customer-client.jar" />
-            <zipfileset dir="build" includes="init-data-client.jar" />
-            <zipfileset prefix="lib" dir="lib/struts2" includes="**/*.jar" />
-        </ear>
-    </target>
+	<!-- Fixed global properties (no need to modify)-->
+	<!-- These are input directories -->
+	<property name="idl.dir" value="src/idl" />
+	<property name="src.dir" value="src" />
+	<property name="transation.dir" value="planetekids/transaction" />
+	<property name="manifest.dir" value="src/META-INF" />
+	<property name="manifest.file" value="MANIFEST.MF" />
 
-    <target name="clean">
-        <delete dir="build" />
-    </target>
-    
-    <target name="deploy" depends="build">
-        <copy todir="${jonas.root}/deploy">
-            <fileset dir="build" includes="planete-kids.ear" />
-        </copy>
-    </target>
-    
-    <target name="undeploy">
-        <delete>
-            <fileset dir="${jonas.root}/deploy" includes="planete-kids.ear" />
-        </delete>
-    </target>
+	<property name="lib.dir" value="lib" />
+	<property name="build.dir" value="build" />
+	<property name="classes.dir" value="target/classes" />
+	<property name="generated.dir" value="src" />
+
+	<!-- Create output directory. -->
+	<target name="init">
+		<condition property="sys.is.unix">
+			<os family="unix" />
+		</condition>
+		<condition property="sys.is.windows">
+			<os family="windows" />
+		</condition>
+
+		<mkdir dir="${lib.dir}" />
+		<mkdir dir="${classes.dir}" />
+		<mkdir dir="${generated.dir}" />
+		<mkdir dir="${build.dir}" />
+	</target>
+
+	<!-- idl -->
+	<target name="idl" depends="init">
+		<exec executable="idlj">
+			<arg value="-td" />
+			<arg value="${generated.dir}" />
+			<arg value="-v" />
+			<arg value="-emitAll" />
+			<arg value="-fallTIE" />
+			<arg value="-i" />
+			<arg value="${idl.dir}" />
+			<arg value="${idl.dir}/bank.idl" />
+		</exec>
+		<exec executable="idlj">
+			<arg value="-td" />
+			<arg value="${generated.dir}" />
+			<arg value="-v" />
+			<arg value="-emitAll" />
+			<arg value="-fallTIE" />
+			<arg value="-i" />
+			<arg value="${idl.dir}" />
+			<arg value="${idl.dir}/transaction.idl" />
+		</exec>
+		<exec executable="idlj">
+			<arg value="-td" />
+			<arg value="${generated.dir}" />
+			<arg value="-v" />
+			<arg value="-emitAll" />
+			<arg value="-fallTIE" />
+			<arg value="-i" />
+			<arg value="${idl.dir}" />
+			<arg value="${idl.dir}/admin.idl" />
+		</exec>
+	</target>
+	
+	<!-- Create class path from lib and output directories. -->
+	<path id="project.path">
+		<pathelement path="${classes.dir}" />
+		<fileset dir="${lib.dir}">
+			<include name="*.jar" />
+		</fileset>
+	</path>
+	
+	<target name="build" depends="idl">
+		<javac srcdir="src" destdir="${build.dir}" debug="on" deprecation="off" optimize="off" verbose="off" compiler="modern" nowarn="off">
+			<classpath>
+				<fileset dir="lib" includes="**/*.jar" />
+			</classpath>
+		</javac>
+		<!--		<javac srcdir="${generated.dir}" destdir="${classes.dir}" debug="on"> 
+					<classpath refid="project.path" />
+					<include name="**/*.java" />
+				</javac>
+		-->
+		<jar jarfile="${build.dir}/planete-kids.jar">
+			<metainf dir="conf" includes="persistence.xml" />
+			<zipfileset dir="${build.dir}" includes="planetekids/beans/**/*.class" />
+			<zipfileset dir="${build.dir}" includes="gicom/**/*.class" />
+			<zipfileset dir="${build.dir}" includes="${transation.dir}/**/*.class" />
+		</jar>
+
+		<jar jarfile="${build.dir}/admin-client.jar">
+			<manifest>
+				<attribute name="Main-Class" value="planetekids.clients.AdminClient" />
+			</manifest>
+			<metainf dir="conf" includes="application-client.xml" />
+			<fileset dir="${build.dir}" includes="planetekids/clients/AdminClient.class" />
+			<fileset dir="${build.dir}" includes="planetekids/clients/Tx.class" />
+			<fileset dir="${build.dir}" includes="planetekids/beans/**/*.class" />
+		</jar>
+
+		<jar jarfile="${build.dir}/customer-client.jar">
+			<manifest>
+				<attribute name="Main-Class" value="planetekids.clients.CustomerClient" />
+			</manifest>
+			<metainf dir="conf" includes="application-client.xml" />
+			<fileset dir="${build.dir}" includes="planetekids/clients/CustomerClient.class" />
+			<fileset dir="${build.dir}" includes="planetekids/clients/Tx.class" />
+			<fileset dir="${build.dir}" includes="planetekids/beans/**/*.class" />
+		</jar>
+
+		<jar jarfile="${build.dir}/init-data-client.jar">
+			<manifest>
+				<attribute name="Main-Class" value="planetekids.clients.InitDataBaseClient" />
+			</manifest>
+			<metainf dir="conf" includes="application-client.xml" />
+			<fileset dir="${build.dir}" includes="planetekids/clients/InitDataBaseClient.class" />
+			<fileset dir="${build.dir}" includes="planetekids/clients/Tx.class" />
+			<fileset dir="${build.dir}" includes="planetekids/beans/**/*.class" />
+		</jar>
+
+		<war warfile="${build.dir}/planete-kids.war" webxml="conf/web.xml">
+			<zipfileset dir="web" includes="**" />
+			<classes dir="conf" includes="struts.xml" />
+			<classes dir="src" includes="planetekids/actions/**/*.properties" />
+			<classes dir="${build.dir}" includes="planetekids/beans/**/*.class" />
+			<classes dir="${build.dir}" includes="planetekids/actions/**/*.class" />
+			<classes dir="${build.dir}" includes="planetekids/servlets/**/*.class" />
+			<classes dir="${build.dir}" includes="gicom/**/*.class" />
+			<classes dir="${build.dir}" includes="${transation.dir}/**/*.class" />
+		</war>
+
+		<ear earfile="${build.dir}/planete-kids.ear" appxml="conf/application.xml">
+			<zipfileset dir="${build.dir}" includes="planete-kids.jar" />
+			<zipfileset dir="${build.dir}" includes="planete-kids.war" />
+			<zipfileset dir="${build.dir}" includes="admin-client.jar" />
+			<zipfileset dir="${build.dir}" includes="customer-client.jar" />
+			<zipfileset dir="${build.dir}" includes="init-data-client.jar" />
+			<zipfileset prefix="lib" dir="lib/struts2" includes="**/*.jar" />
+		</ear>
+	</target>
+
+	<target name="clean">
+		<delete dir="${build.dir}" />
+	</target>
+
+	<target name="deploy" depends="idl,build">
+		<copy todir="${jonas.root}/deploy">
+			<fileset dir="${build.dir}" includes="planete-kids.ear" />
+		</copy>
+	</target>
+
+	<target name="undeploy">
+		<delete>
+			<fileset dir="${jonas.root}/deploy" includes="planete-kids.ear" />
+		</delete>
+	</target>
 </project>

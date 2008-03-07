@@ -78,6 +78,8 @@ public class CustomerBean implements CustomerRemote {
             createCommandLine(command, product.getName("fr"), product.getName("en"), product.getPrice(), cartTable.get(key));
             product.setStock(product.getStock()-cartTable.get(key));
         }
+        
+        cart.validateCart();
 
     }
 
