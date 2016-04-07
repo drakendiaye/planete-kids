@@ -1,0 +1,1 @@
+Nous sommes quatre étudiants en troisième à Polytech'Grenoble. Dans le cadre du projet ecomm, nous developpons un site de commerce en ligne pour la société Planete-Kids. Ce commerce situé à St Jean de Maurienne vends des vètement de marques pour enfants de 0 à 16 ans. Ce projet doit aboutir et être en ligne d'ici début janvier 2008.
